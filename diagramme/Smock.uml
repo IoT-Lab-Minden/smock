@@ -77,20 +77,20 @@
     </packageImport>
     <packagedElement xmi:type="uml:Actor" xmi:id="_FoVs8OW-EeiHbNSSdY3B9A" name="Actor"/>
     <packagedElement xmi:type="uml:Package" xmi:id="_IuEu0OW-EeiHbNSSdY3B9A" name="System">
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_U6oyUOW-EeiHbNSSdY3B9A" name="Computer entsperren" classifierBehavior="_pox_4OW_EeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_pox_4OW_EeiHbNSSdY3B9A" name="Activity1" node="_3Ne7AOW_EeiHbNSSdY3B9A _Z2ad4OXAEeiHbNSSdY3B9A _3dcNIOXAEeiHbNSSdY3B9A _MnqIIOXBEeiHbNSSdY3B9A _cALxUOXBEeiHbNSSdY3B9A _nXlucOXBEeiHbNSSdY3B9A _zl-98OXBEeiHbNSSdY3B9A _5dKzwOXBEeiHbNSSdY3B9A _9lMZEOXBEeiHbNSSdY3B9A _Daib0OXCEeiHbNSSdY3B9A _DrisQOXCEeiHbNSSdY3B9A _FrkDQOXCEeiHbNSSdY3B9A _I_tUkOXCEeiHbNSSdY3B9A _X8ZWUOXCEeiHbNSSdY3B9A _tV-tkOXDEeiHbNSSdY3B9A _1BXE4OXDEeiHbNSSdY3B9A">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_U6oyUOW-EeiHbNSSdY3B9A" name="Unlock computer" classifierBehavior="_pox_4OW_EeiHbNSSdY3B9A">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_pox_4OW_EeiHbNSSdY3B9A" name="Unlock Computer" node="_3Ne7AOW_EeiHbNSSdY3B9A _Z2ad4OXAEeiHbNSSdY3B9A _3dcNIOXAEeiHbNSSdY3B9A _MnqIIOXBEeiHbNSSdY3B9A _cALxUOXBEeiHbNSSdY3B9A _nXlucOXBEeiHbNSSdY3B9A _zl-98OXBEeiHbNSSdY3B9A _5dKzwOXBEeiHbNSSdY3B9A _9lMZEOXBEeiHbNSSdY3B9A _Daib0OXCEeiHbNSSdY3B9A _DrisQOXCEeiHbNSSdY3B9A _FrkDQOXCEeiHbNSSdY3B9A _I_tUkOXCEeiHbNSSdY3B9A _X8ZWUOXCEeiHbNSSdY3B9A _tV-tkOXDEeiHbNSSdY3B9A _1BXE4OXDEeiHbNSSdY3B9A _suzoMOpKEei0m4I4I3qPnQ">
           <edge xmi:type="uml:ControlFlow" xmi:id="_-Yhv8OXAEeiHbNSSdY3B9A" target="_3dcNIOXAEeiHbNSSdY3B9A" source="_3Ne7AOW_EeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_JFkhcOXBEeiHbNSSdY3B9A" target="_3Ne7AOW_EeiHbNSSdY3B9A" source="_Z2ad4OXAEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_QXHccOXBEeiHbNSSdY3B9A" name="[fehlgeschlagen]" target="_MnqIIOXBEeiHbNSSdY3B9A" source="_3dcNIOXAEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_QXHccOXBEeiHbNSSdY3B9A" name="[error]" target="_MnqIIOXBEeiHbNSSdY3B9A" source="_3dcNIOXAEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_kFu8IOXBEeiHbNSSdY3B9A" target="_cALxUOXBEeiHbNSSdY3B9A" source="_3dcNIOXAEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_sYO90OXBEeiHbNSSdY3B9A" target="_nXlucOXBEeiHbNSSdY3B9A" source="_cALxUOXBEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_B2z_QOXCEeiHbNSSdY3B9A" target="_9lMZEOXBEeiHbNSSdY3B9A" source="_nXlucOXBEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_5M5RMOXDEeiHbNSSdY3B9A" target="_1BXE4OXDEeiHbNSSdY3B9A" source="_nXlucOXBEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_3Ne7AOW_EeiHbNSSdY3B9A" name="Tag Authentifizieren" incoming="_JFkhcOXBEeiHbNSSdY3B9A" outgoing="_-Yhv8OXAEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:AcceptEventAction" xmi:id="_Z2ad4OXAEeiHbNSSdY3B9A" name="Rfid Signal" outgoing="_JFkhcOXBEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_B2z_QOXCEeiHbNSSdY3B9A" name="[UserIsLastLoggedUser]" target="_9lMZEOXBEeiHbNSSdY3B9A" source="_nXlucOXBEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_5M5RMOXDEeiHbNSSdY3B9A" name="[UserIsNotLastLoggedUser]" target="_1BXE4OXDEeiHbNSSdY3B9A" source="_nXlucOXBEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_3Ne7AOW_EeiHbNSSdY3B9A" name="Authenticate tag" incoming="_JFkhcOXBEeiHbNSSdY3B9A" outgoing="_-Yhv8OXAEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_Z2ad4OXAEeiHbNSSdY3B9A" name="RFID signal" outgoing="_JFkhcOXBEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:DecisionNode" xmi:id="_3dcNIOXAEeiHbNSSdY3B9A" name="" incoming="_-Yhv8OXAEeiHbNSSdY3B9A" outgoing="_QXHccOXBEeiHbNSSdY3B9A _kFu8IOXBEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:ActivityFinalNode" xmi:id="_MnqIIOXBEeiHbNSSdY3B9A" name="" incoming="_QXHccOXBEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_cALxUOXBEeiHbNSSdY3B9A" name="Nutzer prüfen" incoming="_kFu8IOXBEeiHbNSSdY3B9A" outgoing="_sYO90OXBEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_cALxUOXBEeiHbNSSdY3B9A" name="Check User" incoming="_kFu8IOXBEeiHbNSSdY3B9A" outgoing="_sYO90OXBEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:DecisionNode" xmi:id="_nXlucOXBEeiHbNSSdY3B9A" name="" incoming="_sYO90OXBEeiHbNSSdY3B9A" outgoing="_B2z_QOXCEeiHbNSSdY3B9A _5M5RMOXDEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_zl-98OXBEeiHbNSSdY3B9A" name="CallBehaviorAction13"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_5dKzwOXBEeiHbNSSdY3B9A" name="CallBehaviorAction14"/>
@@ -101,49 +101,50 @@
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_I_tUkOXCEeiHbNSSdY3B9A" name="CallBehaviorAction20"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_X8ZWUOXCEeiHbNSSdY3B9A" name="CallBehaviorAction21"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_tV-tkOXDEeiHbNSSdY3B9A" name="CallBehaviorAction22"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_1BXE4OXDEeiHbNSSdY3B9A" name="Benutzer wechslen" incoming="_5M5RMOXDEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_1BXE4OXDEeiHbNSSdY3B9A" name="Change user" incoming="_5M5RMOXDEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:CallBehaviorAction" xmi:id="_suzoMOpKEei0m4I4I3qPnQ" name="CallBehaviorAction24" behavior="_pox_4OW_EeiHbNSSdY3B9A"/>
         </ownedBehavior>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_jEheIOW-EeiHbNSSdY3B9A" name="Computer sperren" classifierBehavior="_Gz3dMOXEEeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_Gz3dMOXEEeiHbNSSdY3B9A" name="Computer sperren" node="_KVtMQOXEEeiHbNSSdY3B9A _TiBx4OXEEeiHbNSSdY3B9A _bhgJ4OXEEeiHbNSSdY3B9A _pN4aUOXEEeiHbNSSdY3B9A">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_jEheIOW-EeiHbNSSdY3B9A" name="Lock computer" classifierBehavior="_Gz3dMOXEEeiHbNSSdY3B9A">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_Gz3dMOXEEeiHbNSSdY3B9A" name="Lock computer" node="_KVtMQOXEEeiHbNSSdY3B9A _TiBx4OXEEeiHbNSSdY3B9A _bhgJ4OXEEeiHbNSSdY3B9A _pN4aUOXEEeiHbNSSdY3B9A">
           <edge xmi:type="uml:ControlFlow" xmi:id="_ki5R4OXEEeiHbNSSdY3B9A" target="_TiBx4OXEEeiHbNSSdY3B9A" source="_KVtMQOXEEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_lfpOAOXEEeiHbNSSdY3B9A" target="_bhgJ4OXEEeiHbNSSdY3B9A" source="_TiBx4OXEEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_sziSYOXEEeiHbNSSdY3B9A" target="_pN4aUOXEEeiHbNSSdY3B9A" source="_bhgJ4OXEEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:AcceptEventAction" xmi:id="_KVtMQOXEEeiHbNSSdY3B9A" name="RFID interrupt" outgoing="_ki5R4OXEEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_TiBx4OXEEeiHbNSSdY3B9A" name="Computer sperren" incoming="_ki5R4OXEEeiHbNSSdY3B9A" outgoing="_lfpOAOXEEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_bhgJ4OXEEeiHbNSSdY3B9A" name="Sleep Modus" incoming="_lfpOAOXEEeiHbNSSdY3B9A" outgoing="_sziSYOXEEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_TiBx4OXEEeiHbNSSdY3B9A" name="Lock Computer" incoming="_ki5R4OXEEeiHbNSSdY3B9A" outgoing="_lfpOAOXEEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_bhgJ4OXEEeiHbNSSdY3B9A" name="Sleep mode" incoming="_lfpOAOXEEeiHbNSSdY3B9A" outgoing="_sziSYOXEEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:ActivityFinalNode" xmi:id="_pN4aUOXEEeiHbNSSdY3B9A" name="" incoming="_sziSYOXEEeiHbNSSdY3B9A"/>
         </ownedBehavior>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_7iBHwOW-EeiHbNSSdY3B9A" name="Benutzer wechseln" classifierBehavior="_zMg4kOXCEeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_zMg4kOXCEeiHbNSSdY3B9A" name="Benutzer wechseln" node="_2CMFMOXCEeiHbNSSdY3B9A _5NlqMOXCEeiHbNSSdY3B9A _9hehQOXCEeiHbNSSdY3B9A _MlLxAOXDEeiHbNSSdY3B9A">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_7iBHwOW-EeiHbNSSdY3B9A" name="Change User" classifierBehavior="_zMg4kOXCEeiHbNSSdY3B9A">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_zMg4kOXCEeiHbNSSdY3B9A" name="Change User" node="_2CMFMOXCEeiHbNSSdY3B9A _5NlqMOXCEeiHbNSSdY3B9A _9hehQOXCEeiHbNSSdY3B9A _MlLxAOXDEeiHbNSSdY3B9A">
           <edge xmi:type="uml:ControlFlow" xmi:id="_BRyxMOXDEeiHbNSSdY3B9A" target="_5NlqMOXCEeiHbNSSdY3B9A" source="_2CMFMOXCEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_Cdo5QOXDEeiHbNSSdY3B9A" target="_9hehQOXCEeiHbNSSdY3B9A" source="_5NlqMOXCEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_b8fSMOXDEeiHbNSSdY3B9A" target="_MlLxAOXDEeiHbNSSdY3B9A" source="_9hehQOXCEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:InitialNode" xmi:id="_2CMFMOXCEeiHbNSSdY3B9A" name="" outgoing="_BRyxMOXDEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_5NlqMOXCEeiHbNSSdY3B9A" name="Benutzer abmelden" incoming="_BRyxMOXDEeiHbNSSdY3B9A" outgoing="_Cdo5QOXDEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_9hehQOXCEeiHbNSSdY3B9A" name="Benutzer anmelden" incoming="_Cdo5QOXDEeiHbNSSdY3B9A" outgoing="_b8fSMOXDEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_5NlqMOXCEeiHbNSSdY3B9A" name="Log out user" incoming="_BRyxMOXDEeiHbNSSdY3B9A" outgoing="_Cdo5QOXDEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_9hehQOXCEeiHbNSSdY3B9A" name="Log in User" incoming="_Cdo5QOXDEeiHbNSSdY3B9A" outgoing="_b8fSMOXDEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:ActivityFinalNode" xmi:id="_MlLxAOXDEeiHbNSSdY3B9A" name="" incoming="_b8fSMOXDEeiHbNSSdY3B9A"/>
         </ownedBehavior>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_-WeMYOW-EeiHbNSSdY3B9A" name="User registrieren" classifierBehavior="_9SIy0OXEEeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_9SIy0OXEEeiHbNSSdY3B9A" name="Activity1" node="__TiC0OXEEeiHbNSSdY3B9A _AwDrMOXFEeiHbNSSdY3B9A _DBSG8OXFEeiHbNSSdY3B9A _HIsBMOXFEeiHbNSSdY3B9A _KLXvEOXFEeiHbNSSdY3B9A _S4RNwOXFEeiHbNSSdY3B9A _cF2-sOXFEeiHbNSSdY3B9A _FY96kOXGEeiHbNSSdY3B9A _Wll-oOXGEeiHbNSSdY3B9A">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_-WeMYOW-EeiHbNSSdY3B9A" name="Register User" classifierBehavior="_9SIy0OXEEeiHbNSSdY3B9A">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_9SIy0OXEEeiHbNSSdY3B9A" name="Register User" node="__TiC0OXEEeiHbNSSdY3B9A _AwDrMOXFEeiHbNSSdY3B9A _DBSG8OXFEeiHbNSSdY3B9A _HIsBMOXFEeiHbNSSdY3B9A _KLXvEOXFEeiHbNSSdY3B9A _S4RNwOXFEeiHbNSSdY3B9A _cF2-sOXFEeiHbNSSdY3B9A _FY96kOXGEeiHbNSSdY3B9A _Wll-oOXGEeiHbNSSdY3B9A">
           <edge xmi:type="uml:ControlFlow" xmi:id="_hQ0nsOXFEeiHbNSSdY3B9A" target="_cF2-sOXFEeiHbNSSdY3B9A" source="_S4RNwOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_i_nr0OXFEeiHbNSSdY3B9A" name="[Benutzer nicht vorhanden]" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_n8RMAOXFEeiHbNSSdY3B9A" name="[Benutzer vorhanden]" target="_KLXvEOXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_i_nr0OXFEeiHbNSSdY3B9A" name="[User doesn't exist]" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_n8RMAOXFEeiHbNSSdY3B9A" name="[User exists]" target="_KLXvEOXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_0UwLoOXFEeiHbNSSdY3B9A" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_KLXvEOXFEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_4rY0sOXFEeiHbNSSdY3B9A" target="_AwDrMOXFEeiHbNSSdY3B9A" source="__TiC0OXEEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_6MFycOXFEeiHbNSSdY3B9A" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_AwDrMOXFEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_6vpygOXFEeiHbNSSdY3B9A" target="_FY96kOXGEeiHbNSSdY3B9A" source="_DBSG8OXFEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_7lCiYOXFEeiHbNSSdY3B9A" target="_S4RNwOXFEeiHbNSSdY3B9A" source="_HIsBMOXFEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_QI0IcOXGEeiHbNSSdY3B9A" target="_HIsBMOXFEeiHbNSSdY3B9A" source="_FY96kOXGEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_Zrq-wOXGEeiHbNSSdY3B9A" name="[Abbrechen]" target="_Wll-oOXGEeiHbNSSdY3B9A" source="_FY96kOXGEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Zrq-wOXGEeiHbNSSdY3B9A" name="[Abort]" target="_Wll-oOXGEeiHbNSSdY3B9A" source="_FY96kOXGEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:InitialNode" xmi:id="__TiC0OXEEeiHbNSSdY3B9A" name="" outgoing="_4rY0sOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_AwDrMOXFEeiHbNSSdY3B9A" name="Tag einlesen" incoming="_4rY0sOXFEeiHbNSSdY3B9A" outgoing="_6MFycOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_DBSG8OXFEeiHbNSSdY3B9A" name="Tag anzeigen" incoming="_6MFycOXFEeiHbNSSdY3B9A _0UwLoOXFEeiHbNSSdY3B9A _i_nr0OXFEeiHbNSSdY3B9A" outgoing="_6vpygOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_HIsBMOXFEeiHbNSSdY3B9A" name="Benutzername übergeben" incoming="_QI0IcOXGEeiHbNSSdY3B9A" outgoing="_7lCiYOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_KLXvEOXFEeiHbNSSdY3B9A" name="Passwort übergeben" incoming="_n8RMAOXFEeiHbNSSdY3B9A" outgoing="_0UwLoOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_S4RNwOXFEeiHbNSSdY3B9A" name="Benutzer prüfen" incoming="_7lCiYOXFEeiHbNSSdY3B9A" outgoing="_hQ0nsOXFEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_AwDrMOXFEeiHbNSSdY3B9A" name="Read Tag" incoming="_4rY0sOXFEeiHbNSSdY3B9A" outgoing="_6MFycOXFEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_DBSG8OXFEeiHbNSSdY3B9A" name="Show tag" incoming="_6MFycOXFEeiHbNSSdY3B9A _0UwLoOXFEeiHbNSSdY3B9A _i_nr0OXFEeiHbNSSdY3B9A" outgoing="_6vpygOXFEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_HIsBMOXFEeiHbNSSdY3B9A" name="Input username" incoming="_QI0IcOXGEeiHbNSSdY3B9A" outgoing="_7lCiYOXFEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_KLXvEOXFEeiHbNSSdY3B9A" name="Input password" incoming="_n8RMAOXFEeiHbNSSdY3B9A" outgoing="_0UwLoOXFEeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_S4RNwOXFEeiHbNSSdY3B9A" name="Check user" incoming="_7lCiYOXFEeiHbNSSdY3B9A" outgoing="_hQ0nsOXFEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:DecisionNode" xmi:id="_cF2-sOXFEeiHbNSSdY3B9A" name="" incoming="_hQ0nsOXFEeiHbNSSdY3B9A" outgoing="_i_nr0OXFEeiHbNSSdY3B9A _n8RMAOXFEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:DecisionNode" xmi:id="_FY96kOXGEeiHbNSSdY3B9A" name="" incoming="_6vpygOXFEeiHbNSSdY3B9A" outgoing="_QI0IcOXGEeiHbNSSdY3B9A _Zrq-wOXGEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:ActivityFinalNode" xmi:id="_Wll-oOXGEeiHbNSSdY3B9A" name="" incoming="_Zrq-wOXGEeiHbNSSdY3B9A"/>
