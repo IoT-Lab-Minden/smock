@@ -27,6 +27,7 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_EnCosOmHEei9U5yEW2wp6A" name="manageComputer" visibility="private"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_F4cmMOmHEei9U5yEW2wp6A" name="getNearTags" visibility="private"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_IpaR8OmHEei9U5yEW2wp6A" name="registerUser" visibility="private"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_HggMIOvXEeiI75dQfm4qMg" name="editUser" visibility="private"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_MCEsUOmGEei9U5yEW2wp6A" name="User">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_ZBGukOmGEei9U5yEW2wp6A" name="username" visibility="private">
@@ -65,9 +66,15 @@
         <transition xmi:type="uml:Transition" xmi:id="_ohxgsOpCEei0m4I4I3qPnQ" source="_REhzIOpCEei0m4I4I3qPnQ" target="_hpXecOpCEei0m4I4I3qPnQ"/>
         <transition xmi:type="uml:Transition" xmi:id="_NlAwkOpIEei0m4I4I3qPnQ" name="[NearTag &amp;&amp; User owns Tag]" source="_hpXecOpCEei0m4I4I3qPnQ" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
         <transition xmi:type="uml:Transition" xmi:id="_Vtsu8OpIEei0m4I4I3qPnQ" name="[NoNearTag]" source="_QX4WQOpHEei0m4I4I3qPnQ" target="_hpXecOpCEei0m4I4I3qPnQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_C6NoYOvVEeiI75dQfm4qMg" name="[User has new Tag]" source="_QX4WQOpHEei0m4I4I3qPnQ" target="_2UNKIOvUEeiI75dQfm4qMg"/>
+        <transition xmi:type="uml:Transition" xmi:id="_JloXgOvVEeiI75dQfm4qMg" name="[user registered]" source="_2UNKIOvUEeiI75dQfm4qMg" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_Rr-zkOvVEeiI75dQfm4qMg" name="[User wants to edit tags" source="_QX4WQOpHEei0m4I4I3qPnQ" target="_Ol3XMOvVEeiI75dQfm4qMg"/>
+        <transition xmi:type="uml:Transition" xmi:id="_SuDUkOvVEeiI75dQfm4qMg" name="[Finished editing]" source="_Ol3XMOvVEeiI75dQfm4qMg" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
         <subvertex xmi:type="uml:Pseudostate" xmi:id="_REhzIOpCEei0m4I4I3qPnQ" name=""/>
         <subvertex xmi:type="uml:State" xmi:id="_hpXecOpCEei0m4I4I3qPnQ" name="LockedComputer"/>
         <subvertex xmi:type="uml:State" xmi:id="_QX4WQOpHEei0m4I4I3qPnQ" name="UnlockedComputer"/>
+        <subvertex xmi:type="uml:State" xmi:id="_2UNKIOvUEeiI75dQfm4qMg" name="Register user"/>
+        <subvertex xmi:type="uml:State" xmi:id="_Ol3XMOvVEeiI75dQfm4qMg" name="Edit user"/>
       </region>
     </packagedElement>
   </packagedElement>
@@ -116,8 +123,8 @@
           <node xmi:type="uml:ActivityFinalNode" xmi:id="_pN4aUOXEEeiHbNSSdY3B9A" name="" incoming="_sziSYOXEEeiHbNSSdY3B9A"/>
         </ownedBehavior>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_7iBHwOW-EeiHbNSSdY3B9A" name="Change User" classifierBehavior="_zMg4kOXCEeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_zMg4kOXCEeiHbNSSdY3B9A" name="Change User" node="_2CMFMOXCEeiHbNSSdY3B9A _5NlqMOXCEeiHbNSSdY3B9A _9hehQOXCEeiHbNSSdY3B9A _MlLxAOXDEeiHbNSSdY3B9A">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_7iBHwOW-EeiHbNSSdY3B9A" name="Change user" classifierBehavior="_zMg4kOXCEeiHbNSSdY3B9A">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_zMg4kOXCEeiHbNSSdY3B9A" name="Change user" node="_2CMFMOXCEeiHbNSSdY3B9A _5NlqMOXCEeiHbNSSdY3B9A _9hehQOXCEeiHbNSSdY3B9A _MlLxAOXDEeiHbNSSdY3B9A">
           <edge xmi:type="uml:ControlFlow" xmi:id="_BRyxMOXDEeiHbNSSdY3B9A" target="_5NlqMOXCEeiHbNSSdY3B9A" source="_2CMFMOXCEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_Cdo5QOXDEeiHbNSSdY3B9A" target="_9hehQOXCEeiHbNSSdY3B9A" source="_5NlqMOXCEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_b8fSMOXDEeiHbNSSdY3B9A" target="_MlLxAOXDEeiHbNSSdY3B9A" source="_9hehQOXCEeiHbNSSdY3B9A"/>
@@ -127,8 +134,8 @@
           <node xmi:type="uml:ActivityFinalNode" xmi:id="_MlLxAOXDEeiHbNSSdY3B9A" name="" incoming="_b8fSMOXDEeiHbNSSdY3B9A"/>
         </ownedBehavior>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_-WeMYOW-EeiHbNSSdY3B9A" name="Register User" classifierBehavior="_9SIy0OXEEeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_9SIy0OXEEeiHbNSSdY3B9A" name="Register User" node="__TiC0OXEEeiHbNSSdY3B9A _AwDrMOXFEeiHbNSSdY3B9A _DBSG8OXFEeiHbNSSdY3B9A _HIsBMOXFEeiHbNSSdY3B9A _KLXvEOXFEeiHbNSSdY3B9A _S4RNwOXFEeiHbNSSdY3B9A _cF2-sOXFEeiHbNSSdY3B9A _FY96kOXGEeiHbNSSdY3B9A _Wll-oOXGEeiHbNSSdY3B9A">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_-WeMYOW-EeiHbNSSdY3B9A" name="Register user" classifierBehavior="_9SIy0OXEEeiHbNSSdY3B9A">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_9SIy0OXEEeiHbNSSdY3B9A" name="Register user" node="__TiC0OXEEeiHbNSSdY3B9A _AwDrMOXFEeiHbNSSdY3B9A _DBSG8OXFEeiHbNSSdY3B9A _HIsBMOXFEeiHbNSSdY3B9A _KLXvEOXFEeiHbNSSdY3B9A _S4RNwOXFEeiHbNSSdY3B9A _cF2-sOXFEeiHbNSSdY3B9A _FY96kOXGEeiHbNSSdY3B9A _Wll-oOXGEeiHbNSSdY3B9A">
           <edge xmi:type="uml:ControlFlow" xmi:id="_hQ0nsOXFEeiHbNSSdY3B9A" target="_cF2-sOXFEeiHbNSSdY3B9A" source="_S4RNwOXFEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_i_nr0OXFEeiHbNSSdY3B9A" name="[User doesn't exist]" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
           <edge xmi:type="uml:ControlFlow" xmi:id="_n8RMAOXFEeiHbNSSdY3B9A" name="[User exists]" target="_KLXvEOXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
@@ -148,6 +155,33 @@
           <node xmi:type="uml:DecisionNode" xmi:id="_cF2-sOXFEeiHbNSSdY3B9A" name="" incoming="_hQ0nsOXFEeiHbNSSdY3B9A" outgoing="_i_nr0OXFEeiHbNSSdY3B9A _n8RMAOXFEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:DecisionNode" xmi:id="_FY96kOXGEeiHbNSSdY3B9A" name="" incoming="_6vpygOXFEeiHbNSSdY3B9A" outgoing="_QI0IcOXGEeiHbNSSdY3B9A _Zrq-wOXGEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:ActivityFinalNode" xmi:id="_Wll-oOXGEeiHbNSSdY3B9A" name="" incoming="_Zrq-wOXGEeiHbNSSdY3B9A"/>
+        </ownedBehavior>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_8P3lYOvWEeiI75dQfm4qMg" name="Edit user" classifierBehavior="_f9zogOvXEeiI75dQfm4qMg">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_f9zogOvXEeiI75dQfm4qMg" name="Edit user" visibility="public" node="_tZo7gOvXEeiI75dQfm4qMg _wKHfEOvXEeiI75dQfm4qMg _7cZEkOvXEeiI75dQfm4qMg _BNguoOvYEeiI75dQfm4qMg _oDjyMOvYEeiI75dQfm4qMg _WvaJAOwIEeiI75dQfm4qMg _z-5iAOwIEeiI75dQfm4qMg _OGgkEOwJEeiI75dQfm4qMg _QgPbkOwJEeiI75dQfm4qMg _Dg4zwOwKEeiI75dQfm4qMg">
+          <edge xmi:type="uml:ControlFlow" xmi:id="_FiSWgOvYEeiI75dQfm4qMg" target="_BNguoOvYEeiI75dQfm4qMg" source="_wKHfEOvXEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_HuzRYOvYEeiI75dQfm4qMg" name="[continue]" target="_7cZEkOvXEeiI75dQfm4qMg" source="_BNguoOvYEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_V3vBgOwFEeiI75dQfm4qMg" target="_wKHfEOvXEeiI75dQfm4qMg" source="_tZo7gOvXEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_bMv-YOwFEeiI75dQfm4qMg" name="[Finished]" target="_oDjyMOvYEeiI75dQfm4qMg" source="_BNguoOvYEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_a2UUAOwIEeiI75dQfm4qMg" target="_z-5iAOwIEeiI75dQfm4qMg" source="_7cZEkOvXEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_4uCxsOwIEeiI75dQfm4qMg" name="[continue]" target="_WvaJAOwIEeiI75dQfm4qMg" source="_z-5iAOwIEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="__tpoIOwIEeiI75dQfm4qMg" name="[cancel]" target="_wKHfEOvXEeiI75dQfm4qMg" source="_z-5iAOwIEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_SHgUUOwJEeiI75dQfm4qMg" target="_QgPbkOwJEeiI75dQfm4qMg" source="_WvaJAOwIEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_ryrSAOwJEeiI75dQfm4qMg" name="[continue]" target="_OGgkEOwJEeiI75dQfm4qMg" source="_QgPbkOwJEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_zsmboOwJEeiI75dQfm4qMg" name="[cancel]" target="_wKHfEOvXEeiI75dQfm4qMg" source="_QgPbkOwJEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_GfJUoOwKEeiI75dQfm4qMg" target="_Dg4zwOwKEeiI75dQfm4qMg" source="_OGgkEOwJEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_INHSUOwKEeiI75dQfm4qMg" name="[continue]" target="_WvaJAOwIEeiI75dQfm4qMg" source="_Dg4zwOwKEeiI75dQfm4qMg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_KlwksOwKEeiI75dQfm4qMg" name="[finished]" target="_wKHfEOvXEeiI75dQfm4qMg" source="_Dg4zwOwKEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:InitialNode" xmi:id="_tZo7gOvXEeiI75dQfm4qMg" outgoing="_V3vBgOwFEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_wKHfEOvXEeiI75dQfm4qMg" name="view user list" incoming="_V3vBgOwFEeiI75dQfm4qMg __tpoIOwIEeiI75dQfm4qMg _zsmboOwJEeiI75dQfm4qMg _KlwksOwKEeiI75dQfm4qMg" outgoing="_FiSWgOvYEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_7cZEkOvXEeiI75dQfm4qMg" name="select user" incoming="_HuzRYOvYEeiI75dQfm4qMg" outgoing="_a2UUAOwIEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:DecisionNode" xmi:id="_BNguoOvYEeiI75dQfm4qMg" incoming="_FiSWgOvYEeiI75dQfm4qMg" outgoing="_HuzRYOvYEeiI75dQfm4qMg _bMv-YOwFEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_oDjyMOvYEeiI75dQfm4qMg" incoming="_bMv-YOwFEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_WvaJAOwIEeiI75dQfm4qMg" name="Choose attribute" incoming="_4uCxsOwIEeiI75dQfm4qMg _INHSUOwKEeiI75dQfm4qMg" outgoing="_SHgUUOwJEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:DecisionNode" xmi:id="_z-5iAOwIEeiI75dQfm4qMg" incoming="_a2UUAOwIEeiI75dQfm4qMg" outgoing="_4uCxsOwIEeiI75dQfm4qMg __tpoIOwIEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_OGgkEOwJEeiI75dQfm4qMg" name="Edit attribute" incoming="_ryrSAOwJEeiI75dQfm4qMg" outgoing="_GfJUoOwKEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:DecisionNode" xmi:id="_QgPbkOwJEeiI75dQfm4qMg" incoming="_SHgUUOwJEeiI75dQfm4qMg" outgoing="_ryrSAOwJEeiI75dQfm4qMg _zsmboOwJEeiI75dQfm4qMg"/>
+          <node xmi:type="uml:DecisionNode" xmi:id="_Dg4zwOwKEeiI75dQfm4qMg" incoming="_GfJUoOwKEeiI75dQfm4qMg" outgoing="_INHSUOwKEeiI75dQfm4qMg _KlwksOwKEeiI75dQfm4qMg"/>
         </ownedBehavior>
       </packagedElement>
     </packagedElement>
@@ -171,6 +205,13 @@
     <packagedElement xmi:type="uml:Association" xmi:id="_W3LiEOW_EeiHbNSSdY3B9A"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_YTE4UOW_EeiHbNSSdY3B9A"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_ZcG88OW_EeiHbNSSdY3B9A"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Ap0oMOvXEeiI75dQfm4qMg" memberEnd="_Ap7V4OvXEeiI75dQfm4qMg _Ap788OvXEeiI75dQfm4qMg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Ap6HwOvXEeiI75dQfm4qMg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Ap6HwevXEeiI75dQfm4qMg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Ap7V4OvXEeiI75dQfm4qMg" name="edit user" type="_8P3lYOvWEeiI75dQfm4qMg" association="_Ap0oMOvXEeiI75dQfm4qMg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Ap788OvXEeiI75dQfm4qMg" type="_KdVQgOW_EeiHbNSSdY3B9A" association="_Ap0oMOvXEeiI75dQfm4qMg"/>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_-7_4wOpHEei0m4I4I3qPnQ">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-8CVAOpHEei0m4I4I3qPnQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
