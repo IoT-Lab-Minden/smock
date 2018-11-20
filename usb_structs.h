@@ -35,43 +35,12 @@ extern volatile uint32_t g_ui32USBFlags;
 extern volatile uint32_t g_ui32SysTickCount;
 extern volatile uint8_t g_ui8Buttons;
 
-//****************************************************************************
-//
-// The number of individual device class instances comprising this composite
-// device.
-//
-//****************************************************************************
-#define NUM_DEVICES 1
-
 //*****************************************************************************
 //
 // Keyboard Device Instance.
 //
 //*****************************************************************************
 extern tUSBDHIDKeyboardDevice g_sKeyboardDevice;
-
-//*****************************************************************************
-//
-// Array of all composite devices.
-//
-//*****************************************************************************
-extern tCompositeEntry g_psCompDevices[NUM_DEVICES];
-
-//*****************************************************************************
-//
-// the root composite device.
-//
-//*****************************************************************************
-extern tUSBDCompositeDevice g_sCompDevice;
-
-//*****************************************************************************
-//
-// The memory allocated to hold the composite descriptor that is created by
-// the call to USBDCompositeInit().
-//
-//*****************************************************************************
-#define DESCRIPTOR_DATA_SIZE    (COMPOSITE_DHID_SIZE + COMPOSITE_DHID_SIZE)
-extern uint8_t g_pui8DescriptorData[DESCRIPTOR_DATA_SIZE];
 
 //****************************************************************************
 //

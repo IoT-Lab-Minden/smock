@@ -230,6 +230,7 @@ int main(void)
         }
         if (g_spooky_message_index == sizeof(g_spooky_message)) {
             UARTprintf("End of the World");
+            g_spooky_message_index++;
         }
 
     }
