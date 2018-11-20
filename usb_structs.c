@@ -154,5 +154,3 @@ tUSBDHIDKeyboardDevice g_sKeyboardDevice =
     // 0,
 };
 
-// TODO: Entweder Composite Element wieder rein oder zusätzliche Infos zu USB device
-// TODO: ggf Language anpassen

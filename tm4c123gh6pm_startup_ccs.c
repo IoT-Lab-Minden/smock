@@ -36,8 +36,6 @@ static void IntDefaultHandler(void);
 extern void UARTStdioIntHandler(void);
 extern void USB0DeviceIntHandler(void);
 extern void SysTickIntHandler(void);
-extern void uDMAErrorHandler(void);
-extern void ADC00IntHandler(void);
 
 //*****************************************************************************
 //
@@ -102,7 +100,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                     // PWM Generator 1
     IntDefaultHandler,                      // PWM Generator 2
     IntDefaultHandler,                      // Quadrature Encoder 0
-    ADC00IntHandler,                        // ADC Sequence 0
+    IntDefaultHandler,                        // ADC Sequence 0
     IntDefaultHandler,                      // ADC Sequence 1
     IntDefaultHandler,                      // ADC Sequence 2
     IntDefaultHandler,                      // ADC Sequence 3
@@ -135,7 +133,7 @@ void (* const g_pfnVectors[])(void) =
     USB0DeviceIntHandler,                   // USB0
     IntDefaultHandler,                      // PWM Generator 3
     IntDefaultHandler,                      // uDMA Software Transfer
-    uDMAErrorHandler,                       // uDMA Error
+    IntDefaultHandler,                      // uDMA Error
     IntDefaultHandler,                      // ADC1 Sequence 0
     IntDefaultHandler,                      // ADC1 Sequence 1
     IntDefaultHandler,                      // ADC1 Sequence 2
