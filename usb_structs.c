@@ -136,7 +136,7 @@ tUSBDHIDKeyboardDevice g_sKeyboardDevice =
     USB_CONF_ATTR_BUS_PWR,
 
     //
-    // The Mouse handler function.
+    // The Keyboard handler function.
     //
     USBKeyboardHandler,
 
@@ -148,8 +148,10 @@ tUSBDHIDKeyboardDevice g_sKeyboardDevice =
     //
     // The composite device does not use the strings from the class.
     //
-    0,
-    0,
+    g_pui8StringDescriptors,
+    // 0,
+    NUM_STRING_DESCRIPTORS
+    // 0,
 };
 
 //****************************************************************************
@@ -210,3 +212,6 @@ tUSBDCompositeDevice g_sCompDevice =
     NUM_DEVICES,
     g_psCompDevices,
 };
+
+// TODO: Entweder Composite Element wieder rein oder zusätzliche Infos zu USB device
+// TODO: ggf Language anpassen

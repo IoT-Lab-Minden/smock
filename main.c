@@ -31,7 +31,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include "usblib/device/usbdevice.h"
 #include "usblib/device/usbdcomp.h"
 #include "usblib/device/usbdhid.h"
-#include "usblib/device/usbdhidmouse.h"
 #include "usblib/device/usbdhidkeyb.h"
 #include "utils/uartstdio.h"
 #include "utils/ustdlib.h"
@@ -57,15 +56,15 @@ static int16_t *g_filterImagInPtr = 0;
 static int16_t *g_filterRealInPtr = 0;
 
 static int16_t *g_adcInPtr = 0;
-static int16_t *g_adcOutPtr = 0;
+//static int16_t *g_adcOutPtr = 0;
 static int16_t g_adcBuffer[ADC_BUFFER_SIZE];
 
 extern const int16_t g_filter[FILTER_SIZE];
 
 
-static int32_t g_fftBuffer[FFT_BIN_SIZE];
+/*static int32_t g_fftBuffer[FFT_BIN_SIZE];
 static int32_t g_fftInvBuffer[FFT_BIN_SIZE];
-static int32_t g_fftMultiplyBuffer[FFT_BIN_SIZE];
+static int32_t g_fftMultiplyBuffer[FFT_BIN_SIZE]; */
 
 extern const int16_t g_fftSignalA[FFT_BIN_SIZE*2];
 extern const int16_t g_fftSignalB[FFT_BIN_SIZE*2];
@@ -153,6 +152,8 @@ USBEventHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgParam,
  */
 int main(void)
 {
+    volatile uint32_t ui32Loop;
+    volatile uint32_t ui32Loop1;
     //C:\ti\TivaWare_C_Series-2.1.1.71\examples\boards\dk-tm4c129x\usb_dev_chid\usb_dev_chid.c
 
     ROM_FPULazyStackingEnable();
@@ -170,24 +171,6 @@ int main(void)
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
     ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
 
-
-    // configure dma
-    ROM_SysCtlPeripheralClockGating(true);
-    ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
-    ROM_SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_UDMA);
-    ROM_IntEnable(INT_UDMAERR);
-    ROM_uDMAEnable();
-    ROM_uDMAControlBaseSet(pui8ControlTable);
-
-    // configure A/D converter, use AIN4 PD3
-    g_filterImagInPtr = &g_filterBufferImag[0];
-    g_filterRealInPtr = &g_filterBufferReal[0];
-    g_adcInPtr = g_adcBuffer;
-    g_adcOutPtr = g_adcBuffer;
-    //g_test_ptr = g_test_signal + 256;
-
-    InitADC00();
-
     ConfigureUART();
 
     g_message_index = 0;
@@ -196,264 +179,22 @@ int main(void)
 
     USBStackModeSet(0, eUSBModeForceDevice, 0);
 
-    USBKeyboardInit();
-
-    USBDHIDKeyboardCompositeInit(0, &g_sKeyboardDevice, &g_psCompDevices[1]);
-
-    USBDCompositeInit(0, &g_sCompDevice, DESCRIPTOR_DATA_SIZE,
-                      g_pui8DescriptorData);
+    if (!USBDHIDKeyboardInit(0, &g_sKeyboardDevice)) {
+        return 0;
+    }
 
     UARTprintf("Spooky keyboard online.\n");
 
     IntMasterEnable();
 
     int test_count = 0;
+    // Wait for host
+    for(ui32Loop = 0; ui32Loop < 20; ui32Loop++){
+        for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++){
+        }
+    }
     while(true)
     {
-
-
-        int sample_count = ((g_adcInPtr - g_adcOutPtr + ADC_BUFFER_SIZE) % ADC_BUFFER_SIZE) / 2;
-        if(sample_count >= FFT_BIN_SIZE)
-        {
-            if(test_count > 2)
-            {
-                test_count = 0;
-            }
-            test_count++;
-            int i;
-            int16_t *ptr_inData;
-
-            //
-            // test the letter A
-            //
-            ptr_inData = (int16_t *)g_fftBuffer;
-            int16_t *ptr_inModel = (int16_t *)g_fftSignalA;
-            int16_t *ptr_out = (int16_t *)g_fftMultiplyBuffer;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int a = *ptr_inData++;
-                int b = *ptr_inData++;
-                int c = *ptr_inModel++;
-                int d = *ptr_inModel++;
-                int ac = a * c;
-                int bd = b * d;
-
-                int re = ac - bd;
-                int im = (a + b) * (c + d) - ac - bd;
-
-                *ptr_out++ = re >> MULTIPLY_DOWN_SHIFT;
-                *ptr_out++ = im >> MULTIPLY_DOWN_SHIFT;
-            }
-
-            // find peak
-            int16_t *ptr_inv = (int16_t *)g_fftInvBuffer;
-            int32_t maxA = 0;
-            int32_t maxA_index = 0;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int re = *ptr_inv++;
-                int im = *ptr_inv++;
-                int val = re * re + im * im;
-                if(val > maxA)
-                {
-                    maxA = val;
-                    maxA_index = FFT_BIN_SIZE - i;
-                }
-            }
-
-            //
-            // test the letter B
-            //
-            ptr_inData = (int16_t *)g_fftBuffer;
-            ptr_inModel = (int16_t *)g_fftSignalB;
-            ptr_out = (int16_t *)g_fftMultiplyBuffer;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int a = *ptr_inData++;
-                int b = *ptr_inData++;
-                int c = *ptr_inModel++;
-                int d = *ptr_inModel++;
-                int ac = a * c;
-                int bd = b * d;
-
-                int re = ac - bd;
-                int im = (a + b) * (c + d) - ac - bd;
-
-                *ptr_out++ = re >> MULTIPLY_DOWN_SHIFT;
-                *ptr_out++ = im >> MULTIPLY_DOWN_SHIFT;
-            }
-
-            // find peak
-            ptr_inv = (int16_t *)g_fftInvBuffer;
-            int32_t maxB = 0;
-            int32_t maxB_index = 0;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int re = *ptr_inv++;
-                int im = *ptr_inv++;
-                int val = re * re + im * im;
-                if(val > maxB)
-                {
-                    maxB = val;
-                    maxB_index = FFT_BIN_SIZE - i;
-                }
-            }
-
-            //
-            // test the letter C
-            //
-            ptr_inData = (int16_t *)g_fftBuffer;
-            ptr_inModel = (int16_t *)g_fftSignalC;
-            ptr_out = (int16_t *)g_fftMultiplyBuffer;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int a = *ptr_inData++;
-                int b = *ptr_inData++;
-                int c = *ptr_inModel++;
-                int d = *ptr_inModel++;
-                int ac = a * c;
-                int bd = b * d;
-
-                int re = ac - bd;
-                int im = (a + b) * (c + d) - ac - bd;
-
-                *ptr_out++ = re >> MULTIPLY_DOWN_SHIFT;
-                *ptr_out++ = im >> MULTIPLY_DOWN_SHIFT;
-            }
-
-            // find peak
-            ptr_inv = (int16_t *)g_fftInvBuffer;
-            int32_t maxC = 0;
-            int32_t maxC_index = 0;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int re = *ptr_inv++;
-                int im = *ptr_inv++;
-                int val = re * re + im * im;
-                if(val > maxC)
-                {
-                    maxC = val;
-                    maxC_index = FFT_BIN_SIZE - i;
-                }
-            }
-
-            //
-            // test the letter D
-            //
-            ptr_inData = (int16_t *)g_fftBuffer;
-            ptr_inModel = (int16_t *)g_fftSignalD;
-            ptr_out = (int16_t *)g_fftMultiplyBuffer;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int a = *ptr_inData++;
-                int b = *ptr_inData++;
-                int c = *ptr_inModel++;
-                int d = *ptr_inModel++;
-                int ac = a * c;
-                int bd = b * d;
-
-                int re = ac - bd;
-                int im = (a + b) * (c + d) - ac - bd;
-
-                *ptr_out++ = re >> MULTIPLY_DOWN_SHIFT;
-                *ptr_out++ = im >> MULTIPLY_DOWN_SHIFT;
-            }
-
-            // find peak
-            ptr_inv = (int16_t *)g_fftInvBuffer;
-            int32_t maxD = 0;
-            int32_t maxD_index = 0;
-            for(i=FFT_BIN_SIZE;i>0;i--)
-            {
-                int re = *ptr_inv++;
-                int im = *ptr_inv++;
-                int val = re * re + im * im;
-                if(val > maxD)
-                {
-                    maxD = val;
-                    maxD_index = FFT_BIN_SIZE - i;
-                }
-            }
-
-            char found_char;
-            int low_maxA = maxA >> THRESHOLD_SHIFT;
-            int low_maxB = maxB >> THRESHOLD_SHIFT;
-            int low_maxC = maxC >> THRESHOLD_SHIFT;
-            int low_maxD = maxD >> THRESHOLD_SHIFT;
-            int max_index;
-            if((low_maxA > maxB) && (low_maxA > maxC) && (low_maxA > maxD))
-            {
-                found_char = 'A';
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, last_led = (GPIO_PIN_2 | GPIO_PIN_3));
-                max_index = maxA_index;
-            }
-            else if((low_maxB > maxA) && (low_maxB > maxC) && (low_maxB > maxD))
-            {
-                found_char = 'B';
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, last_led = GPIO_PIN_3);
-                max_index = maxB_index;
-            }
-            else if((low_maxC > maxA) && (low_maxC > maxB) && (low_maxC > maxD))
-            {
-                found_char = 'C';
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, last_led = GPIO_PIN_2);
-                max_index = maxC_index;
-            }
-            else if((low_maxD > maxA) && (low_maxD > maxB) && (low_maxD > maxC))
-            {
-                found_char = 'D';
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, last_led = GPIO_PIN_1);
-                max_index = maxD_index;
-            }
-            else
-            {
-                found_char = '_';
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, last_led = 0);
-
-                if((maxA > maxB) && (maxA > maxC) && (maxA > maxD))
-                    max_index = maxA_index;
-                else if((maxB > maxC) && (maxB > maxD))
-                    max_index = maxB_index;
-                else if((maxC > maxD))
-                    max_index = maxC_index;
-                else
-                    max_index = maxD_index;
-            }
-
-            int skip = FFT_BIN_SIZE - max_index;
-            if(skip > FFT_BIN_SIZE - 4)
-                skip = 0;
-            g_skip_samples = skip * 4;
-
-            UARTprintf("%c %d %d %d %d %d\n", found_char, maxA, maxB, maxC, maxD, max_index);
-
-            if(g_message_last_char != found_char)
-            {
-                if(g_message[g_message_index] == found_char)
-                {
-                    g_message_index++;
-                    if(g_message_index >= MESSAGE_LENGTH)
-                    {
-                        UARTprintf("spooky!");
-                        g_spooky_message_index = 0;
-                    }
-                }
-                else
-                {
-                    if(g_message[0] == found_char)
-                        g_message_index = 1;
-                    else
-                        g_message_index = 0;
-                }
-            }
-
-            g_adcOutPtr += FFT_BIN_SIZE * 2;
-            if(g_adcOutPtr >= &g_adcBuffer[ADC_BUFFER_SIZE])
-            {
-                g_adcOutPtr = g_adcBuffer;
-            }
-        }
-
         unsigned int tick = ROM_SysTickValueGet();
         if((g_spooky_message_index == 0) && (g_keyTick == 0))
         {
@@ -486,6 +227,9 @@ int main(void)
                     g_keyTick = 0;
                 }
             }
+        }
+        if (g_spooky_message_index == sizeof(g_spooky_message)) {
+            UARTprintf("End of the World");
         }
 
     }

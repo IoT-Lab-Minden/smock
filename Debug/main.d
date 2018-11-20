@@ -34,7 +34,6 @@ main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h
-main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/utils/uartstdio.h
 main.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/stdarg.h
@@ -79,7 +78,6 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h: 
-C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h: 
 C:/ti/tivaware_c_series_2_1_4_178/utils/uartstdio.h: 
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/stdarg.h: 

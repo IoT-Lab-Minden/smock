@@ -41,7 +41,7 @@ extern volatile uint8_t g_ui8Buttons;
 // device.
 //
 //****************************************************************************
-#define NUM_DEVICES 2
+#define NUM_DEVICES 1
 
 //*****************************************************************************
 //
@@ -49,13 +49,6 @@ extern volatile uint8_t g_ui8Buttons;
 //
 //*****************************************************************************
 extern tUSBDHIDKeyboardDevice g_sKeyboardDevice;
-
-//*****************************************************************************
-//
-// Mouse Device instance
-//
-//*****************************************************************************
-extern tUSBDHIDMouseDevice g_sMouseDevice;
 
 //*****************************************************************************
 //
@@ -101,7 +94,6 @@ extern uint8_t g_pui8DescriptorData[DESCRIPTOR_DATA_SIZE];
 //
 //****************************************************************************
 
-extern void USBMouseMoveHandler(void);
 extern void USBKeyboardMain(void);
 bool IsKeyboardPending(void);
 
@@ -112,8 +104,6 @@ bool IsKeyboardPending(void);
 //****************************************************************************
 extern uint32_t USBEventHandler(void *pvCBData, uint32_t ui32Event,
                                 uint32_t ui32MsgValue, void *pvMsgData);
-extern uint32_t USBMouseHandler(void *pvCBData, uint32_t ui32Event,
-                                uint32_t ui32MsgData, void *pvMsgData);
 extern uint32_t USBKeyboardHandler(void *pvCBData, uint32_t ui32Event,
                                    uint32_t ui32MsgData, void *pvMsgData);
 #endif
