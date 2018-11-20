@@ -16,6 +16,9 @@ main.obj: C:/ti/tivaware_c_series_2_1_4_178/inc/hw_memmap.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/inc/hw_ints.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/inc/hw_types.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/inc/hw_adc.h
+main.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/grlib.h
+main.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/widget.h
+main.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/keyboard.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/fpu.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/debug.h
@@ -60,6 +63,9 @@ C:/ti/tivaware_c_series_2_1_4_178/inc/hw_memmap.h:
 C:/ti/tivaware_c_series_2_1_4_178/inc/hw_ints.h: 
 C:/ti/tivaware_c_series_2_1_4_178/inc/hw_types.h: 
 C:/ti/tivaware_c_series_2_1_4_178/inc/hw_adc.h: 
+C:/ti/tivaware_c_series_2_1_4_178/grlib/grlib.h: 
+C:/ti/tivaware_c_series_2_1_4_178/grlib/widget.h: 
+C:/ti/tivaware_c_series_2_1_4_178/grlib/keyboard.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/fpu.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/debug.h: 

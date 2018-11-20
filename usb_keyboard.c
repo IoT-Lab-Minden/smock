@@ -34,10 +34,11 @@
 #include "usblib/device/usbdevice.h"
 #include "usblib/device/usbdcomp.h"
 #include "usblib/device/usbdhid.h"
-#include "usblib/device/usbdhidmouse.h"
 #include "usblib/device/usbdhidkeyb.h"
 #include "usb_structs.h"
 #include "global_defs.h"
+
+#define HASHTAG 0x32
 
 
 //****************************************************************************
@@ -73,6 +74,7 @@ sUsageEntry;
 // The un-shifted HID usage codes used by the graphical keyboard.
 //
 //****************************************************************************
+// TODO: sonderzeichen wie ae, oe ... -----> Doppelpunkt entspricht Ö???
 static const sUsageEntry g_pcUsageCodes[] =
 {
     {'q', HID_KEYB_USAGE_Q}, {'w', HID_KEYB_USAGE_W},

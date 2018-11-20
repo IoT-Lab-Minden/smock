@@ -14,6 +14,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include "inc/hw_ints.h"
 #include "inc/hw_types.h"
 #include "inc/hw_adc.h"
+#include "grlib/grlib.h"
+#include "grlib/widget.h"
+#include "grlib/keyboard.h"
 #include "driverlib/fpu.h"
 #include "driverlib/pin_map.h"
 #include "driverlib/debug.h"
@@ -37,12 +40,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include "usb_structs.h"
 #include "global_defs.h"
 
-const char g_spooky_message[] = "spooky";
+const char ENTER = UNICODE_RETURN;
+const char g_spooky_message[] = "Warum koennen Piraten keine Kreise yeichenen_";
+const char g_spooky_message1[] = "Weil sie...";
+const char g_spooky_message2[] = "PI raten!";
+
 int g_spooky_message_index = 0;
 int g_spooky_last_tick = 0;
 unsigned int g_keyTick = 0;
 bool g_keyDown = false;
 
+void USBWriteString(const char *string, int length);
 void ConfigureUART(void);
 
 //*****************************************************************************
@@ -58,8 +66,6 @@ void ConfigureUART(void);
 //
 //*****************************************************************************
 volatile uint32_t g_ui32SysTickCount;
-
-
 
 //*****************************************************************************
 //
@@ -96,7 +102,6 @@ USBEventHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgParam,
     return(0);
 }
 
-
 /*
  * main.c
  */
@@ -121,9 +126,6 @@ int main(void) {
 
     ConfigureUART();
 
-    uint8_t last_led = 0;
-
-
     USBStackModeSet(0, eUSBModeForceDevice, 0);
 
     if (!USBDHIDKeyboardInit(0, &g_sKeyboardDevice)) {
@@ -134,47 +136,31 @@ int main(void) {
 
     IntMasterEnable();
 
-    // Wait for host (maybe longer?)
+    // wait for the host to set up the usb device(maybe longer?)
     for(ui32Loop = 0; ui32Loop < 20; ui32Loop++) {
         for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++) {
         }
     }
+
+    int once = 1;
     while(true) {
-        // Wait for at least one System Tick (Host)
-        unsigned int tick = ROM_SysTickValueGet();
-        if((g_spooky_message_index == 0) && (g_keyTick == 0)) {
-            g_keyTick = g_ui32SysTickCount;
-        }
-        if(g_keyTick != 0) {
-            int diff = g_keyTick - g_ui32SysTickCount;
-            if(diff <= 0) {
-                if(g_keyDown) {
-                    //release button
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, last_led);
-                    UARTprintf("key up %c %d %d\n ", g_spooky_message[g_spooky_message_index], (int)IsKeyboardPending(), g_ui32SysTickCount);
-                    USBKeyboardUpdate(0, g_spooky_message[g_spooky_message_index], false);
-                    g_spooky_message_index++;
-                    g_keyTick = (g_ui32SysTickCount + 0x1) | 1;
-                    g_keyDown = false;
-                }
-                else if(g_spooky_message_index < sizeof(g_spooky_message)) {
-                    // press button
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_1 | GPIO_PIN_3);
-                    UARTprintf("key down %c %d %d\n ", g_spooky_message[g_spooky_message_index], (int)IsKeyboardPending(), g_ui32SysTickCount);
-                    USBKeyboardUpdate(0, g_spooky_message[g_spooky_message_index], true);
-                    g_keyTick = (g_ui32SysTickCount + 0x2) | 1;
-                    g_keyDown = true;
-                }
-                else {
-                    g_keyTick = 0;
+        if (once) {
+            USBWriteString(g_spooky_message, sizeof(g_spooky_message) - 1);
+            USBWriteString(&ENTER, 1);
+            for(ui32Loop = 0; ui32Loop < 20; ui32Loop++) {
+                for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++) {
                 }
             }
+            USBWriteString(g_spooky_message1, sizeof(g_spooky_message1) - 1);
+            USBWriteString(&ENTER, 1);
+            for(ui32Loop = 0; ui32Loop < 20; ui32Loop++) {
+                for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++) {
+                }
+            }
+            USBWriteString(g_spooky_message2, sizeof(g_spooky_message2) - 1);
+            USBWriteString(&ENTER, 1);
+            once--;
         }
-        if (g_spooky_message_index == sizeof(g_spooky_message)) {
-            UARTprintf("End of the World");
-            g_spooky_message_index++;
-        }
-
     }
 }
 
@@ -183,8 +169,7 @@ int main(void) {
 // Configure the UART and its pins.  This must be called before UARTprintf().
 //
 //*****************************************************************************
-void ConfigureUART(void)
-{
+void ConfigureUART(void) {
     //
     // Enable the GPIO Peripheral used by the UART.
     //
@@ -211,4 +196,47 @@ void ConfigureUART(void)
     // Initialize the UART for console I/O.
     //
     UARTStdioConfig(0, 115200, 16000000);
+}
+
+
+void USBWriteString(const char *string, int length) {
+    uint8_t running = 1;
+    uint8_t last_led = 0;
+    int index = 0;
+
+    while (running) {
+        unsigned int tick = ROM_SysTickValueGet();
+        if((index == 0) && (g_keyTick == 0)) {
+            g_keyTick = g_ui32SysTickCount;
+        }
+        if(g_keyTick != 0) {
+            int diff = g_keyTick - g_ui32SysTickCount;
+            if(diff <= 0) {
+                if(g_keyDown) {
+                    //release button
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, last_led);
+                    UARTprintf("key up %c %d %d\n ", string[index], (int)IsKeyboardPending(), g_ui32SysTickCount);
+                    USBKeyboardUpdate(0, string[index], false);
+                    index++;
+                    g_keyTick = (g_ui32SysTickCount + 0x1) | 1;
+                    g_keyDown = false;
+                }
+                else if(index < length) {
+                    // press button
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_1 | GPIO_PIN_3);
+                    UARTprintf("key down %c %d %d\n ", string[index], (int)IsKeyboardPending(), g_ui32SysTickCount);
+                    USBKeyboardUpdate(0, string[index], true);
+                    g_keyTick = (g_ui32SysTickCount + 0x2) | 1;
+                    g_keyDown = true;
+                }
+                else {
+                    g_keyTick = 0;
+                }
+            }
+        }
+        if (index >= length) {
+            UARTprintf("End of the World");
+            running = 0;
+        }
+    }
 }

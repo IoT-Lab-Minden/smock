@@ -46,6 +46,7 @@ volatile uint32_t g_ui32USBFlags;
 // The languages supported by this device.
 //
 //*****************************************************************************
+//TODO: Language anpassen bzw. fuer Tastertur layout optimieren -> ggf, an anderer Stelle schon umrechen
 const uint8_t g_pui8LangDescriptor[] =
 {
     4,
