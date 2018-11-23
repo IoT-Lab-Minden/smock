@@ -213,6 +213,23 @@
     <ownedEnd xmi:type="uml:Property" xmi:id="_Ap7V4OvXEeiI75dQfm4qMg" name="edit user" type="_8P3lYOvWEeiI75dQfm4qMg" association="_Ap0oMOvXEeiI75dQfm4qMg"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_Ap788OvXEeiI75dQfm4qMg" type="_KdVQgOW_EeiHbNSSdY3B9A" association="_Ap0oMOvXEeiI75dQfm4qMg"/>
   </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_mx-wkOwPEeiI75dQfm4qMg" name="CompositeDiagram">
+    <packagedElement xmi:type="uml:Class" xmi:id="_bbgqUO7-EeiY0qITZamNVg" name="Smock">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_chmIoO7-EeiY0qITZamNVg" name="ComputerManager" type="_LsIRgOmGEei9U5yEW2wp6A"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_loCvwO7-EeiY0qITZamNVg" name="RFID-Reader" type="_MfF_gOmGEei9U5yEW2wp6A"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Trv3YO8AEeiY0qITZamNVg" name="Tag">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_Mr8zsO8AEeiY0qITZamNVg" name="I2C">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_Mr-B0O8AEeiY0qITZamNVg" role="_chmIoO7-EeiY0qITZamNVg"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_Mr-o4O8AEeiY0qITZamNVg" role="_loCvwO7-EeiY0qITZamNVg"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_YORAUO8AEeiY0qITZamNVg" name="RFID-Signal">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_YORnYO8AEeiY0qITZamNVg" role="_Trv3YO8AEeiY0qITZamNVg"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_YOSOcO8AEeiY0qITZamNVg" role="_loCvwO7-EeiY0qITZamNVg"/>
+      </ownedConnector>
+    </packagedElement>
+  </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_-7_4wOpHEei0m4I4I3qPnQ">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-8CVAOpHEei0m4I4I3qPnQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
