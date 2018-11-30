@@ -37,13 +37,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include "usblib/device/usbdhidkeyb.h"
 #include "utils/uartstdio.h"
 #include "utils/ustdlib.h"
+#include "drivers/buttons.h"
 #include "usb_structs.h"
 #include "global_defs.h"
 
 const char ENTER = UNICODE_RETURN;
-const char g_spooky_message[] = "Warum koennen Piraten keine Kreise yeichenen_";
-const char g_spooky_message1[] = "Weil sie...";
-const char g_spooky_message2[] = "PI raten!";
+const char password[] = "**********";
 
 int g_spooky_message_index = 0;
 int g_spooky_last_tick = 0;
@@ -132,6 +131,8 @@ int main(void) {
         return 0;
     }
 
+    ButtonsInit();
+
     UARTprintf("Spooky keyboard online.\n");
 
     IntMasterEnable();
@@ -143,23 +144,26 @@ int main(void) {
     }
 
     int once = 1;
+    uint8_t ui8ButtonsChanged, ui8Buttons;
+    uint8_t locked = 0;
+    char l = 'l';
+    char counter = 0x00;
     while(true) {
-        if (once) {
-            USBWriteString(g_spooky_message, sizeof(g_spooky_message) - 1);
+        //
+        // See if the buttons updated.
+        //
+        ButtonsPoll(&ui8ButtonsChanged, &ui8Buttons);
+
+        // TODO: Wartezeit sollte über Variable einstellbar sein
+        // TODO: Handle caps
+        if (ui8ButtonsChanged && (ui8Buttons & RIGHT_BUTTON)) {
             USBWriteString(&ENTER, 1);
             for(ui32Loop = 0; ui32Loop < 20; ui32Loop++) {
                 for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++) {
                 }
             }
-            USBWriteString(g_spooky_message1, sizeof(g_spooky_message1) - 1);
+            USBWriteString(password, sizeof(password) - 1);
             USBWriteString(&ENTER, 1);
-            for(ui32Loop = 0; ui32Loop < 20; ui32Loop++) {
-                for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++) {
-                }
-            }
-            USBWriteString(g_spooky_message2, sizeof(g_spooky_message2) - 1);
-            USBWriteString(&ENTER, 1);
-            once--;
         }
     }
 }
