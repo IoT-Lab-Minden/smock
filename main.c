@@ -120,8 +120,8 @@ int main(void) {
     // configure USB pins
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
     ROM_GPIOPinTypeUSBAnalog(GPIO_PORTD_BASE, GPIO_PIN_4 | GPIO_PIN_5);
-    ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
+    //ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
+    //ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
 
     ConfigureUART();
 
