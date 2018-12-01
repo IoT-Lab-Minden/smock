@@ -33,6 +33,7 @@
 #include "usblib/device/usbdhidmouse.h"
 #include "usblib/device/usbdhidkeyb.h"
 #include "usb_structs.h"
+#include "usb_keyboard.h"
 
 //*****************************************************************************
 //

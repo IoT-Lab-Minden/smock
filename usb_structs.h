@@ -26,27 +26,15 @@
 #ifndef __USB_STRUCTS_H__
 #define __USB_STRUCTS_H__
 
-//****************************************************************************
-//
 // Globals used by both classes.
-//
-//****************************************************************************
 extern volatile uint32_t g_ui32USBFlags;
 extern volatile uint32_t g_ui32SysTickCount;
 extern volatile uint8_t g_ui8Buttons;
 
-//*****************************************************************************
-//
 // Keyboard Device Instance.
-//
-//*****************************************************************************
 extern tUSBDHIDKeyboardDevice g_sKeyboardDevice;
 
-//****************************************************************************
-//
 // The flags used by this application for the g_ulFlags value.
-//
-//****************************************************************************
 #define FLAG_MOVE_UPDATE       0
 #define FLAG_CONNECTED         1
 #define FLAG_LED_ACTIVITY      2
@@ -54,25 +42,4 @@ extern tUSBDHIDKeyboardDevice g_sKeyboardDevice;
 #define FLAG_COMMAND_RECEIVED  4
 #define FLAG_SUSPENDED         5
 
-//****************************************************************************
-//
-// The size of the transmit and receive buffers used for the redirected UART.
-// This number should be a power of 2 for best performance.  256 is chosen
-// pretty much at random though the buffer should be at least twice the size
-// of a maximum-sized USB packet.
-//
-//****************************************************************************
-
-extern void USBKeyboardMain(void);
-bool IsKeyboardPending(void);
-
-//****************************************************************************
-//
-// CDC device callback function prototypes.
-//
-//****************************************************************************
-extern uint32_t USBEventHandler(void *pvCBData, uint32_t ui32Event,
-                                uint32_t ui32MsgValue, void *pvMsgData);
-extern uint32_t USBKeyboardHandler(void *pvCBData, uint32_t ui32Event,
-                                   uint32_t ui32MsgData, void *pvMsgData);
 #endif

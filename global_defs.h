@@ -36,23 +36,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #define THRESHOLD_SHIFT (1)
 
 #define MESSAGE_LENGTH (2)
-//*****************************************************************************
-//
-// USB mouse function prototypes.
-//
-//*****************************************************************************
-void USBMouseInit(void);
-void USBMouseMain(void);
-void USBMouseUpdate(int32_t i32X, int32_t i32Y, uint8_t ui8Buttons);
-
-//*****************************************************************************
-//
-// USB keyboard prototypes.
-//
-//*****************************************************************************
-void USBKeyboardInit(void);
-void USBKeyboardUpdate(uint8_t ui8Modifiers, uint8_t ui8UsageCode,
-                       bool bPressed);
-
 
 #endif /* GLOBAL_DEFS_H_ */
