@@ -43,6 +43,7 @@ data.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/time.h
 data.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/abi_prefix.h
 data.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/xlocale/_time.h
 data.obj: ../usb_structs.h
+data.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
 data.obj: ../global_defs.h
 
 ../data.c: 
@@ -88,4 +89,5 @@ C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/time.h:
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/abi_prefix.h: 
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/xlocale/_time.h: 
 ../usb_structs.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
 ../global_defs.h: 

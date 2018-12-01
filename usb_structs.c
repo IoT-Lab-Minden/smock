@@ -30,24 +30,21 @@
 #include "usblib/device/usbdevice.h"
 #include "usblib/device/usbdcomp.h"
 #include "usblib/device/usbdhid.h"
-#include "usblib/device/usbdhidmouse.h"
 #include "usblib/device/usbdhidkeyb.h"
+#include "usblib/usbcdc.h"
 #include "usb_structs.h"
+#include "usb_serial.h"
 #include "usb_keyboard.h"
+#include "usblib/usbcdc.h"
 
-//*****************************************************************************
-//
-// Flags for Keyboard and Mouse shared states.
-//
-//*****************************************************************************
+/**
+ * Flags for Keyboard and Mouse shared states.
+ */
 volatile uint32_t g_ui32USBFlags;
 
-//*****************************************************************************
-//
-// The languages supported by this device.
-//
-//*****************************************************************************
-//TODO: Language anpassen bzw. fuer Tastertur layout optimieren -> ggf, an anderer Stelle schon umrechen
+/**
+ * The languages supported by this device.
+ */
 const uint8_t g_pui8LangDescriptor[] =
 {
     4,
@@ -55,11 +52,9 @@ const uint8_t g_pui8LangDescriptor[] =
     USBShort(USB_LANG_EN_US)
 };
 
-//*****************************************************************************
-//
-// The manufacturer string.
-//
-//*****************************************************************************
+/**
+ * The manufacturer string.
+ */
 const uint8_t g_pui8ManufacturerString[] =
 {
     (17 + 1) * 2,
@@ -68,11 +63,9 @@ const uint8_t g_pui8ManufacturerString[] =
     't', 0, 'r', 0, 'u', 0, 'm', 0, 'e', 0, 'n', 0, 't', 0, 's', 0,
 };
 
-//*****************************************************************************
-//
-// The product string.
-//
-//*****************************************************************************
+/**
+ * The product string.
+ */
 const uint8_t g_pui8ProductString[] =
 {
     (13 + 1) * 2,
@@ -81,11 +74,9 @@ const uint8_t g_pui8ProductString[] =
     'm', 0, 'p', 0, 'l', 0, 'e', 0
 };
 
-//*****************************************************************************
-//
-// The serial number string.
-//
-//*****************************************************************************
+/**
+ * The serial number string.
+ */
 const uint8_t g_pui8SerialNumberString[] =
 {
     (8 + 1) * 2,
@@ -93,66 +84,111 @@ const uint8_t g_pui8SerialNumberString[] =
     '1', 0, '2', 0, '3', 0, '4', 0, '5', 0, '6', 0, '7', 0, '8', 0
 };
 
-//*****************************************************************************
-//
-// The descriptor string table.
-//
-//*****************************************************************************
-const uint8_t * const g_pui8StringDescriptors[] =
+/**
+ * The control interface description string.
+ */
+const uint8_t g_pui8ControlInterfaceString[] =
 {
-    g_pui8LangDescriptor,
-    g_pui8ManufacturerString,
-    g_pui8ProductString,
-    g_pui8SerialNumberString,
+    2 + (21 * 2),
+    USB_DTYPE_STRING,
+    'A', 0, 'C', 0, 'M', 0, ' ', 0, 'C', 0, 'o', 0, 'n', 0, 't', 0,
+    'r', 0, 'o', 0, 'l', 0, ' ', 0, 'I', 0, 'n', 0, 't', 0, 'e', 0,
+    'r', 0, 'f', 0, 'a', 0, 'c', 0, 'e', 0
 };
 
-#define NUM_STRING_DESCRIPTORS (sizeof(g_pui8StringDescriptors) /             \
-                                sizeof(uint8_t *))
+/**
+ * The configuration description string.
+ */
+const uint8_t g_pui8ConfigString[] =
+{
+    2 + (26 * 2),
+    USB_DTYPE_STRING,
+    'S', 0, 'e', 0, 'l', 0, 'f', 0, ' ', 0, 'P', 0, 'o', 0, 'w', 0,
+    'e', 0, 'r', 0, 'e', 0, 'd', 0, ' ', 0, 'C', 0, 'o', 0, 'n', 0,
+    'f', 0, 'i', 0, 'g', 0, 'u', 0, 'r', 0, 'a', 0, 't', 0, 'i', 0,
+    'o', 0, 'n', 0
+};
 
+/**
+ * The descriptor string table.
+ */
+const uint8_t * const g_pui8StringDescriptors[] =
+{
+     g_pui8LangDescriptor,
+     g_pui8ManufacturerString,
+     g_pui8ProductString,
+     g_pui8SerialNumberString,
+     g_pui8ControlInterfaceString,
+     g_pui8ConfigString
+};
 
-//*****************************************************************************
-//
-// The HID keyboard device initialization and customization structures.
-//
-//*****************************************************************************
+const int NUM_STRING_DESCRIPTORS = (sizeof(g_pui8StringDescriptors) / sizeof(uint8_t *));
+
 tUSBDHIDKeyboardDevice g_sKeyboardDevice =
 {
-    //
     // Tiva VID.
-    //
     USB_VID_TI_1CBE,
 
-    //
-    // Tiva HID Mouse PID.
-    //
+    // Tiva HID Keyboard PID.
     USB_PID_KEYBOARD,
 
-    //
     // This is in 2mA increments so 500mA.
-    //
     250,
 
-    //
     // Bus powered device.
-    //
     USB_CONF_ATTR_BUS_PWR,
 
-    //
     // The Keyboard handler function.
-    //
     USBKeyboardHandler,
 
-    //
     // Point to the mouse device structure.
-    //
     (void *)&g_sKeyboardDevice,
 
-    //
     // The composite device does not use the strings from the class.
-    //
     g_pui8StringDescriptors,
     // 0,
     NUM_STRING_DESCRIPTORS
     // 0,
 };
 
+tUSBDCDCDevice g_sCDCDevice =
+{
+    USB_VID_TI_1CBE,
+    USB_PID_SERIAL,
+    0,
+    USB_CONF_ATTR_SELF_PWR,
+    ControlHandler,
+    (void *)&g_sCDCDevice,
+    USBBufferEventCallback,
+    (void *)&g_sRxBuffer,
+    USBBufferEventCallback,
+    (void *)&g_sTxBuffer,
+    g_pui8StringDescriptors,
+    NUM_STRING_DESCRIPTORS
+};
+
+uint8_t g_pui8USBRxBuffer[UART_BUFFER_SIZE];
+tUSBBuffer g_sRxBuffer =
+{
+    false,                          // This is a receive buffer.
+    RxHandler,                      // pfnCallback
+    (void *)&g_sCDCDevice,          // Callback data is our device pointer.
+    USBDCDCPacketRead,              // pfnTransfer
+    USBDCDCRxPacketAvailable,       // pfnAvailable
+    (void *)&g_sCDCDevice,          // pvHandle
+    g_pui8USBRxBuffer,              // pui8Buffer
+    UART_BUFFER_SIZE,               // ui32BufferSize
+};
+
+uint8_t g_pui8USBTxBuffer[UART_BUFFER_SIZE];
+tUSBBuffer g_sTxBuffer =
+{
+    true,                           // This is a transmit buffer.
+    TxHandler,                      // pfnCallback
+    (void *)&g_sCDCDevice,          // Callback data is our device pointer.
+    USBDCDCPacketWrite,             // pfnTransfer
+    USBDCDCTxPacketAvailable,       // pfnAvailable
+    (void *)&g_sCDCDevice,          // pvHandle
+    g_pui8USBTxBuffer,              // pui8Buffer
+    UART_BUFFER_SIZE,               // ui32BufferSize
+};

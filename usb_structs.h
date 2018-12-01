@@ -26,12 +26,17 @@
 #ifndef __USB_STRUCTS_H__
 #define __USB_STRUCTS_H__
 
+#include "usblib/device/usbdcdc.h"
+#include "usblib/device/usbdhidkeyb.h"
+
 // Globals used by both classes.
 extern volatile uint32_t g_ui32USBFlags;
 extern volatile uint32_t g_ui32SysTickCount;
 extern volatile uint8_t g_ui8Buttons;
 
-// Keyboard Device Instance.
+/**
+ * The HID keyboard device initialization and customization structures.
+ */
 extern tUSBDHIDKeyboardDevice g_sKeyboardDevice;
 
 // The flags used by this application for the g_ulFlags value.
@@ -41,5 +46,36 @@ extern tUSBDHIDKeyboardDevice g_sKeyboardDevice;
 #define FLAG_MOVE_MOUSE        3
 #define FLAG_COMMAND_RECEIVED  4
 #define FLAG_SUSPENDED         5
+
+/**
+ * Size of the Rx and Tx buffer
+ */
+#define UART_BUFFER_SIZE 256
+
+/**
+ * Transmit buffer (from the USB perspective).
+ */
+extern tUSBBuffer g_sTxBuffer;
+extern uint8_t g_pui8USBTxBuffer[];
+
+/**
+ * Receive buffer (from the USB perspective).
+ */
+extern tUSBBuffer g_sRxBuffer;
+extern uint8_t g_pui8USBRxBuffer[];
+
+
+/**
+ * The CDC device initialization and customization structures. In this case,
+ * we are using USBBuffers between the CDC device class driver and the
+ * application code. The function pointers and callback data values are set
+ * to insert a buffer in each of the data channels, transmit and receive.
+ *
+ * With the buffer in place, the CDC channel callback is set to the relevant
+ * channel function and the callback data is set to point to the channel
+ * instance data. The buffer, in turn, has its callback set to the application
+ * function and the callback data set to our CDC instance structure.
+ */
+extern tUSBDCDCDevice g_sCDCDevice;
 
 #endif

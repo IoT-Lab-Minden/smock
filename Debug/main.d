@@ -33,6 +33,7 @@ main.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/uart.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usblib.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbhid.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usb-ids.h
+main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h
@@ -46,6 +47,7 @@ main.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/abi_prefix.h
 main.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/xlocale/_time.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c123gxl/drivers/buttons.h
 main.obj: ../usb_structs.h
+main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
 main.obj: ../global_defs.h
 main.obj: ../usb_keyboard.h
 
@@ -82,6 +84,7 @@ C:/ti/tivaware_c_series_2_1_4_178/driverlib/uart.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/usblib.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/usbhid.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/usb-ids.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h: 
@@ -95,5 +98,6 @@ C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/abi_prefix.h:
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/xlocale/_time.h: 
 C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c123gxl/drivers/buttons.h: 
 ../usb_structs.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
 ../global_defs.h: 
 ../usb_keyboard.h: 

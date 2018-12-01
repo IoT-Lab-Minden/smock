@@ -22,6 +22,7 @@
 #include "usblib/usblib.h"
 #include "usblib/usbhid.h"
 #include "usblib/usb-ids.h"
+#include "usblib/usbcdc.h"
 #include "usblib/device/usbdevice.h"
 #include "usblib/device/usbdcomp.h"
 #include "usblib/device/usbdhid.h"

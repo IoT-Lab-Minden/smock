@@ -10,10 +10,10 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./data.obj" \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "./usb_keyboard.obj" \
+"./usb_serial.obj" \
 "./usb_structs.obj" \
 "./drivers/buttons.obj" \
 "./utils/uartstdio.obj" \
@@ -167,8 +167,8 @@ usb_keyb_dev.bin: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "data.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "usb_keyboard.obj" "usb_structs.obj" "drivers\buttons.obj" "utils\uartstdio.obj" 
-	-$(RM) "data.d" "main.d" "tm4c123gh6pm_startup_ccs.d" "usb_keyboard.d" "usb_structs.d" "drivers\buttons.d" "utils\uartstdio.d" 
+	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "usb_keyboard.obj" "usb_serial.obj" "usb_structs.obj" "drivers\buttons.obj" "utils\uartstdio.obj" 
+	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "usb_keyboard.d" "usb_serial.d" "usb_structs.d" "drivers\buttons.d" "utils\uartstdio.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

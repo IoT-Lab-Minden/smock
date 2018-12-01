@@ -16,6 +16,7 @@ usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/keyboard.h
 usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h
 usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usblib.h
 usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbhid.h
+usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h
 usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h
 usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h
 usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h
@@ -23,6 +24,7 @@ usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h
 usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h
 usb_keyboard.obj: ../usb_keyboard.h
 usb_keyboard.obj: ../usb_structs.h
+usb_keyboard.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
 usb_keyboard.obj: ../global_defs.h
 
 ../usb_keyboard.c: 
@@ -41,6 +43,7 @@ C:/ti/tivaware_c_series_2_1_4_178/grlib/keyboard.h:
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/usblib.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/usbhid.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h: 
@@ -48,4 +51,5 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h: 
 ../usb_keyboard.h: 
 ../usb_structs.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
 ../global_defs.h: 

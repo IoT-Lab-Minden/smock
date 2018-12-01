@@ -16,9 +16,11 @@ usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h
 usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h
 usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h
 usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h
-usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.h
 usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h
+usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h
 usb_structs.obj: ../usb_structs.h
+usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
+usb_structs.obj: ../usb_serial.h
 usb_structs.obj: ../usb_keyboard.h
 
 ../usb_structs.c: 
@@ -37,7 +39,9 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h: 
-C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h: 
 ../usb_structs.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
+../usb_serial.h: 
 ../usb_keyboard.h: 
