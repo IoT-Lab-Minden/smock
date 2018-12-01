@@ -54,7 +54,8 @@ extern char *g_pcStatus;
  *
  * \return The return value is event-specific.
  */
-uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData);
+uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
+                   void *pvMsgData);
 
 /**
  * Handles CDC driver notifications related to the transmit channel (data to
@@ -71,7 +72,8 @@ uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, vo
  *
  * \return The return value is event-specific.
  */
-uint32_t TxHandler(void *pvi32CBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData);
+uint32_t TxHandler(void *pvi32CBData, uint32_t ui32Event, uint32_t ui32MsgValue,
+                   void *pvMsgData);
 
 /**
  * Handles CDC driver notifications related to control and setup of the device.
@@ -88,7 +90,8 @@ uint32_t TxHandler(void *pvi32CBData, uint32_t ui32Event, uint32_t ui32MsgValue,
  *
  * \return The return value is event-specific.
  */
-uint32_t ControlHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData);
+uint32_t ControlHandler(void *pvCBData, uint32_t ui32Event,
+                        uint32_t ui32MsgValue, void *pvMsgData);
 
 /**
  * Take as many bytes from the transmit buffer as we have space for and move
@@ -108,7 +111,8 @@ void USBUARTPrimeTransmit(uint32_t ui32Base);
  * completion of the previous notification and used to send a second one
  * if necessary.
  */
-void CheckForSerialStateChange(const tUSBDCDCDevice *psDevice, int32_t i32Errors);
+void CheckForSerialStateChange(const tUSBDCDCDevice *psDevice,
+                               int32_t i32Errors);
 
 /**
  * Set the state of the RS232 RTS and DTR signals.

@@ -26,6 +26,7 @@ usb_serial.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h
 usb_serial.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h
 usb_serial.obj: ../usb_serial.h
 usb_serial.obj: ../usb_structs.h
+usb_serial.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h
 
 ../usb_serial.c: 
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/stdint.h: 
@@ -53,3 +54,4 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhid.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h: 
 ../usb_serial.h: 
 ../usb_structs.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcomp.h: 

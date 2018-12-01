@@ -126,29 +126,15 @@ const int NUM_STRING_DESCRIPTORS = (sizeof(g_pui8StringDescriptors) / sizeof(uin
 
 tUSBDHIDKeyboardDevice g_sKeyboardDevice =
 {
-    // Tiva VID.
     USB_VID_TI_1CBE,
-
-    // Tiva HID Keyboard PID.
     USB_PID_KEYBOARD,
-
-    // This is in 2mA increments so 500mA.
     250,
-
-    // Bus powered device.
     USB_CONF_ATTR_BUS_PWR,
-
-    // The Keyboard handler function.
     USBKeyboardHandler,
-
-    // Point to the mouse device structure.
     (void *)&g_sKeyboardDevice,
-
-    // The composite device does not use the strings from the class.
     g_pui8StringDescriptors,
-    // 0,
-    NUM_STRING_DESCRIPTORS
-    // 0,
+    0, //g_pui8StringDescriptors
+    0, //NUM_STRING_DESCRIPTORS
 };
 
 tUSBDCDCDevice g_sCDCDevice =
@@ -163,8 +149,8 @@ tUSBDCDCDevice g_sCDCDevice =
     (void *)&g_sRxBuffer,
     USBBufferEventCallback,
     (void *)&g_sTxBuffer,
-    g_pui8StringDescriptors,
-    NUM_STRING_DESCRIPTORS
+    0, //g_pui8StringDescriptors
+    0, //NUM_STRING_DESCRIPTORS
 };
 
 uint8_t g_pui8USBRxBuffer[UART_BUFFER_SIZE];
@@ -191,4 +177,21 @@ tUSBBuffer g_sTxBuffer =
     (void *)&g_sCDCDevice,          // pvHandle
     g_pui8USBTxBuffer,              // pui8Buffer
     UART_BUFFER_SIZE,               // ui32BufferSize
+};
+
+tCompositeEntry g_psCompDevices[NUM_DEVICES];
+
+uint8_t g_pui8DescriptorData[DESCRIPTOR_DATA_SIZE];
+
+tUSBDCompositeDevice g_sCompDevice =
+{
+    USB_VID_TI_1CBE,
+    USB_PID_COMP_HID_SER,
+    250,
+    USB_CONF_ATTR_BUS_PWR,
+    USBEventHandler,
+    g_pui8StringDescriptors,
+    NUM_STRING_DESCRIPTORS,
+    NUM_DEVICES,
+    g_psCompDevices,
 };

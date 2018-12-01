@@ -28,6 +28,7 @@
 
 #include "usblib/device/usbdcdc.h"
 #include "usblib/device/usbdhidkeyb.h"
+#include "usblib/device/usbdcomp.h"
 
 // Globals used by both classes.
 extern volatile uint32_t g_ui32USBFlags;
@@ -64,7 +65,6 @@ extern uint8_t g_pui8USBTxBuffer[];
 extern tUSBBuffer g_sRxBuffer;
 extern uint8_t g_pui8USBRxBuffer[];
 
-
 /**
  * The CDC device initialization and customization structures. In this case,
  * we are using USBBuffers between the CDC device class driver and the
@@ -78,4 +78,22 @@ extern uint8_t g_pui8USBRxBuffer[];
  */
 extern tUSBDCDCDevice g_sCDCDevice;
 
+#define NUM_DEVICES 2
+
+#define DESCRIPTOR_DATA_SIZE    (COMPOSITE_DHID_SIZE + COMPOSITE_DCDC_SIZE)
+
+/**
+ * The memory allocation for the composite USB device descriptors.
+ */
+extern uint8_t g_pui8DescriptorData[DESCRIPTOR_DATA_SIZE];
+
+/**
+ * The array of devices supported by this composite device.
+ */
+extern tCompositeEntry g_psCompDevices[];
+
+/**
+ * Allocate the Device Data for the top level composite device class.
+ */
+extern tUSBDCompositeDevice g_sCompDevice;
 #endif

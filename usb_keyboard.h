@@ -9,7 +9,6 @@
 
 #define HASHTAG 0x32
 
-
 void USBKeyboardMain(void);
 
 /**
@@ -21,7 +20,6 @@ void USBKeyboardInit(void);
  * Returns the current keyboard state
  */
 bool IsKeyboardPending(void);
-
 
 /**
  * Called by the UI interface to update the USB keyboard.
@@ -37,19 +35,20 @@ bool IsKeyboardPending(void);
  *
  * \return None.
  */
-void USBKeyboardUpdate(uint8_t ui8Modifiers, uint8_t ui8UsageCode, bool bPressed);
-
+void USBKeyboardUpdate(uint8_t ui8Modifiers, uint8_t ui8UsageCode,
+                       bool bPressed);
 
 /**
  * Handle the callbacks from the USB library's HID keyboard layer.
  */
-uint32_t USBKeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData);
-
+uint32_t USBKeyboardHandler(void *pvCBData, uint32_t ui32Event,
+                            uint32_t ui32MsgData, void *pvMsgData);
 
 /**
  * Handles all of the generic USB events.
  */
-uint32_t USBEventHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData);
+uint32_t USBEventHandler(void *pvCBData, uint32_t ui32Event,
+                         uint32_t ui32MsgValue, void *pvMsgData);
 
 /**
  * Calls USBKeyboardUpdate for every char in the string

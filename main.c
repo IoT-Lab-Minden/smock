@@ -27,6 +27,7 @@
 #include "usblib/device/usbdcomp.h"
 #include "usblib/device/usbdhid.h"
 #include "usblib/device/usbdhidkeyb.h"
+#include "usblib/device/usbdcomp.h"
 #include "utils/uartstdio.h"
 #include "utils/ustdlib.h"
 #include "drivers/buttons.h"
@@ -60,14 +61,21 @@ void configureUSB();
 /**
  * This is the interrupt handler for the SysTick interrupt.
  */
-void SysTickIntHandler(void) {
+void SysTickIntHandler(void)
+{
     g_ui32SysTickCount++;
 }
 
 /*
  * main.c
+ *
+ * To use Serial Communication connect to com port (COM9) with baud 115200
+ * ser = serial.Serial("COM9", 15200)
+ * ser.write("w")
+ * print ser.read() // -> 'w'
  */
-int main(void) {
+int main(void)
+{
     volatile uint32_t ui32Loop;
     volatile uint32_t ui32Loop1;
 
@@ -78,31 +86,37 @@ int main(void) {
     IntMasterEnable();
 
     // wait for the host to set up the usb device(maybe longer?)
-    for(ui32Loop = 0; ui32Loop < 20; ui32Loop++) {
-        for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++) {
+    for (ui32Loop = 0; ui32Loop < 20; ui32Loop++)
+    {
+        for (ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++)
+        {
         }
     }
 
     uint8_t ui8ButtonsChanged, ui8Buttons;
-    while(true) {
-//        //
-//        // See if the buttons updated.
-//        //
-//        ButtonsPoll(&ui8ButtonsChanged, &ui8Buttons);
-//
-//        // TODO: Wartezeit sollte über Variable einstellbar sein
-//        // TODO: Handle caps
-//        if (ui8ButtonsChanged && (ui8Buttons & RIGHT_BUTTON)) {
-//            USBWriteString(&ENTER, 1);
-//            for(ui32Loop = 0; ui32Loop < 20; ui32Loop++) {
-//                for(ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++) {
-//                }
-//            }
-//            USBWriteString(password, sizeof(password) - 1);
-//            USBWriteString(&ENTER, 1);
-//        }
+    while (true)
+    {
+        //
+        // See if the buttons updated.
+        //
+        ButtonsPoll(&ui8ButtonsChanged, &ui8Buttons);
 
-        if(g_ui32Flags & COMMAND_STATUS_UPDATE)
+        // TODO: Wartezeit sollte über Variable einstellbar sein
+        // TODO: Handle caps
+        if (ui8ButtonsChanged && (ui8Buttons & RIGHT_BUTTON))
+        {
+            USBWriteString(&ENTER, 1);
+            for (ui32Loop = 0; ui32Loop < 20; ui32Loop++)
+            {
+                for (ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++)
+                {
+                }
+            }
+            USBWriteString(password, sizeof(password) - 1);
+            USBWriteString(&ENTER, 1);
+        }
+
+        if (g_ui32Flags & COMMAND_STATUS_UPDATE)
         {
             //
             // Clear the command flag
@@ -111,7 +125,7 @@ int main(void) {
             g_ui32Flags &= ~COMMAND_STATUS_UPDATE;
             ROM_IntMasterEnable();
         }
-        if(ui32RxCount != g_ui32UARTRxCount)
+        if (ui32RxCount != g_ui32UARTRxCount)
         {
             //
             // Turn on the Blue LED.
@@ -131,7 +145,8 @@ int main(void) {
             //
             // Write back received bytes
             //
-            USBBufferWrite((tUSBBuffer *)&g_sTxBuffer, (uint8_t *)&ui8ReceiveBuffer, ui32ReceiveBufferEnd);
+            USBBufferWrite((tUSBBuffer *) &g_sTxBuffer,
+                           (uint8_t *) &ui8ReceiveBuffer, ui32ReceiveBufferEnd);
             //
             // Take a snapshot of the latest receive count.
             //
@@ -141,10 +156,13 @@ int main(void) {
     }
 }
 
-void configureUSB() {
+void configureUSB()
+{
     ROM_FPULazyStackingEnable();
 
-    ROM_SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
+    ROM_SysCtlClockSet(
+            SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN
+                    | SYSCTL_XTAL_16MHZ);
     uint32_t ui32SysClock = ROM_SysCtlClockGet();
 
     ROM_SysTickPeriodSet(ui32SysClock / SYSTICKS_PER_SECOND);
@@ -166,13 +184,14 @@ void configureUSB() {
 
     // Set the default UART configuration.
     ROM_UARTConfigSetExpClk(USB_UART_BASE, ROM_SysCtlClockGet(),
-                            DEFAULT_BIT_RATE, DEFAULT_UART_CONFIG);
+    DEFAULT_BIT_RATE,
+                            DEFAULT_UART_CONFIG);
     ROM_UARTFIFOLevelSet(USB_UART_BASE, UART_FIFO_TX4_8, UART_FIFO_RX4_8);
 
     // Configure and enable UART interrupts.
     ROM_UARTIntClear(USB_UART_BASE, ROM_UARTIntStatus(USB_UART_BASE, false));
     ROM_UARTIntEnable(USB_UART_BASE, (UART_INT_OE | UART_INT_BE | UART_INT_PE |
-                      UART_INT_FE | UART_INT_RT | UART_INT_TX | UART_INT_RX));
+    UART_INT_FE | UART_INT_RT | UART_INT_TX | UART_INT_RX));
 
     // Initialize the transmit and receive buffers.
     USBBufferInit(&g_sTxBuffer);
@@ -180,8 +199,14 @@ void configureUSB() {
 
     USBStackModeSet(0, eUSBModeForceDevice, 0);
 
-    USBDCDCInit(0, &g_sCDCDevice);
+    // USBDCDCInit(0, &g_sCDCDevice);
     // USBDHIDKeyboardInit(0, &g_sKeyboardDevice);
+
+    USBDHIDKeyboardCompositeInit(0, &g_sKeyboardDevice, &g_psCompDevices[0]);
+    USBDCDCCompositeInit(0, &g_sCDCDevice, &g_psCompDevices[1]);
+
+    USBDCompositeInit(0, &g_sCompDevice, DESCRIPTOR_DATA_SIZE,
+                      g_pui8DescriptorData);
 
     ui32RxCount = 0;
     ui32TxCount = 0;
