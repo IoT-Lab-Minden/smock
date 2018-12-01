@@ -27,13 +27,16 @@
 #define COMMAND_PACKET_RECEIVED 0x00000001
 #define COMMAND_STATUS_UPDATE   0x00000002
 
+extern bool g_bUSBConfigured;
+extern bool g_bSendingBreak;
+
 extern uint32_t g_ui32UARTTxCount;
 extern uint32_t g_ui32UARTRxCount;
 
 extern uint8_t ui8ReceiveBuffer[];
 extern uint32_t ui32ReceiveBufferEnd;
 
-extern volatile uint32_t g_ui32Flag;
+extern uint32_t g_ui32Flag;
 extern char *g_pcStatus;
 
 /**

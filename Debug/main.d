@@ -50,6 +50,7 @@ main.obj: ../usb_structs.h
 main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
 main.obj: ../global_defs.h
 main.obj: ../usb_keyboard.h
+main.obj: ../usb_serial.h
 
 ../main.c: 
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/stdint.h: 
@@ -101,3 +102,4 @@ C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c123gxl/drivers/buttons.
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
 ../global_defs.h: 
 ../usb_keyboard.h: 
+../usb_serial.h: 

@@ -28,10 +28,10 @@ uint32_t g_ui32UARTRxCount = 0;
 uint8_t ui8ReceiveBuffer[UART_BUFFER_SIZE];
 uint32_t ui32ReceiveBufferEnd = 0;
 
-static bool g_bUSBConfigured = false;
-static bool g_bSendingBreak = false;
+bool g_bUSBConfigured = false;
+bool g_bSendingBreak = false;
 
-volatile uint32_t g_ui32Flags = 0;
+uint32_t g_ui32Flags = 0;
 char *g_pcStatus;
 
 uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData)
