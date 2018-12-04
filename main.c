@@ -36,6 +36,10 @@
 #include "usb_keyboard.h"
 #include "usb_serial.h"
 
+const int START_DELAY = 1000;
+const int WAIT_FOR_HOST_KONFIGURATION = 500;
+const int ENTER_DELAY = 280;
+
 const char ENTER = UNICODE_RETURN;
 const char password[] = "PASSWORD";
 
@@ -58,6 +62,8 @@ volatile uint32_t g_ui32SysTickCount;
  */
 void configureUSB();
 
+void delay(int ms);
+
 /**
  * This is the interrupt handler for the SysTick interrupt.
  */
@@ -70,7 +76,7 @@ void SysTickIntHandler(void)
  * main.c
  *
  * To use Serial Communication connect to com port (COM9) with baud 115200
- * ser = serial.Serial("COM9", 15200)
+ * ser = serial.Serial("COM9", 115200)
  * ser.write("w")
  * print ser.read() // -> 'w'
  */
@@ -79,19 +85,15 @@ int main(void)
     volatile uint32_t ui32Loop;
     volatile uint32_t ui32Loop1;
 
+    delay(START_DELAY);
+
     configureUSB();
 
     ButtonsInit();
 
     IntMasterEnable();
 
-    // wait for the host to set up the usb device(maybe longer?)
-    for (ui32Loop = 0; ui32Loop < 20; ui32Loop++)
-    {
-        for (ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++)
-        {
-        }
-    }
+    delay(WAIT_FOR_HOST_KONFIGURATION);
 
     uint8_t ui8ButtonsChanged, ui8Buttons;
     while (true)
@@ -106,15 +108,19 @@ int main(void)
         if (ui8ButtonsChanged && (ui8Buttons & RIGHT_BUTTON))
         {
             USBWriteString(&ENTER, 1);
-            for (ui32Loop = 0; ui32Loop < 20; ui32Loop++)
-            {
-                for (ui32Loop1 = 0; ui32Loop1 < 200000; ui32Loop1++)
-                {
-                }
-            }
+            delay(ENTER_DELAY);
             USBWriteString(password, sizeof(password) - 1);
             USBWriteString(&ENTER, 1);
         }
+
+        if (ui8ButtonsChanged && (ui8Buttons & LEFT_BUTTON))
+        {
+            USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &DEL, 1);
+            delay(ENTER_DELAY);
+            USBWriteString(&ENTER, 1);
+
+        }
+
 
         if (g_ui32Flags & COMMAND_STATUS_UPDATE)
         {
@@ -212,5 +218,10 @@ void configureUSB()
     ui32TxCount = 0;
 
     ROM_IntEnable(USB_UART_INT);
+}
+
+void delay(int ms) {
+    uint32_t one_ms = (ROM_SysCtlClockGet() / 3) / 1000;
+    SysCtlDelay(one_ms * ms);
 }
 

@@ -6,8 +6,11 @@
  */
 #ifndef USB_KEYBOARD_H
 #define USB_KEYBOARD_H
+#include <stdint.h>
 
-#define HASHTAG 0x32
+extern const uint8_t HASHTAG;
+extern const uint8_t HOME;
+extern const uint8_t DEL;
 
 void USBKeyboardMain(void);
 
@@ -54,4 +57,9 @@ uint32_t USBEventHandler(void *pvCBData, uint32_t ui32Event,
  * Calls USBKeyboardUpdate for every char in the string
  */
 void USBWriteString(const char *string, int length);
+
+/**
+ * Presses all key at the same time
+ */
+void USBPressKeyCombination(const uint8_t modifiers, const uint8_t *string, int length);
 #endif

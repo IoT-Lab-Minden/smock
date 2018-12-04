@@ -41,7 +41,9 @@
 #include "usb_structs.h"
 #include "global_defs.h"
 
-
+const uint8_t HASHTAG = 0x32;
+const uint8_t HOME = 0x24;
+const uint8_t DEL = 0x4c;
 
 /**
  * Global USB keyboard state.
@@ -68,7 +70,7 @@ typedef struct
  */
 // TODO: sonderzeichen wie ae, oe ... -----> Doppelpunkt entspricht Ö???
 static const sUsageEntry g_pcUsageCodes[] = { { 'q', HID_KEYB_USAGE_Q }, {
-        'w', HID_KEYB_USAGE_W },
+                                                      'w', HID_KEYB_USAGE_W },
                                               { 'e', HID_KEYB_USAGE_E }, {
                                                       'r', HID_KEYB_USAGE_R },
                                               { 't', HID_KEYB_USAGE_T }, {
@@ -334,6 +336,48 @@ void USBWriteString(const char *string, int length) {
         }
     }
 }
+
+void USBPressKeyCombination(const uint8_t modifiers, const uint8_t *string, int length) {
+    static unsigned int g_keyTick = 0;
+
+    uint8_t running = 1;
+    int index = 0;
+
+    while (running) {
+        unsigned int tick = ROM_SysTickValueGet();
+        if((index == 0) && (g_keyTick == 0)) {
+            g_keyTick = g_ui32SysTickCount;
+        }
+        if(g_keyTick != 0) {
+            int diff = g_keyTick - g_ui32SysTickCount;
+            if(diff <= 0) {
+                if(index < length) {
+                    // press button
+                    uint8_t usage = string[index];
+                    USBDHIDKeyboardKeyStateChange(&g_sKeyboardDevice, modifiers,
+                                                       usage, true);
+                    index++;
+                    g_keyTick = (g_ui32SysTickCount + 0x2) | 1;
+                }
+                else if(index < length * 2 && index >= length) {
+                    // release button
+                    uint8_t usage = string[index - length];
+                    USBDHIDKeyboardKeyStateChange(&g_sKeyboardDevice, 0,
+                                                       usage, false);
+                    index++;
+                    g_keyTick = (g_ui32SysTickCount + 0x1) | 1;
+                }
+                else {
+                    g_keyTick = 0;
+                }
+            }
+        }
+        if (index >= length * 2) {
+            running = 0;
+        }
+    }
+}
+
 
 static uint8_t GetUsageCode(char cKey, bool bShifted)
 {
