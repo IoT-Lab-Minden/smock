@@ -20,8 +20,6 @@ usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h
 usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h
 usb_structs.obj: ../usb_structs.h
 usb_structs.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
-usb_structs.obj: ../usb_serial.h
-usb_structs.obj: ../usb_keyboard.h
 
 ../usb_structs.c: 
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/stdint.h: 
@@ -43,5 +41,3 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h: 
 ../usb_structs.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
-../usb_serial.h: 
-../usb_keyboard.h: 

@@ -4,7 +4,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.C:\Users\malte\workspace_v8\usb_keyb_dev\target_config.ccxml.Stellaris In-Circuit Debug Interface_0/CORTEX_M4_0" value="${build_artifact:usb_keyb_dev}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.C:\Users\malte\workspace_v8\usb_keyb_dev\target_config.ccxml.Stellaris In-Circuit Debug Interface_0/CORTEX_M4_0" value="usb_keyb_dev"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:usb_keyb_dev}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.C:\Users\malte\workspace_v8\usb_keyb_dev\target_config.ccxml.Stellaris In-Circuit Debug Interface_0/CORTEX_M4_0" value="C:/Users\malte\workspace_v8\usb_keyb_dev\Release\usb_keyb_dev.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.C:\Users\malte\workspace_v8\usb_keyb_dev\target_config.ccxml.Stellaris In-Circuit Debug Interface_0/CORTEX_M4_0" value="C:/Users\malte\workspace_v8\usb_keyb_dev\Debug\usb_keyb_dev.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/usb_keyb_dev"/>
 </listAttribute>

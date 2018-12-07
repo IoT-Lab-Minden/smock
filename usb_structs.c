@@ -33,8 +33,6 @@
 #include "usblib/device/usbdhidkeyb.h"
 #include "usblib/usbcdc.h"
 #include "usb_structs.h"
-#include "usb_serial.h"
-#include "usb_keyboard.h"
 #include "usblib/usbcdc.h"
 
 /**
@@ -122,76 +120,5 @@ const uint8_t * const g_pui8StringDescriptors[] =
      g_pui8ConfigString
 };
 
-const int NUM_STRING_DESCRIPTORS = (sizeof(g_pui8StringDescriptors) / sizeof(uint8_t *));
+const unsigned int NUM_STRING_DESCRIPTORS = (sizeof(g_pui8StringDescriptors) / sizeof(uint8_t *));
 
-tUSBDHIDKeyboardDevice g_sKeyboardDevice =
-{
-    USB_VID_TI_1CBE,
-    USB_PID_KEYBOARD,
-    250,
-    USB_CONF_ATTR_BUS_PWR,
-    USBKeyboardHandler,
-    (void *)&g_sKeyboardDevice,
-    g_pui8StringDescriptors,
-    0, //g_pui8StringDescriptors
-    0, //NUM_STRING_DESCRIPTORS
-};
-
-tUSBDCDCDevice g_sCDCDevice =
-{
-    USB_VID_TI_1CBE,
-    USB_PID_SERIAL,
-    0,
-    USB_CONF_ATTR_SELF_PWR,
-    ControlHandler,
-    (void *)&g_sCDCDevice,
-    USBBufferEventCallback,
-    (void *)&g_sRxBuffer,
-    USBBufferEventCallback,
-    (void *)&g_sTxBuffer,
-    0, //g_pui8StringDescriptors
-    0, //NUM_STRING_DESCRIPTORS
-};
-
-uint8_t g_pui8USBRxBuffer[UART_BUFFER_SIZE];
-tUSBBuffer g_sRxBuffer =
-{
-    false,                          // This is a receive buffer.
-    RxHandler,                      // pfnCallback
-    (void *)&g_sCDCDevice,          // Callback data is our device pointer.
-    USBDCDCPacketRead,              // pfnTransfer
-    USBDCDCRxPacketAvailable,       // pfnAvailable
-    (void *)&g_sCDCDevice,          // pvHandle
-    g_pui8USBRxBuffer,              // pui8Buffer
-    UART_BUFFER_SIZE,               // ui32BufferSize
-};
-
-uint8_t g_pui8USBTxBuffer[UART_BUFFER_SIZE];
-tUSBBuffer g_sTxBuffer =
-{
-    true,                           // This is a transmit buffer.
-    TxHandler,                      // pfnCallback
-    (void *)&g_sCDCDevice,          // Callback data is our device pointer.
-    USBDCDCPacketWrite,             // pfnTransfer
-    USBDCDCTxPacketAvailable,       // pfnAvailable
-    (void *)&g_sCDCDevice,          // pvHandle
-    g_pui8USBTxBuffer,              // pui8Buffer
-    UART_BUFFER_SIZE,               // ui32BufferSize
-};
-
-tCompositeEntry g_psCompDevices[NUM_DEVICES];
-
-uint8_t g_pui8DescriptorData[DESCRIPTOR_DATA_SIZE];
-
-tUSBDCompositeDevice g_sCompDevice =
-{
-    USB_VID_TI_1CBE,
-    USB_PID_COMP_HID_SER,
-    250,
-    USB_CONF_ATTR_BUS_PWR,
-    USBEventHandler,
-    g_pui8StringDescriptors,
-    NUM_STRING_DESCRIPTORS,
-    NUM_DEVICES,
-    g_psCompDevices,
-};

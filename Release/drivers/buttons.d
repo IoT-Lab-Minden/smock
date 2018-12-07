@@ -16,6 +16,7 @@ drivers/buttons.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/sysctl.h
 drivers/buttons.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h
 drivers/buttons.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom_map.h
 drivers/buttons.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h
+drivers/buttons.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usblib.h
 drivers/buttons.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/gpio.h
 drivers/buttons.obj: C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c123gxl/drivers/buttons.h
 
@@ -35,5 +36,6 @@ C:/ti/tivaware_c_series_2_1_4_178/driverlib/sysctl.h:
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom_map.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h: 
+C:/ti/tivaware_c_series_2_1_4_178/usblib/usblib.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/gpio.h: 
 C:/ti/tivaware_c_series_2_1_4_178/examples/boards/ek-tm4c123gxl/drivers/buttons.h: 

@@ -24,6 +24,7 @@
 
 #include <stdint.h>
 
+uint32_t g_ui32SysTickCount = 0;
 //*****************************************************************************
 //
 // Forward declaration of the default fault handlers.
@@ -300,4 +301,11 @@ IntDefaultHandler(void)
     while(1)
     {
     }
+}
+
+/**
+ * This is the interrupt handler for the SysTick interrupt.
+ */
+void SysTickIntHandler(void) {
+	g_ui32SysTickCount++;
 }

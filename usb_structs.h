@@ -26,6 +26,7 @@
 #ifndef __USB_STRUCTS_H__
 #define __USB_STRUCTS_H__
 
+#include "usblib/usbcdc.h"
 #include "usblib/device/usbdcdc.h"
 #include "usblib/device/usbdhidkeyb.h"
 #include "usblib/device/usbdcomp.h"
@@ -38,62 +39,21 @@ extern volatile uint8_t g_ui8Buttons;
 /**
  * The HID keyboard device initialization and customization structures.
  */
-extern tUSBDHIDKeyboardDevice g_sKeyboardDevice;
 
 // The flags used by this application for the g_ulFlags value.
-#define FLAG_MOVE_UPDATE       0
-#define FLAG_CONNECTED         1
-#define FLAG_LED_ACTIVITY      2
-#define FLAG_MOVE_MOUSE        3
-#define FLAG_COMMAND_RECEIVED  4
-#define FLAG_SUSPENDED         5
+const uint8_t FLAG_MOVE_UPDATE = 0;
+const uint8_t FLAG_CONNECTED = 1;
+const uint8_t FLAG_LED_ACTIVITY = 2;
+const uint8_t FLAG_MOVE_MOUSE = 3;
+const uint8_t FLAG_COMMAND_RECEIVED = 4;
+const uint8_t FLAG_SUSPENDED = 5;
 
-/**
- * Size of the Rx and Tx buffer
- */
-#define UART_BUFFER_SIZE 256
-
-/**
- * Transmit buffer (from the USB perspective).
- */
-extern tUSBBuffer g_sTxBuffer;
-extern uint8_t g_pui8USBTxBuffer[];
-
-/**
- * Receive buffer (from the USB perspective).
- */
-extern tUSBBuffer g_sRxBuffer;
-extern uint8_t g_pui8USBRxBuffer[];
-
-/**
- * The CDC device initialization and customization structures. In this case,
- * we are using USBBuffers between the CDC device class driver and the
- * application code. The function pointers and callback data values are set
- * to insert a buffer in each of the data channels, transmit and receive.
- *
- * With the buffer in place, the CDC channel callback is set to the relevant
- * channel function and the callback data is set to point to the channel
- * instance data. The buffer, in turn, has its callback set to the application
- * function and the callback data set to our CDC instance structure.
- */
-extern tUSBDCDCDevice g_sCDCDevice;
-
-#define NUM_DEVICES 2
-
-#define DESCRIPTOR_DATA_SIZE    (COMPOSITE_DHID_SIZE + COMPOSITE_DCDC_SIZE)
-
-/**
- * The memory allocation for the composite USB device descriptors.
- */
-extern uint8_t g_pui8DescriptorData[DESCRIPTOR_DATA_SIZE];
-
-/**
- * The array of devices supported by this composite device.
- */
-extern tCompositeEntry g_psCompDevices[];
-
-/**
- * Allocate the Device Data for the top level composite device class.
- */
-extern tUSBDCompositeDevice g_sCompDevice;
+extern const uint8_t g_pui8LangDescriptor[];
+extern const uint8_t g_pui8ManufacturerString[];
+extern const uint8_t g_pui8ProductString[];
+extern const uint8_t g_pui8SerialNumberString[];
+extern const uint8_t g_pui8ControlInterfaceString[];
+extern const uint8_t g_pui8ConfigString[];
+extern const uint8_t * const g_pui8StringDescriptors[];
+extern const unsigned NUM_STRING_DESCRIPTORS;
 #endif
