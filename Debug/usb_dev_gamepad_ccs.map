@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker PC v18.1.3                     
 ******************************************************************************
->> Linked Fri Dec  7 20:14:20 2018
+>> Linked Mon Dec 10 09:20:27 2018
 
 OUTPUT FILE NAME:   <usb_keyb_dev.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00003ea5
@@ -11,7 +11,7 @@ MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  FLASH                 00000000   00040000  0000541f  0003abe1  R  X
+  FLASH                 00000000   00040000  0000541c  0003abe4  R  X
   SRAM                  20000000   00008000  0000111a  00006ee6  RW X
 
 
@@ -19,11 +19,11 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    00005428   00005428    r-x
+00000000    00000000    00005420   00005420    r-x
   00000000    00000000    0000026c   0000026c    r-- .intvecs
   0000026c    0000026c    00004d0a   00004d0a    r-x .text
-  00004f78    00004f78    000003e9   000003e9    r-- .const
-  00005368    00005368    000000c0   000000c0    r-- .cinit
+  00004f78    00004f78    000003e6   000003e6    r-- .const
+  00005360    00005360    000000c0   000000c0    r-- .cinit
 20000000    20000000    00001120   00000000    rw-
   20000000    20000000    00000c02   00000000    rw- .bss
   20000c08    20000c08    00000400   00000000    rw- .stack
@@ -343,7 +343,7 @@ section   page    origin      length       input sections
                   00004f6e    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
                   00004f72    00000004                                   : exit.c.obj (.text:abort:abort)
 
-.const     0    00004f78    000003e9     
+.const     0    00004f78    000003e6     
                   00004f78    00000070     driverlib.lib : interrupt.obj (.const)
                   00004fe8    00000068     USBKeyboardDevice.obj (.const:_ZN43_INTERNAL_21_USBKeyboardDevice_cpp_497fa7839usbdevice14g_pcUsageCodesE)
                   00005050    00000058     usblib.lib : usbdcdc.obj (.const)
@@ -366,17 +366,17 @@ section   page    origin      length       input sections
                   000052f8    00000018     usb_structs.obj (.const:g_pui8StringDescriptors)
                   00005310    00000012     usb_structs.obj (.const:.string:g_pui8SerialNumberString)
                   00005322    0000000e     usblib.lib : usbdhidkeyb.obj (.const:.string)
-                  00005330    0000000c     main.obj (.const:.string:password)
-                  0000533c    0000000c     uartstdio.obj (.const:g_ui32UARTInt)
-                  00005348    0000000c     usb_structs.obj (.const)
-                  00005354    00000009     usblib.lib : usbdcomp.obj (.const:.string)
-                  0000535d    00000004     usb_structs.obj (.const:.string:g_pui8LangDescriptor)
+                  00005330    0000000c     uartstdio.obj (.const:g_ui32UARTInt)
+                  0000533c    0000000c     usb_structs.obj (.const)
+                  00005348    00000009     main.obj (.const:.string:password)
+                  00005351    00000009     usblib.lib : usbdcomp.obj (.const:.string)
+                  0000535a    00000004     usb_structs.obj (.const:.string:g_pui8LangDescriptor)
 
-.cinit     0    00005368    000000c0     
-                  00005368    0000009c     (.cinit..data.load) [load image, compression = lzss]
-                  00005404    0000000c     (__TI_handler_table)
-                  00005410    00000008     (.cinit..bss.load) [load image, compression = zero_init]
-                  00005418    00000010     (__TI_cinit_table)
+.cinit     0    00005360    000000c0     
+                  00005360    0000009c     (.cinit..data.load) [load image, compression = lzss]
+                  000053fc    0000000c     (__TI_handler_table)
+                  00005408    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00005410    00000010     (__TI_cinit_table)
 
 .init_array 
 *          0    00000000    00000000     UNINITIALIZED
@@ -431,13 +431,13 @@ MODULE SUMMARY
        ------                         ----    -------   -------
     .\
        USBSerialDevice.obj            963     0         1016   
-       main.obj                       928     14        8      
+       main.obj                       928     11        8      
        USBKeyboardDevice.obj          592     138       184    
        tm4c123gh6pm_startup_ccs.obj   28      620       4      
        USBCompDevice.obj              212     0         258    
        usb_structs.obj                0       220       0      
     +--+------------------------------+-------+---------+---------+
-       Total:                         2723    992       1470   
+       Total:                         2723    989       1470   
                                                                
     .\drivers\
        buttons.obj                    240     0         3      
@@ -495,19 +495,19 @@ MODULE SUMMARY
        Stack:                         0       0         1024   
        Linker Generated:              0       192       0      
     +--+------------------------------+-------+---------+---------+
-       Grand Total:                   19715   1811      4373   
+       Grand Total:                   19715   1808      4373   
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00005418 records: 2, size/record: 8, table size: 16
-	.data: load addr=00005368, load size=0000009c bytes, run addr=20001008, run size=00000118 bytes, compression=lzss
-	.bss: load addr=00005410, load size=00000008 bytes, run addr=20000000, run size=00000c02 bytes, compression=zero_init
+__TI_cinit_table @ 00005410 records: 2, size/record: 8, table size: 16
+	.data: load addr=00005360, load size=0000009c bytes, run addr=20001008, run size=00000118 bytes, compression=lzss
+	.bss: load addr=00005408, load size=00000008 bytes, run addr=20000000, run size=00000c02 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00005404 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 000053fc records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_decompress_lzss
 	index: 1, handler: __TI_decompress_none
 	index: 2, handler: __TI_zero_init
@@ -523,12 +523,12 @@ address   name
 00004f73  C$$EXIT                                                               
 00004e01  CPUcpsid                                                              
 00004e0d  CPUcpsie                                                              
-0000534c  FLAG_COMMAND_RECEIVED                                                 
-00005349  FLAG_CONNECTED                                                        
-0000534a  FLAG_LED_ACTIVITY                                                     
-0000534b  FLAG_MOVE_MOUSE                                                       
-00005348  FLAG_MOVE_UPDATE                                                      
-0000534d  FLAG_SUSPENDED                                                        
+00005340  FLAG_COMMAND_RECEIVED                                                 
+0000533d  FLAG_CONNECTED                                                        
+0000533e  FLAG_LED_ACTIVITY                                                     
+0000533f  FLAG_MOVE_MOUSE                                                       
+0000533c  FLAG_MOVE_UPDATE                                                      
+00005341  FLAG_SUSPENDED                                                        
 00004f13  GPIOPinWrite                                                          
 00002b89  IntDisable                                                            
 00002bf1  IntEnable                                                             
@@ -538,7 +538,7 @@ address   name
 00003c75  InternalUSBRegisterTickHandler                                        
 00003cad  InternalUSBStartOfFrameTick                                           
 000042ad  InternalUSBTickInit                                                   
-00005350  NUM_STRING_DESCRIPTORS                                                
+00005344  NUM_STRING_DESCRIPTORS                                                
 00002885  ProcessDataFromHost                                                   
 00002a49  ProcessDataToHost                                                     
 00004183  ProcessNotificationToHost                                             
@@ -701,10 +701,10 @@ address   name
 20001008  __STACK_END                                                           
 00000400  __STACK_SIZE                                                          
 20000e08  __STACK_TOP                                                           
-00005418  __TI_CINIT_Base                                                       
-00005428  __TI_CINIT_Limit                                                      
-00005404  __TI_Handler_Table_Base                                               
-00005410  __TI_Handler_Table_Limit                                              
+00005410  __TI_CINIT_Base                                                       
+00005420  __TI_CINIT_Limit                                                      
+000053fc  __TI_Handler_Table_Base                                               
+00005408  __TI_Handler_Table_Limit                                              
 00003a0d  __TI_auto_init_nobinit_nopinit                                        
 00002c59  __TI_decompress_lzss                                                  
 00004df3  __TI_decompress_none                                                  
@@ -757,7 +757,7 @@ ffffffff  binit
 00005246  g_pui8ControlInterfaceString                                          
 200010c7  g_pui8HIDDeviceDescriptor                                             
 20001023  g_pui8IADSerDescriptor                                                
-0000535d  g_pui8LangDescriptor                                                  
+0000535a  g_pui8LangDescriptor                                                  
 00005272  g_pui8ManufacturerString                                              
 000052db  g_pui8ProductString                                                   
 00005310  g_pui8SerialNumberString                                              
@@ -1019,18 +1019,18 @@ address   name
 000052db  g_pui8ProductString                                                   
 000052f8  g_pui8StringDescriptors                                               
 00005310  g_pui8SerialNumberString                                              
-00005348  FLAG_MOVE_UPDATE                                                      
-00005349  FLAG_CONNECTED                                                        
-0000534a  FLAG_LED_ACTIVITY                                                     
-0000534b  FLAG_MOVE_MOUSE                                                       
-0000534c  FLAG_COMMAND_RECEIVED                                                 
-0000534d  FLAG_SUSPENDED                                                        
-00005350  NUM_STRING_DESCRIPTORS                                                
-0000535d  g_pui8LangDescriptor                                                  
-00005404  __TI_Handler_Table_Base                                               
-00005410  __TI_Handler_Table_Limit                                              
-00005418  __TI_CINIT_Base                                                       
-00005428  __TI_CINIT_Limit                                                      
+0000533c  FLAG_MOVE_UPDATE                                                      
+0000533d  FLAG_CONNECTED                                                        
+0000533e  FLAG_LED_ACTIVITY                                                     
+0000533f  FLAG_MOVE_MOUSE                                                       
+00005340  FLAG_COMMAND_RECEIVED                                                 
+00005341  FLAG_SUSPENDED                                                        
+00005344  NUM_STRING_DESCRIPTORS                                                
+0000535a  g_pui8LangDescriptor                                                  
+000053fc  __TI_Handler_Table_Base                                               
+00005408  __TI_Handler_Table_Limit                                              
+00005410  __TI_CINIT_Base                                                       
+00005420  __TI_CINIT_Limit                                                      
 20000b14  g_psDCDInst                                                           
 20000ba4  g_pfnTickHandlers                                                     
 20000bbc  g_pvTickInstance                                                      

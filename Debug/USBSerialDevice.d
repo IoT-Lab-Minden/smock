@@ -26,6 +26,7 @@ USBSerialDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h
 USBSerialDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h
 USBSerialDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h
 USBSerialDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
+USBSerialDevice.obj: ../USBSerialConstants.h
 USBSerialDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/inc/hw_types.h
 USBSerialDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/inc/hw_uart.h
 USBSerialDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h
@@ -63,6 +64,7 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevice.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdevicepriv.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
+../USBSerialConstants.h: 
 C:/ti/tivaware_c_series_2_1_4_178/inc/hw_types.h: 
 C:/ti/tivaware_c_series_2_1_4_178/inc/hw_uart.h: 
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/rom.h: 

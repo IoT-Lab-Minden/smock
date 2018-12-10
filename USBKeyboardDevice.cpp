@@ -20,7 +20,6 @@
 
 namespace usbdevice {
 
-
 	tUSBCallback USBKeyboardDevice::keyboardHandler = nullptr;
 
 	void USBKeyboardDevice::registerKeyboardHandler(tUSBCallback handler) {

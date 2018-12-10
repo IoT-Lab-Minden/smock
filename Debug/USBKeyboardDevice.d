@@ -33,6 +33,7 @@ USBKeyboardDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidke
 USBKeyboardDevice.obj: ../usb_structs.h
 USBKeyboardDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
 USBKeyboardDevice.obj: ../global_defs.h
+USBKeyboardDevice.obj: ../USBKeyboardConstants.h
 
 ../USBKeyboardDevice.cpp: 
 ../USBKeyboardDevice.h: 
@@ -67,3 +68,4 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h:
 ../usb_structs.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
 ../global_defs.h: 
+../USBKeyboardConstants.h: 

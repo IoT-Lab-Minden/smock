@@ -17,10 +17,9 @@
 #include "USBSerialDevice.h"
 #include "USBKeyboardDevice.h"
 #include "usb_structs.h"
+#include "USBCompConstants.h"
 
 namespace usbdevice {
-	const uint8_t DESCRIPTOR_DATA_SIZE = (COMPOSITE_DHID_SIZE + COMPOSITE_DCDC_SIZE);
-	const uint8_t NUM_DEVICES = 2;
 
 	class USBCompDevice {
 	private:

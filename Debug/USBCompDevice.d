@@ -31,6 +31,7 @@ USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/uart.h
 USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h
 USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h
 USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h
+USBCompDevice.obj: ../USBSerialConstants.h
 USBCompDevice.obj: ../USBKeyboardDevice.h
 USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/grlib.h
 USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/grlib/widget.h
@@ -40,6 +41,8 @@ USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.
 USBCompDevice.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h
 USBCompDevice.obj: ../usb_structs.h
 USBCompDevice.obj: ../global_defs.h
+USBCompDevice.obj: ../USBKeyboardConstants.h
+USBCompDevice.obj: ../USBCompConstants.h
 
 ../USBCompDevice.cpp: 
 ../USBCompDevice.h: 
@@ -72,6 +75,7 @@ C:/ti/tivaware_c_series_2_1_4_178/driverlib/uart.h:
 C:/ti/tivaware_c_series_2_1_4_178/driverlib/pin_map.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/usbcdc.h: 
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdcdc.h: 
+../USBSerialConstants.h: 
 ../USBKeyboardDevice.h: 
 C:/ti/tivaware_c_series_2_1_4_178/grlib/grlib.h: 
 C:/ti/tivaware_c_series_2_1_4_178/grlib/widget.h: 
@@ -81,3 +85,5 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.h:
 C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidkeyb.h: 
 ../usb_structs.h: 
 ../global_defs.h: 
+../USBKeyboardConstants.h: 
+../USBCompConstants.h: 
