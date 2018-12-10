@@ -26,10 +26,9 @@ class Gui:
 
         notifyWin.mainloop()
 
-
     # Edit the active user of list. Only username and password
     def __edit(self):
-
+        
         def setUser():
             user = self.userList[list.index(ACTIVE)]
             user.setUsername(textfieldUsername.get())
@@ -67,17 +66,17 @@ class Gui:
         for user in self.userList:
             list.insert(END, user.getUsername())
 
-
     # Add a new user
     def __add(self):
+
         user = User()
         self.userList.append(user)
         self.list.insert(END, user.getUsername())
         self.__notify("Der User wurde erfolgreich hinzugefügt!")
 
-
     # Delete the active user from list
     def __delete(self):
+
         del self.userList[list.index(ACTIVE)]
         self.__refreshList()
         self.__notify("Der User wurde erfolgreich gelöscht")
