@@ -3,7 +3,8 @@ from user import *
 
 
 class Gui:
-    def __setWindowsize(self, tk, w, h):
+    @staticmethod
+    def __set_window_size(tk, w, h):
         # get screen width and height
         ws = tk.winfo_screenwidth()
         hs = tk.winfo_screenheight()
@@ -16,80 +17,78 @@ class Gui:
         tk.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
     def __notify(self, message):
-        notifyWin = Tk()
-        self.__setWindowsize(notifyWin, 250, 50)
+        notify_win = Tk()
+        self.__set_window_size(notify_win, 250, 50)
 
-        label = Label(notifyWin, text=message)
+        label = Label(notify_win, text=message)
         label.pack()
-        btn = Button(notifyWin, text="OK", command=notifyWin.destroy)
+        btn = Button(notify_win, text="OK", command=notify_win.destroy)
         btn.pack()
 
-        notifyWin.mainloop()
+        notify_win.mainloop()
 
     # Edit the active user of list. Only username and password
     def __edit(self):
-        
-        def setUser():
-            user = self.userList[list.index(ACTIVE)]
-            user.setUsername(textfieldUsername.get())
-            user.setPassword(textfieldPassword.get())
-            self.__refreshList()
-            editWindow.destroy()
+
+        def set_user():
+            user = self.user_list[self.list.index(ACTIVE)]
+            user.setUsername(textfield_username.get())
+            user.setPassword(textfield_password.get())
+            self.__refresh_list()
+            edit_window.destroy()
             self.__notify("Der User wurde erfolgreich bearbeitet!")
 
-        editWindow = Tk()
+        edit_window = Tk()
 
-        editWindow.title("Smock")
-        self.__setWindowsize(editWindow, 200, 100)
+        edit_window.title("Smock")
+        self.__set_window_size(edit_window, 200, 100)
 
+        edit_top_frame = Frame(edit_window)
+        edit_bottom_frame = Frame(edit_window)
 
-        editTopFrame = Frame(editWindow)
-        editBottomFrame = Frame(editWindow)
+        Label(edit_top_frame, text="Username: ").grid(row=0)
+        Label(edit_top_frame, text="Password: ").grid(row=1)
 
-        Label(editTopFrame, text="Username: ").grid(row=0)
-        Label(editTopFrame, text="Password: ").grid(row=1)
+        textfield_username = Entry(edit_top_frame)
+        textfield_password = Entry(edit_top_frame)
 
-        textfieldUsername = Entry(editTopFrame)
-        textfieldPassword = Entry(editTopFrame)
+        textfield_username.grid(row=0, column=1)
+        textfield_password.grid(row=1, column=1)
 
-        textfieldUsername.grid(row=0, column=1)
-        textfieldPassword.grid(row=1, column=1)
+        Button(edit_bottom_frame, text="Bestätigen", command=set_user).pack()
 
-        Button(editBottomFrame, text="Bestätigen", command=setUser).pack()
-
-        editWindow.mainloop()
-
+        edit_window.mainloop()
 
     # Refresh the list, when user deleted or edited
-    def __refreshList(self):
-        list.delete(0, END)
-        for user in self.userList:
-            list.insert(END, user.getUsername())
+    def __refresh_list(self):
+        self.list.delete(0, END)
+        for user in self.user_list:
+            self.list.insert(END, user.getUsername())
 
     # Add a new user
     def __add(self):
 
         user = User()
-        self.userList.append(user)
+        self.user_list.append(user)
         self.list.insert(END, user.getUsername())
         self.__notify("Der User wurde erfolgreich hinzugefügt!")
 
     # Delete the active user from list
     def __delete(self):
 
-        del self.userList[list.index(ACTIVE)]
-        self.__refreshList()
+        del self.user_list[self.list.index(ACTIVE)]
+        self.__refresh_list()
         self.__notify("Der User wurde erfolgreich gelöscht")
 
     def __init__(self):
 
-        self.userList = []
+        self.user_list = []
 
         # create main window
         self.root = Tk()
 
         self.root.title("Smock")
-        self.__setWindowsize(self.root, 200, 270)
+        self.__set_window_size(self.root, 200, 270)
 
         # Initialize frames
         self.topFrame = Frame(self.root, pady=3)
