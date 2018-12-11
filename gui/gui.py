@@ -32,8 +32,8 @@ class Gui:
 
         def set_user():
             user = self.user_list[self.list.index(ACTIVE)]
-            user.setUsername(textfield_username.get())
-            user.setPassword(textfield_password.get())
+            user.set_username(textfield_username.get())
+            user.set_password(textfield_password.get())
             self.__refresh_list()
             edit_window.destroy()
             self.__notify("Der User wurde erfolgreich bearbeitet!")
@@ -61,22 +61,57 @@ class Gui:
         textfield_password.grid(row=1, column=1)
 
         btn_confirm = Button(edit_bottom_frame, text="Bestätigen", command=set_user)
+        btn_cancel = Button(edit_bottom_frame, text="Abbrechen", command=edit_window.destroy)
 
-        btn_confirm.pack()
+        btn_confirm.grid(row=0, column=1)
+        btn_cancel.grid(row=0, column=0)
 
     # Refresh the list, when user deleted or edited
     def __refresh_list(self):
         self.list.delete(0, END)
         for user in self.user_list:
-            self.list.insert(END, user.getUsername())
+            self.list.insert(END, user.get_username())
 
     # Add a new user
     def __add(self):
 
-        user = User()
-        self.user_list.append(user)
-        self.list.insert(END, user.getUsername())
-        self.__notify("Der User wurde erfolgreich hinzugefügt!")
+        def add_user():
+            user = User(textfield_username.get(), textfield_username.get(), label_near_uid.cget("text"))
+            user.print()
+            self.user_list.append(user)
+            self.list.insert(END, user.get_username())
+            edit_window.destroy()
+            self.__notify("Der User wurde erfolgreich hinzugefügt!")
+
+        edit_window = Toplevel(self.root)
+
+        edit_window.title("Smock")
+        self.__set_window_size(edit_window, 300, 100)
+
+        add_top_frame = Frame(edit_window)
+        add_bottom_frame = Frame(edit_window)
+
+        add_top_frame.pack()
+        add_bottom_frame.pack()
+
+        label_username = Label(add_top_frame, text="Username: ")
+        label_password = Label(add_top_frame, text="Password: ")
+        label_uid = Label(add_top_frame, text="uid: ")
+
+        textfield_username = Entry(add_top_frame)
+        textfield_password = Entry(add_top_frame)
+        label_near_uid = Label(add_top_frame, text="569f625c-fd1d-11e8-8eb2-f2801f1b9fd1")
+
+        label_username.grid(row=0)
+        label_password.grid(row=1)
+        label_uid.grid(row=2)
+        textfield_username.grid(row=0, column=1)
+        textfield_password.grid(row=1, column=1)
+        label_near_uid.grid(row=2, column=1)
+
+        btn_confirm = Button(add_bottom_frame, text="Bestätigen", command=add_user)
+
+        btn_confirm.pack()
 
     # Delete the active user from list
     def __delete(self):

@@ -1,32 +1,26 @@
-from tkinter import *
-
 class User:
 
-    username = ""
-    password = ""
-    uuid = ""
+    def __init__(self, username, password, uid):
+        self.username = username
+        self.password = password
+        self.uid = uid
 
-    def __init__(self):
-        self.username = "anon"
-        self.password = "test"
-        self.uuid = "teststring"
-
-    def getUsername(self):
+    def get_username(self):
         return self.username
 
-    def getPassword(self):
+    def get_password(self):
         return self.password
 
-    def getUuid(self):
-        return self.uuid
+    def get_uuid(self):
+        return self.uid
 
-    def setUsername(self, newUsername):
-        self.username = newUsername
+    def set_username(self, new_username):
+        self.username = new_username
 
-    def setPassword(self, newPassword):
-        self.password = newPassword
+    def set_password(self, new_password):
+        self.password = new_password
 
-    def printUser(self):
+    def print(self):
         print("Username: " + self.username)
         print("Passwort: " + self.password)
-        print("uuid: " + self.uuid)
+        print("uuid: " + self.uid)
