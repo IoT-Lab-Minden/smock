@@ -63,6 +63,9 @@ main.obj: C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.h
 main.obj: ../USBKeyboardConstants.h
 main.obj: ../USBCompDevice.h
 main.obj: ../USBCompConstants.h
+main.obj: ../SPI.h
+main.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/libcxx/stdio.h
+main.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/stdio.h
 
 ../main.cpp: 
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/libcxx/stdint.h: 
@@ -127,3 +130,6 @@ C:/ti/tivaware_c_series_2_1_4_178/usblib/device/usbdhidmouse.h:
 ../USBKeyboardConstants.h: 
 ../USBCompDevice.h: 
 ../USBCompConstants.h: 
+../SPI.h: 
+C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/libcxx/stdio.h: 
+C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.3.LTS/include/stdio.h: 

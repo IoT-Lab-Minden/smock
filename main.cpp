@@ -36,6 +36,7 @@
 #include "USBSerialDevice.h"
 #include "USBKeyboardDevice.h"
 #include "USBCompDevice.h"
+#include "SPI.h"
 
 
 using namespace usbdevice;
@@ -86,6 +87,7 @@ uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
  * print ser.read() // -> 'w'
  */
 int main(void) {
+
 	USBSerialDevice::registerControlHandler(ControlHandler);
 	USBSerialDevice::registerRxHandler(RxHandler);
 	USBSerialDevice::registerTxHandler(TxHandler);
@@ -96,18 +98,41 @@ int main(void) {
 
 	USBKeyboardDevice::getInstance();
 	USBKeyboardDevice::getInstance();
+
 	USBSerialDevice::getInstance();
 	USBCompDevice::getInstance();
 
 	delay(START_DELAY);
 
 	configureUSB();
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+
+	// Set pin to output
+    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_5);
+    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_3);
+    // Set pin to high
+	ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_PIN_3);
+
+	/*//set rfid protocol
+	SPI.transfer(0x00);	// control bits
+	SPI.transfer(0x02); // command
+	SPI.transfer(0x02); // length of data
+	SPI.transfer(0x01); // protocol
+	SPI.transfer(0b00011000); //protocol parameter*/
 
 	ButtonsInit();
 
 	IntMasterEnable();
 
 	delay(WAIT_FOR_HOST_KONFIGURATION);
+
+	ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_3, 0);
+	delay(100);
+	ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_PIN_3);
+	delay(100);
+
+	ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_5, GPIO_PIN_5);
+	SPI.begin();
 
 	uint8_t ui8ButtonsChanged, ui8Buttons;
 	while (true) {
@@ -119,10 +144,22 @@ int main(void) {
 		// TODO: Wartezeit sollte über Variable einstellbar sein
 		// TODO: Handle caps
 		if (ui8ButtonsChanged && (ui8Buttons & RIGHT_BUTTON)) {
-			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+			/*USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
 			delay(ENTER_DELAY);
 			USBKeyboardDevice::getInstance()->USBWriteString(password, sizeof(password) - 1);
-			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);*/
+
+			// IDN command to test
+			ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_5, 0);
+			uint8_t response = SPI.transfer(0x55);	// control bits
+			uint8_t s = 's';
+			uint8_t x = 'x';
+			ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_5, GPIO_PIN_5);
+			if (response == 0x55) {
+				USBSerialDevice::getInstance()->write((uint8_t *)&s, 1);
+			} else {
+				USBSerialDevice::getInstance()->write((uint8_t *)&x, 1);
+			}
 		}
 
 		if (ui8ButtonsChanged && (ui8Buttons & LEFT_BUTTON)) {

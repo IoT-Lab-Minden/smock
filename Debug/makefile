@@ -10,6 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./SPI.obj" \
 "./USBCompDevice.obj" \
 "./USBKeyboardDevice.obj" \
 "./USBSerialDevice.obj" \
@@ -168,9 +169,9 @@ usb_keyb_dev.bin: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "USBCompDevice.obj" "USBKeyboardDevice.obj" "USBSerialDevice.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "usb_structs.obj" "drivers\buttons.obj" "utils\uartstdio.obj" 
-	-$(RM) "tm4c123gh6pm_startup_ccs.d" "usb_structs.d" "drivers\buttons.d" "utils\uartstdio.d" 
-	-$(RM) "USBCompDevice.d" "USBKeyboardDevice.d" "USBSerialDevice.d" "main.d" 
+	-$(RM) "SPI.obj" "USBCompDevice.obj" "USBKeyboardDevice.obj" "USBSerialDevice.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "usb_structs.obj" "drivers\buttons.obj" "utils\uartstdio.obj" 
+	-$(RM) "tm4c123gh6pm_startup_ccs.d" "drivers\buttons.d" "utils\uartstdio.d" 
+	-$(RM) "SPI.d" "USBCompDevice.d" "USBKeyboardDevice.d" "USBSerialDevice.d" "main.d" "usb_structs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
