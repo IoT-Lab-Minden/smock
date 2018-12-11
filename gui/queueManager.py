@@ -30,3 +30,7 @@ class QueueManager:
                     command_complete = True
 
         return message
+
+    # writes a byte into the queue
+    def write_queue(self, byte):
+        self.serial_queue.put(byte)
