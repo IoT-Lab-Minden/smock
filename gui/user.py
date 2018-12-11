@@ -23,4 +23,4 @@ class User:
     def print(self):
         print("Username: " + self.__username)
         print("Passwort: " + self.__password)
-        print("uuid: " + self.__uid)
+        print("uid: " + self.__uid)
