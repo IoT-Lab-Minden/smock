@@ -8,10 +8,9 @@ class SerialManager:
     def fill_queue(self):
         counter = 0
         while True:
-            counter += 1
-            if counter > 10:
-                counter = 0
+            if counter > 2:
                 self.__serial_queue.write_queue("!")
+                break
             else:
                 self.__serial_queue.write_queue("s")
-            time.sleep(1)
+            counter += 1

@@ -1,5 +1,6 @@
 from tkinter import *
 from user import *
+from message import Message
 
 
 class Gui:
@@ -118,6 +119,9 @@ class Gui:
         def add_user():
             user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
             self.__user_list.append(user)
+            message = self.__serial_queue.read_queue()
+            print(message.get_command_code())
+            print(message.get_text())
             self.list.insert(END, user.get_username())
             edit_window.destroy()
             self.__notify("Der User wurde erfolgreich hinzugefügt!")
