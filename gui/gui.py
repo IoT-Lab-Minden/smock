@@ -38,7 +38,7 @@ class Gui:
             edit_window.destroy()
             self.__notify("Der User wurde erfolgreich bearbeitet!")
 
-        edit_window = Tk()
+        edit_window = Toplevel(self.root)
 
         edit_window.title("Smock")
         self.__set_window_size(edit_window, 200, 100)
@@ -46,18 +46,23 @@ class Gui:
         edit_top_frame = Frame(edit_window)
         edit_bottom_frame = Frame(edit_window)
 
-        Label(edit_top_frame, text="Username: ").grid(row=0)
-        Label(edit_top_frame, text="Password: ").grid(row=1)
+        edit_top_frame.pack()
+        edit_bottom_frame.pack()
+
+        label_username = Label(edit_top_frame, text="Username: ")
+        label_password = Label(edit_top_frame, text="Password: ")
 
         textfield_username = Entry(edit_top_frame)
         textfield_password = Entry(edit_top_frame)
 
+        label_username.grid(row=0)
+        label_password.grid(row=1)
         textfield_username.grid(row=0, column=1)
         textfield_password.grid(row=1, column=1)
 
-        Button(edit_bottom_frame, text="Bestätigen", command=set_user).pack()
+        btn_confirm = Button(edit_bottom_frame, text="Bestätigen", command=set_user)
 
-        edit_window.mainloop()
+        btn_confirm.pack()
 
     # Refresh the list, when user deleted or edited
     def __refresh_list(self):
@@ -91,29 +96,29 @@ class Gui:
         self.__set_window_size(self.root, 200, 270)
 
         # Initialize frames
-        self.topFrame = Frame(self.root, pady=3)
-        self.bottomFrame = Frame(self.root, pady=3)
+        self.top_frame = Frame(self.root, pady=3)
+        self.bottom_frame = Frame(self.root, pady=3)
 
         # Layout frames
-        self.topFrame.pack()
-        self.bottomFrame.pack()
+        self.top_frame.pack()
+        self.bottom_frame.pack()
 
         # Initialize top frame
-        self.list = Listbox(self.topFrame)
+        self.list = Listbox(self.top_frame)
 
         # Initialize bottom frame
-        self.btnAdd = Button(self.bottomFrame, text="Hinzufügen", command=self.__add, width=9, padx=2)
-        self.btnEdit = Button(self.bottomFrame, text="Editieren", command=self.__edit, width=9, padx=2)
-        self.btnDelete = Button(self.bottomFrame, text="Löschen", command=self.__delete, width=9, padx=2)
-        self.btnQuit = Button(self.bottomFrame, text="Beenden", command=self.root.destroy, width=9, padx=2)
+        self.btn_add = Button(self.bottom_frame, text="Hinzufügen", command=self.__add, width=9, padx=2)
+        self.btn_edit = Button(self.bottom_frame, text="Editieren", command=self.__edit, width=9, padx=2)
+        self.btn_delete = Button(self.bottom_frame, text="Löschen", command=self.__delete, width=9, padx=2)
+        self.btn_quit = Button(self.bottom_frame, text="Beenden", command=self.root.destroy, width=9, padx=2)
 
         # Layout top frame
         self.list.pack()
 
         # Layout bottom frame
-        self.btnAdd.grid(row=0, column=0)
-        self.btnEdit.grid(row=0, column=1)
-        self.btnDelete.grid(row=1, column=0)
-        self.btnQuit.grid(row=1, column=1)
+        self.btn_add.grid(row=0, column=0)
+        self.btn_edit.grid(row=0, column=1)
+        self.btn_delete.grid(row=1, column=0)
+        self.btn_quit.grid(row=1, column=1)
 
         self.root.mainloop()
