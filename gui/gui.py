@@ -3,6 +3,46 @@ from user import *
 
 
 class Gui:
+
+    def __init__(self, serial_queue):
+
+        self.__user_list = []
+        self.__serial_queue = serial_queue
+
+        # create main window
+        self.__root = Tk()
+
+        self.__root.title("Smock")
+        self.__set_window_size(self.__root, 200, 270)
+
+        # Initialize frames
+        self.top_frame = Frame(self.__root, pady=3)
+        self.bottom_frame = Frame(self.__root, pady=3)
+
+        # Layout frames
+        self.top_frame.pack()
+        self.bottom_frame.pack()
+
+        # Initialize top frame
+        self.list = Listbox(self.top_frame)
+
+        # Initialize bottom frame
+        self.btn_add = Button(self.bottom_frame, text="Hinzufügen", command=self.__add, width=9, padx=2)
+        self.btn_edit = Button(self.bottom_frame, text="Editieren", command=self.__edit, width=9, padx=2)
+        self.btn_delete = Button(self.bottom_frame, text="Löschen", command=self.__delete, width=9, padx=2)
+        self.btn_quit = Button(self.bottom_frame, text="Beenden", command=self.__root.destroy, width=9, padx=2)
+
+        # Layout top frame
+        self.list.pack()
+
+        # Layout bottom frame
+        self.btn_add.grid(row=0, column=0, padx=10)
+        self.btn_edit.grid(row=0, column=1, pady=5)
+        self.btn_delete.grid(row=1, column=0, padx=10)
+        self.btn_quit.grid(row=1, column=1, pady=5)
+
+        self.__root.mainloop()
+
     @staticmethod
     def __set_window_size(tk, w, h):
         # get screen width and height
@@ -31,14 +71,14 @@ class Gui:
     def __edit(self):
 
         def set_user():
-            user = self.user_list[self.list.index(ACTIVE)]
+            user = self.__user_list[self.list.index(ACTIVE)]
             user.set_username(textfield_username.get())
             user.set_password(textfield_password.get())
             self.__refresh_list()
             edit_window.destroy()
             self.__notify("Der User wurde erfolgreich bearbeitet!")
 
-        edit_window = Toplevel(self.root)
+        edit_window = Toplevel(self.__root)
 
         edit_window.title("Smock")
         self.__set_window_size(edit_window, 200, 100)
@@ -69,7 +109,7 @@ class Gui:
     # Refresh the list, when user deleted or edited
     def __refresh_list(self):
         self.list.delete(0, END)
-        for user in self.user_list:
+        for user in self.__user_list:
             self.list.insert(END, user.get_username())
 
     # Add a new user
@@ -77,12 +117,12 @@ class Gui:
 
         def add_user():
             user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
-            self.user_list.append(user)
+            self.__user_list.append(user)
             self.list.insert(END, user.get_username())
             edit_window.destroy()
             self.__notify("Der User wurde erfolgreich hinzugefügt!")
 
-        edit_window = Toplevel(self.root)
+        edit_window = Toplevel(self.__root)
 
         edit_window.title("Smock")
         self.__set_window_size(edit_window, 300, 100)
@@ -117,44 +157,6 @@ class Gui:
     # Delete the active user from list
     def __delete(self):
 
-        del self.user_list[self.list.index(ACTIVE)]
+        del self.__user_list[self.list.index(ACTIVE)]
         self.__refresh_list()
         self.__notify("Der User wurde erfolgreich gelöscht")
-
-    def __init__(self):
-
-        self.user_list = []
-
-        # create main window
-        self.root = Tk()
-
-        self.root.title("Smock")
-        self.__set_window_size(self.root, 200, 270)
-
-        # Initialize frames
-        self.top_frame = Frame(self.root, pady=3)
-        self.bottom_frame = Frame(self.root, pady=3)
-
-        # Layout frames
-        self.top_frame.pack()
-        self.bottom_frame.pack()
-
-        # Initialize top frame
-        self.list = Listbox(self.top_frame)
-
-        # Initialize bottom frame
-        self.btn_add = Button(self.bottom_frame, text="Hinzufügen", command=self.__add, width=9, padx=2)
-        self.btn_edit = Button(self.bottom_frame, text="Editieren", command=self.__edit, width=9, padx=2)
-        self.btn_delete = Button(self.bottom_frame, text="Löschen", command=self.__delete, width=9, padx=2)
-        self.btn_quit = Button(self.bottom_frame, text="Beenden", command=self.root.destroy, width=9, padx=2)
-
-        # Layout top frame
-        self.list.pack()
-
-        # Layout bottom frame
-        self.btn_add.grid(row=0, column=0, padx=10)
-        self.btn_edit.grid(row=0, column=1, pady=5)
-        self.btn_delete.grid(row=1, column=0, padx=10)
-        self.btn_quit.grid(row=1, column=1, pady=5)
-
-        self.root.mainloop()

@@ -1,8 +1,11 @@
 from gui import *
+from queueManager import QueueManager
 
 
 def main():
-    gui = Gui()
+
+    serial_queue = QueueManager()
+    Gui(serial_queue)
 
 
 if __name__ == "__main__":
