@@ -76,7 +76,7 @@ class Gui:
     def __add(self):
 
         def add_user():
-            user = User(textfield_username.get(), textfield_username.get(), label_near_uid.cget("text"))
+            user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
             user.print()
             self.user_list.append(user)
             self.list.insert(END, user.get_username())

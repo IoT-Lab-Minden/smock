@@ -1,26 +1,26 @@
 class User:
 
     def __init__(self, username, password, uid):
-        self.username = username
-        self.password = password
-        self.uid = uid
+        self.__username = username
+        self.__password = password
+        self.__uid = uid
 
     def get_username(self):
-        return self.username
+        return self.__username
 
     def get_password(self):
-        return self.password
+        return self.__password
 
     def get_uuid(self):
-        return self.uid
+        return self.__uid
 
     def set_username(self, new_username):
-        self.username = new_username
+        self.__username = new_username
 
     def set_password(self, new_password):
-        self.password = new_password
+        self.__password = new_password
 
     def print(self):
-        print("Username: " + self.username)
-        print("Passwort: " + self.password)
-        print("uuid: " + self.uid)
+        print("Username: " + self.__username)
+        print("Passwort: " + self.__password)
+        print("uuid: " + self.__uid)
