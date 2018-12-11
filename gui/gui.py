@@ -46,6 +46,7 @@ class Gui:
 
     @staticmethod
     def __set_window_size(tk, w, h):
+        # set the size of the window and place the window in the middle of the screen
         # get screen width and height
         ws = tk.winfo_screenwidth()
         hs = tk.winfo_screenheight()
@@ -58,6 +59,7 @@ class Gui:
         tk.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
     def __notify(self, message):
+        # Create a notify window with a message
         notify_win = Tk()
         self.__set_window_size(notify_win, 250, 50)
 
@@ -72,6 +74,7 @@ class Gui:
     def __edit(self):
 
         def set_user():
+            # Get the selected user from the listbox and edit its name by the text of the Entry widgets
             user = self.__user_list[self.list.index(ACTIVE)]
             user.set_username(textfield_username.get())
             user.set_password(textfield_password.get())
@@ -79,6 +82,7 @@ class Gui:
             edit_window.destroy()
             self.__notify("Der User wurde erfolgreich bearbeitet!")
 
+        # Build the edit window
         edit_window = Toplevel(self.__root)
 
         edit_window.title("Smock")
@@ -117,22 +121,27 @@ class Gui:
     def __add(self):
 
         def add_user():
+            # create new user and add it to the list of users
             user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
             self.__user_list.append(user)
+
+            # read from queue
             message = self.__serial_queue.read_queue()
             print(message.get_command_code())
-            print(message.get_text())
+
+            # add user to the listbox
             self.list.insert(END, user.get_username())
-            edit_window.destroy()
+            add_window.destroy()
             self.__notify("Der User wurde erfolgreich hinzugefügt!")
 
-        edit_window = Toplevel(self.__root)
+        # Build the add Window
+        add_window = Toplevel(self.__root)
 
-        edit_window.title("Smock")
-        self.__set_window_size(edit_window, 300, 100)
+        add_window.title("Smock")
+        self.__set_window_size(add_window, 300, 100)
 
-        add_top_frame = Frame(edit_window)
-        add_bottom_frame = Frame(edit_window)
+        add_top_frame = Frame(add_window)
+        add_bottom_frame = Frame(add_window)
 
         add_top_frame.pack()
         add_bottom_frame.pack()
@@ -153,7 +162,7 @@ class Gui:
         label_near_uid.grid(row=2, column=1)
 
         btn_confirm = Button(add_bottom_frame, text="Bestätigen", command=add_user)
-        btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=edit_window.destroy)
+        btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=add_window.destroy)
 
         btn_confirm.grid(row=0, column=1)
         btn_cancel.grid(row=0, column=0, padx=10)
