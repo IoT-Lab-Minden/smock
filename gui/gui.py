@@ -63,7 +63,7 @@ class Gui:
         btn_confirm = Button(edit_bottom_frame, text="Bestätigen", command=set_user)
         btn_cancel = Button(edit_bottom_frame, text="Abbrechen", command=edit_window.destroy)
 
-        btn_confirm.grid(row=0, column=1)
+        btn_confirm.grid(row=0, column=1, padx=10)
         btn_cancel.grid(row=0, column=0)
 
     # Refresh the list, when user deleted or edited
@@ -110,8 +110,10 @@ class Gui:
         label_near_uid.grid(row=2, column=1)
 
         btn_confirm = Button(add_bottom_frame, text="Bestätigen", command=add_user)
+        btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=edit_window.destroy)
 
-        btn_confirm.pack()
+        btn_confirm.grid(row=0, column=1)
+        btn_cancel.grid(row=0, column=0, padx=10)
 
     # Delete the active user from list
     def __delete(self):
@@ -151,9 +153,9 @@ class Gui:
         self.list.pack()
 
         # Layout bottom frame
-        self.btn_add.grid(row=0, column=0)
-        self.btn_edit.grid(row=0, column=1)
-        self.btn_delete.grid(row=1, column=0)
-        self.btn_quit.grid(row=1, column=1)
+        self.btn_add.grid(row=0, column=0, padx=10)
+        self.btn_edit.grid(row=0, column=1, pady=5)
+        self.btn_delete.grid(row=1, column=0, padx=10)
+        self.btn_quit.grid(row=1, column=1, pady=5)
 
         self.root.mainloop()
