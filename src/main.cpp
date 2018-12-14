@@ -31,12 +31,11 @@
 #include "utils/uartstdio.h"
 #include "utils/ustdlib.h"
 #include "drivers/buttons.h" // <-----
-#include "usb_structs.h"
-#include "global_defs.h"
-#include "USBSerialDevice.h"
-#include "USBKeyboardDevice.h"
-#include "USBCompDevice.h"
-#include "SPI.h"
+#include "usb/usb_structs.h"
+#include "usb/global_defs.h"
+#include "usb/USBSerialDevice.h"
+#include "usb/USBKeyboardDevice.h"
+#include "usb/USBCompDevice.h"
 
 
 using namespace usbdevice;
@@ -143,28 +142,7 @@ int main(void) {
 			ROM_IntMasterEnable();
 		}
 		if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount()) {
-			//
-			// Turn on the Blue LED.
-			//
-			GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, GPIO_PIN_2);
-
-			//
-			// Delay for a bit.
-			//
-			SysCtlDelay(ROM_SysCtlClockGet() / 3 / 20);
-
-			//
-			// Turn off the Blue LED.
-			//
-			GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0);
-
-			//
-			// Write back received bytes
-			//
 			USBSerialDevice::getInstance()->write(USBSerialDevice::getInstance()->getReceiveBuffer(), USBSerialDevice::getInstance()->getReceiveBufferEnd());
-			//
-			// Take a snapshot of the latest receive count.
-			//
 			ui32RxCount = USBSerialDevice::getInstance()->getRxEventCount();
 
 		}

@@ -111,7 +111,9 @@ PDE_DEPS__QUOTED :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-. \
 drivers \
+src \
+src/rfid \
+src/usb \
 utils \
 

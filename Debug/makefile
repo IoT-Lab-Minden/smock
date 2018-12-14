@@ -10,17 +10,17 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./RFIDReader.obj" \
-"./SPI.obj" \
-"./USBCompDevice.obj" \
-"./USBKeyboardDevice.obj" \
-"./USBSerialDevice.obj" \
-"./main.obj" \
-"./tm4c123gh6pm_startup_ccs.obj" \
-"./usb_structs.obj" \
 "./drivers/buttons.obj" \
+"./src/main.obj" \
+"./src/tm4c123gh6pm_startup_ccs.obj" \
+"./src/rfid/RFIDReader.obj" \
+"./src/rfid/SPI.obj" \
+"./src/usb/USBCompDevice.obj" \
+"./src/usb/USBKeyboardDevice.obj" \
+"./src/usb/USBSerialDevice.obj" \
+"./src/usb/usb_structs.obj" \
 "./utils/uartstdio.obj" \
-"../tm4c123gh6pm.cmd" \
+"../src/tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 -l"C:/ti/tivaware_c_series_2_1_4_178/driverlib/ccs/Debug/driverlib.lib" \
@@ -33,11 +33,15 @@ RMDIR := RMDIR /S/Q
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include subdir_vars.mk
 -include drivers/subdir_vars.mk
+-include src/subdir_vars.mk
+-include src/rfid/subdir_vars.mk
+-include src/usb/subdir_vars.mk
 -include utils/subdir_vars.mk
--include subdir_rules.mk
 -include drivers/subdir_rules.mk
+-include src/subdir_rules.mk
+-include src/rfid/subdir_rules.mk
+-include src/usb/subdir_rules.mk
 -include utils/subdir_rules.mk
 -include objects.mk
 
@@ -170,9 +174,9 @@ usb_keyb_dev.bin: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "RFIDReader.obj" "SPI.obj" "USBCompDevice.obj" "USBKeyboardDevice.obj" "USBSerialDevice.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "usb_structs.obj" "drivers\buttons.obj" "utils\uartstdio.obj" 
-	-$(RM) "tm4c123gh6pm_startup_ccs.d" "drivers\buttons.d" "utils\uartstdio.d" 
-	-$(RM) "RFIDReader.d" "SPI.d" "USBCompDevice.d" "USBKeyboardDevice.d" "USBSerialDevice.d" "main.d" "usb_structs.d" 
+	-$(RM) "drivers\buttons.obj" "src\main.obj" "src\tm4c123gh6pm_startup_ccs.obj" "src\rfid\RFIDReader.obj" "src\rfid\SPI.obj" "src\usb\USBCompDevice.obj" "src\usb\USBKeyboardDevice.obj" "src\usb\USBSerialDevice.obj" "src\usb\usb_structs.obj" "utils\uartstdio.obj" 
+	-$(RM) "drivers\buttons.d" "src\tm4c123gh6pm_startup_ccs.d" "utils\uartstdio.d" 
+	-$(RM) "src\main.d" "src\rfid\RFIDReader.d" "src\rfid\SPI.d" "src\usb\USBCompDevice.d" "src\usb\USBKeyboardDevice.d" "src\usb\USBSerialDevice.d" "src\usb\usb_structs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
