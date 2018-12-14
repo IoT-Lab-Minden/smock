@@ -6,6 +6,7 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../RFIDReader.cpp \
 ../SPI.cpp \
 ../USBCompDevice.cpp \
 ../USBKeyboardDevice.cpp \
@@ -23,6 +24,7 @@ C_DEPS += \
 ./tm4c123gh6pm_startup_ccs.d 
 
 OBJS += \
+./RFIDReader.obj \
 ./SPI.obj \
 ./USBCompDevice.obj \
 ./USBKeyboardDevice.obj \
@@ -32,6 +34,7 @@ OBJS += \
 ./usb_structs.obj 
 
 CPP_DEPS += \
+./RFIDReader.d \
 ./SPI.d \
 ./USBCompDevice.d \
 ./USBKeyboardDevice.d \
@@ -40,6 +43,7 @@ CPP_DEPS += \
 ./usb_structs.d 
 
 OBJS__QUOTED += \
+"RFIDReader.obj" \
 "SPI.obj" \
 "USBCompDevice.obj" \
 "USBKeyboardDevice.obj" \
@@ -52,6 +56,7 @@ C_DEPS__QUOTED += \
 "tm4c123gh6pm_startup_ccs.d" 
 
 CPP_DEPS__QUOTED += \
+"RFIDReader.d" \
 "SPI.d" \
 "USBCompDevice.d" \
 "USBKeyboardDevice.d" \
@@ -60,6 +65,7 @@ CPP_DEPS__QUOTED += \
 "usb_structs.d" 
 
 CPP_SRCS__QUOTED += \
+"../RFIDReader.cpp" \
 "../SPI.cpp" \
 "../USBCompDevice.cpp" \
 "../USBKeyboardDevice.cpp" \

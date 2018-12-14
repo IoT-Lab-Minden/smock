@@ -118,7 +118,7 @@ void SPIClass::begin() {
 	*/
 	ROM_SSIClockSourceSet(SSIBASE, SSI_CLOCK_SYSTEM);
 
-	ROM_SSIConfigSetExpClk(SSIBASE, SysCtlClockGet(), SSI_FRF_MOTO_MODE_0, SSI_MODE_MASTER, 1000000, 8);
+	ROM_SSIConfigSetExpClk(SSIBASE, SysCtlClockGet(), SSI_FRF_MOTO_MODE_3, SSI_MODE_MASTER, 1000000, 8);
 
 	ROM_SSIEnable(SSIBASE);
 
