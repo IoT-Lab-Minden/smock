@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <string.h> // ?
 #include <stdbool.h>
+#include <avr/pgmspace.h>
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_types.h"
@@ -36,7 +37,9 @@
 #include "usb/USBSerialDevice.h"
 #include "usb/USBKeyboardDevice.h"
 #include "usb/USBCompDevice.h"
+#include "Wire.h"
 
+#define TARGET_IS_BLIZZARD_RB1
 
 using namespace usbdevice;
 
@@ -59,6 +62,8 @@ const int SYSTICKS_PER_SECOND = 100;
  * Configure the USB pins
  */
 void configureUSB();
+
+void setUpI2C();
 
 void delay(int ms);
 
@@ -110,6 +115,9 @@ int main(void) {
 	IntMasterEnable();
 
 	delay(WAIT_FOR_HOST_KONFIGURATION);
+
+	Wire.setModule(0);
+	Wire.begin();
 
 	uint8_t ui8ButtonsChanged, ui8Buttons;
 	while (true) {
