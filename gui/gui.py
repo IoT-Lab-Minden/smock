@@ -120,14 +120,17 @@ class Gui:
     # Add a new user
     def __add(self):
 
+        def refresh_uid():
+            # read from queue
+            message = self.__serial_queue.read_queue()
+            print(message.get_text())
+            label_near_uid.config(text=message.get_text())
+            add_window.update()
+
         def add_user():
             # create new user and add it to the list of users
             user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
             self.__user_list.append(user)
-
-            # read from queue
-            message = self.__serial_queue.read_queue()
-            print(message.get_command_code())
 
             # add user to the listbox
             self.list.insert(END, user.get_username())
@@ -152,7 +155,7 @@ class Gui:
 
         textfield_username = Entry(add_top_frame)
         textfield_password = Entry(add_top_frame)
-        label_near_uid = Label(add_top_frame, text="569f625c-fd1d-11e8-8eb2-f2801f1b9fd1")
+        label_near_uid = Label(add_top_frame)
 
         label_username.grid(row=0)
         label_password.grid(row=1)
@@ -163,9 +166,11 @@ class Gui:
 
         btn_confirm = Button(add_bottom_frame, text="Bestätigen", command=add_user)
         btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=add_window.destroy)
+        btn_refresh = Button(add_bottom_frame, text="uid aktualisieren", command=refresh_uid)
 
         btn_confirm.grid(row=0, column=1)
         btn_cancel.grid(row=0, column=0, padx=10)
+        btn_refresh.grid(row=0, column=2, padx=10)
 
     # Delete the active user from list
     def __delete(self):

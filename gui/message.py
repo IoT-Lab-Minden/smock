@@ -1,5 +1,5 @@
 class Message:
-    def __init__(self, text, command_code):
+    def __init__(self,  command_code, text):
         self.__text = text
         self.__command_code = command_code
 
