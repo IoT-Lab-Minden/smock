@@ -74,13 +74,17 @@ class Gui:
     def __edit(self):
 
         def set_user():
-            # Get the selected user from the listbox and edit its name by the text of the Entry widgets
-            user = self.__user_list[self.list.index(ACTIVE)]
-            user.set_username(textfield_username.get())
-            user.set_password(textfield_password.get())
-            self.__refresh_list()
-            edit_window.destroy()
-            self.__notify("Der User wurde erfolgreich bearbeitet!")
+            # First check if username isn't already existing
+            if self.__check_if_user_exists(textfield_username.get()):
+                self.__notify("Der User existiert bereits")
+            else:
+                # Get the selected user from the listbox and edit its name by the text of the Entry widgets
+                user = self.__user_list[self.list.index(ACTIVE)]
+                user.set_username(textfield_username.get())
+                user.set_password(textfield_password.get())
+                self.__refresh_list()
+                edit_window.destroy()
+                self.__notify("Der User wurde erfolgreich bearbeitet!")
 
         # Build the edit window
         edit_window = Toplevel(self.__root)
@@ -128,14 +132,18 @@ class Gui:
             add_window.update()
 
         def add_user():
-            # create new user and add it to the list of users
-            user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
-            self.__user_list.append(user)
+            # First check if username isn't already existing
+            if self.__check_if_user_exists(textfield_username.get()):
+                self.__notify("Der User existiert bereits")
+            else:
+                # create new user and add it to the list of users
+                user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
+                self.__user_list.append(user)
 
-            # add user to the listbox
-            self.list.insert(END, user.get_username())
-            add_window.destroy()
-            self.__notify("Der User wurde erfolgreich hinzugefügt!")
+                # add user to the listbox
+                self.list.insert(END, user.get_username())
+                add_window.destroy()
+                self.__notify("Der User wurde erfolgreich hinzugefügt!")
 
         # Build the add Window
         add_window = Toplevel(self.__root)
@@ -178,3 +186,9 @@ class Gui:
         del self.__user_list[self.list.index(ACTIVE)]
         self.__refresh_list()
         self.__notify("Der User wurde erfolgreich gelöscht")
+
+    def __check_if_user_exists(self, username):
+        for user in self.__user_list:
+            if user.get_username() == username:
+                return True
+        return False
