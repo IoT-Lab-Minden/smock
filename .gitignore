@@ -117,3 +117,4 @@ dmypy.json
 .pyre/
 
 gui/.idea/*
+gui/users/*
