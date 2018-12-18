@@ -6,10 +6,10 @@ from os.path import isfile, join
 
 class Gui:
 
-    def __init__(self, serial_queue):
+    def __init__(self, queue_manager):
 
         self.__user_list = []
-        self.__serial_queue = serial_queue
+        self.__queue_manager = queue_manager
 
         # create main window
         self.__root = Tk()
@@ -140,7 +140,7 @@ class Gui:
 
         def refresh_uid():
             # read from queue
-            message = self.__serial_queue.read_queue()
+            message = self.__queue_manager.read_queue()
             label_near_uid.config(text=message.get_text())
             add_window.update()
 
@@ -220,7 +220,7 @@ class Gui:
             with open(local_path + file, "r") as file_descriptor:
                 password = file_descriptor.readline()
                 uid = file_descriptor.readline()
-                
+
             username = file
             user = User(username, password, uid)
             self.__user_list.append(user)

@@ -5,10 +5,10 @@ from serialManager import SerialManager
 
 def main():
 
-    serial_queue = QueueManager()
-    serial_manager = SerialManager(serial_queue)
+    queue_manager = QueueManager()
+    serial_manager = SerialManager(queue_manager)
     serial_manager.fill_queue()
-    Gui(serial_queue)
+    Gui(queue_manager)
 
 
 if __name__ == "__main__":
