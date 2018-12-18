@@ -14,7 +14,6 @@ class QueueManager:
         while not self.serial_queue.empty() and not command_complete:
             # Reads from queue until no more bytes are expected
             byte = self.serial_queue.get()
-            print(type(byte))
             # Got a byte from the queue
             if first_char:
                 first_char = False

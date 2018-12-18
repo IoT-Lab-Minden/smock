@@ -1,6 +1,7 @@
 from tkinter import *
 from user import *
-from message import Message
+from os import listdir, remove
+from os.path import isfile, join
 
 
 class Gui:
@@ -42,6 +43,10 @@ class Gui:
         self.btn_delete.grid(row=1, column=0, padx=10)
         self.btn_quit.grid(row=1, column=1, pady=5)
 
+        # load the users
+        self.__load_users_from_files()
+
+        # Start the gui
         self.__root.mainloop()
 
     @staticmethod
@@ -80,8 +85,17 @@ class Gui:
             else:
                 # Get the selected user from the listbox and edit its name by the text of the Entry widgets
                 user = self.__user_list[self.list.index(ACTIVE)]
+
+                # Remove the file of the user
+                remove("./users/" + user.get_username())
+
                 user.set_username(textfield_username.get())
                 user.set_password(textfield_password.get())
+
+                with open("./users/" + user.get_username(), "w") as file_descriptor:
+                    file_descriptor.write(user.get_password())
+                    file_descriptor.write(user.get_uid())
+
                 self.__refresh_list()
                 edit_window.destroy()
                 self.__notify("Der User wurde erfolgreich bearbeitet!")
@@ -127,7 +141,6 @@ class Gui:
         def refresh_uid():
             # read from queue
             message = self.__serial_queue.read_queue()
-            print(message.get_text())
             label_near_uid.config(text=message.get_text())
             add_window.update()
 
@@ -139,6 +152,11 @@ class Gui:
                 # create new user and add it to the list of users
                 user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
                 self.__user_list.append(user)
+
+                # Create a File for the user
+                with open("./users/" + textfield_username.get(), "w") as file_descriptor:
+                    file_descriptor.write(textfield_password.get() + "\n")
+                    file_descriptor.write(label_near_uid.cget("text"))
 
                 # add user to the listbox
                 self.list.insert(END, user.get_username())
@@ -192,3 +210,17 @@ class Gui:
             if user.get_username() == username:
                 return True
         return False
+
+    def __load_users_from_files(self):
+        local_path = "./users/"
+        # Get all the filenames of the files in the local_path directory
+        local_files = [f for f in listdir(local_path) if isfile(join(local_path, f))]
+        print(local_files)
+        for file in local_files:
+            with open(local_path + file, "r") as file_descriptor:
+                password = file_descriptor.readline()
+                uid = file_descriptor.readline()
+                username = file
+                user = User(username, password, uid)
+                self.__user_list.append(user)
+                self.__refresh_list()
