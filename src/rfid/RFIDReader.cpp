@@ -6,7 +6,7 @@
  */
 
 #include "RFIDReader.h"
-#include "SPI.h"
+#include "../energia/SPI.h"
 #include "driverlib/rom.h"
 #include "driverlib/gpio.h"
 #include "inc/hw_memmap.h"
@@ -16,12 +16,13 @@ namespace rfid_reader {
 
 	RFIDReader::RFIDReader() {
 		// Set pin to output
-	    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_5);
-	    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_3);
+	    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTA_BASE, GPIO_PIN_3);
+	    ROM_GPIOPinTypeGPIOOutput(GPIO_PORTA_BASE, GPIO_PIN_6);
 	    // Set pin to high
-		ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_PIN_3);
+		ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_6, GPIO_PIN_6);
 
 		SPI.begin();
+		SPI.setModule(0);
 		SPI.setClockDivider(SPI_CLOCK_DIV64);
 	}
 
@@ -54,19 +55,30 @@ namespace rfid_reader {
 	}
 
 	void RFIDReader::wakeUpCall() {
-		ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_3, 0);
+		ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_6, 0);
 		delay(100);
-		ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_PIN_3);
+		ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_6, GPIO_PIN_6);
 		delay(100);
 
-		ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_5, GPIO_PIN_5);
+		ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_3, GPIO_PIN_3);
 	}
 
 	uint8_t RFIDReader::singleEcho() {
 		toggleSlaveActive();
+		delay(10);
 
+		volatile uint8_t result;
 		SPI.transfer(CONTROL_BYTE_COMMAND);
-		SPI.transfer(COMMAND_ECHO);
+		result = SPI.transfer(COMMAND_ECHO);
+		result = SPI.transfer(0x00);
+
+		communicationPause();
+
+		result = SPI.transfer(CONTROL_BYTE_POLLING);
+		result = SPI.transfer(CONTROL_BYTE_POLLING);
+		while ((result & 0x11111000) != POLLING_END) {
+			result = SPI.transfer(CONTROL_BYTE_POLLING);
+		}
 
 		communicationPause();
 
@@ -82,6 +94,7 @@ namespace rfid_reader {
 		toggleSlaveActive();
 		delay(10);
 		toggleSlaveActive();
+		delay(10);
 	}
 
 	void RFIDReader::delay(int ms) {
@@ -92,10 +105,10 @@ namespace rfid_reader {
 	void RFIDReader::toggleSlaveActive() {
 		static uint8_t active = 0;
 		if (active) {
-			ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_5, 0);
+			ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_3, 0);
 			active = 1;
 		} else {
-			ROM_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_5, GPIO_PIN_5);
+			ROM_GPIOPinWrite(GPIO_PORTA_BASE, GPIO_PIN_3, GPIO_PIN_3);
 			active = 0;
 		}
 	}

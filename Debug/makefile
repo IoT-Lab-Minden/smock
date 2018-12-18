@@ -11,10 +11,17 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./drivers/buttons.obj" \
+"./src/energia/HardwareSerial.obj" \
+"./src/energia/Print.obj" \
+"./src/energia/SPI.obj" \
+"./src/energia/Stream.obj" \
+"./src/energia/WString.obj" \
+"./src/energia/Wire.obj" \
+"./src/energia/itoa.obj" \
+"./src/energia/avr/dtostrf.obj" \
 "./src/main.obj" \
 "./src/tm4c123gh6pm_startup_ccs.obj" \
 "./src/rfid/RFIDReader.obj" \
-"./src/rfid/SPI.obj" \
 "./src/usb/USBCompDevice.obj" \
 "./src/usb/USBKeyboardDevice.obj" \
 "./src/usb/USBSerialDevice.obj" \
@@ -34,11 +41,15 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include drivers/subdir_vars.mk
+-include src/energia/subdir_vars.mk
+-include src/energia/avr/subdir_vars.mk
 -include src/subdir_vars.mk
 -include src/rfid/subdir_vars.mk
 -include src/usb/subdir_vars.mk
 -include utils/subdir_vars.mk
 -include drivers/subdir_rules.mk
+-include src/energia/subdir_rules.mk
+-include src/energia/avr/subdir_rules.mk
 -include src/subdir_rules.mk
 -include src/rfid/subdir_rules.mk
 -include src/usb/subdir_rules.mk
@@ -174,9 +185,9 @@ usb_keyb_dev.bin: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "drivers\buttons.obj" "src\main.obj" "src\tm4c123gh6pm_startup_ccs.obj" "src\rfid\RFIDReader.obj" "src\rfid\SPI.obj" "src\usb\USBCompDevice.obj" "src\usb\USBKeyboardDevice.obj" "src\usb\USBSerialDevice.obj" "src\usb\usb_structs.obj" "utils\uartstdio.obj" 
-	-$(RM) "drivers\buttons.d" "src\tm4c123gh6pm_startup_ccs.d" "utils\uartstdio.d" 
-	-$(RM) "src\main.d" "src\rfid\RFIDReader.d" "src\rfid\SPI.d" "src\usb\USBCompDevice.d" "src\usb\USBKeyboardDevice.d" "src\usb\USBSerialDevice.d" "src\usb\usb_structs.d" 
+	-$(RM) "drivers\buttons.obj" "src\energia\HardwareSerial.obj" "src\energia\Print.obj" "src\energia\SPI.obj" "src\energia\Stream.obj" "src\energia\WString.obj" "src\energia\Wire.obj" "src\energia\itoa.obj" "src\energia\avr\dtostrf.obj" "src\main.obj" "src\tm4c123gh6pm_startup_ccs.obj" "src\rfid\RFIDReader.obj" "src\usb\USBCompDevice.obj" "src\usb\USBKeyboardDevice.obj" "src\usb\USBSerialDevice.obj" "src\usb\usb_structs.obj" "utils\uartstdio.obj" 
+	-$(RM) "drivers\buttons.d" "src\energia\itoa.d" "src\energia\avr\dtostrf.d" "src\tm4c123gh6pm_startup_ccs.d" "utils\uartstdio.d" 
+	-$(RM) "src\energia\HardwareSerial.d" "src\energia\Print.d" "src\energia\SPI.d" "src\energia\Stream.d" "src\energia\WString.d" "src\energia\Wire.d" "src\main.d" "src\rfid\RFIDReader.d" "src\usb\USBCompDevice.d" "src\usb\USBKeyboardDevice.d" "src\usb\USBSerialDevice.d" "src\usb\usb_structs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

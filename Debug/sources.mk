@@ -112,6 +112,8 @@ PDE_DEPS__QUOTED :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 drivers \
+src/energia \
+src/energia/avr \
 src \
 src/rfid \
 src/usb \

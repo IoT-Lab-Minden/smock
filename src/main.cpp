@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include <string.h> // ?
 #include <stdbool.h>
-#include <avr/pgmspace.h>
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_types.h"
@@ -37,7 +36,9 @@
 #include "usb/USBSerialDevice.h"
 #include "usb/USBKeyboardDevice.h"
 #include "usb/USBCompDevice.h"
-#include "Wire.h"
+#include "rfid/RFIDReader.h"
+#include "energia/SPI.h"
+#include "energia/Wire.h"
 
 #define TARGET_IS_BLIZZARD_RB1
 
@@ -49,6 +50,9 @@ const int ENTER_DELAY = 280;
 
 const char ENTER = UNICODE_RETURN;
 const char password[] = "Passwort";
+
+const int DEVICE_MEMORY_ADDRESS = 0b1010011;
+const int DEVICE_SYSTEM_ADDRESS = 0b1010111;
 
 uint32_t ui32TxCount;
 uint32_t ui32RxCount;
@@ -116,8 +120,11 @@ int main(void) {
 
 	delay(WAIT_FOR_HOST_KONFIGURATION);
 
-	Wire.setModule(0);
+	rfid_reader::RFIDReader reader;
+	delay(100);
+	reader.wakeUpCall();
 	Wire.begin();
+	Wire.setModule(0);
 
 	uint8_t ui8ButtonsChanged, ui8Buttons;
 	while (true) {
@@ -129,10 +136,14 @@ int main(void) {
 		// TODO: Wartezeit sollte über Variable einstellbar sein
 		// TODO: Handle caps
 		if (ui8ButtonsChanged && (ui8Buttons & RIGHT_BUTTON)) {
-			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+			/*USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
 			delay(ENTER_DELAY);
 			USBKeyboardDevice::getInstance()->USBWriteString(password, sizeof(password) - 1);
-			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);*/
+			uint8_t result = reader.singleEcho();
+
+			USBKeyboardDevice::getInstance()->USBWriteString((char *)&result, 1);
+			Wire.endTransmission();
 		}
 
 		if (ui8ButtonsChanged && (ui8Buttons & LEFT_BUTTON)) {
