@@ -2,6 +2,7 @@ from tkinter import *
 from user import *
 from os import listdir, remove
 from os.path import isfile, join
+from command import Command
 
 
 class Gui:
@@ -140,7 +141,7 @@ class Gui:
 
         def refresh_uid():
             # read from queue
-            message = self.__queue_manager.read_queue()
+            message = self.__queue_manager.read_queue(Command.UID.value)
             label_near_uid.config(text=message.get_text())
             add_window.update()
 

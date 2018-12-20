@@ -6,8 +6,7 @@ from serialManager import SerialManager
 def main():
 
     queue_manager = QueueManager()
-    serial_manager = SerialManager(queue_manager)
-    serial_manager.fill_queue()
+    SerialManager(queue_manager)
     Gui(queue_manager)
 
 
