@@ -21,7 +21,7 @@ class SerialManager:
                 break
             else:
                 if first_byte:
-                    self.__command = "s"
+                    self.__command = 2
                     first_byte = False
                 else:
                     self.__text = self.__text + "s"
