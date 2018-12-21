@@ -39,6 +39,9 @@
 #include "rfid/RFIDReader.h"
 #include "energia/SPI.h"
 #include "energia/Wire.h"
+#include "rfid/MFRC522.h"
+#include "rfid/MFRC522Constants.h"
+#include "energia/Stream.h"
 
 #define TARGET_IS_BLIZZARD_RB1
 
@@ -46,13 +49,15 @@ using namespace usbdevice;
 
 const int START_DELAY = 1000;
 const int WAIT_FOR_HOST_KONFIGURATION = 500;
-const int ENTER_DELAY = 280;
+const int ENTER_DELAY = 350;
 
 const char ENTER = UNICODE_RETURN;
-const char password[] = "Passwort";
+const char password[] = "Frotheim257";
 
 const int DEVICE_MEMORY_ADDRESS = 0b1010011;
 const int DEVICE_SYSTEM_ADDRESS = 0b1010111;
+uint8_t currentUid[] = {0,0,0,0};
+uint32_t cardMissing = 0;
 
 uint32_t ui32TxCount;
 uint32_t ui32RxCount;
@@ -95,6 +100,7 @@ uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
  * print ser.read() // -> 'w'
  */
 int main(void) {
+
 	USBSerialDevice::registerControlHandler(ControlHandler);
 	USBSerialDevice::registerRxHandler(RxHandler);
 	USBSerialDevice::registerTxHandler(TxHandler);
@@ -119,12 +125,13 @@ int main(void) {
 	IntMasterEnable();
 
 	delay(WAIT_FOR_HOST_KONFIGURATION);
-
-	rfid_reader::RFIDReader reader;
-	delay(100);
-	reader.wakeUpCall();
 	Wire.begin();
 	Wire.setModule(0);
+
+	rfid_reader::MFRC522 reader;
+	uint8_t res = reader.readRegister(rfid_reader::CommandReg);
+	/*rfid_reader::RFIDReader reader;
+	reader.wakeUpCall();*/
 
 	uint8_t ui8ButtonsChanged, ui8Buttons;
 	while (true) {
@@ -140,10 +147,9 @@ int main(void) {
 			delay(ENTER_DELAY);
 			USBKeyboardDevice::getInstance()->USBWriteString(password, sizeof(password) - 1);
 			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);*/
-			uint8_t result = reader.singleEcho();
 
-			USBKeyboardDevice::getInstance()->USBWriteString((char *)&result, 1);
-			Wire.endTransmission();
+			uint8_t result = reader.performSelfTest();
+
 		}
 
 		if (ui8ButtonsChanged && (ui8Buttons & LEFT_BUTTON)) {
@@ -163,7 +169,44 @@ int main(void) {
 		if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount()) {
 			USBSerialDevice::getInstance()->write(USBSerialDevice::getInstance()->getReceiveBuffer(), USBSerialDevice::getInstance()->getReceiveBufferEnd());
 			ui32RxCount = USBSerialDevice::getInstance()->getRxEventCount();
+		}
+		if (reader.isNewCardPresent()) {
+			uint8_t n = 'y';
+			USBSerialDevice::getInstance()->write(&n, 1);
+			if (reader.readCardSerial()) {
+				uint8_t n = 'r';
+				USBSerialDevice::getInstance()->write(&n, 1);
 
+				if (currentUid[0] == 0 && currentUid[1] == 0 && currentUid[2] == 0 && currentUid[3] == 0) {
+					for (uint8_t i = 0; i < sizeof(currentUid); i++) {
+						currentUid[i] = reader.uid.uiduint8_t[i];
+					}
+					// unlock
+					USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+					delay(ENTER_DELAY);
+					USBKeyboardDevice::getInstance()->USBWriteString(password, sizeof(password) - 1);
+					USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+					cardMissing = 0;
+				}else if (currentUid[0] == reader.uid.uiduint8_t[0] &&
+						currentUid[1] == reader.uid.uiduint8_t[1] &&
+						currentUid[2] == reader.uid.uiduint8_t[2] &&
+						currentUid[3] == reader.uid.uiduint8_t[3]) {
+					cardMissing = 0;
+				} else {
+					cardMissing++;
+				}
+			}
+		} else {
+			if (cardMissing <= 50)
+				cardMissing++;
+		}
+		if (cardMissing == 20) {
+			for (uint8_t i = 0; i < sizeof(currentUid); i++) {
+				currentUid[i] = 0;
+			}
+			USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &DEL, 1);
+			delay(ENTER_DELAY);
+			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
 		}
 	}
 }

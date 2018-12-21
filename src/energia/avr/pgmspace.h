@@ -28,6 +28,7 @@ typedef uint32_t prog_uint32_t;
 #define sprintf_P(s, f, ...) sprintf((s), (f), __VA_ARGS__)
 
 #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
+#define pgm_read_uint8_t(addr) (*(const unsigned char *)(addr))
 #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 #define pgm_read_dword(addr) (*(const unsigned long *)(addr))
 #define pgm_read_float(addr) (*(const float *)(addr))

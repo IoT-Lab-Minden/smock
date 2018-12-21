@@ -21,6 +21,7 @@ ORDERED_OBJS += \
 "./src/energia/avr/dtostrf.obj" \
 "./src/main.obj" \
 "./src/tm4c123gh6pm_startup_ccs.obj" \
+"./src/rfid/MFRC522.obj" \
 "./src/rfid/RFIDReader.obj" \
 "./src/usb/USBCompDevice.obj" \
 "./src/usb/USBKeyboardDevice.obj" \
@@ -185,9 +186,9 @@ usb_keyb_dev.bin: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "drivers\buttons.obj" "src\energia\HardwareSerial.obj" "src\energia\Print.obj" "src\energia\SPI.obj" "src\energia\Stream.obj" "src\energia\WString.obj" "src\energia\Wire.obj" "src\energia\itoa.obj" "src\energia\avr\dtostrf.obj" "src\main.obj" "src\tm4c123gh6pm_startup_ccs.obj" "src\rfid\RFIDReader.obj" "src\usb\USBCompDevice.obj" "src\usb\USBKeyboardDevice.obj" "src\usb\USBSerialDevice.obj" "src\usb\usb_structs.obj" "utils\uartstdio.obj" 
+	-$(RM) "drivers\buttons.obj" "src\energia\HardwareSerial.obj" "src\energia\Print.obj" "src\energia\SPI.obj" "src\energia\Stream.obj" "src\energia\WString.obj" "src\energia\Wire.obj" "src\energia\itoa.obj" "src\energia\avr\dtostrf.obj" "src\main.obj" "src\tm4c123gh6pm_startup_ccs.obj" "src\rfid\MFRC522.obj" "src\rfid\RFIDReader.obj" "src\usb\USBCompDevice.obj" "src\usb\USBKeyboardDevice.obj" "src\usb\USBSerialDevice.obj" "src\usb\usb_structs.obj" "utils\uartstdio.obj" 
 	-$(RM) "drivers\buttons.d" "src\energia\itoa.d" "src\energia\avr\dtostrf.d" "src\tm4c123gh6pm_startup_ccs.d" "utils\uartstdio.d" 
-	-$(RM) "src\energia\HardwareSerial.d" "src\energia\Print.d" "src\energia\SPI.d" "src\energia\Stream.d" "src\energia\WString.d" "src\energia\Wire.d" "src\main.d" "src\rfid\RFIDReader.d" "src\usb\USBCompDevice.d" "src\usb\USBKeyboardDevice.d" "src\usb\USBSerialDevice.d" "src\usb\usb_structs.d" 
+	-$(RM) "src\energia\HardwareSerial.d" "src\energia\Print.d" "src\energia\SPI.d" "src\energia\Stream.d" "src\energia\WString.d" "src\energia\Wire.d" "src\main.d" "src\rfid\MFRC522.d" "src\rfid\RFIDReader.d" "src\usb\USBCompDevice.d" "src\usb\USBKeyboardDevice.d" "src\usb\USBSerialDevice.d" "src\usb\usb_structs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
