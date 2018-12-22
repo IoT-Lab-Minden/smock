@@ -54,13 +54,28 @@ const int ENTER_DELAY = 350;
 const char ENTER = UNICODE_RETURN;
 const char password[] = "Frotheim257";
 
-const int DEVICE_MEMORY_ADDRESS = 0b1010011;
-const int DEVICE_SYSTEM_ADDRESS = 0b1010111;
+const uint8_t ASK_FOR_PW = '1';
+const uint8_t OS_SYSTEM = '3';
+const uint8_t HOST_STATUS = '4';
+const uint8_t END_REQUEST = '!';
+const uint8_t WIN = 'w';
+const uint8_t LINUX = 'l';
+
+typedef enum : uint8_t {
+	START,
+	LOCKED,
+	WAIT_FOR_PW,
+	UNLOCKED,
+	VALIDATE_HOST_LOCKED,
+} State;
+
 uint8_t currentUid[] = {0,0,0,0};
-uint32_t cardMissing = 0;
+uint32_t cardMissing = 20;
 
 uint32_t ui32TxCount;
 uint32_t ui32RxCount;
+
+uint8_t os = 0;
 
 /**
  * The system tick timer period.
@@ -100,6 +115,7 @@ uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
  * print ser.read() // -> 'w'
  */
 int main(void) {
+	State state = START;
 
 	USBSerialDevice::registerControlHandler(ControlHandler);
 	USBSerialDevice::registerRxHandler(RxHandler);
@@ -135,78 +151,87 @@ int main(void) {
 
 	uint8_t ui8ButtonsChanged, ui8Buttons;
 	while (true) {
-		//
-		// See if the buttons updated.
-		//
-		ButtonsPoll(&ui8ButtonsChanged, &ui8Buttons);
-
-		// TODO: Wartezeit sollte über Variable einstellbar sein
-		// TODO: Handle caps
-		if (ui8ButtonsChanged && (ui8Buttons & RIGHT_BUTTON)) {
-			/*USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
-			delay(ENTER_DELAY);
-			USBKeyboardDevice::getInstance()->USBWriteString(password, sizeof(password) - 1);
-			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);*/
-
-			uint8_t result = reader.performSelfTest();
-
-		}
-
-		if (ui8ButtonsChanged && (ui8Buttons & LEFT_BUTTON)) {
-			USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &DEL, 1);
-			delay(ENTER_DELAY);
-			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
-		}
-
-		if (USBSerialDevice::getInstance()->commandStatusUpdated()) {
-			//
-			// Clear the command flag
-			//
-			ROM_IntMasterDisable();
-			USBSerialDevice::getInstance()->resetCommandStatusFlag();
-			ROM_IntMasterEnable();
-		}
-		if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount()) {
-			USBSerialDevice::getInstance()->write(USBSerialDevice::getInstance()->getReceiveBuffer(), USBSerialDevice::getInstance()->getReceiveBufferEnd());
-			ui32RxCount = USBSerialDevice::getInstance()->getRxEventCount();
-		}
-		if (reader.isNewCardPresent()) {
-			uint8_t n = 'y';
-			USBSerialDevice::getInstance()->write(&n, 1);
-			if (reader.readCardSerial()) {
-				uint8_t n = 'r';
-				USBSerialDevice::getInstance()->write(&n, 1);
-
-				if (currentUid[0] == 0 && currentUid[1] == 0 && currentUid[2] == 0 && currentUid[3] == 0) {
+		switch (state) {
+		case START:
+			if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount() && USBSerialDevice::getInstance()->getReceiveBuffer()[0] == OS_SYSTEM) {
+				os = USBSerialDevice::getInstance()->getReceiveBuffer()[1];
+				// Ask for state
+				uint8_t command[] = {HOST_STATUS, END_REQUEST};
+				USBSerialDevice::getInstance()->write(command, sizeof(command));
+				state = LOCKED;
+			}
+			break;
+		case LOCKED:
+			// TODO: art entprellen dazu?
+			if (reader.isNewCardPresent()) {
+				if (reader.readCardSerial()) {
 					for (uint8_t i = 0; i < sizeof(currentUid); i++) {
 						currentUid[i] = reader.uid.uiduint8_t[i];
 					}
-					// unlock
-					USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
-					delay(ENTER_DELAY);
-					USBKeyboardDevice::getInstance()->USBWriteString(password, sizeof(password) - 1);
-					USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
-					cardMissing = 0;
-				}else if (currentUid[0] == reader.uid.uiduint8_t[0] &&
-						currentUid[1] == reader.uid.uiduint8_t[1] &&
-						currentUid[2] == reader.uid.uiduint8_t[2] &&
-						currentUid[3] == reader.uid.uiduint8_t[3]) {
-					cardMissing = 0;
-				} else {
-					cardMissing++;
+					uint8_t command[] = {ASK_FOR_PW, END_REQUEST};
+					USBSerialDevice::getInstance()->write(command, sizeof(command));
+					state = WAIT_FOR_PW;
 				}
 			}
-		} else {
-			if (cardMissing <= 50)
-				cardMissing++;
-		}
-		if (cardMissing == 20) {
-			for (uint8_t i = 0; i < sizeof(currentUid); i++) {
-				currentUid[i] = 0;
+			break;
+		case WAIT_FOR_PW:
+			if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount()) {
+				if (USBSerialDevice::getInstance()->getReceiveBuffer()[0] == HOST_STATUS) {
+					for (uint8_t i = 0; i < sizeof(currentUid); i++) {
+						currentUid[i] = 0;
+					}
+					state = LOCKED;
+				} else if (USBSerialDevice::getInstance()->getReceiveBuffer()[0] == ASK_FOR_PW) {
+					char pw[USBSerialDevice::getInstance()->getReceiveBufferEnd() - 1];
+					for (int i = 1; i < USBSerialDevice::getInstance()->getReceiveBufferEnd(); i++) {
+						pw[i] = USBSerialDevice::getInstance()->getReceiveBuffer()[1];
+					}
+					if (os != LINUX) {
+						USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+						delay(ENTER_DELAY);
+					}
+					USBKeyboardDevice::getInstance()->USBWriteString(pw, sizeof(pw));
+					USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+					state = UNLOCKED;
+				}
 			}
-			USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &DEL, 1);
-			delay(ENTER_DELAY);
-			USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+		case UNLOCKED:
+			if (reader.isNewCardPresent()) {
+				if (reader.readCardSerial()) {
+					if (currentUid[0] == reader.uid.uiduint8_t[0] &&
+							currentUid[1] == reader.uid.uiduint8_t[1] &&
+							currentUid[2] == reader.uid.uiduint8_t[2] &&
+							currentUid[3] == reader.uid.uiduint8_t[3]) {
+						cardMissing = 0;
+					} else {
+						cardMissing++;
+					}
+				} else {
+					if (cardMissing <= 50) {
+						cardMissing++;
+					}
+				}
+				if (cardMissing == 50) {
+					for (uint8_t i = 0; i < sizeof(currentUid); i++) {
+						currentUid[i] = 0;
+					}
+					uint8_t command[] = {HOST_STATUS, END_REQUEST};
+					USBSerialDevice::getInstance()->write(command, sizeof(command));
+					state = VALIDATE_HOST_LOCKED;
+				}
+			}
+			break;
+		case VALIDATE_HOST_LOCKED:
+			if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount() && USBSerialDevice::getInstance()->getReceiveBuffer()[0] == HOST_STATUS) {
+				if (USBSerialDevice::getInstance()->getReceiveBuffer()[1] == '1') {
+					USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &DEL, 1);
+					delay(ENTER_DELAY);
+					USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+				}
+				state = LOCKED;
+			}
+			break;
+
 		}
 	}
 }
