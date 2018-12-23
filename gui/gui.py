@@ -1,16 +1,14 @@
 from tkinter import *
-from user import *
-from os import listdir, remove
-from os.path import isfile, join
+from os import remove
 from command import Command
 
 
 class Gui:
 
-    def __init__(self, queue_manager, serial_manager):
-        self.__user_list = []
+    def __init__(self, queue_manager, serial_manager, user_manager):
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
+        self.__user_manager = user_manager
 
         # create main window
         self.__root = Tk()
@@ -45,7 +43,8 @@ class Gui:
         self.btn_quit.grid(row=1, column=1, pady=5)
 
         # load the users
-        self.__load_users_from_files()
+        self.__user_manager.load_users_from_files()
+        self.__refresh_list()
 
         # Start the gui
         self.__root.mainloop()
@@ -81,11 +80,11 @@ class Gui:
 
         def set_user():
             # First check if username isn't already existing
-            if self.__check_if_user_exists(textfield_username.get()):
+            if self.__user_manager.check_if_user_exists(textfield_username.get()):
                 self.__notify("Der User existiert bereits")
             else:
                 # Get the selected user from the listbox and edit its name by the text of the Entry widgets
-                user = self.__user_list[self.list.index(ACTIVE)]
+                user = self.__user_manager.user_list[self.list.index(ACTIVE)]
 
                 # Remove the file of the user
                 remove("./users/" + user.get_username())
@@ -130,12 +129,6 @@ class Gui:
         btn_confirm.grid(row=0, column=1, padx=10)
         btn_cancel.grid(row=0, column=0)
 
-    # Refresh the list, when user deleted or edited
-    def __refresh_list(self):
-        self.list.delete(0, END)
-        for user in self.__user_list:
-            self.list.insert(END, user.get_username())
-
     # Add a new user
     def __add(self):
 
@@ -148,22 +141,20 @@ class Gui:
 
         def add_user():
             # First check if username isn't already existing
-            if self.__check_if_user_exists(textfield_username.get()):
+            if self.__user_manager.check_if_user_exists(textfield_username.get()):
                 self.__notify("Der User existiert bereits")
             else:
-                # create new user and add it to the list of users
-                user = User(textfield_username.get(), textfield_password.get(), label_near_uid.cget("text"))
-                self.__user_list.append(user)
+                # check if textfield have inputs
+                if len(textfield_username.get()) > 0 and len(textfield_password.get()) > 0:
+                    self.__user_manager.add_user(textfield_username.get(), textfield_password.get(),
+                                                 label_near_uid.cget("text"))
 
-                # Create a File for the user
-                with open("./users/" + textfield_username.get(), "w") as file_descriptor:
-                    file_descriptor.write(textfield_password.get() + "\n")
-                    file_descriptor.write(label_near_uid.cget("text"))
-
-                # add user to the listbox
-                self.list.insert(END, user.get_username())
-                add_window.destroy()
-                self.__notify("Der User wurde erfolgreich hinzugefügt!")
+                    # add user to the listbox
+                    self.list.insert(END, textfield_username.get())
+                    add_window.destroy()
+                    self.__notify("Der User wurde erfolgreich hinzugefügt!")
+                else:
+                    self.__notify("Bitte geben Sie alle Nutzerdaten ein.")
 
         # Build the add Window
         add_window = Toplevel(self.__root)
@@ -203,26 +194,12 @@ class Gui:
     # Delete the active user from list
     def __delete(self):
 
-        del self.__user_list[self.list.index(ACTIVE)]
+        self.__user_manager.delete_user(self.list.index(ACTIVE))
         self.__refresh_list()
         self.__notify("Der User wurde erfolgreich gelöscht")
 
-    def __check_if_user_exists(self, username):
-        for user in self.__user_list:
-            if user.get_username() == username:
-                return True
-        return False
-
-    def __load_users_from_files(self):
-        local_path = "./users/"
-        # Get all the filenames of the files in the local_path directory
-        local_files = [f for f in listdir(local_path) if isfile(join(local_path, f))]
-        for file in local_files:
-            with open(local_path + file, "r") as file_descriptor:
-                password = file_descriptor.readline()
-                uid = file_descriptor.readline()
-
-            username = file
-            user = User(username, password, uid)
-            self.__user_list.append(user)
-            self.__refresh_list()
+    # Refresh the list, when user deleted or edited
+    def __refresh_list(self):
+        self.list.delete(0, END)
+        for user in self.__user_manager.user_list:
+            self.list.insert(END, user.get_username())

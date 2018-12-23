@@ -1,0 +1,41 @@
+from user import User
+from os.path import isfile, join
+from os import listdir
+
+
+class UserManager:
+
+    def __init__(self):
+        self.user_list = []
+
+    def load_users_from_files(self):
+        local_path = "./users/"
+        # Get all the filenames of the files in the local_path directory
+        local_files = [f for f in listdir(local_path) if isfile(join(local_path, f))]
+        for file in local_files:
+            with open(local_path + file, "r") as file_descriptor:
+                password = file_descriptor.readline()
+                uid = file_descriptor.readline()
+
+            username = file
+            user = User(username, password, uid)
+            self.user_list.append(user)
+
+    def add_user(self, username, password, uid):
+        # create new user and add it to the list of users
+        user = User(username, password, uid)
+        self.user_list.append(user)
+
+        # Create a File for the user
+        with open("./users/" + username, "w") as file_descriptor:
+            file_descriptor.write(password + "\n")
+            file_descriptor.write(uid)
+
+    def check_if_user_exists(self, username):
+        for user in self.user_list:
+            if user.get_username() == username:
+                return True
+        return False
+
+    def delete_user(self, index):
+        del self.user_list[index]
