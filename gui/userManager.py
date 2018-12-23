@@ -39,3 +39,9 @@ class UserManager:
 
     def delete_user(self, index):
         del self.user_list[index]
+
+    def get_user_with_uid(self, uid):
+        for user in self.user_list:
+            if user.get_uid() == uid:
+                return user
+        return -1
