@@ -1,7 +1,7 @@
 class Message:
     def __init__(self,  command_code, text):
-        self.__text = text
         self.__command_code = command_code
+        self.__text = text
 
     def set_text(self, text):
         self.__text = text

@@ -7,10 +7,10 @@ from command import Command
 
 class Gui:
 
-    def __init__(self, queue_manager):
-
+    def __init__(self, queue_manager, serial_manager):
         self.__user_list = []
         self.__queue_manager = queue_manager
+        self.__serial_manager = serial_manager
 
         # create main window
         self.__root = Tk()
@@ -142,7 +142,8 @@ class Gui:
         def refresh_uid():
             # read from queue
             message = self.__queue_manager.read_queue(Command.UID.value)
-            label_near_uid.config(text=message.get_text())
+            if message.get_text() != "nothing":
+                label_near_uid.config(text=message.get_text())
             add_window.update()
 
         def add_user():
@@ -182,7 +183,7 @@ class Gui:
 
         textfield_username = Entry(add_top_frame)
         textfield_password = Entry(add_top_frame)
-        label_near_uid = Label(add_top_frame)
+        label_near_uid = Label(add_top_frame, text="nothing")
 
         label_username.grid(row=0)
         label_password.grid(row=1)
@@ -216,7 +217,6 @@ class Gui:
         local_path = "./users/"
         # Get all the filenames of the files in the local_path directory
         local_files = [f for f in listdir(local_path) if isfile(join(local_path, f))]
-        print(local_files)
         for file in local_files:
             with open(local_path + file, "r") as file_descriptor:
                 password = file_descriptor.readline()

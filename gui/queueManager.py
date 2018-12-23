@@ -28,7 +28,6 @@ class QueueManager:
 
     # writes a message into the responsible queue
     def write_queue(self, message):
-        print(Command.UID.value)
         if message.get_command_code() == Command.PASSWORD.value:
             self.__password_query.put(message)
         elif message.get_command_code() == Command.UID.value:
