@@ -13,12 +13,11 @@ class SerialManager:
         self.__text = ""
         self.__mutex = Lock()
         self.__serial_device = self.__find_serial_device()
-        print(self.__serial_device.is_open)
 
     def write_to_controller(self, message):
         self.__mutex.acquire(True)
-        print("Command Code: " + str(message.get_command_code()))
-        print("Message: " + message.get_text())
+        text = str(message.get_command_code().value) + message.get_text()
+        self.__serial_device.write(str.encode(text))
         self.__mutex.release()
 
     def fill_queue(self):
@@ -48,14 +47,19 @@ class SerialManager:
         config = configparser.ConfigParser()
         config.read("./config/smock.cfg")
         if 'COMPORT' in config['DEFAULT']:
-            ser = serial.Serial(config['DEFAULT']['COMPORT'], 115200)
+                ports = serial.tools.list_ports.comports()
+                if len(ports) > 0:
+                    print("hallo")
+                    ser = serial.Serial(config['DEFAULT']['COMPORT'], 115200, timeout=1)
+                else:
+                    ser = "hallo"
         else:
             config['DEFAULT'] = {}
             config['DEFAULT']['COMPORT'] = "COM4"
             with open("./config/smock.cfg", "w") as config_file:
                 config.write(config_file)
             ports = serial.tools.list_ports.comports()
-            ser = serial.Serial(ports[0].device, 115200)
+            ser = serial.Serial(ports[0].device, 115200, timeout=1)
         return ser
 
 
