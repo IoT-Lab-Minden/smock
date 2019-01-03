@@ -60,6 +60,8 @@ namespace usbdevice {
 		USBSerialDevice(tUSBCallback controlHandler, tUSBCallback rxHandler, tUSBCallback txHandler);
 
 	public:
+		void flushReceiveBuffer();
+
 		static USBSerialDevice *getInstance();
 
 		static void registerControlHandler(tUSBCallback cHandler);

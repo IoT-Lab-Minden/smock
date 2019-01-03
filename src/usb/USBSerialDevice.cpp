@@ -49,6 +49,13 @@ namespace usbdevice {
 		return &instance;
 	}
 
+	void USBSerialDevice::flushReceiveBuffer() {
+		USBUARTPrimeTransmit();
+		for (int i = 0; i < UART_BUFFER_SIZE; i++) {
+			ui8ReceiveBuffer[i] = 0;
+		}
+	}
+
 	USBSerialDevice::USBSerialDevice(tUSBCallback controlHandler, tUSBCallback rxHandler, tUSBCallback txHandler) :
 	g_sCDCDevice( {
 				USB_VID_TI_1CBE,
