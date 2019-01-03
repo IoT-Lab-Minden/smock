@@ -5,12 +5,13 @@ from userManager import UserManager
 from taskManager import TaskManager
 from threading import Thread
 from message import Message
-from platform import platform
+import platform
 from command import Command
 
 
 def main():
 
+    print(platform.system())
     queue_manager = QueueManager()
     serial_manager = SerialManager(queue_manager)
     user_manager = UserManager()
