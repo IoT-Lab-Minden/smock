@@ -59,6 +59,7 @@ const uint8_t HOST_STATUS = '4';
 const uint8_t END_REQUEST = '!';
 const uint8_t WIN = 'W';
 const uint8_t LINUX = 'L';
+const uint8_t READ_UID = '2';
 
 typedef enum : uint8_t {
 	START,
@@ -145,11 +146,23 @@ int main(void) {
 
 	rfid_reader::MFRC522 reader;
 	uint8_t res = reader.readRegister(rfid_reader::CommandReg);
-	/*rfid_reader::RFIDReader reader;
-	reader.wakeUpCall();*/
+
 
 	uint8_t ui8ButtonsChanged, ui8Buttons;
 	while (true) {
+		if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount() && USBSerialDevice::getInstance()->getReceiveBuffer()[0] == READ_UID) {
+			if (currentUid[0] == 0 && currentUid[1] == 0 && currentUid[2] == 0 && currentUid[3] == 0) {
+				// no card present
+				uint8_t command[] = {READ_UID, END_REQUEST};
+				USBSerialDevice::getInstance()->write(command, sizeof(command));
+			} else {
+				uint8_t command[] = {READ_UID, currentUid[0], currentUid[1], currentUid[2], currentUid[3], END_REQUEST};
+				USBSerialDevice::getInstance()->write(command, sizeof(command));
+			}
+			USBSerialDevice::getInstance()->flushReceiveBuffer();
+			delay(100);
+		}
+
 		switch (state) {
 		case START:
 			if (ui32RxCount != USBSerialDevice::getInstance()->getRxEventCount() && USBSerialDevice::getInstance()->getReceiveBuffer()[0] == OS_SYSTEM) {
