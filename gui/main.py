@@ -11,13 +11,12 @@ from command import Command
 
 def main():
 
-    print(platform.system())
     queue_manager = QueueManager()
     serial_manager = SerialManager(queue_manager)
     user_manager = UserManager()
     task_manager = TaskManager(user_manager, queue_manager, serial_manager)
 
-    message = Message(Command.OS, platform.system()[0])
+    message = Message(Command.OS, str.encode(platform.system()[0]))
     t_serial_write = Thread(target=serial_manager.write_to_controller, args=(message,))
     t_serial_write.daemon = True
     t_serial_write.start()

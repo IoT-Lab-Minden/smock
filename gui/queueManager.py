@@ -7,12 +7,15 @@ class QueueManager:
     def __init__(self):
         self.__password_query = Queue()
         self.__uid_query = Queue()
+        self.__computer_status_query = Queue()
 
     def read_queue(self, command_code):
-        if command_code == Command.PASSWORD.value:
+        if command_code == Command.PASSWORD:
             message = self.__get_entry_of_queue(self.__password_query)
-        elif command_code == Command.UID.value:
+        elif command_code == Command.UID:
             message = self.__get_entry_of_queue(self.__uid_query)
+        elif command_code == Command.COMPUTER_STATUS:
+            message = self.__get_entry_of_queue(self.__computer_status_query)
         else:
             message = Message("n", "nothing")
 
@@ -32,5 +35,7 @@ class QueueManager:
             self.__password_query.put(message)
         elif message.get_command_code() == Command.UID.value:
             self.__uid_query.put(message)
+        elif message.get_command_code() == Command.COMPUTER_STATUS.value:
+            self.__computer_status_query.put(message)
         else:
             pass

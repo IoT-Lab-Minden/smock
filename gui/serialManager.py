@@ -4,20 +4,24 @@ from threading import Lock
 import serial
 import serial.tools.list_ports
 import configparser
+from command import Command
 
 
 class SerialManager:
     def __init__(self, queue_manager):
         self.__queue_manager = queue_manager
-        self.__command = ""
-        self.__text = ""
+        self.__command = b""
+        self.__text = b""
         self.__mutex = Lock()
         self.__serial_device = self.__find_serial_device()
 
     def write_to_controller(self, message):
         self.__mutex.acquire(True)
-        text = str(message.get_command_code().value) + message.get_text()
-        self.__serial_device.write(str.encode(text))
+        print(message.get_command_code().value)
+        print(message.get_text())
+        text = message.get_command_code().value
+        text += message.get_text()
+        self.__serial_device.write(text)
         self.__mutex.release()
 
     def fill_queue(self):
@@ -28,12 +32,14 @@ class SerialManager:
                 self.__mutex.acquire(True)
                 mutex_acquired = True
 
+            #TODO endlosschleife in read?
             letter = self.__serial_device.read()
+            print(letter)
             if first_byte:
                 self.__command = letter
                 first_byte = False
-            elif letter != "!":
-                self.__text = self.__text + str(letter)
+            elif letter != Command.ENDING_SYMBOL:
+                self.__text += letter
             else:
                 message = Message(self.__command, self.__text)
                 self.__mutex.release()
@@ -49,8 +55,7 @@ class SerialManager:
         if 'COMPORT' in config['DEFAULT']:
                 ports = serial.tools.list_ports.comports()
                 if len(ports) > 0:
-                    print("hallo")
-                    ser = serial.Serial(config['DEFAULT']['COMPORT'], 115200, timeout=1)
+                    ser = serial.Serial(config['DEFAULT']['COMPORT'], 115200)
                 else:
                     ser = "hallo"
         else:
@@ -59,7 +64,5 @@ class SerialManager:
             with open("./config/smock.cfg", "w") as config_file:
                 config.write(config_file)
             ports = serial.tools.list_ports.comports()
-            ser = serial.Serial(ports[0].device, 115200, timeout=1)
+            ser = serial.Serial(ports[0].device, 115200)
         return ser
-
-
