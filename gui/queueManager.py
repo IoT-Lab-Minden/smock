@@ -10,11 +10,11 @@ class QueueManager:
         self.__computer_status_query = Queue()
 
     def read_queue(self, command_code):
-        if command_code == Command.PASSWORD:
+        if command_code == Command.PASSWORD.value:
             message = self.__get_entry_of_queue(self.__password_query)
-        elif command_code == Command.UID:
+        elif command_code == Command.UID.value:
             message = self.__get_entry_of_queue(self.__uid_query)
-        elif command_code == Command.COMPUTER_STATUS:
+        elif command_code == Command.COMPUTER_STATUS.value:
             message = self.__get_entry_of_queue(self.__computer_status_query)
         else:
             message = Message("n", "nothing")

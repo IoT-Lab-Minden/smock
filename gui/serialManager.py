@@ -17,9 +17,9 @@ class SerialManager:
 
     def write_to_controller(self, message):
         self.__mutex.acquire(True)
-        print(message.get_command_code().value)
+        print(message.get_command_code())
         print(message.get_text())
-        text = message.get_command_code().value
+        text = message.get_command_code()
         text += message.get_text()
         self.__serial_device.write(text)
         self.__mutex.release()
@@ -28,26 +28,27 @@ class SerialManager:
         first_byte = True
         mutex_acquired = False
         while True:
+            time.sleep(0.1)
             if not mutex_acquired:
                 self.__mutex.acquire(True)
                 mutex_acquired = True
 
             #TODO endlosschleife in read?
             letter = self.__serial_device.read()
-            print(letter)
-            if first_byte:
-                self.__command = letter
-                first_byte = False
-            elif letter != Command.ENDING_SYMBOL:
-                self.__text += letter
-            else:
-                message = Message(self.__command, self.__text)
-                self.__mutex.release()
-                mutex_acquired = False
-                self.__queue_manager.write_queue(message)
-                first_byte = True
-                self.__command = ""
-                self.__text = ""
+            if letter != b'':
+                if first_byte:
+                    self.__command = letter
+                    first_byte = False
+                elif letter != Command.ENDING_SYMBOL.value:
+                    self.__text += letter
+                else:
+                    message = Message(self.__command, self.__text)
+                    self.__mutex.release()
+                    mutex_acquired = False
+                    self.__queue_manager.write_queue(message)
+                    first_byte = True
+                    self.__command = b""
+                    self.__text = b""
 
     def __find_serial_device(self):
         config = configparser.ConfigParser()
@@ -55,7 +56,7 @@ class SerialManager:
         if 'COMPORT' in config['DEFAULT']:
                 ports = serial.tools.list_ports.comports()
                 if len(ports) > 0:
-                    ser = serial.Serial(config['DEFAULT']['COMPORT'], 115200)
+                    ser = serial.Serial(config['DEFAULT']['COMPORT'], 115200, timeout=0.1)
                 else:
                     ser = "hallo"
         else:
@@ -64,5 +65,5 @@ class SerialManager:
             with open("./config/smock.cfg", "w") as config_file:
                 config.write(config_file)
             ports = serial.tools.list_ports.comports()
-            ser = serial.Serial(ports[0].device, 115200)
+            ser = serial.Serial(ports[0].device, 115200, timeout=0.1)
         return ser
