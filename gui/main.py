@@ -29,7 +29,7 @@ def main():
     t_task_manager.daemon = True
     t_task_manager.start()
 
-    Gui(queue_manager, serial_manager, user_manager)
+    gui = Gui(queue_manager, serial_manager, user_manager, task_manager)
     sys.exit()
 
 

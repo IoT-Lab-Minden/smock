@@ -10,6 +10,7 @@ class TaskManager:
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
         self.__user32 = ctypes.windll.User32
+        self.gui = None
 
     def read_tasks(self):
         while True:
@@ -19,6 +20,7 @@ class TaskManager:
             message = self.__queue_manager.read_queue(Command.COMPUTER_STATUS.value)
             if message.get_text() != "nothing":
                 pass
+            #TODO: READ UID TASKS HERE
 
     def send_password_to_controller(self, uid):
         found_user = False

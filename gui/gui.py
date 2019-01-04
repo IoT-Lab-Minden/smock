@@ -1,14 +1,20 @@
 from tkinter import *
 from os import remove
 from command import Command
+from message import Message
+from threading import Thread
 
 
 class Gui:
 
-    def __init__(self, queue_manager, serial_manager, user_manager):
+    def __init__(self, queue_manager, serial_manager, user_manager, task_manager):
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
         self.__user_manager = user_manager
+
+        task_manager.gui = self
+
+        self.__add_window = None
 
         # create main window
         self.__root = Tk()
@@ -132,12 +138,18 @@ class Gui:
     # Add a new user
     def __add(self):
 
+        def destroy_window():
+            self.__add_window.destroy()
+            self.__add_window = None
+
         def refresh_uid():
             # read from queue
+            message = Message(Command.UID.value, b'')
+            self.__serial_manager.write_to_controller(message)
             message = self.__queue_manager.read_queue(Command.UID.value)
             if message.get_text() != "nothing":
-                label_near_uid.config(text=message.get_text())
-            add_window.update()
+                label_near_uid.config(text=str(message.get_text()))
+                self.__add_window.update()
 
         def add_user():
             # First check if username isn't already existing
@@ -151,19 +163,19 @@ class Gui:
 
                     # add user to the listbox
                     self.list.insert(END, textfield_username.get())
-                    add_window.destroy()
+                    self.__add_window.destroy()
                     self.__notify("Der User wurde erfolgreich hinzugefügt!")
                 else:
                     self.__notify("Bitte geben Sie alle Nutzerdaten ein.")
 
         # Build the add Window
-        add_window = Toplevel(self.__root)
+        self.__add_window = Toplevel(self.__root)
 
-        add_window.title("Smock")
-        self.__set_window_size(add_window, 300, 100)
+        self.__add_window.title("Smock")
+        self.__set_window_size(self.__add_window, 300, 100)
 
-        add_top_frame = Frame(add_window)
-        add_bottom_frame = Frame(add_window)
+        add_top_frame = Frame(self.__add_window)
+        add_bottom_frame = Frame(self.__add_window)
 
         add_top_frame.pack()
         add_bottom_frame.pack()
@@ -184,7 +196,7 @@ class Gui:
         label_near_uid.grid(row=2, column=1)
 
         btn_confirm = Button(add_bottom_frame, text="Bestätigen", command=add_user)
-        btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=add_window.destroy)
+        btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=destroy_window)
         btn_refresh = Button(add_bottom_frame, text="uid aktualisieren", command=refresh_uid)
 
         btn_confirm.grid(row=0, column=1)
@@ -203,3 +215,6 @@ class Gui:
         self.list.delete(0, END)
         for user in self.__user_manager.user_list:
             self.list.insert(END, user.get_username())
+
+    def update_uid_panel(self):
+        pass

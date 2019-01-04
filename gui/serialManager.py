@@ -28,13 +28,13 @@ class SerialManager:
         first_byte = True
         mutex_acquired = False
         while True:
-            time.sleep(0.1)
+            time.sleep(0.05)
             if not mutex_acquired:
                 self.__mutex.acquire(True)
                 mutex_acquired = True
 
             #TODO endlosschleife in read?
-            letter = self.__serial_device.read()
+            letter = self.__serial_device.read(1)
             if letter != b'':
                 if first_byte:
                     self.__command = letter
@@ -43,12 +43,17 @@ class SerialManager:
                     self.__text += letter
                 else:
                     message = Message(self.__command, self.__text)
+                    print("Controller Message")
+                    print(message.get_text())
                     self.__mutex.release()
                     mutex_acquired = False
                     self.__queue_manager.write_queue(message)
                     first_byte = True
                     self.__command = b""
                     self.__text = b""
+            else:
+                self.__mutex.release()
+                mutex_acquired = False
 
     def __find_serial_device(self):
         config = configparser.ConfigParser()
