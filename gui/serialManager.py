@@ -5,6 +5,7 @@ import serial
 import serial.tools.list_ports
 import configparser
 from command import Command
+from gui import Gui
 
 
 class SerialManager:
@@ -13,9 +14,16 @@ class SerialManager:
         self.__command = b""
         self.__text = b""
         self.__mutex = Lock()
-        self.__serial_device = self.__find_serial_device()
+        self.__serial_device = serial.Serial()
+        self.__serial_device.baudrate = 115200
+        self.__serial_device.timeout = 0.1
+        self.find_serial_device()
 
     def write_to_controller(self, message):
+
+        while not self.__serial_device.is_open:
+            time.sleep(1)
+
         self.__mutex.acquire(True)
         print(message.get_command_code())
         print(message.get_text())
@@ -27,6 +35,10 @@ class SerialManager:
     def fill_queue(self):
         first_byte = True
         mutex_acquired = False
+
+        while not self.__serial_device.is_open:
+            time.sleep(1)
+
         while True:
             time.sleep(0.05)
             if not mutex_acquired:
@@ -55,20 +67,32 @@ class SerialManager:
                 self.__mutex.release()
                 mutex_acquired = False
 
-    def __find_serial_device(self):
+    def find_serial_device(self):
         config = configparser.ConfigParser()
         config.read("./config/smock.cfg")
-        if 'COMPORT' in config['DEFAULT']:
-                ports = serial.tools.list_ports.comports()
-                if len(ports) > 0:
-                    ser = serial.Serial(config['DEFAULT']['COMPORT'], 115200, timeout=0.1)
-                else:
-                    ser = "hallo"
-        else:
-            config['DEFAULT'] = {}
-            config['DEFAULT']['COMPORT'] = "COM4"
-            with open("./config/smock.cfg", "w") as config_file:
-                config.write(config_file)
+        if self.__serial_device.is_open:
+            Gui.notify("Das Gerät ist bereits angeschlossen")
+        elif 'COMPORT' in config['DEFAULT']:
             ports = serial.tools.list_ports.comports()
-            ser = serial.Serial(ports[0].device, 115200, timeout=0.1)
-        return ser
+            if len(ports) > 0:
+                for port in ports:
+                    if port[0] == config['DEFAULT']['COMPORT']:
+                        self.__serial_device.port = config['DEFAULT']['COMPORT']
+                        self.__serial_device.open()
+
+                if not self.__serial_device.is_open:
+                    Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
+                               "Vergewissern Sie sich, dass das Gerät angeschlossen ist\n"
+                               "und der COM Port in der Config richtig ist.")
+        else:
+            ports = serial.tools.list_ports.comports()
+            if len(ports) > 0:
+                self.__serial_device.port = ports[0].device
+                self.__serial_device.open()
+                config['DEFAULT'] = {}
+                config['DEFAULT']['COMPORT'] = self.__serial_device.port
+                with open("./config/smock.cfg", "w") as config_file:
+                    config.write(config_file)
+            else:
+                Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
+                           "Vergewissern Sie sich, dass das Gerät angeschlossen ist.\n")

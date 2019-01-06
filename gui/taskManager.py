@@ -21,6 +21,9 @@ class TaskManager:
             if message.get_text() != "nothing":
                 pass
             #TODO: READ UID TASKS HERE
+            message = self.__queue_manager.read_queue(Command.UID.value)
+            if message.get_text() != "nothing":
+                pass
 
     def send_password_to_controller(self, uid):
         found_user = False

@@ -6,8 +6,22 @@ from threading import Thread
 
 
 class Gui:
+    """
+    The Smock gui
+    """
 
     def __init__(self, queue_manager, serial_manager, user_manager, task_manager):
+        """
+        The constructor of the class. Gives the task_manager the reference to itself.
+        Builds the main Window of the gui and loads the user that are existing on the
+        Computer to the ListBox.
+
+        Args:
+            queue_manager: A queueManager
+            serial_manager: A serialManager
+            user_manager: A userManager
+            task_manager: A taskManager
+        """
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
         self.__user_manager = user_manager
@@ -20,7 +34,7 @@ class Gui:
         self.__root = Tk()
 
         self.__root.title("Smock")
-        self.__set_window_size(self.__root, 200, 270)
+        self.__set_window_size(self.__root, 230, 270)
 
         # Initialize frames
         self.top_frame = Frame(self.__root, pady=3)
@@ -34,10 +48,12 @@ class Gui:
         self.list = Listbox(self.top_frame)
 
         # Initialize bottom frame
-        self.btn_add = Button(self.bottom_frame, text="Hinzufügen", command=self.__add, width=9, padx=2)
-        self.btn_edit = Button(self.bottom_frame, text="Editieren", command=self.__edit, width=9, padx=2)
-        self.btn_delete = Button(self.bottom_frame, text="Löschen", command=self.__delete, width=9, padx=2)
-        self.btn_quit = Button(self.bottom_frame, text="Beenden", command=self.__root.destroy, width=9, padx=2)
+        self.btn_add = Button(self.bottom_frame, text="Hinzufügen", command=self.__add, width=11, padx=2)
+        self.btn_edit = Button(self.bottom_frame, text="Editieren", command=self.__edit, width=11, padx=2)
+        self.btn_delete = Button(self.bottom_frame, text="Löschen", command=self.__delete, width=11, padx=2)
+        self.btn_refresh_controller = Button(self.bottom_frame, text="Gerät erkennen", command=self.__find_controller,
+                                             width=11, padx=2)
+        self.btn_quit = Button(self.bottom_frame, text="Beenden", command=self.__root.destroy, width=11, padx=2)
 
         # Layout top frame
         self.list.pack()
@@ -46,33 +62,39 @@ class Gui:
         self.btn_add.grid(row=0, column=0, padx=10)
         self.btn_edit.grid(row=0, column=1, pady=5)
         self.btn_delete.grid(row=1, column=0, padx=10)
-        self.btn_quit.grid(row=1, column=1, pady=5)
+        self.btn_quit.grid(row=2, column=0, pady=5)
+        self.btn_refresh_controller.grid(row=1, column=1)
 
         # load the users
         self.__user_manager.load_users_from_files()
         self.__refresh_list()
 
-        # Start the gui
-        self.__root.mainloop()
-
     @staticmethod
     def __set_window_size(tk, w, h):
-        # set the size of the window and place the window in the middle of the screen
-        # get screen width and height
+        """
+        Sets the size of the window and position the window to the center of the screen.
+
+        Args:
+            tk: The Window that has to be positioned
+            w: width of window
+            h: height of window
+        """
+        # gets screen width and height
         ws = tk.winfo_screenwidth()
         hs = tk.winfo_screenheight()
 
+        # calculate position of window
         x = (ws / 2) - (w / 2)
         y = (hs / 2) - (h / 2)
 
-        # set the dimensions of the screen
-        # and where it is placed
+        # sets the dimensions of the screen and where it is placed
         tk.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-    def __notify(self, message):
+    @classmethod
+    def notify(cls, message):
         # Create a notify window with a message
         notify_win = Tk()
-        self.__set_window_size(notify_win, 250, 50)
+        cls.__set_window_size(notify_win, 300, 100)
 
         label = Label(notify_win, text=message)
         label.pack()
@@ -87,7 +109,7 @@ class Gui:
         def set_user():
             # First check if username isn't already existing
             if self.__user_manager.check_if_user_exists(textfield_username.get()):
-                self.__notify("Der User existiert bereits")
+                self.notify("Der User existiert bereits")
             else:
                 # Get the selected user from the listbox and edit its name by the text of the Entry widgets
                 user = self.__user_manager.user_list[self.list.index(ACTIVE)]
@@ -104,7 +126,7 @@ class Gui:
 
                 self.__refresh_list()
                 edit_window.destroy()
-                self.__notify("Der User wurde erfolgreich bearbeitet!")
+                self.notify("Der User wurde erfolgreich bearbeitet!")
 
         # Build the edit window
         edit_window = Toplevel(self.__root)
@@ -154,7 +176,7 @@ class Gui:
         def add_user():
             # First check if username isn't already existing
             if self.__user_manager.check_if_user_exists(textfield_username.get()):
-                self.__notify("Der User existiert bereits")
+                self.notify("Der User existiert bereits")
             else:
                 # check if textfield have inputs
                 if len(textfield_username.get()) > 0 and len(textfield_password.get()) > 0:
@@ -164,9 +186,9 @@ class Gui:
                     # add user to the listbox
                     self.list.insert(END, textfield_username.get())
                     self.__add_window.destroy()
-                    self.__notify("Der User wurde erfolgreich hinzugefügt!")
+                    self.notify("Der User wurde erfolgreich hinzugefügt!")
                 else:
-                    self.__notify("Bitte geben Sie alle Nutzerdaten ein.")
+                    self.notify("Bitte geben Sie alle Nutzerdaten ein.")
 
         # Build the add Window
         self.__add_window = Toplevel(self.__root)
@@ -208,7 +230,7 @@ class Gui:
 
         self.__user_manager.delete_user(self.list.index(ACTIVE))
         self.__refresh_list()
-        self.__notify("Der User wurde erfolgreich gelöscht")
+        self.notify("Der User wurde erfolgreich gelöscht")
 
     # Refresh the list, when user deleted or edited
     def __refresh_list(self):
@@ -218,3 +240,9 @@ class Gui:
 
     def update_uid_panel(self):
         pass
+
+    def start(self):
+        self.__root.mainloop()
+
+    def __find_controller(self):
+        self.__serial_manager.find_serial_device()

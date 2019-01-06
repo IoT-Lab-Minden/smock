@@ -10,6 +10,7 @@ class QueueManager:
         self.__computer_status_query = Queue()
 
     def read_queue(self, command_code):
+        # Read the different queues and return the message if a message exists
         if command_code == Command.PASSWORD.value:
             message = self.__get_entry_of_queue(self.__password_query)
         elif command_code == Command.UID.value:
@@ -22,6 +23,7 @@ class QueueManager:
         return message
 
     def __get_entry_of_queue(self, queue):
+        # get the next entry of the queue that is given as param
         if not queue.empty():
             message = queue.get()
         else:
@@ -29,7 +31,7 @@ class QueueManager:
 
         return message
 
-    # writes a message into the responsible queue
+    # writes a message into the responsible queue if queue doesn't exist, do nothing
     def write_queue(self, message):
         if message.get_command_code() == Command.PASSWORD.value:
             self.__password_query.put(message)

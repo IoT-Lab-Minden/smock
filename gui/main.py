@@ -10,11 +10,16 @@ from command import Command
 
 
 def main():
-
+    """
+    This starts starts the program Smock. It is initializing the queueManager, serialManager, userManager, taskManager
+    and the gui. It also starts three threads. One to read the messages from the serial input, One to read the tasks
+    that are given from the Smock device and the last to text the Smock device about the using OS.
+    """
     queue_manager = QueueManager()
     serial_manager = SerialManager(queue_manager)
     user_manager = UserManager()
     task_manager = TaskManager(user_manager, queue_manager, serial_manager)
+    gui = Gui(queue_manager, serial_manager, user_manager, task_manager)
 
     message = Message(Command.OS.value, str.encode(platform.system()[0]))
     t_serial_write = Thread(target=serial_manager.write_to_controller, args=(message,))
@@ -29,7 +34,7 @@ def main():
     t_task_manager.daemon = True
     t_task_manager.start()
 
-    gui = Gui(queue_manager, serial_manager, user_manager, task_manager)
+    gui.start()
     sys.exit()
 
 
