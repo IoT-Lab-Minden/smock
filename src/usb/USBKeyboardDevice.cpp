@@ -1,8 +1,10 @@
-/*
- * USBKeyboardDevice.cpp
+/**
+ * \file USBKeyboardDevice.cpp
+ * \brief Contains the definitions of the methods for the keyboard device.
  *
- *  Created on: 06.12.2018
- *      Author: malte
+ * The keyboard device is realized by a singelton pattern because the micro controller is
+ * only able to have one keyboard device active at the same time. The device is a human
+ * interface device and simulates a keyboard.
  */
 
 #include "USBKeyboardDevice.h"
@@ -42,7 +44,8 @@ namespace usbdevice {
 				(void *)&g_sKeyboardDevice,
 				0,
 				0
-			}) {}
+			})
+	{}
 
 
 	tUSBDHIDKeyboardDevice *USBKeyboardDevice::getKeyboardDevice() {
@@ -50,9 +53,7 @@ namespace usbdevice {
 	}
 
 	void USBKeyboardDevice::USBKeyboardInit(void) {
-	    //
 	    // Clear out the special key variable.
-	    //
 	    g_sKeyboardState.ui8Special = 0;
 	}
 
@@ -69,10 +70,8 @@ namespace usbdevice {
 	{
 	    uint8_t ui8Usage;
 
-	    //
 	    // Move these to a-z because USB HID does not recognize unshifted values,
 	    // it uses the SHIFT modifier to change the case.
-	    //
 	    if ((ui8Key >= 'A') && (ui8Key <= 'Z'))
 	    {
 	        ui8Key |= 0x20;
@@ -83,40 +82,29 @@ namespace usbdevice {
 	        }
 	    }
 
-	    //
 	    // Get the usage code for this character.
-	    //
 	    ui8Usage = GetUsageCode(ui8Key, false);
 
-	    //
-	    // Check if this was a "special" key because USB HID handles these
-	    // separately.
-	    //
+	    // Check if this was a "special" key because USB HID handles these separately.
 	    if ((ui8Usage == HID_KEYB_USAGE_CAPSLOCK)
 	            || (ui8Usage == HID_KEYB_USAGE_SCROLLOCK)
 	            || (ui8Usage == HID_KEYB_USAGE_NUMLOCK))
 	    {
-	        // If there was already a special key pressed, then force it to be
-	        // released.
+	        // If there was already a special key pressed, then force it to be released.
 	        if (g_sKeyboardState.ui8Special)
 	        {
 	            USBDHIDKeyboardKeyStateChange(&g_sKeyboardDevice, ui8Modifiers,
 	                                          g_sKeyboardState.ui8Special, false);
 	        }
 
-	        //
 	        // Save the new special key.
-	        //
 	        g_sKeyboardState.ui8Special = ui8Usage;
 	    }
 
-	    // If there was not an unshifted value for this character then look for
-	    // a shifted version of the character.
+	    // If there was not an unshifted value for this character then look for a shifted version of the character.
 	    if (ui8Usage == 0)
 	    {
-	        //
 	        // Get the shifted value and set the shift modifier.
-	        //
 	        ui8Usage = GetUsageCode(ui8Key, true);
 
 	        if (bPressed)
@@ -125,8 +113,7 @@ namespace usbdevice {
 	        }
 	    }
 
-	    // If a valid usage code was found then pass the key along to the
-	    // USB library.
+	    // If a valid usage code was found then pass the key along to the USB library.
 	    if (ui8Usage)
 	    {
 	        USBDHIDKeyboardKeyStateChange(&g_sKeyboardDevice, ui8Modifiers,

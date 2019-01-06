@@ -1,8 +1,10 @@
-/*
- * USBSerialDevice.cpp
+/**
+ * \file USBSerialDevice.cpp
+ * \brief Contains the definitions of the methods for the serial device.
  *
- *  Created on: 06.12.2018
- *      Author: malte
+ * The serial device is realized by a singelton pattern because the micro controller is
+ * only able to have one serial device active at the same time. The device enables a serial
+ * communication with the host.
  */
 
 #include "USBSerialDevice.h"
@@ -26,11 +28,11 @@
 
 namespace usbdevice {
 
-	tUSBCallback USBSerialDevice::controlHandler = 0;
+	tUSBCallback USBSerialDevice::controlHandler = nullptr;
 
-	tUSBCallback USBSerialDevice::rxHandler = 0;
+	tUSBCallback USBSerialDevice::rxHandler = nullptr;
 
-	tUSBCallback USBSerialDevice::txHandler = 0;
+	tUSBCallback USBSerialDevice::txHandler = nullptr;
 
 	void USBSerialDevice::registerControlHandler(tUSBCallback cHandler) {
 		controlHandler = cHandler;
@@ -171,71 +173,51 @@ namespace usbdevice {
 		uint32_t ui32Read;
 		uint8_t ui8Char;
 
-		//
 		// If we are currently sending a break condition, don't receive any
 		// more data. We will resume transmission once the break is turned off.
-		//
 		if (g_bSendingBreak)
 		{
 			return;
 		}
 
-		//
 		// If there is space in the UART FIFO, try to read some characters
 		// from the receive buffer to fill it again.
-		//
+
 		while (ROM_UARTSpaceAvail(USB_UART_BASE))
 		{
-			//
 			// Get a character from the buffer.
-			//
 			ui32Read = USBBufferRead((tUSBBuffer *) &g_sRxBuffer, &ui8Char, 1);
-			//
 			// Did we get a character?
-			//
 			if (ui32Read)
 			{
-				//
 				// Place the character in the UART transmit FIFO.
-				//
 				ROM_UARTCharPutNonBlocking(USB_UART_BASE, ui8Char);
 
-				//
 				// Update our count of bytes transmitted via the UART.
-				//
 				g_ui32UARTTxCount++;
 			}
 			else
 			{
-				//
 				// We ran out of characters so exit the function.
-				//
 				return;
 			}
 		}
 	}
 
 	void USBSerialDevice::CheckForSerialStateChange(const tUSBDCDCDevice *psDevice,
-			int32_t i32Errors)
-	{
+			int32_t i32Errors) {
 		uint16_t ui16SerialState;
 
-		//
 		// Clear our USB serial state.  Since we are faking the handshakes, always
 		// set the TXCARRIER (DSR) and RXCARRIER (DCD) bits.
-		//
 		ui16SerialState = USB_CDC_SERIAL_STATE_TXCARRIER |
 		USB_CDC_SERIAL_STATE_RXCARRIER;
 
-		//
 		// Are any error bits set?
-		//
 		if (i32Errors)
 		{
-			//
 			// At least one error is being notified so translate from our hardware
 			// error bits into the correct state markers for the USB notification.
-			//
 			if (i32Errors & UART_DR_OE)
 			{
 				ui16SerialState |= USB_CDC_SERIAL_STATE_OVERRUN;
@@ -261,27 +243,21 @@ namespace usbdevice {
 		}
 	}
 
-	void USBSerialDevice::SetControlLineState(uint16_t ui16State)
-	{
+	void USBSerialDevice::SetControlLineState(uint16_t ui16State) {
 		// TODO: If configured with GPIOs controlling the handshake lines,
 		// set them appropriately depending upon the flags passed in the wValue
 		// field of the request structure passed.
 	}
 
-	bool USBSerialDevice::SetLineCoding(tLineCoding *psLineCoding)
-	{
+	bool USBSerialDevice::SetLineCoding(tLineCoding *psLineCoding) {
 		uint32_t ui32Config;
 		bool bRetcode;
 
-		//
 		// Assume everything is OK until we detect any problem.
-		//
 		bRetcode = true;
 
-		//
 		// Word length.  For invalid values, the default is to set 8 bits per
 		// character and return an error.
-		//
 		switch (psLineCoding->ui8Databits)
 		{
 			case 5:
@@ -316,9 +292,7 @@ namespace usbdevice {
 			}
 		}
 
-		//
 		// Parity.  For any invalid values, we set no parity and return an error.
-		//
 		switch (psLineCoding->ui8Parity)
 		{
 			case USB_CDC_PARITY_NONE:
@@ -359,37 +333,29 @@ namespace usbdevice {
 			}
 		}
 
-		//
 		// Stop bits.  Our hardware only supports 1 or 2 stop bits whereas CDC
 		// allows the host to select 1.5 stop bits.  If passed 1.5 (or any other
 		// invalid or unsupported value of ui8Stop, we set up for 1 stop bit but
 		// return an error in case the caller needs to Stall or otherwise report
 		// this back to the host.
-		//
 		switch (psLineCoding->ui8Stop)
 		{
-			//
 			// One stop bit requested.
-			//
 			case USB_CDC_STOP_BITS_1:
 			{
 				ui32Config |= UART_CONFIG_STOP_ONE;
 				break;
 			}
 
-			//
 			// Two stop bits requested.
-			//
 			case USB_CDC_STOP_BITS_2:
 			{
 				ui32Config |= UART_CONFIG_STOP_TWO;
 				break;
 			}
 
-			//
 			// Other cases are either invalid values of ui8Stop or values that we
 			// cannot support so set 1 stop bit but return an error.
-			//
 			default:
 			{
 				ui32Config |= UART_CONFIG_STOP_ONE;
@@ -398,15 +364,11 @@ namespace usbdevice {
 			}
 		}
 
-		//
 		// Set the UART mode appropriately.
-		//
 		ROM_UARTConfigSetExpClk(USB_UART_BASE, ROM_SysCtlClockGet(),
 				psLineCoding->ui32Rate, ui32Config);
 
-		//
-		// Let the caller know if we had a problem or not.
-		//
+		// Let the caller know if there was a problem or not.
 		return (bRetcode);
 	}
 
@@ -415,17 +377,13 @@ namespace usbdevice {
 		uint32_t ui32Config;
 		uint32_t ui32Rate;
 
-		//
 		// Get the current line coding set in the UART.
-		//
 		ROM_UARTConfigGetExpClk(USB_UART_BASE, ROM_SysCtlClockGet(), &ui32Rate,
 				&ui32Config);
 		psLineCoding->ui32Rate = ui32Rate;
 
-		//
 		// Translate the configuration word length field into the format expected
 		// by the host.
-		//
 		switch (ui32Config & UART_CONFIG_WLEN_MASK)
 		{
 			case UART_CONFIG_WLEN_8:
@@ -453,10 +411,8 @@ namespace usbdevice {
 			}
 		}
 
-		//
 		// Translate the configuration parity field into the format expected
 		// by the host.
-		//
 		switch (ui32Config & UART_CONFIG_PAR_MASK)
 		{
 			case UART_CONFIG_PAR_NONE:
@@ -490,10 +446,8 @@ namespace usbdevice {
 			}
 		}
 
-		//
 		// Translate the configuration stop bits field into the format expected
 		// by the host.
-		//
 		switch (ui32Config & UART_CONFIG_STOP_MASK)
 		{
 			case UART_CONFIG_STOP_ONE:
@@ -512,22 +466,16 @@ namespace usbdevice {
 
 	void USBSerialDevice::SendBreak(bool bSend)
 	{
-		//
 		// Are we being asked to start or stop the break condition?
-		//
 		if (!bSend)
 		{
-			//
 			// Remove the break condition on the line.
-			//
 			ROM_UARTBreakCtl(USB_UART_BASE, false);
 			g_bSendingBreak = false;
 		}
 		else
 		{
-			//
 			// Start sending a break condition on the line.
-			//
 			ROM_UARTBreakCtl(USB_UART_BASE, true);
 			g_bSendingBreak = true;
 		}

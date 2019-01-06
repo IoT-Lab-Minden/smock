@@ -1,8 +1,10 @@
-/*
- * USBCompDevice.cpp
+/**
+ * \file USBCompDevice.cpp
+ * \brief Contains the definitions of the methods for the composite device.
  *
- *  Created on: 07.12.2018
- *      Author: malte
+ * This composite device is realized by a singelton pattern because the micro controller
+ * is only able to have one usb device active at once. The device allows a keyboard device
+ * and a serial device to be active at the same time through the same port.
  */
 
 #include "USBCompDevice.h"
@@ -12,21 +14,19 @@
 
 namespace usbdevice {
 
-	tUSBCallback USBCompDevice::eventHandler = 0;
+	tUSBCallback USBCompDevice::eventHandler = nullptr;
 
 	void USBCompDevice::init() {
 		USBDHIDKeyboardCompositeInit(0, USBKeyboardDevice::getInstance()->getKeyboardDevice(), &g_psCompDevices[0]);
 		USBDCDCCompositeInit(0, USBSerialDevice::getInstance()->getSerialDevice(), &g_psCompDevices[1]);
 
 		USBDCompositeInit(0, &g_sCompDevice, DESCRIPTOR_DATA_SIZE, g_pui8DescriptorData);
-
 	}
 
 	void USBCompDevice::registerEventHandler(tUSBCallback handler) {
 		eventHandler = handler;
 	}
 
-	// Anlegen des Objektes auf dem Heap hat nicht funktioniert??
 	USBCompDevice *USBCompDevice::getInstance() {
 		static USBCompDevice instance(eventHandler);
 		return &instance;

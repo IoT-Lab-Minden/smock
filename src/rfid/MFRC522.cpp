@@ -394,7 +394,7 @@ namespace rfid_reader {
 			if (currentLevelKnownBits < 0) {
 				currentLevelKnownBits = 0;
 			}
-			// Copy the known bits from uid->uiduint8_t[] to buffer[]
+			// Copy the known bits from uid->uidbyte[] to buffer[]
 			uint8_t index = 2; // destination index in buffer[]
 			if (useCascadeTag) {
 				buffer[index++] = PICC_CMD_CT;
@@ -406,7 +406,7 @@ namespace rfid_reader {
 					uint8_tsToCopy = maxuint8_ts;
 				}
 				for (count = 0; count < uint8_tsToCopy; count++) {
-					buffer[index++] = uid->uiduint8_t[uidIndex + count];
+					buffer[index++] = uid->uidbyte[uidIndex + count];
 				}
 			}
 			// Now that the data has been copied we need to include the 8 bits in CT in currentLevelKnownBits
@@ -489,11 +489,11 @@ namespace rfid_reader {
 
 			// We do not check the CBB - it was constructed by us above.
 
-			// Copy the found UID uint8_ts from buffer[] to uid->uiduint8_t[]
+			// Copy the found UID uint8_ts from buffer[] to uid->uidbyte[]
 			index			= (buffer[2] == PICC_CMD_CT) ? 3 : 2; // source index in buffer[]
 			uint8_tsToCopy		= (buffer[2] == PICC_CMD_CT) ? 3 : 4;
 			for (count = 0; count < uint8_tsToCopy; count++) {
-				uid->uiduint8_t[uidIndex + count] = buffer[index++];
+				uid->uidbyte[uidIndex + count] = buffer[index++];
 			}
 
 			// Check response SAK (Select Acknowledge)

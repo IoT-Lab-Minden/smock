@@ -1,8 +1,9 @@
-/*
- * USBKeyboardConstants.h
+/**
+ * \file USBKeyboardConstants.h
+ * \brief Contains the constants and structs needed for the Keyboard Device
  *
- *  Created on: 10.12.2018
- *      Author: malte
+ * Contains needed structs for the keyboard device for holding current keyboard state and
+ * for working with the different usage codes for the key.
  */
 
 #ifndef USBKEYBOARDCONSTANTS_H_
@@ -10,22 +11,58 @@
 #include "usblib/usbhid.h"
 
 namespace usbdevice {
-	const uint8_t HASHTAG = 0x32;
-	const uint8_t HOME = 0x24;
+
+
+	#define UI_CAPS_LOCK            0x00000001
+	#define UI_SCROLL_LOCK          0x00000002
+	#define UI_NUM_LOCK             0x00000003
+
+	#define ADC_BUFFER_SIZE (4096)
+	#define HW_AVERAGE (64)
+	#define NUM_CHANNELS (8)
+	#define FFT_BIN_SIZE (1024)
+
+	#define FILTER_SIZE (145+3)
+	#define FILTER_BUFFER_ALLOWANCE (8)
+	#define FILTER_BUFFER_SIZE (FILTER_SIZE + FILTER_BUFFER_ALLOWANCE)
+	#define FILTER_STEP_SIZE (FILTER_SIZE/2)
+
+	#define MULTIPLY_DOWN_SHIFT (8)
+	#define THRESHOLD_SHIFT (1)
+
+	#define MESSAGE_LENGTH (2)
+
+	/**
+	 * \var const uint8_t DEL
+	 *
+	 * Code for the delete key
+	 */
 	const uint8_t DEL = 0x4c;
 
 	/**
-	 * Global USB keyboard state.
+	 * \var const uint8_t ENTER
+	 *
+	 * Code for the enter key
+	 */
+	const char ENTER = UNICODE_RETURN;
+
+	/**
+	 * \var g_sKeyboardState
+	 * \brief holds USB keyboard state.
+	 *
+	 * Holds a pending special key press for the Caps Lock, Scroll Lock, or Num Lock keys.
 	 */
 	struct {
-		// Holds a pending special key press for the Caps Lock, Scroll Lock, or
-		// Num Lock keys.
 		uint8_t ui8Special;
 		uint8_t pending;
 	}g_sKeyboardState;
 
 	/**
-	 * The look up table entries for usage codes.
+	 * \struct sUsageEntry
+	 * \brief The look up table entries for usage codes.
+	 *
+	 * Containg two char. The first is the char value and the second one is the matching
+	 * value for the HID key.
 	 */
 	typedef struct {
 		char cChar;
@@ -33,6 +70,8 @@ namespace usbdevice {
 	} sUsageEntry;
 
 	/**
+	 * \var const sUsageEntry g_pcUsageCodes[]
+	 *
 	 * The un-shifted HID usage codes used by the graphical keyboard.
 	 */
 	const sUsageEntry g_pcUsageCodes[] = { {'q', HID_KEYB_USAGE_Q}, {
@@ -95,10 +134,16 @@ namespace usbdevice {
 		{	UNICODE_RETURN,
 			HID_KEYB_USAGE_ENTER},};
 
-	const uint32_t ui32NumUsageCodes = sizeof(g_pcUsageCodes)
-	/ sizeof(sUsageEntry);
+	/**
+	 * \var const uint32_t ui32NumUsageCodes
+	 *
+	 * Number of entries in the usagecode array
+	 */
+	const uint32_t ui32NumUsageCodes = sizeof(g_pcUsageCodes) / sizeof(sUsageEntry);
 
 	/**
+	 * \var const sUsageEntry g_pcUsageCodesShift[]
+	 *
 	 * The shifted HID usage codes that are used by the graphical keyboard.
 	 */
 	const sUsageEntry g_pcUsageCodesShift[] = {
@@ -113,8 +158,12 @@ namespace usbdevice {
 		{	'~', HID_KEYB_USAGE_BQUOTE}, {'|', HID_KEYB_USAGE_BSLASH}, {
 			'\"', HID_KEYB_USAGE_FQUOTE},};
 
-	const uint32_t ui32NumUsageCodesShift = sizeof(g_pcUsageCodes)
-	/ sizeof(sUsageEntry);
+	/**
+	 * \var const uint32_t ui32NumUsageCodesShift
+	 *
+	 * Number of entries in the usagecode array
+	 */
+	const uint32_t ui32NumUsageCodesShift = sizeof(g_pcUsageCodes) / sizeof(sUsageEntry);
 
 }
 

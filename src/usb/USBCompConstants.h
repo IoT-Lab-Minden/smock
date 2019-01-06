@@ -1,8 +1,8 @@
-/*
- * USBCompConstants.h
+/**
+ * \file USBCompConstants.h
+ * \brief Contains the constants needed for the Composite-Device
  *
- *  Created on: 10.12.2018
- *      Author: malte
+ * Contains the constants needed for the Composite-Device
  */
 
 #ifndef USBCOMPCONSTANTS_H_
@@ -10,9 +10,19 @@
 #include <stdint.h>
 
 namespace usbdevice {
+	/**
+	 * \var const uint8_t DESCRIPTOR_DATA_SIZE
+	 *
+	 * Size of the Composite-Device-Descriptor
+	 */
 	const uint8_t DESCRIPTOR_DATA_SIZE = (COMPOSITE_DHID_SIZE + COMPOSITE_DCDC_SIZE);
-	const uint8_t NUM_DEVICES = 2;
 
+	/**
+	 * \var const uint8_t NUM_DEVICES
+	 *
+	 * Number of the devices of the Composite-Device
+	 */
+	const uint8_t NUM_DEVICES = 2;
 }
 
 

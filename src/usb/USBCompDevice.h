@@ -1,8 +1,9 @@
-/*
- * USBCompDevice.h
+/**
+ * \file USBCompDevice.h
+ * \brief Contains the declaration of the methods and attributes needed for the composite device.
  *
- *  Created on: 07.12.2018
- *      Author: malte
+ * This device allows a keyboard device and a serial device to be active at the same time
+ * through the same port.
  */
 
 #ifndef USBCOMPDEVICE_H_
@@ -21,6 +22,15 @@
 
 namespace usbdevice {
 
+	/**
+	 * \class USBCompDevice
+	 * \brief Device consisting of a serial device and a keyboard device.
+	 *
+	 * The composite device allows a keyboard device and a serial device to be active
+	 * at the same time through the same usb port.
+	 * The device is realized by a singelton pattern because the micro controller
+	 * is only able to have one usb device active on the port at once.
+	 */
 	class USBCompDevice {
 	private:
 
@@ -41,14 +51,53 @@ namespace usbdevice {
 
 		static tUSBCallback eventHandler;
 
-	protected:
+		/**
+		 * \brief Constructor which builds the object.
+		 * \param eventHandler The callback function that should be set.
+		 *
+		 * The constructor initializes the g_sCompDevice of the object.
+		 */
 		USBCompDevice(tUSBCallback eventHandler);
 
 	public:
+
+		/**
+		 * \fn USBCompDevice *getInstance()
+		 * \brief Returns the instance of the USBCompdevice
+		 *
+		 * The function creates the object the first time it is called and return the pointer
+		 * to the object. The object is created on the heap. Later calls only return the
+		 * pointer to this object.
+		 *
+		 * \return - the instance of composite device
+		 */
 		static USBCompDevice *getInstance();
 
+		/**
+		 * \fn void registerEventHandler(tUSBCallback eventHandler)
+		 * \brief Registers a new Callback function for the envent handler.
+		 *
+		 * \param eventHandler New callback method.
+		 *
+		 * A new handler can only be set before the device is referenced the first time.
+		 * When the device is referenced the first time, the composite device struct is
+		 * initialized with the current callback method by calling the constructor of the
+		 * composite device. After that there is no possibility to change the callback
+		 * method. It can only be one function registered.
+		 *
+		 * \return void
+		 */
 		static void registerEventHandler(tUSBCallback eventHandler);
 
+		/**
+		 * \fn void init()
+		 * \brief Initialized the composite device
+		 *
+		 * The device is initialized by initializing both sub-devices as part of the
+		 * composite device followed by initializing the composite device itself.
+		 *
+		 * \return void
+		 */
 		void init();
 
 	};

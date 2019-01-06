@@ -1,5 +1,5 @@
 /**
- * \file usb_structs.c
+ * \file usb_structs.cpp
  * \brief Data structures defining the USB keyboard and serial device.
  *
  * Copyright (c) 2009-2015 Texas Instruments Incorporated.  All rights reserved.

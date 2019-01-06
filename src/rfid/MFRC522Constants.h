@@ -159,7 +159,7 @@ enum StatusCode : uint8_t {
 // A struct used for passing the UID of a PICC.
 typedef struct {
 	uint8_t		size;			// Number of uint8_ts in the UID. 4, 7 or 10.
-	uint8_t		uiduint8_t[10];
+	uint8_t		uidbyte[10];
 	uint8_t		sak;			// The SAK (Select acknowledge) uint8_t returned from the PICC after successful selection.
 } Uid;
 
