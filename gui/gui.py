@@ -92,6 +92,13 @@ class Gui:
 
     @classmethod
     def notify(cls, message):
+        """
+        Opens a window with a message for a user.
+
+        Args:
+            message: The message displayed on the notify window
+        """
+
         # Create a notify window with a message
         notify_win = Tk()
         cls.__set_window_size(notify_win, 300, 100)
@@ -105,7 +112,10 @@ class Gui:
 
     # Edit the active user of list. Only username and password
     def __edit(self):
-
+        """
+        The window to edit a user. User is selected from the listbox of the main window.
+        Only able to edit username and password.
+        """
         def set_user():
             # First check if username isn't already existing
             if self.__user_manager.check_if_user_exists(textfield_username.get()):
@@ -120,10 +130,12 @@ class Gui:
                 user.set_username(textfield_username.get())
                 user.set_password(textfield_password.get())
 
+                # change the name of the file and its content
                 with open("./users/" + user.get_username(), "w") as file_descriptor:
                     file_descriptor.write(user.get_password())
                     file_descriptor.write(user.get_uid())
 
+                # refresh the listbox and destroy the editing window
                 self.__refresh_list()
                 edit_window.destroy()
                 self.notify("Der User wurde erfolgreich bearbeitet!")
@@ -159,7 +171,10 @@ class Gui:
 
     # Add a new user
     def __add(self):
-
+        """
+        Opens a window for adding a user. The user needs to fill in his username, password and uid.
+        Saves these information in a file. The filename is the username of the user.
+        """
         def destroy_window():
             self.__add_window.destroy()
             self.__add_window = None
@@ -225,15 +240,18 @@ class Gui:
         btn_cancel.grid(row=0, column=0, padx=10)
         btn_refresh.grid(row=0, column=2, padx=10)
 
-    # Delete the active user from list
     def __delete(self):
-
+        """
+        Deletes the user that is active in the listbox of the main window
+        """
         self.__user_manager.delete_user(self.list.index(ACTIVE))
         self.__refresh_list()
         self.notify("Der User wurde erfolgreich gelöscht")
 
-    # Refresh the list, when user deleted or edited
     def __refresh_list(self):
+        """
+        Refreshes the listbox of the main window.
+        """
         self.list.delete(0, END)
         for user in self.__user_manager.user_list:
             self.list.insert(END, user.get_username())
@@ -242,7 +260,14 @@ class Gui:
         pass
 
     def start(self):
+        """
+        Opens the main window.
+        Should only be called once.
+        """
         self.__root.mainloop()
 
     def __find_controller(self):
+        """
+        Searches for the serial_device
+        """
         self.__serial_manager.find_serial_device()
