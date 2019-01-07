@@ -65,30 +65,29 @@ class Gui:
         self.btn_quit.grid(row=2, column=0, pady=5)
         self.btn_refresh_controller.grid(row=1, column=1)
 
-        # load the users
-        self.__user_manager.load_users_from_files()
+        # load users into the list
         self.__refresh_list()
 
     @staticmethod
-    def __set_window_size(tk, w, h):
+    def __set_window_size(tk, width, height):
         """
         Sets the size of the window and position the window to the center of the screen.
 
         Args:
             tk: The Window that has to be positioned
-            w: width of window
+            width: width of window
             h: height of window
         """
         # gets screen width and height
-        ws = tk.winfo_screenwidth()
-        hs = tk.winfo_screenheight()
+        width_screen = tk.winfo_screenwidth()
+        height_screen = tk.winfo_screenheight()
 
         # calculate position of window
-        x = (ws / 2) - (w / 2)
-        y = (hs / 2) - (h / 2)
+        x = (width_screen / 2) - (width / 2)
+        y = (height_screen / 2) - (height / 2)
 
         # sets the dimensions of the screen and where it is placed
-        tk.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        tk.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
     @classmethod
     def notify(cls, message):
@@ -101,7 +100,9 @@ class Gui:
 
         # Create a notify window with a message
         notify_win = Tk()
-        cls.__set_window_size(notify_win, 300, 100)
+        width = 300
+        height = 100
+        cls.__set_window_size(notify_win, width, height)
 
         label = Label(notify_win, text=message)
         label.pack()
@@ -144,7 +145,9 @@ class Gui:
         edit_window = Toplevel(self.__root)
 
         edit_window.title("Smock")
-        self.__set_window_size(edit_window, 200, 100)
+        width = 200
+        height = 100
+        self.__set_window_size(edit_window, width, height)
 
         edit_top_frame = Frame(edit_window)
         edit_bottom_frame = Frame(edit_window)
@@ -205,7 +208,9 @@ class Gui:
         self.add_window = Toplevel(self.__root)
 
         self.add_window.title("Smock")
-        self.__set_window_size(self.add_window, 300, 100)
+        width = 300
+        height = 100
+        self.__set_window_size(self.add_window, width, height)
 
         add_top_frame = Frame(self.add_window)
         add_bottom_frame = Frame(self.add_window)
@@ -248,7 +253,8 @@ class Gui:
         """
         Refreshes the listbox of the main window.
         """
-        self.list.delete(0, END)
+        beginning = 0
+        self.list.delete(beginning, END)
         for user in self.__user_manager.user_list:
             self.list.insert(END, user.get_username())
 

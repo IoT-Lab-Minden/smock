@@ -7,6 +7,7 @@ from gui import Gui
 from message import Message
 import platform
 from command import Command
+from userManager import UserManager
 
 
 class SerialManager:
@@ -28,6 +29,7 @@ class SerialManager:
         self.__mutex.acquire(True)
         text = message.get_command_code()
         text += message.get_text()
+        print(text)
         self.__serial_device.write(text)
         self.__mutex.release()
 
@@ -77,10 +79,10 @@ class SerialManager:
                         self.__serial_device.open()
                         self.send_os_to_controller()
 
-                if not self.__serial_device.is_open:
-                    Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
-                               "Vergewissern Sie sich, dass das Gerät angeschlossen ist\n"
-                               "und der COM Port in der Config richtig ist.")
+            if not self.__serial_device.is_open:
+                Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
+                           "Vergewissern Sie sich, dass das Gerät angeschlossen ist\n"
+                           "und der COM Port in der Config richtig ist.")
         else:
             ports = serial.tools.list_ports.comports()
             if len(ports) > 0:
@@ -97,5 +99,11 @@ class SerialManager:
 
     def send_os_to_controller(self):
         time.sleep(0.1)
-        message = Message(Command.OS.value, str.encode(platform.system()[0]))
+        user_manager = UserManager()
+        if user_manager.contains_multiple_user():
+            multi_user_byte = b"2"
+        else:
+            multi_user_byte = b"1"
+
+        message = Message(Command.OS.value, str.encode(platform.system()[0]) + multi_user_byte)
         self.write_to_controller(message)

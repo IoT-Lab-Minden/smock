@@ -13,8 +13,9 @@ class UserManager:
         Initializing the list.
         """
         self.user_list = []
+        self.__load_users_from_files()
 
-    def load_users_from_files(self):
+    def __load_users_from_files(self):
         """
         Loads the users from all files that are in the directory ./users
         """
@@ -29,7 +30,6 @@ class UserManager:
 
             # create user and append to list
             username = file
-            print(password)
             user = User(username, password, uid)
             self.user_list.append(user)
 
@@ -89,3 +89,9 @@ class UserManager:
             if user.get_uid() == str(uid):
                 return user
         return -1
+
+    def contains_multiple_user(self):
+        if len(self.user_list) > 1:
+            return True
+        else:
+            return False

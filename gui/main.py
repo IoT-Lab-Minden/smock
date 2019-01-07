@@ -13,8 +13,8 @@ def main():
     that are given from the Smock device and the last to text the Smock device about the using OS.
     """
     queue_manager = QueueManager()
-    serial_manager = SerialManager(queue_manager)
     user_manager = UserManager()
+    serial_manager = SerialManager(queue_manager)
     task_manager = TaskManager(user_manager, queue_manager, serial_manager)
     gui = Gui(queue_manager, serial_manager, user_manager, task_manager)
 

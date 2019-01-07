@@ -3,6 +3,7 @@ from computerStatus import ComputerStatus
 from message import Message
 import ctypes
 import time
+from userManager import UserManager
 
 
 class TaskManager:
@@ -23,6 +24,8 @@ class TaskManager:
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
         self.__user32 = ctypes.windll.User32
+        user_manager = UserManager()
+        self.__multi_user = user_manager.contains_multiple_user()
         self.gui = None
         self.LOCK_WINDOW_NAME_GERMAN = "Windows-Standardsperrbildschirm"
         self.LOCK_WINDOW_NAME_ENGLISH = "Windows Default Lock Screen"
@@ -47,7 +50,6 @@ class TaskManager:
                 self.__update_add_window(message.get_text())
 
     def send_password_to_controller(self, uid):
-        # TODO: \n to password
         """
         Sends the password of the user with the given uid. Is the computer locked, the method processes.
         When the computer is unlocked, the computer status will be send to the micro controller
@@ -59,8 +61,13 @@ class TaskManager:
         if self.__is_locked():
             user = self.__user_manager.get_user_with_uid(uid)
             if user != -1:
-                print(user.get_password().encode())
-                message = Message(Command.PASSWORD.value, user.get_password().encode())
+                if self.__multi_user:
+                    # TODO: add username when multi_user
+                    message = Message(Command.PASSWORD.value, user.get_password().encode())
+                else:
+                    message = Message(Command.PASSWORD.value, user.get_password().encode())
+                    print(user.get_password().encode())
+
                 self.__serial_manager.write_to_controller(message)
                 found_user = True
 
@@ -116,12 +123,3 @@ class TaskManager:
         """
         if self.gui is not None:
             self.gui.update_uid_label(uid)
-
-    def compare_strings(self, first_string, second_string):
-        if len(first_string) != len(second_string):
-            return False
-
-        for i in range(len(second_string)):
-            if first_string[i] != second_string[i]:
-                return False
-        return True
