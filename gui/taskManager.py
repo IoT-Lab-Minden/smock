@@ -63,10 +63,12 @@ class TaskManager:
             if user != -1:
                 if self.__multi_user:
                     # TODO: add username when multi_user
-                    message = Message(Command.PASSWORD.value, user.get_password().encode())
+                    password = user.get_password().encode()
+                    username = (user.get_username() + "\n").encode()
+                    message_text = password + username
+                    message = Message(Command.PASSWORD.value, message_text)
                 else:
                     message = Message(Command.PASSWORD.value, user.get_password().encode())
-                    print(user.get_password().encode())
 
                 self.__serial_manager.write_to_controller(message)
                 found_user = True
@@ -111,8 +113,10 @@ class TaskManager:
              Returns True if computer is locked, otherwise return False
         """
         lock_window_name = self.__get_current_process()
+        print(lock_window_name)
 
-        return lock_window_name == self.LOCK_WINDOW_NAME_ENGLISH or lock_window_name == self.LOCK_WINDOW_NAME_GERMAN
+        return lock_window_name == self.LOCK_WINDOW_NAME_ENGLISH or lock_window_name == self.LOCK_WINDOW_NAME_GERMAN \
+               or lock_window_name == ""
 
     def __update_add_window(self, uid):
         """

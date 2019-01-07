@@ -133,7 +133,7 @@ class Gui:
 
                 # change the name of the file and its content
                 with open("./users/" + user.get_username(), "w") as file_descriptor:
-                    file_descriptor.write(user.get_password())
+                    file_descriptor.write(user.get_password() + "\n")
                     file_descriptor.write(user.get_uid())
 
                 # refresh the listbox and destroy the editing window
