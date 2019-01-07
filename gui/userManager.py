@@ -29,6 +29,7 @@ class UserManager:
 
             # create user and append to list
             username = file
+            print(password)
             user = User(username, password, uid)
             self.user_list.append(user)
 
@@ -85,6 +86,6 @@ class UserManager:
             User with the given uid, else -1
         """
         for user in self.user_list:
-            if user.get_uid() == uid:
+            if user.get_uid() == str(uid):
                 return user
         return -1

@@ -1,11 +1,12 @@
-from message import Message
 import time
 from threading import Lock
 import serial
 import serial.tools.list_ports
 import configparser
-from command import Command
 from gui import Gui
+from message import Message
+import platform
+from command import Command
 
 
 class SerialManager:
@@ -25,8 +26,6 @@ class SerialManager:
             time.sleep(1)
 
         self.__mutex.acquire(True)
-        print(message.get_command_code())
-        print(message.get_text())
         text = message.get_command_code()
         text += message.get_text()
         self.__serial_device.write(text)
@@ -45,7 +44,6 @@ class SerialManager:
                 self.__mutex.acquire(True)
                 mutex_acquired = True
 
-            #TODO endlosschleife in read?
             letter = self.__serial_device.read(1)
             if letter != b'':
                 if first_byte:
@@ -55,8 +53,6 @@ class SerialManager:
                     self.__text += letter
                 else:
                     message = Message(self.__command, self.__text)
-                    print("Controller Message")
-                    print(message.get_text())
                     self.__mutex.release()
                     mutex_acquired = False
                     self.__queue_manager.write_queue(message)
@@ -79,6 +75,7 @@ class SerialManager:
                     if port[0] == config['DEFAULT']['COMPORT']:
                         self.__serial_device.port = config['DEFAULT']['COMPORT']
                         self.__serial_device.open()
+                        self.send_os_to_controller()
 
                 if not self.__serial_device.is_open:
                     Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
@@ -89,6 +86,7 @@ class SerialManager:
             if len(ports) > 0:
                 self.__serial_device.port = ports[0].device
                 self.__serial_device.open()
+                self.send_os_to_controller()
                 config['DEFAULT'] = {}
                 config['DEFAULT']['COMPORT'] = self.__serial_device.port
                 with open("./config/smock.cfg", "w") as config_file:
@@ -96,3 +94,8 @@ class SerialManager:
             else:
                 Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
                            "Vergewissern Sie sich, dass das Gerät angeschlossen ist.\n")
+
+    def send_os_to_controller(self):
+        time.sleep(0.1)
+        message = Message(Command.OS.value, str.encode(platform.system()[0]))
+        self.write_to_controller(message)

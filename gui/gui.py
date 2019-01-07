@@ -2,7 +2,6 @@ from tkinter import *
 from os import remove
 from command import Command
 from message import Message
-from threading import Thread
 
 
 class Gui:
@@ -28,7 +27,8 @@ class Gui:
 
         task_manager.gui = self
 
-        self.__add_window = None
+        self.add_window = None
+        self.label_near_uid = None
 
         # create main window
         self.__root = Tk()
@@ -176,17 +176,13 @@ class Gui:
         Saves these information in a file. The filename is the username of the user.
         """
         def destroy_window():
-            self.__add_window.destroy()
-            self.__add_window = None
+            self.add_window.destroy()
+            self.add_window = None
 
         def refresh_uid():
             # read from queue
             message = Message(Command.UID.value, b'')
             self.__serial_manager.write_to_controller(message)
-            message = self.__queue_manager.read_queue(Command.UID.value)
-            if message.get_text() != "nothing":
-                label_near_uid.config(text=str(message.get_text()))
-                self.__add_window.update()
 
         def add_user():
             # First check if username isn't already existing
@@ -196,23 +192,23 @@ class Gui:
                 # check if textfield have inputs
                 if len(textfield_username.get()) > 0 and len(textfield_password.get()) > 0:
                     self.__user_manager.add_user(textfield_username.get(), textfield_password.get(),
-                                                 label_near_uid.cget("text"))
+                                                 self.label_near_uid.cget("text"))
 
                     # add user to the listbox
                     self.list.insert(END, textfield_username.get())
-                    self.__add_window.destroy()
+                    self.add_window.destroy()
                     self.notify("Der User wurde erfolgreich hinzugefügt!")
                 else:
                     self.notify("Bitte geben Sie alle Nutzerdaten ein.")
 
         # Build the add Window
-        self.__add_window = Toplevel(self.__root)
+        self.add_window = Toplevel(self.__root)
 
-        self.__add_window.title("Smock")
-        self.__set_window_size(self.__add_window, 300, 100)
+        self.add_window.title("Smock")
+        self.__set_window_size(self.add_window, 300, 100)
 
-        add_top_frame = Frame(self.__add_window)
-        add_bottom_frame = Frame(self.__add_window)
+        add_top_frame = Frame(self.add_window)
+        add_bottom_frame = Frame(self.add_window)
 
         add_top_frame.pack()
         add_bottom_frame.pack()
@@ -223,14 +219,14 @@ class Gui:
 
         textfield_username = Entry(add_top_frame)
         textfield_password = Entry(add_top_frame)
-        label_near_uid = Label(add_top_frame, text="nothing")
+        self.label_near_uid = Label(add_top_frame, text="nothing")
 
         label_username.grid(row=0)
         label_password.grid(row=1)
         label_uid.grid(row=2)
         textfield_username.grid(row=0, column=1)
         textfield_password.grid(row=1, column=1)
-        label_near_uid.grid(row=2, column=1)
+        self.label_near_uid.grid(row=2, column=1)
 
         btn_confirm = Button(add_bottom_frame, text="Bestätigen", command=add_user)
         btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=destroy_window)
@@ -256,8 +252,16 @@ class Gui:
         for user in self.__user_manager.user_list:
             self.list.insert(END, user.get_username())
 
-    def update_uid_panel(self):
-        pass
+    def update_uid_label(self, uid):
+        """
+        Updates the label_id, when the user is using the add user window.
+
+        Args:
+            uid: uid that is shown on the label_uid
+        """
+        if self.add_window is not None:
+            self.label_near_uid.config(text=str(uid))
+            self.add_window.update()
 
     def start(self):
         """
