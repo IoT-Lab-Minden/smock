@@ -1,8 +1,6 @@
-/*
- * MFRC522.cpp
- *
- *  Created on: 19.12.2018
- *      Author: malte
+/**
+ * \file MFRC522.cpp
+ * \brief Contains the definitions of the methods for MFRC522.
  */
 
 #include "MFRC522.h"

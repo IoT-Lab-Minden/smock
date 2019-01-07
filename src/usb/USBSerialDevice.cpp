@@ -53,9 +53,7 @@ namespace usbdevice {
 
 	void USBSerialDevice::flushReceiveBuffer() {
 		USBUARTPrimeTransmit();
-		for (int i = 0; i < UART_BUFFER_SIZE; i++) {
-			ui8ReceiveBuffer[i] = 0;
-		}
+		ui32ReceiveBufferEnd = ui32ReceiveBufferStart;
 	}
 
 	USBSerialDevice::USBSerialDevice(tUSBCallback controlHandler, tUSBCallback rxHandler, tUSBCallback txHandler) :
@@ -93,7 +91,9 @@ namespace usbdevice {
 				g_pui8USBRxBuffer,
 				UART_BUFFER_SIZE,
 			}),
-	g_bSendingBreak(false)
+	g_bSendingBreak(false),
+	ui32ReceiveBufferStart(0),
+	ui32ReceiveBufferEnd(0)
 	{}
 
 
@@ -136,13 +136,40 @@ namespace usbdevice {
 		USBBufferWrite((tUSBBuffer *) &g_sTxBuffer, data, length);
 	}
 
-
-	uint8_t *USBSerialDevice::getReceiveBuffer() {
-		return ui8ReceiveBuffer;
+	uint8_t USBSerialDevice::popReceiveBuffer() {
+		if (ui32ReceiveBufferStart != ui32ReceiveBufferEnd) {
+			uint8_t head = ui8ReceiveBuffer[ui32ReceiveBufferStart];
+			ui32ReceiveBufferStart++;
+			if (ui32ReceiveBufferStart == UART_BUFFER_SIZE) {
+				ui32ReceiveBufferStart = 0;
+			}
+			return head;
+		}
+		return EMPTY_VALUE;
 	}
 
-	uint32_t USBSerialDevice::getReceiveBufferEnd() {
-		return ui32ReceiveBufferEnd;
+	int USBSerialDevice::pushReceiveBuffer(uint8_t data) {
+		uint32_t end = ui32ReceiveBufferEnd;
+		ui32ReceiveBufferEnd++;
+		if (ui32ReceiveBufferEnd == UART_BUFFER_SIZE) {
+			ui32ReceiveBufferEnd = 0;
+		}
+		if (ui32ReceiveBufferEnd != ui32ReceiveBufferStart) {
+			ui8ReceiveBuffer[end] = data;
+			return 1;
+		} else {
+			ui32ReceiveBufferEnd = end;
+			return 0;
+		}
+	}
+
+	uint32_t USBSerialDevice::getReceiveBufferLength() {
+		if (ui32ReceiveBufferEnd == ui32ReceiveBufferStart) {
+			return 0;
+		 }else if (ui32ReceiveBufferEnd < ui32ReceiveBufferStart) {
+			return UART_BUFFER_SIZE - ui32ReceiveBufferStart + ui32ReceiveBufferEnd;
+		}
+		return ui32ReceiveBufferEnd - ui32ReceiveBufferStart;
 	}
 
 	uint32_t USBSerialDevice::getRxEventCount() {
@@ -163,8 +190,13 @@ namespace usbdevice {
 	}
 
 	void USBSerialDevice::readBuffer() {
-		ui32ReceiveBufferEnd = USBBufferRead((tUSBBuffer *) &g_sRxBuffer, ui8ReceiveBuffer, UART_BUFFER_SIZE);
-		g_ui32UARTRxCount += ui32ReceiveBufferEnd;
+		uint8_t buffer[UART_BUFFER_SIZE];
+		uint32_t end = USBBufferRead((tUSBBuffer *) &g_sRxBuffer, buffer, UART_BUFFER_SIZE);
+		for (uint32_t i = 0; i < end; i++) {
+			if (pushReceiveBuffer(buffer[i]) != 0) {
+				g_ui32UARTRxCount++;
+			}
+		}
 		USBUARTPrimeTransmit();
 	}
 

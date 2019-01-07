@@ -1,14 +1,15 @@
 /**
  * \file USBSerialConstants.h
  * \brief Contains the constants needed for the Serial Device
- *  Created on: 10.12.2018
- *      Author: malte
  */
 
 #ifndef USBSERIALCONSTANTS_H_
 #define USBSERIALCONSTANTS_H_
 
 namespace usbdevice {
+
+	const uint8_t EMPTY_VALUE = 255;
+
 	/**
 	 * \var const uint32_t DEFAULT_BIT_RATE
 	 *

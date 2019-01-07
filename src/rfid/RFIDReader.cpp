@@ -9,6 +9,7 @@
 #include "../energia/SPI.h"
 #include "driverlib/rom.h"
 #include "driverlib/sysctl.h"
+#include "MFRC522Constants.h"
 
 namespace rfid_reader {
 

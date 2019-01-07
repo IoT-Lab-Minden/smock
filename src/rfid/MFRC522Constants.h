@@ -1,4 +1,7 @@
-
+/**
+ * \file MFRC522Constatnts.h
+ * \brief Contains the constants, enums and structs need for the MFRC522
+ */
 
 #ifndef RFID_MFRC522_H_
 #define RFID_MFRC522_H_
@@ -6,10 +9,33 @@
 #include <stdint.h>
 namespace rfid_reader {
 
-const uint8_t RST_PIN = GPIO_PIN_6;
-const uint32_t RST_PIN_BASE = GPIO_PORTA_BASE;
-const uint8_t WAIT_IRQ = 0x30;
+/**
+ * \var const uint8_t SS_PIN
+ *
+ * Pin connected to the slave select pin of the MFRC522
+ */
+const uint8_t SS_PIN = GPIO_PIN_3;
 
+/**
+ * \var const uint32_t SS_PIN_BASE
+ *
+ * Base of the slave select pin
+ */
+const uint32_t SS_PIN_BASE = GPIO_PORTA_BASE;
+
+/**
+ * \var const uint8_t RST_PIN
+ *
+ * Pin connected to the reset pin of the MFRC522
+ */
+const uint8_t RST_PIN = GPIO_PIN_6;
+
+/**
+ * \var const uint32_t RST_PIN_BASE = GPIO_PORTA_BASE
+ *
+ * Pin base of the reset pin-
+ */
+const uint32_t RST_PIN_BASE = GPIO_PORTA_BASE;
 
 const uint8_t MFRC522_firmware_referenceV0_0[] = {
 	0x00, 0x87, 0x98, 0x0f, 0x49, 0xFF, 0x07, 0x19,
@@ -55,7 +81,9 @@ const uint8_t FM17522_firmware_reference[] = {
 	0x56, 0x9A, 0x98, 0x82, 0x26, 0xEA, 0x2A, 0x62
 };
 
-
+/**
+ * Registers of the MFRC522
+ */
 enum PCD_Register : uint8_t {
 	// Page 0: Command and status
 	//						  0x00			// reserved for future use
@@ -130,7 +158,9 @@ enum PCD_Register : uint8_t {
 	// 						  0x3F			// reserved for production tests
 };
 
-// MFRC522 commands. Described in chapter 10 of the datasheet.
+/**
+ * Commands of the MFRC522.
+ */
 enum PCD_Command : uint8_t {
 	PCD_Idle				= 0x00,		// no action, cancels current command execution
 	PCD_Mem					= 0x01,		// stores 25 uint8_ts into the internal buffer
@@ -144,6 +174,9 @@ enum PCD_Command : uint8_t {
 	PCD_SoftReset			= 0x0F		// resets the MFRC522
 };
 
+/**
+ * Status codes
+ */
 enum StatusCode : uint8_t {
 	STATUS_OK				,	// Success
 	STATUS_ERROR			,	// Error in communication
@@ -156,13 +189,20 @@ enum StatusCode : uint8_t {
 	STATUS_MIFARE_NACK		= 0xff	// A MIFARE PICC responded with NAK.
 };
 
-// A struct used for passing the UID of a PICC.
+/**
+ * \var Uid
+ *
+ * A struct used for passing the UID of a Tag.
+ */
 typedef struct {
 	uint8_t		size;			// Number of uint8_ts in the UID. 4, 7 or 10.
 	uint8_t		uidbyte[10];
 	uint8_t		sak;			// The SAK (Select acknowledge) uint8_t returned from the PICC after successful selection.
 } Uid;
 
+/**
+ * Command that could be send to the tag.
+ */
 enum PICC_Command : uint8_t {
 	// The commands used by the PCD to manage communication with several PICCs (ISO 14443-3, Type A, section 6.4)
 	PICC_CMD_REQA			= 0x26,		// REQuest command, Type A. Invites PICCs in state IDLE to go to READY and prepare for anticollision or selection. 7 bit frame.

@@ -13,8 +13,6 @@
 #include "RFIDReaderConstants.h"
 
 namespace rfid_reader {
-	const uint8_t SS_PIN = GPIO_PIN_3;
-	const uint32_t SS_PIN_BASE = GPIO_PORTA_BASE;
 	const uint8_t IRQIN_PIN = GPIO_PIN_6;
 	const uint32_t IRQIN_PIN_BASE = GPIO_PORTA_BASE;
 

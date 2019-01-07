@@ -1,8 +1,6 @@
 /**
  * \file USBCompConstants.h
  * \brief Contains the constants needed for the Composite-Device
- *
- * Contains the constants needed for the Composite-Device
  */
 
 #ifndef USBCOMPCONSTANTS_H_

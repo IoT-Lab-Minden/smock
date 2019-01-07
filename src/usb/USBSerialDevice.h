@@ -2,7 +2,7 @@
  * \file USBSerialDevice.h
  * \brief Contains the declaration of the methods and attributes needed for the keyboard device.
  *
- *  The serial device enables a serial communication with the hos.t
+ *  The serial device enables a serial communication with the host.
  */
 
 #ifndef USBSERIALDEVICE_H_
@@ -80,9 +80,10 @@ namespace usbdevice {
 		uint32_t g_ui32Flags;
 
 		/**
-		 * Receive Buffer accessible from user.
+		 * Receive Buffer accessible from user realized as queue.
 		 */
 		uint8_t ui8ReceiveBuffer[UART_BUFFER_SIZE];
+		uint32_t ui32ReceiveBufferStart;
 		uint32_t ui32ReceiveBufferEnd;
 
 		/**
@@ -265,25 +266,19 @@ namespace usbdevice {
 		 */
 		void write(uint8_t *data, uint32_t length);
 
-		/**
-		 * \fn uint8_t *getReceiveBuffer()
-		 * \brief Getter for the user accessible reciveBuffer.
-		 *
-		 * Returns the user accessible reciveBuffer.
-		 *
-		 * \return uint8_t* - pointer to the buffer.
-		 */
-		uint8_t *getReceiveBuffer();
+		uint8_t popReceiveBuffer();
+
+		int pushReceiveBuffer(uint8_t data);
 
 		/**
-		 * \fn uint32_t getReceiveBufferEnd()
+		 * \fn uint32_t getReceiveBufferLength()
 		 * \brief Getter for the length of the user accessible reciveBuffer.
 		 *
 		 * Returns the length of the user accessible reciveBuffer.
 		 *
 		 * \return uint32_t - length of the buffer.
 		 */
-		uint32_t getReceiveBufferEnd();
+		uint32_t getReceiveBufferLength();
 
 		/**
 		 * \fn uint32_t getRxEventCount()
