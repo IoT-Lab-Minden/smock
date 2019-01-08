@@ -6,7 +6,6 @@
 #include "MFRC522.h"
 #include "../energia/SPI.h"
 #include "driverlib/rom.h"
-#include "RFIDReader.h"
 #include "MFRC522Constants.h"
 #include "../energia/avr/pgmspace.h"
 

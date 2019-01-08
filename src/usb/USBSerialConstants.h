@@ -8,6 +8,7 @@
 
 namespace usbdevice {
 
+	const uint32_t USB_BUFFER_SIZE = 128;
 	const uint8_t EMPTY_VALUE = 255;
 
 	/**

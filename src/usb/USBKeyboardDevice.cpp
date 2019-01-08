@@ -135,6 +135,11 @@ namespace usbdevice {
 	            g_keyTick = g_ui32SysTickCount;
 	        }
 	        if(g_keyTick != 0) {
+	        	if (string[index] == '@') {
+	        		uint8_t l = USBKeyboardDevice::getInstance()->GetUsageCode('q', false);
+	        		USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &l, 1);
+	        		index++;
+	        	}
 	            int diff = g_keyTick - g_ui32SysTickCount;
 	            if(diff <= 0) {
 	                if(g_keyDown) {

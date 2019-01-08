@@ -46,13 +46,13 @@ namespace usbdevice {
 		 * Transmit buffer
 		 */
 		tUSBBuffer g_sTxBuffer;
-		uint8_t g_pui8USBTxBuffer[UART_BUFFER_SIZE];
+		uint8_t g_pui8USBTxBuffer[USB_BUFFER_SIZE];
 
 		/**
 		 * Receive buffer
 		 */
 		tUSBBuffer g_sRxBuffer;
-		uint8_t g_pui8USBRxBuffer[UART_BUFFER_SIZE];
+		uint8_t g_pui8USBRxBuffer[USB_BUFFER_SIZE];
 
 		/**
 		 * Transmit actions counter
@@ -82,7 +82,7 @@ namespace usbdevice {
 		/**
 		 * Receive Buffer accessible from user realized as queue.
 		 */
-		uint8_t ui8ReceiveBuffer[UART_BUFFER_SIZE];
+		uint8_t ui8ReceiveBuffer[USB_BUFFER_SIZE];
 		uint32_t ui32ReceiveBufferStart;
 		uint32_t ui32ReceiveBufferEnd;
 

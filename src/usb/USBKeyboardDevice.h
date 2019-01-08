@@ -45,10 +45,6 @@ namespace usbdevice {
 		 */
 		tUSBDHIDKeyboardDevice g_sKeyboardDevice;
 
-		/**
-		 * Method to get the usage code of a char. (Keyboard code standing for this key)
-		 */
-		uint8_t GetUsageCode(char cKey, bool bShifted);
 
 		/**
 		 * Callback function which is called when an event is raised by the host.
@@ -64,6 +60,11 @@ namespace usbdevice {
 		USBKeyboardDevice(tUSBCallback keyboardHandler);
 
 	public:
+
+		/**
+		 * Method to get the usage code of a char. (Keyboard code standing for this key)
+		 */
+		uint8_t GetUsageCode(char cKey, bool bShifted);
 
 		/**
 		 * \fn USBKeyboardDevice *getInstance()

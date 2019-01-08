@@ -79,7 +79,7 @@ namespace usbdevice {
 				USBDCDCTxPacketAvailable,
 				(void *)&g_sCDCDevice,
 				g_pui8USBTxBuffer,
-				UART_BUFFER_SIZE,
+				USB_BUFFER_SIZE,
 			}),
 	g_sRxBuffer ( {
 				false,
@@ -89,7 +89,7 @@ namespace usbdevice {
 				USBDCDCRxPacketAvailable,
 				(void *)&g_sCDCDevice,
 				g_pui8USBRxBuffer,
-				UART_BUFFER_SIZE,
+				USB_BUFFER_SIZE,
 			}),
 	g_bSendingBreak(false),
 	ui32ReceiveBufferStart(0),
@@ -140,7 +140,7 @@ namespace usbdevice {
 		if (ui32ReceiveBufferStart != ui32ReceiveBufferEnd) {
 			uint8_t head = ui8ReceiveBuffer[ui32ReceiveBufferStart];
 			ui32ReceiveBufferStart++;
-			if (ui32ReceiveBufferStart == UART_BUFFER_SIZE) {
+			if (ui32ReceiveBufferStart == USB_BUFFER_SIZE) {
 				ui32ReceiveBufferStart = 0;
 			}
 			return head;
@@ -151,7 +151,7 @@ namespace usbdevice {
 	int USBSerialDevice::pushReceiveBuffer(uint8_t data) {
 		uint32_t end = ui32ReceiveBufferEnd;
 		ui32ReceiveBufferEnd++;
-		if (ui32ReceiveBufferEnd == UART_BUFFER_SIZE) {
+		if (ui32ReceiveBufferEnd == USB_BUFFER_SIZE) {
 			ui32ReceiveBufferEnd = 0;
 		}
 		if (ui32ReceiveBufferEnd != ui32ReceiveBufferStart) {
@@ -167,7 +167,7 @@ namespace usbdevice {
 		if (ui32ReceiveBufferEnd == ui32ReceiveBufferStart) {
 			return 0;
 		 }else if (ui32ReceiveBufferEnd < ui32ReceiveBufferStart) {
-			return UART_BUFFER_SIZE - ui32ReceiveBufferStart + ui32ReceiveBufferEnd;
+			return USB_BUFFER_SIZE - ui32ReceiveBufferStart + ui32ReceiveBufferEnd;
 		}
 		return ui32ReceiveBufferEnd - ui32ReceiveBufferStart;
 	}
@@ -190,8 +190,8 @@ namespace usbdevice {
 	}
 
 	void USBSerialDevice::readBuffer() {
-		uint8_t buffer[UART_BUFFER_SIZE];
-		uint32_t end = USBBufferRead((tUSBBuffer *) &g_sRxBuffer, buffer, UART_BUFFER_SIZE);
+		uint8_t buffer[USB_BUFFER_SIZE];
+		uint32_t end = USBBufferRead((tUSBBuffer *) &g_sRxBuffer, buffer, USB_BUFFER_SIZE);
 		for (uint32_t i = 0; i < end; i++) {
 			if (pushReceiveBuffer(buffer[i]) != 0) {
 				g_ui32UARTRxCount++;

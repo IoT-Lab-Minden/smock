@@ -35,7 +35,6 @@
 #include "usb/USBSerialDevice.h"
 #include "usb/USBKeyboardDevice.h"
 #include "usb/USBCompDevice.h"
-#include "rfid/RFIDReader.h"
 #include "energia/SPI.h"
 #include "energia/Wire.h"
 #include "rfid/MFRC522.h"
@@ -49,16 +48,18 @@ using namespace usbdevice;
 const int START_DELAY = 1000;
 const int WAIT_FOR_HOST_KONFIGURATION = 500;
 volatile const int WAIT_LOG_IN = 400;
+volatile const int WAIT_LOG_IN_LONG = 3000;
 const int ENTER_DELAY = 350;
 
 const uint8_t SINGLE_USER = '1';
-const uint8_t ASK_FOR_PW = '1';
-const uint8_t OS_SYSTEM = '3';
-const uint8_t HOST_STATUS = '4';
+const uint8_t ASK_FOR_PW = 'p';
+const uint8_t OS_SYSTEM = 'o';
+const uint8_t READ_UID = 'u';
+const uint8_t HOST_STATUS = 'l';
+const uint8_t USER_QUANTITY = 'q';
 const uint8_t END_REQUEST = '!';
-const uint8_t WIN = 'W';
+
 const uint8_t LINUX = 'L';
-const uint8_t READ_UID = '2';
 
 const char CHANGE_USER = 'b';
 const char CHANGE_USER1 = 'w';
@@ -150,8 +151,6 @@ int main(void) {
 	rfid_reader::MFRC522 reader;
 	uint8_t res = reader.readRegister(rfid_reader::CommandReg);
 
-
-	uint8_t ui8ButtonsChanged, ui8Buttons;
 	while (true) {
 		uint8_t symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
 		if (symbol == READ_UID) {
@@ -164,8 +163,16 @@ int main(void) {
 				USBSerialDevice::getInstance()->write(command, sizeof(command));
 			}
 			symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
-			USBSerialDevice::getInstance()->flushReceiveBuffer();
 			delay(100);
+		}
+		if (symbol == USER_QUANTITY) {
+			singleUser = USBSerialDevice::getInstance()->popReceiveBuffer();
+			symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
+		}
+		if (symbol == OS_SYSTEM && state != START) {
+			os = USBSerialDevice::getInstance()->popReceiveBuffer();
+			singleUser = USBSerialDevice::getInstance()->popReceiveBuffer();
+			symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
 		}
 
 		switch (state) {
@@ -214,29 +221,22 @@ int main(void) {
 					char username[UART_BUFFER_SIZE / 2];
 					uint32_t lengthU = 0;
 					uint8_t noEnd = 1;
-					uint32_t at = 0;
 					for (lengthU = 0; lengthU < UART_BUFFER_SIZE && noEnd; lengthU++) {
 						username[lengthU] = USBSerialDevice::getInstance()->popReceiveBuffer();
 						if (username[lengthU] == '\n') {
 							noEnd = 0;
 						}
-						if (username[lengthU] == '@') {
-							at = lengthU;
-						}
 					}
-					if (at == 0) {
-						USBKeyboardDevice::getInstance()->USBWriteString(username, lengthU);
-					} else {
-						USBKeyboardDevice::getInstance()->USBWriteString(username, at);
-						uint8_t a = 'q';
-						USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &a, 1);
-						USBKeyboardDevice::getInstance()->USBWriteString(&username[at + 1], lengthU - at - 1);
-					}
+					USBKeyboardDevice::getInstance()->USBWriteString(username, lengthU);
 					USBKeyboardDevice::getInstance()->USBWriteString(&KEY_TAB, 1);
 				}
 				USBKeyboardDevice::getInstance()->USBWriteString(pw, length);
-				//USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
-				delay(WAIT_LOG_IN);
+				USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+				if (singleUser == SINGLE_USER) {
+					delay(WAIT_LOG_IN);
+				} else {
+					delay(WAIT_LOG_IN_LONG);
+				}
 				state = UNLOCKED;
 			}
 			break;
@@ -269,22 +269,26 @@ int main(void) {
 		case VALIDATE_HOST_LOCKED:
 			if (symbol == HOST_STATUS) {
 				if (USBSerialDevice::getInstance()->popReceiveBuffer() != '0') {
-					USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &DEL, 1);
-					delay(ENTER_DELAY);
-					if (singleUser == SINGLE_USER) {
-						USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+					if (os != LINUX) {
+						USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &DEL, 1);
+						delay(ENTER_DELAY);
+						if (singleUser == SINGLE_USER) {
+							USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+						} else {
+							USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER, 1);
+							USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER1, 1);
+							USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER, 1);
+							USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER1, 1);
+						}
 					} else {
-						USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER, 1);
-						USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER1, 1);
-						USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER, 1);
-						USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER1, 1);
+						uint8_t l = USBKeyboardDevice::getInstance()->GetUsageCode('l', false);
+						USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &l, 1);
 					}
-
 				}
 				state = LOCKED;
 			}
 			break;
-		}*/
+		}
 	}
 }
 
