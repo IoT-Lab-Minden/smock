@@ -9,7 +9,7 @@ class Gui:
     The Smock gui
     """
 
-    def __init__(self, queue_manager, serial_manager, user_manager, task_manager):
+    def __init__(self, client_user_interface):
         """
         The constructor of the class. Gives the task_manager the reference to itself.
         Builds the main Window of the gui and loads the user that are existing on the
@@ -21,11 +21,8 @@ class Gui:
             user_manager: A userManager
             task_manager: A taskManager
         """
-        self.__queue_manager = queue_manager
-        self.__serial_manager = serial_manager
-        self.__user_manager = user_manager
-
-        task_manager.gui = self
+        self.__client_user_interface = client_user_interface
+        self.__client_user_interface.gui = self
 
         self.add_window = None
         self.label_near_uid = None
@@ -66,7 +63,7 @@ class Gui:
         self.btn_refresh_controller.grid(row=1, column=1)
 
         # load users into the list
-        self.__refresh_list()
+        self.refresh_list()
 
     @staticmethod
     def __set_window_size(tk, width, height):
@@ -76,7 +73,7 @@ class Gui:
         Args:
             tk: The Window that has to be positioned
             width: width of window
-            h: height of window
+            height: height of window
         """
         # gets screen width and height
         width_screen = tk.winfo_screenwidth()
@@ -119,25 +116,20 @@ class Gui:
         """
         def set_user():
             # First check if username isn't already existing
-            if self.__user_manager.check_if_user_exists(textfield_username.get()):
+            if self.__client_user_interface.check_if_user_exists(textfield_username.get()):
                 self.notify("Der User existiert bereits")
             else:
                 # Get the selected user from the listbox and edit its name by the text of the Entry widgets
-                user = self.__user_manager.user_list[self.list.index(ACTIVE)]
+                user_name = self.__client_user_interface.get_username(self.list.index(ACTIVE))
+                uid = self.__client_user_interface.get_uid(self.list.index(ACTIVE))
 
                 # Remove the file of the user
-                remove("./users/" + user.get_username())
 
-                user.set_username(textfield_username.get())
-                user.set_password(textfield_password.get())
-
-                # change the name of the file and its content
-                with open("./users/" + user.get_username(), "w") as file_descriptor:
-                    file_descriptor.write(user.get_password() + "\n")
-                    file_descriptor.write(user.get_uid())
+                user_name = textfield_username.get()
+                user_pwd = textfield_password.get()
+                self.__client_user_interface.set_new_data(self.list.index(ACTIVE), user_name, user_pwd)
 
                 # refresh the listbox and destroy the editing window
-                self.__refresh_list()
                 edit_window.destroy()
                 self.notify("Der User wurde erfolgreich bearbeitet!")
 
@@ -185,19 +177,17 @@ class Gui:
         def refresh_uid():
             # read from queue
             message = Message(Command.UID.value, b'')
-            self.__serial_manager.write_to_controller(message)
+            self.__client_user_interface.write_to_controller(message)
 
         def add_user():
             # First check if username isn't already existing
-            if self.__user_manager.check_if_user_exists(textfield_username.get()):
+            if self.__client_user_interface.check_if_user_exists(textfield_username.get()):
                 self.notify("Der User existiert bereits")
             else:
                 # check if textfield have inputs
                 if len(textfield_username.get()) > 0 and len(textfield_password.get()) > 0:
-                    self.__user_manager.add_user(textfield_username.get(), textfield_password.get(),
-                                                 self.label_near_uid.cget("text"))
-
-                    self.__serial_manager.send_multiple_user_to_controller()
+                    self.__client_user_interface.add_user(textfield_username.get(), textfield_password.get(),
+                                                          self.label_near_uid.cget("text"))
 
                     # add user to the listbox
                     self.list.insert(END, textfield_username.get())
@@ -247,18 +237,18 @@ class Gui:
         """
         Deletes the user that is active in the listbox of the main window
         """
-        self.__user_manager.delete_user(self.list.index(ACTIVE))
-        self.__refresh_list()
+        self.__client_user_interface.delete_user(self.list.index(ACTIVE))
         self.notify("Der User wurde erfolgreich gelöscht")
 
-    def __refresh_list(self):
+    def refresh_list(self):
         """
         Refreshes the listbox of the main window.
         """
         beginning = 0
         self.list.delete(beginning, END)
-        for user in self.__user_manager.user_list:
-            self.list.insert(END, user.get_username())
+        length = self.__client_user_interface.get_number_of_users()
+        for user in range(length):
+            self.list.insert(END, self.__client_user_interface.get_username(user))
 
     def update_uid_label(self, uid):
         """
@@ -282,4 +272,4 @@ class Gui:
         """
         Searches for the serial_device
         """
-        self.__serial_manager.find_serial_device()
+        self.__client_user_interface.find_serial_device()

@@ -11,8 +11,9 @@ from userManager import UserManager
 
 
 class SerialManager:
-    def __init__(self, queue_manager):
+    def __init__(self, queue_manager, user_manager):
         self.__queue_manager = queue_manager
+        self.__user_manager = user_manager
         self.__command = b""
         self.__text = b""
         self.__mutex = Lock()
@@ -37,16 +38,23 @@ class SerialManager:
         first_byte = True
         mutex_acquired = False
 
-        while not self.__serial_device.is_open:
-            time.sleep(1)
-
         while True:
+            while not self.__serial_device.is_open:
+                self.find_serial_device()
+                time.sleep(1)
+
             time.sleep(0.05)
             if not mutex_acquired:
                 self.__mutex.acquire(True)
                 mutex_acquired = True
 
-            letter = self.__serial_device.read(1)
+            letter = b''
+            try:
+                letter = self.__serial_device.read(1)
+            except serial.serialutil.SerialException:
+                self.__serial_device = serial.Serial()
+                print("lost connection")
+
             if letter != b'':
                 if first_byte:
                     self.__command = letter
@@ -55,6 +63,7 @@ class SerialManager:
                     self.__text += letter
                 else:
                     message = Message(self.__command, self.__text)
+                    print(message.get_text())
                     self.__mutex.release()
                     mutex_acquired = False
                     self.__queue_manager.write_queue(message)
@@ -69,7 +78,8 @@ class SerialManager:
         config = configparser.ConfigParser()
         config.read("./config/smock.cfg")
         if self.__serial_device.is_open:
-            Gui.notify("Das Gerät ist bereits angeschlossen")
+            return True
+            # Gui.notify("Das Gerät ist bereits angeschlossen")
         elif 'COMPORT' in config['DEFAULT']:
             ports = serial.tools.list_ports.comports()
             if len(ports) > 0:
@@ -80,9 +90,10 @@ class SerialManager:
                         self.send_os_to_controller()
 
             if not self.__serial_device.is_open:
-                Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
-                           "Vergewissern Sie sich, dass das Gerät angeschlossen ist\n"
-                           "und der COM Port in der Config richtig ist.")
+                return False
+            #     Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
+            #                "Vergewissern Sie sich, dass das Gerät angeschlossen ist\n"
+            #                "und der COM Port in der Config richtig ist.")
         else:
             ports = serial.tools.list_ports.comports()
             if len(ports) > 0:
@@ -94,8 +105,10 @@ class SerialManager:
                 with open("./config/smock.cfg", "w") as config_file:
                     config.write(config_file)
             else:
-                Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
-                           "Vergewissern Sie sich, dass das Gerät angeschlossen ist.\n")
+                return False
+                # Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
+                #            "Vergewissern Sie sich, dass das Gerät angeschlossen ist.\n")
+        return True
 
     def send_os_to_controller(self):
         time.sleep(0.1)
@@ -110,8 +123,7 @@ class SerialManager:
         self.write_to_controller(message)
 
     def __multiple_user_byte(self):
-        user_manager = UserManager()
-        if user_manager.contains_multiple_user():
+        if self.__user_manager.contains_multiple_user():
             return b"2"
         else:
             return b"1"

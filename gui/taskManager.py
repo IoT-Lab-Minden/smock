@@ -5,13 +5,14 @@ import ctypes
 import time
 from userManager import UserManager
 
+NEWLINE = 10
 
 class TaskManager:
     """
     Reads the tasks from the queue_manager and when there are tasks it responds to them and does some stuff, given to
     the situation.
     """
-    def __init__(self, user_manager, queue_manager, serial_manager):
+    def __init__(self, user_manager, queue_manager, serial_manager, user_interface):
         """
         Constructor of the TaskManager.
 
@@ -24,9 +25,7 @@ class TaskManager:
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
         self.__user32 = ctypes.windll.User32
-        user_manager = UserManager()
-        self.__multi_user = user_manager.contains_multiple_user()
-        self.gui = None
+        self.__user_interface = user_interface
         self.LOCK_WINDOW_NAME_GERMAN = "Windows-Standardsperrbildschirm"
         self.LOCK_WINDOW_NAME_ENGLISH = "Windows Default Lock Screen"
 
@@ -61,9 +60,11 @@ class TaskManager:
         if self.__is_locked():
             user = self.__user_manager.get_user_with_uid(uid)
             if user != -1:
-                if self.__multi_user:
+                if self.__user_manager.contains_multiple_user():
                     # TODO: add username when multi_user
                     password = user.get_password().encode()
+                    if password[-1] != NEWLINE:
+                        password += b'\n'
                     username = (user.get_username() + "\n").encode()
                     message_text = password + username
                     message = Message(Command.PASSWORD.value, message_text)
@@ -112,11 +113,7 @@ class TaskManager:
         Returns:
              Returns True if computer is locked, otherwise return False
         """
-        lock_window_name, window_code = self.__get_current_process()
-        print(lock_window_name)
-
-        return lock_window_name == self.LOCK_WINDOW_NAME_ENGLISH or lock_window_name == self.LOCK_WINDOW_NAME_GERMAN \
-               or (lock_window_name == "" and window_code == 0)
+        return self.__user_interface.check_locked()
 
     def __update_add_window(self, uid):
         """
@@ -125,5 +122,4 @@ class TaskManager:
         Args:
             uid: the uid that should be updated
         """
-        if self.gui is not None:
-            self.gui.update_uid_label(uid)
+        self.__user_interface.send_gui_update(uid)

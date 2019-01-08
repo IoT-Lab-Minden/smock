@@ -1,6 +1,7 @@
 from user import User
 from os.path import isfile, join
 from os import listdir
+from os import remove
 
 
 class UserManager:
@@ -47,9 +48,12 @@ class UserManager:
         self.user_list.append(user)
 
         # Create a File for the user
-        with open("./users/" + username, "w") as file_descriptor:
-            file_descriptor.write(password + "\n")
-            file_descriptor.write(uid)
+        self.create_user_file(user)
+
+    def create_user_file(self, user):
+        with open("./users/" + user.get_username(), "w") as file_descriptor:
+            file_descriptor.write(user.get_password() + "\n")
+            file_descriptor.write(user.get_uid())
 
     def check_if_user_exists(self, username):
         """
@@ -73,6 +77,7 @@ class UserManager:
         Args:
             index: user index in the list.
         """
+        remove("./users/" + self.user_list[index].get_username())
         del self.user_list[index]
 
     def get_user_with_uid(self, uid):
@@ -95,3 +100,10 @@ class UserManager:
             return True
         else:
             return False
+
+    def edit_user(self, index, username, pwd):
+        self.user_list[index].set_password(pwd)
+        if self.user_list[index].get_username() != username:
+            remove("./users/" + self.user_list[index].get_username())
+            self.user_list[index].set_username(username)
+            self.create_user_file(self.user_list[index])
