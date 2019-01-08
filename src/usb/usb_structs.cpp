@@ -49,7 +49,7 @@ volatile uint32_t g_ui32USBFlags;
 const uint8_t g_pui8LangDescriptor[] = {
     4,
     USB_DTYPE_STRING,
-    USBShort(USB_LANG_EN_US)
+    USBShort(USB_LANG_GERMAN)
 };
 
 /**

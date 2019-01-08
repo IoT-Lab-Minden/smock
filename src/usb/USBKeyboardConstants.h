@@ -32,6 +32,9 @@ namespace usbdevice {
 
 	#define MESSAGE_LENGTH (2)
 
+
+	const char TAB = 0x2b;
+
 	/**
 	 * \var const uint8_t DEL
 	 *
@@ -79,7 +82,7 @@ namespace usbdevice {
 		{	'e', HID_KEYB_USAGE_E}, {
 			'r', HID_KEYB_USAGE_R},
 		{	't', HID_KEYB_USAGE_T}, {
-			'y', HID_KEYB_USAGE_Y},
+			'z', HID_KEYB_USAGE_Y},
 		{	'u', HID_KEYB_USAGE_U}, {
 			'i', HID_KEYB_USAGE_I},
 		{	'o', HID_KEYB_USAGE_O}, {
@@ -93,7 +96,7 @@ namespace usbdevice {
 		{	'j', HID_KEYB_USAGE_J}, {
 			'k', HID_KEYB_USAGE_K},
 		{	'l', HID_KEYB_USAGE_L}, {
-			'z', HID_KEYB_USAGE_Z},
+			'y', HID_KEYB_USAGE_Z},
 		{	'x', HID_KEYB_USAGE_X}, {
 			'c', HID_KEYB_USAGE_C},
 		{	'v', HID_KEYB_USAGE_V}, {
@@ -132,7 +135,9 @@ namespace usbdevice {
 		{	UNICODE_BACKSPACE,
 			HID_KEYB_USAGE_BACKSPACE},
 		{	UNICODE_RETURN,
-			HID_KEYB_USAGE_ENTER},};
+			HID_KEYB_USAGE_ENTER},
+		{	(char)202,
+			TAB},};
 
 	/**
 	 * \var const uint32_t ui32NumUsageCodes
