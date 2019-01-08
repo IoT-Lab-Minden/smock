@@ -9,4 +9,5 @@ class Command(Enum):
     UID = b'2'
     OS = b'3'
     COMPUTER_STATUS = b'4'
+    USER_QUANTITY = b'5'
     ENDING_SYMBOL = b'!'

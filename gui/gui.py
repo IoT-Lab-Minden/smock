@@ -197,6 +197,8 @@ class Gui:
                     self.__user_manager.add_user(textfield_username.get(), textfield_password.get(),
                                                  self.label_near_uid.cget("text"))
 
+                    self.__serial_manager.send_multiple_user_to_controller()
+
                     # add user to the listbox
                     self.list.insert(END, textfield_username.get())
                     self.add_window.destroy()

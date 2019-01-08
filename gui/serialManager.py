@@ -99,11 +99,19 @@ class SerialManager:
 
     def send_os_to_controller(self):
         time.sleep(0.1)
-        user_manager = UserManager()
-        if user_manager.contains_multiple_user():
-            multi_user_byte = b"2"
-        else:
-            multi_user_byte = b"1"
+        multi_user_byte = self.__multiple_user_byte()
 
         message = Message(Command.OS.value, str.encode(platform.system()[0]) + multi_user_byte)
         self.write_to_controller(message)
+
+    def send_multiple_user_to_controller(self):
+        multi_user_byte = self.__multiple_user_byte()
+        message = Message(Command.USER_QUANTITY.value, multi_user_byte)
+        self.write_to_controller(message)
+
+    def __multiple_user_byte(self):
+        user_manager = UserManager()
+        if user_manager.contains_multiple_user():
+            return b"2"
+        else:
+            return b"1"
