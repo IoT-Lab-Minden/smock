@@ -103,7 +103,7 @@ class TaskManager:
         window_title = ctypes.create_string_buffer(512)
         self.__user32.GetWindowTextA(hwnd, ctypes.byref(window_title), 512)
 
-        return window_title.value.decode('ASCII')
+        return window_title.value.decode('ASCII'), hwnd
 
     def __is_locked(self):
         """
@@ -112,11 +112,11 @@ class TaskManager:
         Returns:
              Returns True if computer is locked, otherwise return False
         """
-        lock_window_name = self.__get_current_process()
+        lock_window_name, window_code = self.__get_current_process()
         print(lock_window_name)
 
         return lock_window_name == self.LOCK_WINDOW_NAME_ENGLISH or lock_window_name == self.LOCK_WINDOW_NAME_GERMAN \
-               or lock_window_name == ""
+               or (lock_window_name == "" and window_code == 0)
 
     def __update_add_window(self, uid):
         """
