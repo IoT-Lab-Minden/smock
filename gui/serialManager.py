@@ -7,7 +7,11 @@ from gui import Gui
 from message import Message
 import platform
 from command import Command
+import os
 from userManager import UserManager
+
+CONFIG_PATH = "./config/"
+CONFIG_FILE = CONFIG_PATH + "smock.cfg"
 
 
 class SerialManager:
@@ -76,7 +80,7 @@ class SerialManager:
 
     def find_serial_device(self):
         config = configparser.ConfigParser()
-        config.read("./config/smock.cfg")
+        config.read(CONFIG_FILE)
         if self.__serial_device.is_open:
             return True
             # Gui.notify("Das Gerät ist bereits angeschlossen")
@@ -102,7 +106,9 @@ class SerialManager:
                 self.send_os_to_controller()
                 config['DEFAULT'] = {}
                 config['DEFAULT']['COMPORT'] = self.__serial_device.port
-                with open("./config/smock.cfg", "w") as config_file:
+                if not os.path.isdir(CONFIG_PATH):
+                    os.mkdir(CONFIG_PATH)
+                with open(CONFIG_FILE, "w") as config_file:
                     config.write(config_file)
             else:
                 return False

@@ -2,6 +2,9 @@ from user import User
 from os.path import isfile, join
 from os import listdir
 from os import remove
+import os
+
+USERS_PATH = "./users/"
 
 
 class UserManager:
@@ -20,11 +23,12 @@ class UserManager:
         """
         Loads the users from all files that are in the directory ./users
         """
-        local_path = "./users/"
         # Get all the filenames of the files in the local_path directory
-        local_files = [f for f in listdir(local_path) if isfile(join(local_path, f))]
+        if not os.path.isdir(USERS_PATH):
+            os.mkdir(USERS_PATH)
+        local_files = [f for f in listdir(USERS_PATH) if isfile(join(USERS_PATH, f))]
         for file in local_files:
-            with open(local_path + file, "r") as file_descriptor:
+            with open(USERS_PATH + file, "r") as file_descriptor:
                 # extract information from file
                 password = file_descriptor.readline()
                 uid = file_descriptor.readline()
