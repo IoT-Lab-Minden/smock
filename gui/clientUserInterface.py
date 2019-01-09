@@ -40,7 +40,8 @@ class ClientUserInterface:
             if self.__connection.poll():
                 data = self.__connection.recv()
                 if data == str(Command.COMPUTER_STATUS):
-                    self.__connection.send(str(self.is_locked()))
+                    multit_user = self.__connection.recv()
+                    self.__connection.send(str(self.is_locked(multit_user)))
                 elif data == Codes.GUI_UPDATE:
                     uid = self.__connection.recv()
                     self.update_gui(uid)
@@ -56,7 +57,7 @@ class ClientUserInterface:
             if refresh:
                 self.gui.refresh_list()
 
-    def is_locked(self):
+    def is_locked(self, multi_user):
         hwnd = self.__user32.GetForegroundWindow()
 
         pid = ctypes.c_ulong(0)
@@ -65,7 +66,11 @@ class ClientUserInterface:
         window_title = ctypes.create_string_buffer(512)
         self.__user32.GetWindowTextA(hwnd, ctypes.byref(window_title), 512)
 
-        return window_title.value.decode('ASCII') + ";" + str(hwnd)
+        if multi_user == "True":
+            return window_title.value.decode('ASCII') == "" and hwnd == 0
+        else:
+            return window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_ENGLISH or \
+                   window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_GERMAN
 
     def check_if_user_exists(self, name):
         self.__mutex.acquire(True)

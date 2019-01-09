@@ -84,18 +84,11 @@ class ListenerUserInterface:
             if not c.closed:
                 try:
                     c.send(str(Command.COMPUTER_STATUS))
-                    infos = c.recv().split(";")
-                    lock_window_name = infos[0]
-                    window_code = infos[1]
-                    if self.__user_manager.contains_multiple_user():
-                        if not (lock_window_name == "" and window_code == "0"):
-                            self.__mutex.release()
-                            return False
-                    else:
-                        if not (lock_window_name == LOCK_WINDOW_NAME_ENGLISH or lock_window_name ==
-                                LOCK_WINDOW_NAME_GERMAN):
-                            self.__mutex.release()
-                            return False
+                    c.send(str(self.__user_manager.contains_multiple_user()))
+                    value = c.recv()
+                    if value == "False":
+                        self.__mutex.release()
+                        return False
                 except ConnectionResetError:
                     self.__clients.remove(c)
             else:
