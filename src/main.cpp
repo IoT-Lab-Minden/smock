@@ -275,10 +275,11 @@ int main(void) {
 						if (singleUser == SINGLE_USER) {
 							USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
 						} else {
-							USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER, 1);
-							USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER1, 1);
-							USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER, 1);
-							USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER1, 1);
+							uint8_t b = USBKeyboardDevice::getInstance()->GetUsageCode('b', false);
+							USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, &b, 1);
+							//USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER, 1);
+							/*USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER1, 1);
+							USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER1, 1);*/
 						}
 					} else {
 						uint8_t l = USBKeyboardDevice::getInstance()->GetUsageCode('l', false);
