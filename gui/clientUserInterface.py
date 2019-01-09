@@ -4,6 +4,7 @@ from threading import Lock
 from command import Command
 from enum import Enum
 import ctypes
+import time
 from gui import Gui
 
 
@@ -33,12 +34,13 @@ class ClientUserInterface:
 
     def polling(self):
         while True:
+            time.sleep(0.1)
             refresh = False
             self.__mutex.acquire(True)
             if self.__connection.poll():
                 data = self.__connection.recv()
                 if data == str(Command.COMPUTER_STATUS):
-                    self.__connection.send(self.is_locked())
+                    self.__connection.send(str(self.is_locked()))
                 elif data == Codes.GUI_UPDATE:
                     uid = self.__connection.recv()
                     self.update_gui(uid)

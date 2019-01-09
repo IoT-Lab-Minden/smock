@@ -88,19 +88,20 @@ class ListenerUserInterface:
                     lock_window_name = infos[0]
                     window_code = infos[1]
                     if self.__user_manager.contains_multiple_user():
-                        if lock_window_name == "" and window_code == "0":
+                        if not (lock_window_name == "" and window_code == "0"):
                             self.__mutex.release()
-                            return True
+                            return False
                     else:
-                        if lock_window_name == LOCK_WINDOW_NAME_ENGLISH or lock_window_name == LOCK_WINDOW_NAME_GERMAN:
+                        if not (lock_window_name == LOCK_WINDOW_NAME_ENGLISH or lock_window_name ==
+                                LOCK_WINDOW_NAME_GERMAN):
                             self.__mutex.release()
-                            return True
+                            return False
                 except ConnectionResetError:
                     self.__clients.remove(c)
             else:
                 self.__clients.remove(c)
         self.__mutex.release()
-        return False
+        return True
 
     def send_refresh(self):
         self.__mutex.acquire(True)
