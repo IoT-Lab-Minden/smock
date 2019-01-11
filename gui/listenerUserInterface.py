@@ -4,7 +4,7 @@ from clientUserInterface import *
 from multiprocessing.connection import Listener
 from command import Command
 
-ADDRESS = ('localhost', 6001)
+ADDRESS = ('localhost', 6000)
 
 
 class ListenerUserInterface:

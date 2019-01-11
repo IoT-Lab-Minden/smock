@@ -8,12 +8,17 @@ import os
 
 
 def is_locked(multi_user):
-    return os.popen("gdbus call -e -d com.canonical.Unity -o /com/canonical/Unity/Session -m "
-                    "com.canonical.Unity.Session.IsLocked | grep -ioP \"(true)|(false)\"").read()
+    open = os.popen("gdbus call -e -d com.canonical.Unity -o /com/canonical/Unity/Session -m com.canonical.Unity.Session.IsLocked | grep -ioP \"(true)|(false)\"").read()
+    print(open)
+    time.sleep(0.1)
+    if "false\n" == open:
+        return False
+    else:
+        return True
 
 def main():
     """
-    This starts starts the program Smock. It is initializing the queueManager, serialManager, userManager, taskManager
+    This starts the program Smock. It is initializing the queueManager, serialManager, userManager, taskManager
     and the gui. It also starts three threads. One to read the messages from the serial input, One to read the tasks
     that are given from the Smock device and the last to text the Smock device about the using OS.
     """
