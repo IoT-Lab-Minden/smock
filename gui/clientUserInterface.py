@@ -3,7 +3,6 @@ from multiprocessing.connection import Client
 from threading import Lock
 from command import Command
 from enum import Enum
-import ctypes
 import time
 from gui import Gui
 
@@ -26,11 +25,11 @@ class Codes(Enum):
 
 
 class ClientUserInterface:
-    def __init__(self):
+    def __init__(self, locked):
         self.__connection = Client(ADDRESS)
-        self.__user32 = ctypes.windll.User32
         self.__mutex = Lock()
         self.gui = None
+        self.is_locked = locked
 
     def polling(self):
         while True:
@@ -41,7 +40,8 @@ class ClientUserInterface:
                 data = self.__connection.recv()
                 if data == str(Command.COMPUTER_STATUS):
                     multit_user = self.__connection.recv()
-                    self.__connection.send(str(self.is_locked(multit_user)))
+                    ret = str(self.is_locked(multit_user))
+                    self.__connection.send(ret)
                 elif data == Codes.GUI_UPDATE:
                     uid = self.__connection.recv()
                     self.update_gui(uid)
@@ -56,21 +56,6 @@ class ClientUserInterface:
             self.__mutex.release()
             if refresh:
                 self.gui.refresh_list()
-
-    def is_locked(self, multi_user):
-        hwnd = self.__user32.GetForegroundWindow()
-
-        pid = ctypes.c_ulong(0)
-        self.__user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
-
-        window_title = ctypes.create_string_buffer(512)
-        self.__user32.GetWindowTextA(hwnd, ctypes.byref(window_title), 512)
-
-        if multi_user == "True":
-            return window_title.value.decode('ASCII') == "" and hwnd == 0
-        else:
-            return window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_ENGLISH or \
-                   window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_GERMAN
 
     def check_if_user_exists(self, name):
         self.__mutex.acquire(True)

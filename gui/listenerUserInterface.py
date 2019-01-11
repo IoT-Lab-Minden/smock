@@ -4,9 +4,7 @@ from clientUserInterface import *
 from multiprocessing.connection import Listener
 from command import Command
 
-ADDRESS = ('localhost', 6002)
-LOCK_WINDOW_NAME_GERMAN = "Windows-Standardsperrbildschirm"
-LOCK_WINDOW_NAME_ENGLISH = "Windows Default Lock Screen"
+ADDRESS = ('localhost', 6001)
 
 
 class ListenerUserInterface:

@@ -24,7 +24,6 @@ class TaskManager:
         self.__user_manager = user_manager
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
-        self.__user32 = ctypes.windll.User32
         self.__user_interface = user_interface
         self.LOCK_WINDOW_NAME_GERMAN = "Windows-Standardsperrbildschirm"
         self.LOCK_WINDOW_NAME_ENGLISH = "Windows Default Lock Screen"
@@ -88,23 +87,6 @@ class TaskManager:
         else:
             message = Message(Command.COMPUTER_STATUS.value, ComputerStatus.UNLOCKED.value)
         self.__serial_manager.write_to_controller(message)
-
-    def __get_current_process(self):
-        """
-        Identifying what window is on focus.
-
-        Returns:
-             Value of the window title that is on focus
-        """
-        hwnd = self.__user32.GetForegroundWindow()
-
-        pid = ctypes.c_ulong(0)
-        self.__user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
-
-        window_title = ctypes.create_string_buffer(512)
-        self.__user32.GetWindowTextA(hwnd, ctypes.byref(window_title), 512)
-
-        return window_title.value.decode('ASCII'), hwnd
 
     def __is_locked(self):
         """

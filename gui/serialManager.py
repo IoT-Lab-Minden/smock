@@ -27,7 +27,6 @@ class SerialManager:
         self.find_serial_device()
 
     def write_to_controller(self, message):
-
         while not self.__serial_device.is_open:
             time.sleep(1)
 
