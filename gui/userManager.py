@@ -89,7 +89,7 @@ class UserManager:
         Return the user that has the given uid, else return -1
 
         Args:
-            uid:
+            uid: uid of the user
 
         Returns:
             User with the given uid, else -1
