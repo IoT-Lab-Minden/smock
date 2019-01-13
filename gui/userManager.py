@@ -100,6 +100,7 @@ class UserManager:
         return -1
 
     def contains_multiple_user(self):
+        # TODO: change return value
         if len(self.user_list) > 1:
             return True
         else:

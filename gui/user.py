@@ -60,11 +60,3 @@ class User:
             new_password: new password of user
         """
         self.__password = new_password
-
-    def print(self):
-        """
-        Method for printing a user
-        """
-        print("Username: " + self.__username)
-        print("Passwort: " + self.__password)
-        print("uid: " + self.__uid)

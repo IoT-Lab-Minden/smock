@@ -11,6 +11,18 @@ LOCK_WINDOW_NAME_ENGLISH = "Windows Default Lock Screen"
 
 
 def is_locked(multi_user):
+    """
+    Gets the window title that is in the foreground. If it is a single user system then it compares the window title
+    with LOCK_WINDOW_NAME_GERMAN and LOCK_WINDOW_NAME_ENGLISH. If the window title is one of these, then the user is in
+    locked state. If it is a multi user system, the window title has no title when in foreground, because there is no
+    window in foreground at all.
+
+    Args:
+        multi_user: boolean value. If true then system is multi user
+
+    Returns:
+        returns the True if the screen is locked, else returns False
+    """
     user32 = ctypes.windll.User32
     hwnd = user32.GetForegroundWindow()
 

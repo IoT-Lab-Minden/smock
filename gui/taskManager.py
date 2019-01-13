@@ -1,11 +1,11 @@
 from command import Command
 from computerStatus import ComputerStatus
 from message import Message
-import ctypes
 import time
 from userManager import UserManager
 
 NEWLINE = 10
+
 
 class TaskManager:
     """
@@ -25,8 +25,6 @@ class TaskManager:
         self.__queue_manager = queue_manager
         self.__serial_manager = serial_manager
         self.__user_interface = user_interface
-        self.LOCK_WINDOW_NAME_GERMAN = "Windows-Standardsperrbildschirm"
-        self.LOCK_WINDOW_NAME_ENGLISH = "Windows Default Lock Screen"
 
     def read_tasks(self):
         """
@@ -50,7 +48,9 @@ class TaskManager:
     def send_password_to_controller(self, uid):
         """
         Sends the password of the user with the given uid. Is the computer locked, the method processes.
-        When the computer is unlocked, the computer status will be send to the micro controller
+        When the computer is unlocked, the computer status will be send to the micro controller. When the system
+        is a single user system, only the password is send to the serial device. If it is a system with several users,
+        there will be send the username as well.
 
         Args:
             uid: The uid from the user with the password
@@ -60,7 +60,6 @@ class TaskManager:
             user = self.__user_manager.get_user_with_uid(uid)
             if user != -1:
                 if self.__user_manager.contains_multiple_user():
-                    # TODO: add username when multi_user
                     password = user.get_password().encode()
                     if password[-1] != NEWLINE:
                         password += b'\n'
@@ -79,7 +78,7 @@ class TaskManager:
 
     def __send_computer_status(self):
         """
-        Sends the computer status of the computer to the micro controller.
+        Sends the computer status of the computer to the serial device.
         Either locked screen or unlocked.
         """
         if self.__is_locked():

@@ -8,7 +8,8 @@ import os
 
 
 def is_locked(multi_user):
-    open = os.popen("gdbus call -e -d com.canonical.Unity -o /com/canonical/Unity/Session -m com.canonical.Unity.Session.IsLocked | grep -ioP \"(true)|(false)\"").read()
+    open = os.popen("gdbus call -e -d com.canonical.Unity -o /com/canonical/Unity/Session -m"
+                    " com.canonical.Unity.Session.IsLocked | grep -ioP \"(true)|(false)\"").read()
     print(open)
     time.sleep(0.1)
     if "false\n" == open:

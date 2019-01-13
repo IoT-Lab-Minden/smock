@@ -16,10 +16,7 @@ class Gui:
         Computer to the ListBox.
 
         Args:
-            queue_manager: A queueManager
-            serial_manager: A serialManager
-            user_manager: A userManager
-            task_manager: A taskManager
+            client_user_interface: A client user interface
         """
         self.__client_user_interface = client_user_interface
         self.__client_user_interface.gui = self
@@ -68,7 +65,7 @@ class Gui:
     @staticmethod
     def __set_window_size(tk, width, height):
         """
-        Sets the size of the window and position the window to the center of the screen.
+        Sets the size of the window and positions the window to the center of the screen.
 
         Args:
             tk: The Window that has to be positioned
@@ -101,11 +98,14 @@ class Gui:
         height = 100
         cls.__set_window_size(notify_win, width, height)
 
+        # message for the user
         label = Label(notify_win, text=message)
-        label.pack()
-        btn = Button(notify_win, text="OK", command=notify_win.destroy)
-        btn.pack()
 
+        # destroys the notify window
+        btn = Button(notify_win, text="OK", command=notify_win.destroy)
+
+        label.pack()
+        btn.pack()
         notify_win.mainloop()
 
     # Edit the active user of list. Only username and password
@@ -235,7 +235,7 @@ class Gui:
 
     def __delete(self):
         """
-        Deletes the user that is active in the listbox of the main window
+        Deletes the user that is active in the listbox of the main window and also notify the user manager
         """
         self.__client_user_interface.delete_user(self.list.index(ACTIVE))
         self.notify("Der User wurde erfolgreich gelöscht")

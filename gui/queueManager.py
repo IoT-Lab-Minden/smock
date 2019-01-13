@@ -9,7 +9,7 @@ class QueueManager:
     """
     def __init__(self):
         """
-        Construcor of the class. Initialize the different queues.
+        Constructor of the class. Initialize the different queues.
         """
         self.__password_query = Queue()
         self.__uid_query = Queue()
@@ -17,10 +17,10 @@ class QueueManager:
 
     def read_queue(self, command_code):
         """
-        Reads a message from a queue. The queue will be selected by the command_code
+        Reads a message from a queue. The queue that is read from is selected by the command_code
 
         Args:
-            command_code:
+            command_code: The command code that was sent by the serial device
 
         Returns:
             A message if the queue has messages, otherwise returns a message with the text "nothing"
@@ -59,7 +59,7 @@ class QueueManager:
         """
         Stores a message into the correct queue. The command code of the Message decides in which
         queue the message will be put in.
-*
+
         Args:
             message: Message that is stored into a queue
         """
