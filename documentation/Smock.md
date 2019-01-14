@@ -28,25 +28,24 @@ Smock is the first device that allows you to log on or off to your computer usin
 
 Users at all ages, that are using their computer for Work. Companies, that wants to connect users to a specific device.
 
-# 2 Anforderungen
+# 2 Requirements
 
-## 2.1 Funktionale Anforderungen
+## 2.1 Functional Requirements
 
-## 2.2 Nicht-funktionale Anforderungen 
+## 2.2 Not-Functional Requirements 
 
-## 2.3 Graphische Benutzerschnittstelle
+## 2.3 Graphical User Interface
 
-# 3 Technische Beschreibung
+# 3 Technical Description
 
-## 3.1 Systemübersicht
+## 3.1 System Overview
 
-### 3.1.1 Schnittstellen
-
+### 3.1.1 Interfaces
 
 ## 3.5 Entwurf
 
-### Klassendiagramme
+### Class Diagram
 
-### Sequenzdiagramme
+### Sequence Diagram
 
-# 4  Code Dokumentation
+# 4 Code Documentation
