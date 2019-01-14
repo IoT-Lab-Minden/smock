@@ -15,7 +15,7 @@ class Gui:
         Computer to the ListBox.
 
         Args:
-            client_user_interface: A client user interface
+            client_user_interface: The client interface to the service script
         """
         self.__client_user_interface = client_user_interface
         self.__client_user_interface.gui = self
@@ -30,8 +30,8 @@ class Gui:
         self.__set_window_size(self.__root, 230, 270)
 
         # Initialize frames
-        self.top_frame = Frame(self.__root, pady=3)
-        self.bottom_frame = Frame(self.__root, pady=3)
+        self.top_frame = Frame(self.__root)
+        self.bottom_frame = Frame(self.__root)
 
         # Layout frames
         self.top_frame.pack()

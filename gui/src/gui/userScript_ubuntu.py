@@ -1,25 +1,32 @@
 import time
 from src.gui.gui import *
-from src.contoller.clientUserInterface import ClientUserInterface
+from src.gui.clientUserInterface import ClientUserInterface
 from threading import Thread
 import os
 
 
 def is_locked(multi_user):
-    open = os.popen("gdbus call -e -d com.canonical.Unity -o /com/canonical/Unity/Session -m"
-                    " com.canonical.Unity.Session.IsLocked | grep -ioP \"(true)|(false)\"").read()
-    print(open)
+    """
+    Works only for Ubuntu.
+    Asks if the screen is locked. Returns the locked_status
+
+    Returns:
+        returns True if the screen is locked, else returns False
+    """
+    locked_string = os.popen("gdbus call -e -d com.canonical.Unity -o /com/canonical/Unity/Session -m "
+                             "com.canonical.Unity.Session.IsLocked | grep -ioP \"(true)|(false)\"").read()
+    print(locked_string)
     time.sleep(0.1)
-    if "false\n" == open:
+    if "false\n" == locked_string:
         return False
     else:
         return True
 
+
 def main():
     """
-    This starts the program Smock. It is initializing the queueManager, serialManager, userManager, taskManager
-    and the gui. It also starts three threads. One to read the messages from the serial input, One to read the tasks
-    that are given from the Smock device and the last to text the Smock device about the using OS.
+    This starts starts the program gui of Smock. It connects to the service script and let the user interact with the
+    service script through the gui.
     """
     client_user_interface = ClientUserInterface(is_locked)
     gui = Gui(client_user_interface)

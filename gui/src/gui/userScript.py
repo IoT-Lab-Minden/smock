@@ -1,5 +1,5 @@
 from src.gui.gui import *
-from src.contoller.clientUserInterface import ClientUserInterface
+from src.gui.clientUserInterface import ClientUserInterface
 from threading import Thread
 import ctypes
 
@@ -9,6 +9,8 @@ LOCK_WINDOW_NAME_ENGLISH = "Windows Default Lock Screen"
 
 def is_locked(multi_user):
     """
+    Works only for Windows.
+
     Gets the window title that is in the foreground. If it is a single user system then it compares the window title
     with LOCK_WINDOW_NAME_GERMAN and LOCK_WINDOW_NAME_ENGLISH. If the window title is one of these, then the user is in
     locked state. If it is a multi user system, the window title has no title when in foreground, because there is no
@@ -18,7 +20,7 @@ def is_locked(multi_user):
         multi_user: boolean value. If true then system is multi user
 
     Returns:
-        returns the True if the screen is locked, else returns False
+        returns True if the screen is locked, else returns False
     """
     user32 = ctypes.windll.User32
     hwnd = user32.GetForegroundWindow()
@@ -38,9 +40,8 @@ def is_locked(multi_user):
 
 def main():
     """
-    This starts starts the program Smock. It is initializing the queueManager, serialManager, userManager, taskManager
-    and the gui. It also starts three threads. One to read the messages from the serial input, One to read the tasks
-    that are given from the Smock device and the last to text the Smock device about the using OS.
+    This starts starts the program gui of Smock. It connects to the service script and let the user interact with the
+    service script through the gui.
     """
     client_user_interface = ClientUserInterface(is_locked)
     gui = Gui(client_user_interface)

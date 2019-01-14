@@ -1,5 +1,4 @@
 import time
-from src.gui.gui import *
 from src.contoller.queueManager import QueueManager
 from src.contoller.serialManager import SerialManager
 from src.contoller.userManager import UserManager
@@ -19,7 +18,6 @@ def main():
     serial_manager = SerialManager(queue_manager, user_manager)
     user_interface = ListenerUserInterface(user_manager, serial_manager)
     task_manager = TaskManager(user_manager, queue_manager, serial_manager, user_interface)
-    # gui = Gui(queue_manager, serial_manager, user_manager, task_manager)
 
     t_ui_manager = Thread(target=user_interface.run)
     t_ui_manager.daemon = True
@@ -36,8 +34,6 @@ def main():
     while True:
         time.sleep(0.1)
         user_interface.check_for_new_msg()
-    # gui.start()
-    sys.exit()
 
 
 if __name__ == "__main__":

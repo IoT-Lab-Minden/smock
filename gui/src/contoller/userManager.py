@@ -4,7 +4,7 @@ from os import listdir
 from os import remove
 import os
 
-USERS_PATH = "./users/"
+USERS_PATH = "../../users/"
 
 
 class UserManager:
@@ -21,7 +21,8 @@ class UserManager:
 
     def __load_users_from_files(self):
         """
-        Loads the users from all files that are in the directory ./users
+        Loads the users from all files that are in the directory users. The directory users creates itself if not
+        already exists.
         """
         # Get all the filenames of the files in the local_path directory
         if not os.path.isdir(USERS_PATH):
@@ -40,7 +41,7 @@ class UserManager:
 
     def add_user(self, username, password, uid):
         """
-        Adds a new user to the list. Also create a new file
+        Adds a new user to the list. Also creates a new file for the user. The filename is the username of the user.
 
         Args:
             username: username for new user
@@ -55,7 +56,13 @@ class UserManager:
         self.create_user_file(user)
 
     def create_user_file(self, user):
-        with open("./users/" + user.get_username(), "w") as file_descriptor:
+        """
+        Creates a file with the information the user given as parameter.
+
+        Args:
+            user: the user that file is created
+        """
+        with open(USERS_PATH + user.get_username(), "w") as file_descriptor:
             file_descriptor.write(user.get_password() + "\n")
             file_descriptor.write(user.get_uid())
 
@@ -81,7 +88,7 @@ class UserManager:
         Args:
             index: user index in the list.
         """
-        remove("./users/" + self.user_list[index].get_username())
+        remove(USERS_PATH + self.user_list[index].get_username())
         del self.user_list[index]
 
     def get_user_with_uid(self, uid):
@@ -100,15 +107,28 @@ class UserManager:
         return -1
 
     def contains_multiple_user(self):
-        # TODO: change return value
+        """
+        This function checks if there are more than one user in the user list.
+
+        Returns:
+            returns True, when more than one user exists in the user list.
+        """
         if len(self.user_list) > 1:
             return True
         else:
             return False
 
     def edit_user(self, index, username, pwd):
+        """
+        Edits the username and password of the user. It's not possible to change the uid of the user.
+
+        Args:
+            index: index of the user in the list.
+            username: new username for the user
+            pwd: new password for the user
+        """
         self.user_list[index].set_password(pwd)
         if self.user_list[index].get_username() != username:
-            remove("./users/" + self.user_list[index].get_username())
+            remove(USERS_PATH + self.user_list[index].get_username())
             self.user_list[index].set_username(username)
             self.create_user_file(self.user_list[index])

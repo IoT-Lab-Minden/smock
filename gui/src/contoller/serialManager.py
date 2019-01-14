@@ -8,7 +8,7 @@ import platform
 from src.contoller.command import Command
 import os
 
-CONFIG_PATH = "./config/"
+CONFIG_PATH = "../../config/"
 CONFIG_FILE = CONFIG_PATH + "smock.cfg"
 MULTIPLE_USER = b"2"
 SINGLE_USER = b"1"
