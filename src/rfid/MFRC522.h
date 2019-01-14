@@ -64,7 +64,7 @@ namespace rfid_reader {
 		void softReset();
 
 		/**
-		 * \fn void writeRegister(uint8_t reg, uint8_t value)
+		 * \fn void writeRegister(PCD_Register reg, uint8_t value)
 		 * \brief Writes the value into the register given by its address.
 		 *
 		 * \param reg Adress of the register
@@ -82,10 +82,10 @@ namespace rfid_reader {
 		 *
 		 * \return void
 		 */
-		void writeRegister(uint8_t reg, uint8_t value);
+		void writeRegister(PCD_Register reg, uint8_t value);
 
 		/**
-		 * \fn void writeRegister(uint8_t reg, uint8_t count, uint8_t *values)
+		 * \fn void writeRegister(PCD_Register reg, uint8_t count, uint8_t *values)
 		 * \brief Writes multiple bytes to registers, starting at the given address
 		 *
 		 * \param reg Start address
@@ -104,10 +104,10 @@ namespace rfid_reader {
 		 *
 		 * \return void
 		 */
-		void writeRegister(uint8_t reg, uint8_t count, uint8_t *values);
+		void writeRegister(PCD_Register reg, uint8_t count, uint8_t *values);
 
 		/**
-		 * \fn uint8_t readRegister(uint8_t reg)
+		 * \fn uint8_t readRegister(PCD_Register reg)
 		 * \brief Reads the value of one register.
 		 *
 		 * \param reg Address of the register
@@ -124,7 +124,7 @@ namespace rfid_reader {
 		 *
 		 * \return uint8_t - The received answer.
 		 */
-		uint8_t readRegister(uint8_t reg);
+		uint8_t readRegister(PCD_Register reg);
 
 		/**
 		 * \fn void readRegister(PCD_Register reg, uint8_t count, uint8_t *values, uint8_t rxAlign = 0)
@@ -153,7 +153,7 @@ namespace rfid_reader {
 		void readRegister(PCD_Register reg, uint8_t count, uint8_t *values, uint8_t rxAlign = 0);
 
 		/**
-		 * \fn void setRegisterBitMask(uint8_t reg, uint8_t mask)
+		 * \fn void setRegisterBitMask(PCD_Register reg, uint8_t mask)
 		 * \brief Applys a mask to a given register.
 		 *
 		 * \param reg Address of the Register the mask should be applied to
@@ -169,10 +169,10 @@ namespace rfid_reader {
 		 * to the mask, back into the register.
 		 * \return void
 		 */
-		void setRegisterBitMask(uint8_t reg, uint8_t mask);
+		void setRegisterBitMask(PCD_Register reg, uint8_t mask);
 
 		/**
-		 * \fn void clearRegisterBitMask(uint8_t reg, uint8_t mask)
+		 * \fn void clearRegisterBitMask(PCD_Register reg, uint8_t mask)
 		 * \brief Applys a mask to a given register.
 		 *
 		 * \param reg Address of the Register the mask should be applied to
@@ -188,7 +188,7 @@ namespace rfid_reader {
 		 * to the negated mask, back into the register.
 		 * \return void
 		 */
-		void clearRegisterBitMask(uint8_t reg, uint8_t mask);
+		void clearRegisterBitMask(PCD_Register reg, uint8_t mask);
 
 		/**
 		 * \fn void init()

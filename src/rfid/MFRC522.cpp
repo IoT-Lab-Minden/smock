@@ -39,7 +39,7 @@ namespace rfid_reader {
 		antennaOn();						// Enable the antenna driver pins TX1 and TX2 (they were disabled by the reset)
 	}
 
-	void MFRC522::writeRegister(uint8_t reg, uint8_t value) {
+	void MFRC522::writeRegister(PCD_Register reg, uint8_t value) {
 		// select device
 	    ROM_GPIOPinWrite(SS_PIN_BASE, SS_PIN, 0);
 		SPI.transfer(reg & 0x7E);							// write command address format:  r(1)/w(0) a5 a4 a3 a2 a1 RFU(0)  with a5 as address page and a4 - a1 as register address
@@ -47,7 +47,7 @@ namespace rfid_reader {
 	    ROM_GPIOPinWrite(SS_PIN_BASE, SS_PIN, SS_PIN);
 	}
 
-	void MFRC522::writeRegister(uint8_t reg, uint8_t count, uint8_t *values) {
+	void MFRC522::writeRegister(PCD_Register reg, uint8_t count, uint8_t *values) {
 		ROM_GPIOPinWrite(SS_PIN_BASE, SS_PIN, 0);
 		SPI.transfer(reg & 0x7E);
 		for (uint8_t index = 0; index < count; index++) {
@@ -56,7 +56,7 @@ namespace rfid_reader {
 	    ROM_GPIOPinWrite(SS_PIN_BASE, SS_PIN, SS_PIN);
 	}
 
-	uint8_t MFRC522::readRegister(uint8_t reg) {
+	uint8_t MFRC522::readRegister(PCD_Register reg) {
 		uint8_t value;
 	    ROM_GPIOPinWrite(SS_PIN_BASE, SS_PIN, 0);
 		SPI.transfer(0x80 | (reg & 0x7E));
@@ -95,13 +95,13 @@ namespace rfid_reader {
 	    ROM_GPIOPinWrite(SS_PIN_BASE, SS_PIN, SS_PIN);
 	}
 
-	void MFRC522::setRegisterBitMask(uint8_t reg, uint8_t mask) {
+	void MFRC522::setRegisterBitMask(PCD_Register reg, uint8_t mask) {
 		uint8_t tmp;
 		tmp = readRegister(reg);
 		writeRegister(reg, tmp | mask);
 	}
 
-	void MFRC522::clearRegisterBitMask(uint8_t reg, uint8_t mask) {
+	void MFRC522::clearRegisterBitMask(PCD_Register reg, uint8_t mask) {
 		uint8_t tmp;
 		tmp = readRegister(reg);
 		writeRegister(reg, tmp & (~mask));
