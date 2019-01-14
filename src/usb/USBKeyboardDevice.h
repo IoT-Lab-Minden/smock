@@ -62,7 +62,15 @@ namespace usbdevice {
 	public:
 
 		/**
-		 * Method to get the usage code of a char. (Keyboard code standing for this key)
+		 * \fn uint8_t GetUsageCode(char cKey, bool bShifted)
+		 * \brief Method to get the usage code of a char.
+		 *
+		 * \param cKey Char to get the key from
+		 * \param bool Indicates weather the char is a shifted (big) char.
+		 *
+		 * Method to get the usage code of a char. (Keyboard code standing for this char)
+		 *
+		 * \return uint8_t - Usage code of this char.
 		 */
 		uint8_t GetUsageCode(char cKey, bool bShifted);
 

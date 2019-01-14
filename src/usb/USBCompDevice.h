@@ -49,6 +49,9 @@ namespace usbdevice {
 		 */
 		tUSBDCompositeDevice g_sCompDevice;
 
+		/**
+		 * Handles default usb events
+		 */
 		static tUSBCallback eventHandler;
 
 		/**

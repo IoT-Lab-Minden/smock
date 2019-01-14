@@ -266,8 +266,25 @@ namespace usbdevice {
 		 */
 		void write(uint8_t *data, uint32_t length);
 
+		/**
+		 * \fn uint8_t popReceiveBuffer()
+		 * \brief Returns top of queue
+		 *
+		 * \return uint8_t Returns the first byte of receive queue
+		 */
 		uint8_t popReceiveBuffer();
 
+		/**
+		 * \fn int pushReceiveBuffer(uint8_t data)
+		 * \brief Adds add the end of the queue
+		 *
+		 * \param data The data that should be added to the queue
+		 *
+		 * The data is added to the end of the queue. If the queue is
+		 * full, the new data discarded.
+		 *
+		 * \return int - 0 if the buffer is full. 1 otherwise.
+		 */
 		int pushReceiveBuffer(uint8_t data);
 
 		/**
