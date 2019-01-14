@@ -29,14 +29,14 @@ namespace rfid_reader {
 	    } else {
 	    	softReset();
 	    }
-		writeRegister(TModeReg, 0x80);
-		writeRegister(TPrescalerReg, 0xA9);
-		writeRegister(TReloadRegH, 0x03);
+		writeRegister(TModeReg, 0x80);			// TAuto=1; timer starts automatically at the end of the transmission in all communication modes at all speeds
+		writeRegister(TPrescalerReg, 0xA9);		// TPreScaler = TModeReg[3..0]:TPrescalerReg, ie 0x0A9 = 169 => f_timer=40kHz, ie a timer period of 25ms.
+		writeRegister(TReloadRegH, 0x03);		// Reload timer with 0x3E8 = 1000, ie 25ms before timeout.
 		writeRegister(TReloadRegL, 0xE8);
 
-		writeRegister(TxASKReg, 0x40);
-		writeRegister(ModeReg, 0x3D);
-		antennaOn();
+		writeRegister(TxASKReg, 0x40);		// Default 0x00. Force a 100 % ASK modulation independent of the ModGsPReg register setting
+		writeRegister(ModeReg, 0x3D);		// Default 0x3F. Set the preset value for the CRC coprocessor for the CalcCRC command to 0x6363 (ISO 14443-3 part 6.2.4)
+		antennaOn();						// Enable the antenna driver pins TX1 and TX2 (they were disabled by the reset)
 	}
 
 	void MFRC522::writeRegister(uint8_t reg, uint8_t value) {

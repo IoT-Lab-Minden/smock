@@ -45,26 +45,66 @@
 
 using namespace usbdevice;
 
+/**
+ * \var const int START_DELAY
+ *
+ * Delay before configuring the usb-device
+ */
 const int START_DELAY = 1000;
+
+/**
+ * \var const int WAIT_FOR_HOST_KONFIGURATION
+ *
+ * Delay before main-loop, so windows has time to detect the deviceDelay waited before the.
+ */
 const int WAIT_FOR_HOST_KONFIGURATION = 500;
+
+/**
+ * \var const int WAIT_LOG_IN
+ *
+ * Delay after logging in the single user.
+ */
 volatile const int WAIT_LOG_IN = 400;
+
+/**
+ * \var const int WAIT_LOG_IN_LONG
+ *
+ * Delay after logging in the multi user.
+ */
 volatile const int WAIT_LOG_IN_LONG = 3000;
+
+/**
+ * \var const int ENTER_DELAY
+ *
+ * Short delay after pressing enter.
+ */
 const int ENTER_DELAY = 350;
 
-const uint8_t SINGLE_USER = '1';
-const uint8_t ASK_FOR_PW = 'p';
-const uint8_t OS_SYSTEM = 'o';
-const uint8_t READ_UID = 'u';
-const uint8_t HOST_STATUS = 'l';
-const uint8_t USER_QUANTITY = 'q';
-const uint8_t END_REQUEST = '!';
-
+/**
+ * \var const uint8_t LINUX
+ *
+ * Code for a LINUX System
+ */
 const uint8_t LINUX = 'L';
 
-const char CHANGE_USER = 'b';
-const char CHANGE_USER1 = 'w';
-const char KEY_TAB = 202;
+const uint8_t LOG_WINDOWS = 'b';
 
+/**
+ * Command code which could be received by the host.
+ */
+typedef enum : uint8_t {
+	SINGLE_USER = '1',
+	ASK_FOR_PW = 'p',
+	OS_SYSTEM = 'o',
+	READ_UID = 'u',
+	HOST_STATUS = 'l',
+	USER_QUANTITY = 'q',
+	END_REQUEST = '!',
+} CommandCode;
+
+/**
+ * States the device can have.
+ */
 typedef enum : uint8_t {
 	START,
 	LOCKED,
@@ -73,40 +113,99 @@ typedef enum : uint8_t {
 	VALIDATE_HOST_LOCKED,
 } State;
 
+/**
+ * \var int8_t currentUid[]
+ *
+ * Currently logged UID.
+ */
 uint8_t currentUid[] = {0,0,0,0};
+
+/**
+ * \var uint32_t cardMissing
+ *
+ * Counter increased when currentUid is missing.
+ */
 uint32_t cardMissing = 0;
 
+/**
+ * \var uint32_t ui32TxCount
+ *
+ * TxCounter to find out if new data was transmitted
+ */
 uint32_t ui32TxCount;
 
+/**
+ * \var uint8_t os
+ *
+ * The code of the operating system of the host.
+ */
 uint8_t os = 0;
+
+/**
+ * \var uint8_t singleUser
+ *
+ * The code of the single user.
+ */
 uint8_t singleUser = 0;
 
 /**
+ * \var const int SYSTICKS_PER_SECOND
+ *
  * The system tick timer period.
  */
 const int SYSTICKS_PER_SECOND = 100;
 
 /**
- * Configure the USB pins
+ * \fn void configureUSB()
+ *
+ * Configures the USB pins.
+ *
+ * \return void
  */
 void configureUSB();
 
-void setUpI2C();
-
+/**
+ * \fn delay(int ms);
+ * \brief Delays in ms given time.
+ *
+ * \param ms Time to wait in ms
+ *
+ * \return void
+ */
 void delay(int ms);
 
+/**
+ * \fn uint32_t ControlHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData)
+ * \brief Handles the default USB-Events of the serial device.
+ */
 uint32_t ControlHandler(void *pvCBData, uint32_t ui32Event,
 		uint32_t ui32MsgValue, void *pvMsgData);
 
+/**
+ * \fn uint32_t USBEventHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData)
+ * \brief Handles the default USB-Events of the keyboard device.
+ */
 uint32_t USBEventHandler(void *pvCBData, uint32_t ui32Event,
 		uint32_t ui32MsgParam, void *pvMsgData);
 
+/**
+ * \fn uint32_t USBKeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData)
+ * \brief Handles the keyboard events of the keyboard device.
+ */
 uint32_t USBKeyboardHandler(void *pvCBData, uint32_t ui32Event,
 		uint32_t ui32MsgParam, void *pvMsgData);
 
+/**
+ * \fn uint32_t TxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData)
+ * \brief Handles the transmit events of the serial device.
+ */
 uint32_t TxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
 		void *pvMsgData);
 
+/**
+ * \fn uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, void *pvMsgData)
+ * \brief Handles the receive events of the serial device.
+ */
 uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
 		void *pvMsgData);
 
@@ -228,7 +327,12 @@ int main(void) {
 						}
 					}
 					USBKeyboardDevice::getInstance()->USBWriteString(username, lengthU);
-					USBKeyboardDevice::getInstance()->USBWriteString(&KEY_TAB, 1);
+					if (os == LINUX) {
+						USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
+						delay(ENTER_DELAY);
+					} else {
+						USBKeyboardDevice::getInstance()->USBWriteString(&KEY_TAB, 1);
+					}
 				}
 				USBKeyboardDevice::getInstance()->USBWriteString(pw, length);
 				USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
@@ -275,15 +379,17 @@ int main(void) {
 						if (singleUser == SINGLE_USER) {
 							USBKeyboardDevice::getInstance()->USBWriteString(&ENTER, 1);
 						} else {
-							uint8_t b = USBKeyboardDevice::getInstance()->GetUsageCode('b', false);
+							uint8_t b = USBKeyboardDevice::getInstance()->GetUsageCode(LOG_WINDOWS, false);
 							USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, &b, 1);
-							//USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER, 1);
-							/*USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_ALT, (uint8_t *)&CHANGE_USER1, 1);
-							USBKeyboardDevice::getInstance()->USBWriteString(&CHANGE_USER1, 1);*/
 						}
 					} else {
-						uint8_t l = USBKeyboardDevice::getInstance()->GetUsageCode('l', false);
-						USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &l, 1);
+						uint8_t key;
+						if (singleUser == SINGLE_USER) {
+							key = USBKeyboardDevice::getInstance()->GetUsageCode('l', false);
+						} else {
+							key = USBKeyboardDevice::getInstance()->GetUsageCode('u', false);
+						}
+						USBKeyboardDevice::getInstance()->USBPressKeyCombination(HID_KEYB_LEFT_CTRL | HID_KEYB_LEFT_ALT, &key, 1);
 					}
 				}
 				state = LOCKED;

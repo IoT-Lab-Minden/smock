@@ -12,28 +12,40 @@
 
 namespace usbdevice {
 
+	/**
+	 * \var const uint8_t UI_CAPS_LOCK
+	 *
+	 * Usage code of caps lock.
+	 */
+	const uint8_t UI_CAPS_LOCK = 0x00000001;
 
-	#define UI_CAPS_LOCK            0x00000001
-	#define UI_SCROLL_LOCK          0x00000002
-	#define UI_NUM_LOCK             0x00000003
+	/**
+	 * \var const uint8_t UI_SCROLL_LOCK
+	 *
+	 * Usage code of scroll lock.
+	 */
+	const uint8_t UI_SCROLL_LOCK = 0x00000002;
 
-	#define ADC_BUFFER_SIZE (4096)
-	#define HW_AVERAGE (64)
-	#define NUM_CHANNELS (8)
-	#define FFT_BIN_SIZE (1024)
+	/**
+	 * \var const uint8_t UI_NUM_LOCK
+	 *
+	 * Usage code of num lock.
+	 */
+	const uint8_t UI_NUM_LOCK = 0x00000003;
 
-	#define FILTER_SIZE (145+3)
-	#define FILTER_BUFFER_ALLOWANCE (8)
-	#define FILTER_BUFFER_SIZE (FILTER_SIZE + FILTER_BUFFER_ALLOWANCE)
-	#define FILTER_STEP_SIZE (FILTER_SIZE/2)
-
-	#define MULTIPLY_DOWN_SHIFT (8)
-	#define THRESHOLD_SHIFT (1)
-
-	#define MESSAGE_LENGTH (2)
-
-
+	/**
+	 * \var const char TAB
+	 *
+	 * Usage code of tab.
+	 */
 	const char TAB = 0x2b;
+
+	/**
+	 * const char KEY_TAB
+	 *
+	 * Self defined code for tab.
+	 */
+	const char KEY_TAB = 202;
 
 	/**
 	 * \var const uint8_t DEL

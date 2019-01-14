@@ -1,5 +1,5 @@
 /**
- * \file MFRC522Constatnts.h
+ * \file MFRC522Constants.h
  * \brief Contains the constants, enums and structs need for the MFRC522
  */
 
