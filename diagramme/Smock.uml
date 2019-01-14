@@ -64,17 +64,21 @@
     <packagedElement xmi:type="uml:StateMachine" xmi:id="_MVZxkOpCEei0m4I4I3qPnQ" name="Computer" visibility="public">
       <region xmi:type="uml:Region" xmi:id="_NRniMOpCEei0m4I4I3qPnQ" name="Region1">
         <transition xmi:type="uml:Transition" xmi:id="_ohxgsOpCEei0m4I4I3qPnQ" source="_REhzIOpCEei0m4I4I3qPnQ" target="_hpXecOpCEei0m4I4I3qPnQ"/>
-        <transition xmi:type="uml:Transition" xmi:id="_NlAwkOpIEei0m4I4I3qPnQ" name="[NearTag &amp;&amp; User owns Tag]" source="_hpXecOpCEei0m4I4I3qPnQ" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
-        <transition xmi:type="uml:Transition" xmi:id="_Vtsu8OpIEei0m4I4I3qPnQ" name="[NoNearTag]" source="_QX4WQOpHEei0m4I4I3qPnQ" target="_hpXecOpCEei0m4I4I3qPnQ"/>
-        <transition xmi:type="uml:Transition" xmi:id="_C6NoYOvVEeiI75dQfm4qMg" name="[User has new Tag]" source="_QX4WQOpHEei0m4I4I3qPnQ" target="_2UNKIOvUEeiI75dQfm4qMg"/>
-        <transition xmi:type="uml:Transition" xmi:id="_JloXgOvVEeiI75dQfm4qMg" name="[user registered]" source="_2UNKIOvUEeiI75dQfm4qMg" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
-        <transition xmi:type="uml:Transition" xmi:id="_Rr-zkOvVEeiI75dQfm4qMg" name="[User wants to edit tags" source="_QX4WQOpHEei0m4I4I3qPnQ" target="_Ol3XMOvVEeiI75dQfm4qMg"/>
-        <transition xmi:type="uml:Transition" xmi:id="_SuDUkOvVEeiI75dQfm4qMg" name="[Finished editing]" source="_Ol3XMOvVEeiI75dQfm4qMg" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_NlAwkOpIEei0m4I4I3qPnQ" name="receiveOS/setOS();setSingleUser();" source="_hpXecOpCEei0m4I4I3qPnQ" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_xhAyABf0EemaIJVXryD5AQ" name="newCardRead/setCurrentUid();" source="_QX4WQOpHEei0m4I4I3qPnQ" target="_2UNKIOvUEeiI75dQfm4qMg"/>
+        <transition xmi:type="uml:Transition" xmi:id="_wKMeIBf2EemaIJVXryD5AQ" name="isLocked/unsetCurrentUid()" source="_2UNKIOvUEeiI75dQfm4qMg" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_5vLbYBf2EemaIJVXryD5AQ" name="pwAndUsername/logIn()" source="_2UNKIOvUEeiI75dQfm4qMg" target="_Ol3XMOvVEeiI75dQfm4qMg"/>
+        <transition xmi:type="uml:Transition" xmi:id="_jCUzgBf3EemaIJVXryD5AQ" name="[counter==MAX]/unsetCurrentUid()" source="_Ol3XMOvVEeiI75dQfm4qMg" target="_WHpNIBf0EemaIJVXryD5AQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_3RowABf4EemaIJVXryD5AQ" name="[cardNotMissing]/counter=0" source="_Ol3XMOvVEeiI75dQfm4qMg" target="_Ol3XMOvVEeiI75dQfm4qMg"/>
+        <transition xmi:type="uml:Transition" xmi:id="_i2o2ABf5EemaIJVXryD5AQ" name="isLocked/" source="_WHpNIBf0EemaIJVXryD5AQ" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_2iri0Bf5EemaIJVXryD5AQ" name="isNotLocked/lock()" source="_WHpNIBf0EemaIJVXryD5AQ" target="_QX4WQOpHEei0m4I4I3qPnQ"/>
+        <transition xmi:type="uml:Transition" xmi:id="_9xpq8Bf5EemaIJVXryD5AQ" name="[cardMissing]/counter++" source="_Ol3XMOvVEeiI75dQfm4qMg" target="_Ol3XMOvVEeiI75dQfm4qMg"/>
         <subvertex xmi:type="uml:Pseudostate" xmi:id="_REhzIOpCEei0m4I4I3qPnQ" name=""/>
-        <subvertex xmi:type="uml:State" xmi:id="_hpXecOpCEei0m4I4I3qPnQ" name="LockedComputer"/>
-        <subvertex xmi:type="uml:State" xmi:id="_QX4WQOpHEei0m4I4I3qPnQ" name="UnlockedComputer"/>
-        <subvertex xmi:type="uml:State" xmi:id="_2UNKIOvUEeiI75dQfm4qMg" name="Register user"/>
-        <subvertex xmi:type="uml:State" xmi:id="_Ol3XMOvVEeiI75dQfm4qMg" name="Edit user"/>
+        <subvertex xmi:type="uml:State" xmi:id="_hpXecOpCEei0m4I4I3qPnQ" name="START"/>
+        <subvertex xmi:type="uml:State" xmi:id="_QX4WQOpHEei0m4I4I3qPnQ" name="LOCKED"/>
+        <subvertex xmi:type="uml:State" xmi:id="_2UNKIOvUEeiI75dQfm4qMg" name="WAIT_FOR_PW"/>
+        <subvertex xmi:type="uml:State" xmi:id="_Ol3XMOvVEeiI75dQfm4qMg" name="UNLOCKED"/>
+        <subvertex xmi:type="uml:State" xmi:id="_WHpNIBf0EemaIJVXryD5AQ" name="VALIDATE_HOST_LOCKED"/>
       </region>
     </packagedElement>
   </packagedElement>
