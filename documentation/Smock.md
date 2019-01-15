@@ -91,7 +91,7 @@ Because this class takes over the registration at the host the device also conta
 
 ### Host
 
-
+The software of the host is seperated in two different scripts. The first software 
 
 ## Software processes
 
