@@ -3,14 +3,6 @@
   <packagedElement xmi:type="uml:Package" xmi:id="_Dnu9QOmGEei9U5yEW2wp6A" name="ClassDiagramMC">
     <packagedElement xmi:type="uml:Package" xmi:id="_dd6ZoBgAEemaIJVXryD5AQ" name="rfid">
       <packagedElement xmi:type="uml:Class" xmi:id="_ibkJ8BgBEemaIJVXryD5AQ" name="MFRC522" visibility="public">
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_9wwYcBgMEemaIJVXryD5AQ" name="uid" type="_qs0xUBgIEemaIJVXryD5AQ" association="_9wi9EBgMEemaIJVXryD5AQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9w-a4BgMEemaIJVXryD5AQ"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9xJaABgMEemaIJVXryD5AQ" value="1"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_CH7NABgNEemaIJVXryD5AQ" name="statuscode" type="_ArHisBgLEemaIJVXryD5AQ" association="_CH3ioBgNEemaIJVXryD5AQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CH8bIBgNEemaIJVXryD5AQ"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CH8bIRgNEemaIJVXryD5AQ" value="1"/>
-        </ownedAttribute>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_SySdEBgDEemaIJVXryD5AQ" name="delay">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_SySdERgDEemaIJVXryD5AQ" name="ms ">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -107,7 +99,7 @@
           </ownedParameter>
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_X3zrwBgLEemaIJVXryD5AQ" type="_ArHisBgLEemaIJVXryD5AQ" direction="return"/>
         </ownedOperation>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_waCEYBgLEemaIJVXryD5AQ" name="REQA_or_WUPA">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_waCEYBgLEemaIJVXryD5AQ" name="REQA_or_WUPA" visibility="public">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_waCEYRgLEemaIJVXryD5AQ" name="command">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EByte"/>
           </ownedParameter>
@@ -179,14 +171,6 @@
         <ownedAttribute xmi:type="uml:Property" xmi:id="_K2UOkBgPEemaIJVXryD5AQ" name="compDevices" visibility="private" type="_ZRcl8BgQEemaIJVXryD5AQ"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="__bT48BgQEemaIJVXryD5AQ" name="compDevice" visibility="private" type="_ujEJcBgQEemaIJVXryD5AQ"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_VFqFgBgREemaIJVXryD5AQ" name="eventhandler" visibility="private" isStatic="true" type="_HxDb4BgREemaIJVXryD5AQ"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="__-elghgSEemaIJVXryD5AQ" name="usbkeyboarddevice" type="_9jJLgBgSEemaIJVXryD5AQ" association="__-cJQBgSEemaIJVXryD5AQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__-gasBgSEemaIJVXryD5AQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__-gasRgSEemaIJVXryD5AQ" value="1"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_XTuJchgaEemaIJVXryD5AQ" name="usbserialdevice" type="_q8HXQBgYEemaIJVXryD5AQ" association="_XTs7UBgaEemaIJVXryD5AQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XTvXkBgaEemaIJVXryD5AQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XTvXkRgaEemaIJVXryD5AQ" value="1"/>
-        </ownedAttribute>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_FDsBQBgSEemaIJVXryD5AQ" name="getInstance" isStatic="true">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_FDsBQRgSEemaIJVXryD5AQ" type="_DYhf8BgSEemaIJVXryD5AQ" direction="return"/>
         </ownedOperation>
@@ -356,19 +340,27 @@
       <packagedElement xmi:type="uml:DataType" xmi:id="_RY--cBgcEemaIJVXryD5AQ" name="*USBDCDCDevice"/>
       <packagedElement xmi:type="uml:DataType" xmi:id="_1AplABgdEemaIJVXryD5AQ" name="tLineCoding"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="_9wi9EBgMEemaIJVXryD5AQ" memberEnd="_9wwYcBgMEemaIJVXryD5AQ _9xPgoBgMEemaIJVXryD5AQ">
+    <packagedElement xmi:type="uml:Association" xmi:id="_9wi9EBgMEemaIJVXryD5AQ" memberEnd="_9wwYcBgMEemaIJVXryD5AQ _9xPgoBgMEemaIJVXryD5AQ" navigableOwnedEnd="_9wwYcBgMEemaIJVXryD5AQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9wsuEBgMEemaIJVXryD5AQ" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9wsuERgMEemaIJVXryD5AQ" key="nature" value="UML_Nature"/>
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_9xPgoBgMEemaIJVXryD5AQ" name="mfrc522" type="_ibkJ8BgBEemaIJVXryD5AQ" association="_9wi9EBgMEemaIJVXryD5AQ"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_9wwYcBgMEemaIJVXryD5AQ" name="uid" type="_qs0xUBgIEemaIJVXryD5AQ" association="_9wi9EBgMEemaIJVXryD5AQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9w-a4BgMEemaIJVXryD5AQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9xJaABgMEemaIJVXryD5AQ" value="1"/>
+      </ownedEnd>
     </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="_CH3ioBgNEemaIJVXryD5AQ" memberEnd="_CH7NABgNEemaIJVXryD5AQ _CH9CMBgNEemaIJVXryD5AQ">
+    <packagedElement xmi:type="uml:Association" xmi:id="_CH3ioBgNEemaIJVXryD5AQ" memberEnd="_CH7NABgNEemaIJVXryD5AQ _CH9CMBgNEemaIJVXryD5AQ" navigableOwnedEnd="_CH7NABgNEemaIJVXryD5AQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_CH6l8BgNEemaIJVXryD5AQ" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_CH6l8RgNEemaIJVXryD5AQ" key="nature" value="UML_Nature"/>
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_CH9CMBgNEemaIJVXryD5AQ" name="mfrc522" type="_ibkJ8BgBEemaIJVXryD5AQ" association="_CH3ioBgNEemaIJVXryD5AQ"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_CH7NABgNEemaIJVXryD5AQ" name="statuscode" type="_ArHisBgLEemaIJVXryD5AQ" association="_CH3ioBgNEemaIJVXryD5AQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CH8bIBgNEemaIJVXryD5AQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CH8bIRgNEemaIJVXryD5AQ" value="1"/>
+      </ownedEnd>
     </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="__-cJQBgSEemaIJVXryD5AQ" memberEnd="__-elghgSEemaIJVXryD5AQ __-hBwBgSEemaIJVXryD5AQ">
+    <packagedElement xmi:type="uml:Association" xmi:id="__-cJQBgSEemaIJVXryD5AQ" memberEnd="__-elghgSEemaIJVXryD5AQ __-hBwBgSEemaIJVXryD5AQ" navigableOwnedEnd="__-elghgSEemaIJVXryD5AQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__-elgBgSEemaIJVXryD5AQ" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="__-elgRgSEemaIJVXryD5AQ" key="nature" value="UML_Nature"/>
       </eAnnotations>
@@ -376,12 +368,22 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_I5k4QBgTEemaIJVXryD5AQ" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_I6DZYBgTEemaIJVXryD5AQ" value="1"/>
       </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="__-elghgSEemaIJVXryD5AQ" name="usbkeyboarddevice" type="_9jJLgBgSEemaIJVXryD5AQ" association="__-cJQBgSEemaIJVXryD5AQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__-gasBgSEemaIJVXryD5AQ" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__-gasRgSEemaIJVXryD5AQ" value="1"/>
+      </ownedEnd>
     </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="_XTs7UBgaEemaIJVXryD5AQ" memberEnd="_XTuJchgaEemaIJVXryD5AQ _XTvXkhgaEemaIJVXryD5AQ">
+    <packagedElement xmi:type="uml:Association" xmi:id="_XTs7UBgaEemaIJVXryD5AQ" visibility="public" memberEnd="_XTuJchgaEemaIJVXryD5AQ _XTvXkhgaEemaIJVXryD5AQ" navigableOwnedEnd="_XTuJchgaEemaIJVXryD5AQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XTuJcBgaEemaIJVXryD5AQ" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XTuJcRgaEemaIJVXryD5AQ" key="nature" value="UML_Nature"/>
       </eAnnotations>
-      <ownedEnd xmi:type="uml:Property" xmi:id="_XTvXkhgaEemaIJVXryD5AQ" name="usbcompdevice" type="_yPuTUBgOEemaIJVXryD5AQ" association="_XTs7UBgaEemaIJVXryD5AQ"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_XTvXkhgaEemaIJVXryD5AQ" type="_yPuTUBgOEemaIJVXryD5AQ" association="_XTs7UBgaEemaIJVXryD5AQ">
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_TUjXMBi0EemeVK_RnjIajg" value=""/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_XTuJchgaEemaIJVXryD5AQ" type="_q8HXQBgYEemaIJVXryD5AQ" association="_XTs7UBgaEemaIJVXryD5AQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XTvXkBgaEemaIJVXryD5AQ" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XTvXkRgaEemaIJVXryD5AQ" value="1"/>
+      </ownedEnd>
     </packagedElement>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_GRSTAOpCEei0m4I4I3qPnQ" name="StateDiagram">

@@ -65,55 +65,45 @@ To controll the reader and to communicate with the computer we use a usb-capable
 
 ![CompositeDiagram](..\diagramme\Smock\CompositeDiagram.PNG)
 
-# 1 Introduction
+## Software Structure
 
-## 1.1 Description
+### Device
 
-Smock (Smart Computer Lock) is a device that locks your computer when you are not at your place and unlocks it when you are back at your place. Smock is able to operate on Windows 10 and Ubuntu. It's able to use smock with only one existing user on your computer, as well as using it on a computer with multiple users. Smock works with an RFID reader and an RFID tag. The user uses the tag to unlock device and takes away the tag when the user wants to lock the computer. When "User A" locks out of the computer, then another "User B" can log into the device with his tag. Smock will switch the user automatically and logs in the other user. 
+The Software of the device is separted into two different parts. The first one which controls the MFRC522 RFID Reader mainly consits of one class, the __MRFC522__ class.
 
-## 1.2 Goals
+This class uses the SPI module provieded by the energia librarys to communicate with the host. The class hold the currently aviable uid in a UID struct. This struct contains an array of bytes that holds the ID. The struct also holds the length of the UID array.
 
-### 1.2.1 Applications
+The __MRFC522__ class offers the needed functions to setup and communicate with the reader. To handle different error values a StatusCode enumeration is used.
 
-Smock is used for Windows 10 and Ubuntu Computer.
+The second part controls the usb communication. The general communication between the host and the device is realized with a serial interface. The device is  represented by the __USBSerialDevice__. It contains a tUSBCDCDevice which is responsible for the serial communication. The tUSBCDCDevice type is provided by the usb Library from Texas Instruments and it is used to register the callbacks to handle different usb events. There are three Callbacks needed for the serial communication. The first one handles the general usb events like connecting or disconnecting the usb connection, the second one handles the event when data was received and the third one handles the event when data was transmitted.
 
-Auch auf anderen Möglich -> spezielle anpassungen an das betriebs system
+The received data is written into a receive buffer and the data that should be transmitted needs to be written in a transmitt buffer.
 
-### 1.2.2 Motivation
+To lock or unlock the host it is necessary to simulate a keyboard device. For this is the __USBKeyboardDevice__ class used. The class handles events received from the host and provides methods to send keys. The event handler callback method is registered with a tUSBHIDKeyboardDevice which is like the tUSBCDCDevice responible for the connection.
 
-People often forget their passwords of an account or choose easy to guess passwords. Smock prevents this and makes it possible to log in to your device without knowing the password.
+Since we are connecting two usb devices to the host via one usb port we need a composite device to combine them. The device is represened by the __USBCompDevice__ class. This class holds both structures of the devices which a responsible for the connection (the tUSBHIDKeyboardDevice  and the tUSBCDCDevice).  Events send from the host can be the releasing or pressing of special keys.
 
-### 1.2.3 Coverage
+Because this class takes over the registration at the host the device also contains a descriptor data array that holds the informations needed by the host. The connection is like the other devices handled by a structure provided by the usb library. This tUSBCompositeDevice struct also registers a event handler for default usb events like connecting or disconnecting.
 
-Smock is able to be used on Windows 10 and Ubuntu Computer. It is also possible have multiple user on a computer.
+![ClassDiagram_rfid](..\diagramme\Smock\ClassDiagram_rfid.png)
 
-### 1.2.4 Unique Selling Point
+![ClassDiagram_usb](..\diagramme\Smock\ClassDiagram_usb.png)
 
-Smock is the first device that allows you to log on or off to your computer using an RFID card.
-
-### 1.2.5 Target
-
-Users at all ages, that are using their computer for Work. Companies, that wants to connect users to a specific device.
-
-# 2 Anforderungen
-
-## 2.1 Funktionale Anforderungen
-
-## 2.2 Nicht-funktionale Anforderungen 
-
-## 2.3 Graphische Benutzerschnittstelle
-
-# 3 Technische Beschreibung
-
-## 3.1 Systemübersicht
-
-### 3.1.1 Schnittstellen
+### Host
 
 
-## 3.5 Entwurf
 
-### Klassendiagramme
+## Software processes
 
-### Sequenzdiagramme
+### Device
 
-# 4  Code Dokumentation
+### Host
+
+## Setup
+
+## Conclusion
+
+## Code Documentation
+
+## Datasheet
+
