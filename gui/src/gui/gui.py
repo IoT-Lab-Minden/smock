@@ -145,7 +145,7 @@ class Gui:
         label_password = Label(edit_top_frame, text="Password: ")
 
         textfield_username = Entry(edit_top_frame)
-        textfield_password = Entry(edit_top_frame)
+        textfield_password = Entry(edit_top_frame, show="*")
 
         label_username.grid(row=0)
         label_password.grid(row=1)
@@ -209,7 +209,7 @@ class Gui:
         label_uid = Label(add_top_frame, text="uid: ")
 
         textfield_username = Entry(add_top_frame)
-        textfield_password = Entry(add_top_frame)
+        textfield_password = Entry(add_top_frame, show="*")
         self.label_near_uid = Label(add_top_frame, text="nothing")
 
         label_username.grid(row=0)
