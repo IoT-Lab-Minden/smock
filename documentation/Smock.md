@@ -51,6 +51,18 @@ All system requiremnts, functional and non-functional, are shown in the image be
 
 ## Components
 
+Thinking about differnt way to identifcate users we have decided to use RFID. RFID has multiple advantages for our system.
+
+First of all the user just needs to carry around the RFID Tag. This Tags can be very small and they are available in many different variants. This makes it easy to carry them.
+
+RFID Tag are also common in many companys as key cards. So many of the employed already have a RFID Tag.
+
+Finally the tags can easly identificated and and be distinguished from other tags.
+
+To communicate with the tag we need a RFID Reader. The reader has the task to read the ID from the tag. 
+
+To controll the reader and to communicate with the computer we use a usb-capable microcontroller. The microcontroller handles the event when a new card is read by the RFID Reader, verifies the user and logs him. The same way works the logging off from the user.
+
 ![CompositeDiagram](..\diagramme\Smock\CompositeDiagram.PNG)
 
 # 1 Introduction
@@ -83,24 +95,25 @@ Smock is the first device that allows you to log on or off to your computer usin
 
 Users at all ages, that are using their computer for Work. Companies, that wants to connect users to a specific device.
 
-# 2 Requirements
+# 2 Anforderungen
 
-## 2.1 Functional Requirements
+## 2.1 Funktionale Anforderungen
 
-## 2.2 Not-Functional Requirements 
+## 2.2 Nicht-funktionale Anforderungen 
 
-## 2.3 Graphical User Interface
+## 2.3 Graphische Benutzerschnittstelle
 
-# 3 Technical Description
+# 3 Technische Beschreibung
 
-## 3.1 System Overview
+## 3.1 Systemübersicht
 
-### 3.1.1 Interfaces
+### 3.1.1 Schnittstellen
+
 
 ## 3.5 Entwurf
 
-### Class Diagram
+### Klassendiagramme
 
-### Sequence Diagram
+### Sequenzdiagramme
 
-# 4 Code Documentation
+# 4  Code Dokumentation
