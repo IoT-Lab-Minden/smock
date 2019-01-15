@@ -2941,6 +2941,12 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_y8PYoBieEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_2Pmm0BieEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_UGEQgBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_hvQIMhieEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_2Pmm0RieEemeVK_RnjIajg"/>
             </children>
@@ -3011,14 +3017,32 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_zT5qsxieEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_-t96QBieEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_UkAwwBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_hvQIRBieEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_-t-hUBieEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_-uAWgBieEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_U6hzUBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_hvQIRRieEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_-uAWgRieEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_-uA9kBieEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_VTmaoBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_hvQIRhieEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_-uA9kRieEemeVK_RnjIajg"/>
             </children>
@@ -3111,14 +3135,32 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_PFTVFRifEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_ZHsnEBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_WPVqIBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIv_8hifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHsnERifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHsnEhifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_YZKdYBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIv_8xifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHsnExifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHsnFBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_cyjfgBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIv_9BifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHtOIBifEemeVK_RnjIajg"/>
             </children>
@@ -3164,10 +3206,22 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_PFT8KhifEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_ZHi2EBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_eIszEBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIv__RifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHi2ERifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHjdIBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_ebt1sBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIv__hifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHjdIRifEemeVK_RnjIajg"/>
             </children>
@@ -3201,10 +3255,22 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_PFUjPxifEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_ZHkEMBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_fLDn8BiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwAABifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHkEMRifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHkEMhifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_fi9xoBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwAARifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHkEMxifEemeVK_RnjIajg"/>
             </children>
@@ -3230,7 +3296,7 @@
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PFUjTRifEemeVK_RnjIajg"/>
           </children>
           <element xmi:type="uml:Class" href="Smock.uml#_LIv__xifEemeVK_RnjIajg"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PFUjOxifEemeVK_RnjIajg" x="402" y="508"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PFUjOxifEemeVK_RnjIajg" x="1112" y="101"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_PFVKQBifEemeVK_RnjIajg" type="Class_Shape_CN">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PLif-BifEemeVK_RnjIajg" source="PapyrusCSSForceValue">
@@ -3307,6 +3373,12 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_PFVxVRifEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_ZHmgdBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_gbYnYBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnHRifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHmgdRifEemeVK_RnjIajg"/>
             </children>
@@ -3315,14 +3387,32 @@
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHmgdxifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHmgeBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_hBryYBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnIRifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHmgeRifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHmgehifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_h1l7kBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnIhifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHmgexifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHmgfBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_hcYKUBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnIxifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHmgfRifEemeVK_RnjIajg"/>
             </children>
@@ -3380,14 +3470,32 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_PFWYZRifEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_ZHo8sBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_jGOdABiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnMBifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHo8sRifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHpjwBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_jeqyMBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnMRifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHpjwRifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHpjwhifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_jz6CYBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnMhifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHpjwxifEemeVK_RnjIajg"/>
             </children>
@@ -3396,10 +3504,22 @@
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHpjxRifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHpjxhifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_kQWt0BiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnNhifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHpjxxifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHpjyBifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_knHoABiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnNxifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHpjyRifEemeVK_RnjIajg"/>
             </children>
@@ -3457,18 +3577,42 @@
           </children>
           <children xmi:type="notation:BasicCompartment" xmi:id="_PFW_dRifEemeVK_RnjIajg" type="Class_AttributeCompartment_CN">
             <children xmi:type="notation:Shape" xmi:id="_ZHqx5BifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_lRFLABiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnQRifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHqx5RifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHqx5hifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_lp4FgBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnQhifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHqx5xifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHrY8BifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_mDgGcBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnQxifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHrY8RifEemeVK_RnjIajg"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_ZHrY8hifEemeVK_RnjIajg" type="Property_ClassAttributeLabel">
+              <styles xmi:type="notation:StringListValueStyle" xmi:id="_mdy1wBiwEemxip7ihvpsOQ" name="maskLabel">
+                <stringListValue>visibility</stringListValue>
+                <stringListValue>name</stringListValue>
+                <stringListValue>type</stringListValue>
+                <stringListValue>derived</stringListValue>
+              </styles>
               <element xmi:type="uml:Property" href="Smock.uml#_LIwnRBifEemeVK_RnjIajg"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_ZHrY8xifEemeVK_RnjIajg"/>
             </children>
@@ -3505,13 +3649,15 @@
       </children>
       <styles xmi:type="notation:CanonicalStyle" xmi:id="_PFKyMBifEemeVK_RnjIajg"/>
       <element xmi:type="uml:Package" href="Smock.uml#_LIv_8BifEemeVK_RnjIajg"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MUdlIRifEemeVK_RnjIajg" x="1872" y="140" width="1851" height="823"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MUdlIRifEemeVK_RnjIajg" x="1682" y="77" width="1851" height="823"/>
     </children>
     <styles xmi:type="notation:StringValueStyle" xmi:id="_-xuOURidEemeVK_RnjIajg" name="diagram_compatibility_version" stringValue="1.4.0"/>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_-xuOUhidEemeVK_RnjIajg"/>
     <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_-xuOUxidEemeVK_RnjIajg" diagramKindId="org.eclipse.papyrus.uml.diagram.class">
       <owner xmi:type="uml:Package" href="Smock.uml#_4PiTsBidEemeVK_RnjIajg"/>
     </styles>
+    <styles xmi:type="notation:BooleanValueStyle" xmi:id="_KB9HQBiwEemxip7ihvpsOQ" name="rulergrid.snaptogrid"/>
+    <styles xmi:type="notation:BooleanValueStyle" xmi:id="_KLwjgBiwEemxip7ihvpsOQ" name="rulergrid.viewgrid"/>
     <element xmi:type="uml:Package" href="Smock.uml#_4PiTsBidEemeVK_RnjIajg"/>
   </notation:Diagram>
 </xmi:XMI>
