@@ -97,13 +97,47 @@ Because this class takes over the registration at the host the device also conta
 
 ### Device
 
+The main component of the device software is realized with a state machine.
+
+![StateComputer](..\diagramme\Smock\StateComputer.PNG)
+
+After starting the microcontroller goes into the *START* state. All events that come in, whether they come from the rfid reader or via the serial port, are discarded, except for the OS_SYSTEM event from the host. This message contains information about the operarting system and the number of users registerd to the software. Without this information the log in or off won't work because there are different schedules needed for a different number of users or different operating systems.
+
+After receiving the needed information the host goes in the *LOCKED* state. This state is only left when a card is read by the rfid reader. The readed Uid from the tag is stored as currentUid. The device sends over the serial interface a request for the password and optional the username matching to the Uid.
+
+Then the system goes in the state *WAIT_FOR_PW*. In this state the device waits for the answer of the host. There are two differnt way the host can answer. The first opportunity is that the device receives as HOST_STATUS message. This message indicates that the host is already logged in. In this case a user has unlocked the host manually and the device should not sing in the new user. The system goes back to the *LOCKED* state in that case and resets the currentUid to a default value.
+
+The second possible answer is a message containg the the username and optinal the pasword. In this case the microcontroller uses the information to logg in the user using the simulated keyboard. The following state in this case is the *UNLOCKED* state.
+
+The device stay in this state until the card is gone or a other card is read. There is a conuter used which is increased when no or a differnt card is read. If the counter reaches a certain value the card is identified as lost. In that case the system resets the currentUid to the default value and and reqeusts the host state via the serial interface. After that the host goes to the *VALIDATE_HOST_LOCKED_STATE*. The missing card counter is reset to zero when the card is detected again. The use of a counter is necessary because the reader does not always detects the card.
+
+In the *VALIDATE_HOST_LOCKED_STATE* the device waits for the answer of the host to the status request. If the host returns that he is already locked out the state of the device is simply changed to *LOCKED*. Otherwise the device locks the host using the simulated keyboard and goes in the *LOCKED* state afterwards.
+
+In every state are unexpected events discarded except for a few certain requests received via the serial interface.
+
+The first one is the information that the number of registered users has changed. In this case the host sends a USER_QUANTITY code followed by 1 if there is only one usere registered and a 2 other wise.
+
+The second on is when the operating system information is send again. When this happens the device stores updates the operating system and user quantity informations.
+
+Finally the currently read UID can be requested from the host to connect it to a user. The device returns the the value of the currentUid if it does not hold the default value. In that case is a empty uid returned.
+
+*gff. in unter punkten abläufe innerhalb der seriellen schnittstelle/tatstatur klasse beschreiben - oder in doku ausführlicher?*
+
 ### Host
 
 ## Setup
+
+### Windows
+
+To set up the program for windows python needs to be installed on the host. Pthon version
+
+### Ubuntu
+
+
 
 ## Conclusion
 
 ## Code Documentation
 
-## Datasheet
+## Datasheets
 
