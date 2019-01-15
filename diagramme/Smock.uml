@@ -645,8 +645,8 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_hvQIQxieEemeVK_RnjIajg" name="clientUserInterface">
         <ownedAttribute xmi:type="uml:Property" xmi:id="_hvQIRBieEemeVK_RnjIajg" name="gui" type="_hvQIMRieEemeVK_RnjIajg"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_hvQIRRieEemeVK_RnjIajg" name="connection" visibility="private"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_hvQIRhieEemeVK_RnjIajg" name="mutex" visibility="private"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_hvQIRRieEemeVK_RnjIajg" name="connection" visibility="private" type="_jguLMBixEemxip7ihvpsOQ"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_hvQIRhieEemeVK_RnjIajg" name="mutex" visibility="private" type="_5Eu7sBiwEemxip7ihvpsOQ"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQIRxieEemeVK_RnjIajg" name="polling"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQISBieEemeVK_RnjIajg" name="checkIfUserExists" visibility="private">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQISRieEemeVK_RnjIajg" name="name">
@@ -704,9 +704,9 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_LIv_8BifEemeVK_RnjIajg" name="controllerInterface">
       <packagedElement xmi:type="uml:Class" xmi:id="_LIv_8RifEemeVK_RnjIajg" name="QueueManager">
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIv_8hifEemeVK_RnjIajg" name="passwordQuery" visibility="private"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIv_8xifEemeVK_RnjIajg" name="uidQuery" visibility="private"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIv_9BifEemeVK_RnjIajg" name="computerStatusQuery" visibility="private"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIv_8hifEemeVK_RnjIajg" name="passwordQuery" visibility="private" type="_WceRwBixEemxip7ihvpsOQ"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIv_8xifEemeVK_RnjIajg" name="uidQuery" visibility="private" type="_WceRwBixEemxip7ihvpsOQ"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIv_9BifEemeVK_RnjIajg" name="computerStatusQuery" visibility="private" type="_WceRwBixEemxip7ihvpsOQ"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_LIv_9RifEemeVK_RnjIajg" name="read_queue">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_LIv_9hifEemeVK_RnjIajg" name="commandCode" type="_J5boMBgSEemaIJVXryD5AQ"/>
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_LIv_9xifEemeVK_RnjIajg" type="_J5boMBgSEemaIJVXryD5AQ" direction="return"/>
@@ -791,14 +791,14 @@
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_LIwnHBifEemeVK_RnjIajg" name="ListenerUserInterface">
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnHRifEemeVK_RnjIajg" name="listener" visibility="private"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnHhifEemeVK_RnjIajg" name="clients" visibility="private">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnHRifEemeVK_RnjIajg" name="listener" visibility="private" type="_0lTGgBixEemxip7ihvpsOQ"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnHhifEemeVK_RnjIajg" name="clients" visibility="private" type="_jguLMBixEemxip7ihvpsOQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LIwnHxifEemeVK_RnjIajg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LIwnIBifEemeVK_RnjIajg" value="*"/>
         </ownedAttribute>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnIRifEemeVK_RnjIajg" name="userManager" visibility="private" type="_LIwnAxifEemeVK_RnjIajg"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnIhifEemeVK_RnjIajg" name="serialManager" visibility="private" type="_LIwnLxifEemeVK_RnjIajg"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnIxifEemeVK_RnjIajg" name="mutex" visibility="private"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnIxifEemeVK_RnjIajg" name="mutex" visibility="private" type="_5Eu7sBiwEemxip7ihvpsOQ"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_LIwnJBifEemeVK_RnjIajg" name="run"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_LIwnJRifEemeVK_RnjIajg" name="checkForNewMsg"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_LIwnJhifEemeVK_RnjIajg" name="doAction" concurrency="concurrent">
@@ -830,8 +830,8 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LIwnNBifEemeVK_RnjIajg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LIwnNRifEemeVK_RnjIajg" value="*"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnNhifEemeVK_RnjIajg" name="mutex" visibility="private"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnNxifEemeVK_RnjIajg" name="serialDevice" visibility="private"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnNhifEemeVK_RnjIajg" name="mutex" visibility="private" type="_5Eu7sBiwEemxip7ihvpsOQ"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_LIwnNxifEemeVK_RnjIajg" name="serialDevice" visibility="private" type="_3DN6cBixEemxip7ihvpsOQ"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_LIwnOBifEemeVK_RnjIajg" name="writeToController">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_LIwnORifEemeVK_RnjIajg" name="message" type="_LIv__BifEemeVK_RnjIajg"/>
         </ownedOperation>
@@ -854,6 +854,11 @@
         </ownedOperation>
       </packagedElement>
     </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_5Eu7sBiwEemxip7ihvpsOQ" name="Mutex"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_WceRwBixEemxip7ihvpsOQ" name="Queue"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_jguLMBixEemxip7ihvpsOQ" name="Client"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_0lTGgBixEemxip7ihvpsOQ" name="Listener"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_3DN6cBixEemxip7ihvpsOQ" name="Serial"/>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_-7_4wOpHEei0m4I4I3qPnQ">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-8CVAOpHEei0m4I4I3qPnQ" source="http://www.eclipse.org/uml2/2.0.0/UML">

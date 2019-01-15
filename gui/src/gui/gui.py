@@ -118,12 +118,7 @@ class Gui:
             if self.__client_user_interface.check_if_user_exists(textfield_username.get()):
                 self.notify("Der User existiert bereits")
             else:
-                # Get the selected user from the listbox and edit its name by the text of the Entry widgets
-                user_name = self.__client_user_interface.get_username(self.list.index(ACTIVE))
-                uid = self.__client_user_interface.get_uid(self.list.index(ACTIVE))
-
                 # Remove the file of the user
-
                 user_name = textfield_username.get()
                 user_pwd = textfield_password.get()
                 self.__client_user_interface.set_new_data(self.list.index(ACTIVE), user_name, user_pwd)
