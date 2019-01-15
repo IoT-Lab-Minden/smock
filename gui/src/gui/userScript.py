@@ -23,16 +23,18 @@ def is_locked(multi_user):
         returns True if the screen is locked, else returns False
     """
     user32 = ctypes.windll.User32
-    hwnd = user32.GetForegroundWindow()
+    window_number = user32.GetForegroundWindow()
+    no_window_number = 0
 
-    pid = ctypes.c_ulong(0)
-    user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
+    pid = ctypes.c_ulong()
+    user32.GetWindowThreadProcessId(window_number, ctypes.byref(pid))
 
-    window_title = ctypes.create_string_buffer(512)
-    user32.GetWindowTextA(hwnd, ctypes.byref(window_title), 512)
+    buffer_size = 512
+    window_title = ctypes.create_string_buffer(buffer_size)
+    user32.GetWindowTextA(window_number, ctypes.byref(window_title), buffer_size)
 
     if multi_user == "True":
-        return window_title.value.decode('ASCII') == "" and hwnd == 0
+        return window_title.value.decode('ASCII') == "" and window_number == no_window_number
     else:
         return window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_ENGLISH or \
                window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_GERMAN

@@ -149,15 +149,11 @@ class SerialManager:
                 for port in ports:
                     if port[0] == config['DEFAULT']['COMPORT']:
                         self.__serial_device.port = config['DEFAULT']['COMPORT']
-                        # TODO: Find out what happens if no serial device is connected but config exists.
                         self.__serial_device.open()
                         self.send_os_to_controller()
 
             if not self.__serial_device.is_open:
                 return False
-            #     Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
-            #                "Vergewissern Sie sich, dass das Gerät angeschlossen ist\n"
-            #                "und der COM Port in der Config richtig ist.")
         else:
             ports = serial.tools.list_ports.comports()
             if len(ports) > 0:
@@ -172,8 +168,6 @@ class SerialManager:
                     config.write(config_file)
             else:
                 return False
-                # Gui.notify("Es wurde kein Smock Gerät gefunden.\n"
-                #            "Vergewissern Sie sich, dass das Gerät angeschlossen ist.\n")
         return True
 
     def send_os_to_controller(self):

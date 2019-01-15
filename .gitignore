@@ -121,3 +121,6 @@ gui/src/users/*
 gui/src/config/*
 gui/.idea/
 .idea/*
+gui/config/
+
+gui/users/
