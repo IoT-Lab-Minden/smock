@@ -91,7 +91,21 @@ Because this class takes over the registration at the host the device also conta
 
 ### Host
 
-The software of the host is seperated in two different scripts. The first software 
+The software of the host is seperated in two different scripts. The first script is the service script and the second script is the user script.
+
+The service script is for communicating with the serial device. The class that is talking to the serial device is the __SerialManager__. This class receives the messages from the serial device as well as writes messages to the serial device. When the __SerialManager__ receives a message it forwards the message to the __QueueManager__.
+
+The __QueueManager__ puts the message, that it gets into seperate queues, depending on what message the QueueManager got. When another class asks to read a message from a queue, the class has to tell the QueueManager which command he is looking for. The QueueManager will look into the correct queue and returns the message, when a message exists.
+
+A __Message__ contains a command code and the text. The command code is useful for seperating the messages and being aware, what the serial device wants. The text is the information of message.
+
+The __TaskManager__ reads if there are any messages in the QueueManager. When the TaskManager reads a message it responds to this message proceeds according to what the command code says.
+
+The __UserManager__ is responsible for loading the already existing users from files and also managing them. This means adding a new User, editing them or delete a User. The __User__ has the attributes username, password and uid.
+
+The last class of the service script is the __ListenerUserInterface__. This class is the interface to the user script and uses ipv4 to communicate.
+
+The user script is for the user. This opens a Gui that the user can use to add new User or edit/delete User. The __Gui__ has a main window and the different methods to answer the events that are triggered by pressing buttons. The user Script connects to the open port of the ListenerUserInterface of the service script. This happens in the class CLientUserInterface. The __ClientUserInterface__ has also the task to pass changes that are made by a user to the service script.
 
 ## Software processes
 
@@ -124,6 +138,23 @@ Finally the currently read UID can be requested from the host to connect it to a
 *gff. in unter punkten abläufe innerhalb der seriellen schnittstelle/tatstatur klasse beschreiben - oder in doku ausführlicher?*
 
 ### Host
+
+#### Service Script
+
+At first the service script will be started. This initializes the __QueueManager__, the __UserManager__, the __SerialManager__, the __ListenerUserInterface__ and the __TaskManager__. Then there start three different threads. 
+The first thread opens the port of the ListenerUserInterface and waits for incoming connections from the user script. When a user connects to the port, the user will be stored in a client list of the ListenerUserInterface.
+The next thread is calling a function from the SerialManager. This function is called __SerialManager.fill_queue()__ and waits for recieving bytes from the serial device. The messages will be stored as __Message__ in the queue with the function __QueueManager.write_queue()__.
+The last thread calls the function __TaskManager.read_tasks()__. Depending on what command code the TaskManager reads from the queue it calls the functions __TaskManager.send_password_to_controller()__, __TaskManager.send_computer_status()__ oder __TaskManager.update_add_window()__.
+After that three threads the function __ListenerUserInterface.check_for_new_msg()__ is called in an endless loop.
+
+#### User Script
+
+After the service script is started, the user script can be started. At first the __ClientUserInterface__ and the __Gui__ are initialized. Then a thread is started. It calls the function __ClientUserInterface.polling()__. After this thread is called the gui will be started. After that the user has a few possibillities to continue.
+The first is to add a new __User__. Therefore the User presses the button and then the function __Gui.add()__ is called. This will open a new window, where the user can type in the account information of a user. The user can also hold a new RFID tag at the reader and connect this tag to the user account. When the user filled in all information, then at first the function __ClientUserInterface.check_if_user_exists()__ is called so there won't be a duplicate user. Then the user will be added to the UserManager in the service script. At first the __ClientUserInterface.client_user_interface.add_user()__ is called. This will pass the information to the service script. There it will call the function __UserManager.add_user()__.
+If the user wants to edit an account.
+
+
+
 
 ## Setup
 
