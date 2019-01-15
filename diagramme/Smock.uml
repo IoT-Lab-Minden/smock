@@ -184,6 +184,7 @@
           <node xmi:type="uml:DecisionNode" xmi:id="_Dg4zwOwKEeiI75dQfm4qMg" incoming="_GfJUoOwKEeiI75dQfm4qMg" outgoing="_INHSUOwKEeiI75dQfm4qMg _KlwksOwKEeiI75dQfm4qMg"/>
         </ownedBehavior>
       </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_tWzbwBg-EemEjbQR5QY2ug" name="Remove user"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_2btVQOW-EeiHbNSSdY3B9A" memberEnd="_2bujYeW-EeiHbNSSdY3B9A _2bujYuW-EeiHbNSSdY3B9A">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2bt8UOW-EeiHbNSSdY3B9A" source="org.eclipse.papyrus">
@@ -201,7 +202,7 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_JKRtMOW_EeiHbNSSdY3B9A"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_KdVQgOW_EeiHbNSSdY3B9A"/>
-    <packagedElement xmi:type="uml:Actor" xmi:id="_MJ1OkOW_EeiHbNSSdY3B9A" name="RFID Reader"/>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_MJ1OkOW_EeiHbNSSdY3B9A" name="Smock Device"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_W3LiEOW_EeiHbNSSdY3B9A"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_YTE4UOW_EeiHbNSSdY3B9A"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_ZcG88OW_EeiHbNSSdY3B9A"/>
@@ -214,21 +215,74 @@
     <ownedEnd xmi:type="uml:Property" xmi:id="_Ap788OvXEeiI75dQfm4qMg" type="_KdVQgOW_EeiHbNSSdY3B9A" association="_Ap0oMOvXEeiI75dQfm4qMg"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_mx-wkOwPEeiI75dQfm4qMg" name="CompositeDiagram">
-    <packagedElement xmi:type="uml:Class" xmi:id="_bbgqUO7-EeiY0qITZamNVg" name="Smock">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_chmIoO7-EeiY0qITZamNVg" name="ComputerManager" type="_LsIRgOmGEei9U5yEW2wp6A"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_loCvwO7-EeiY0qITZamNVg" name="RFID-Reader" type="_MfF_gOmGEei9U5yEW2wp6A"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_Trv3YO8AEeiY0qITZamNVg" name="Tag">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedAttribute>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_Mr8zsO8AEeiY0qITZamNVg" name="I2C">
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_Mr-B0O8AEeiY0qITZamNVg" role="_chmIoO7-EeiY0qITZamNVg"/>
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_Mr-o4O8AEeiY0qITZamNVg" role="_loCvwO7-EeiY0qITZamNVg"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_bbgqUO7-EeiY0qITZamNVg" name="SmockDevice">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_OiqDABhHEemEjbQR5QY2ug" name="Port4" aggregation="composite"/>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_hB_hkBhGEemEjbQR5QY2ug" name="SPI">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_hCAvsBhGEemEjbQR5QY2ug" role="_Th4LgBhGEemEjbQR5QY2ug"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_hCAvsRhGEemEjbQR5QY2ug" role="_nn4F4BhFEemEjbQR5QY2ug"/>
       </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_YORAUO8AEeiY0qITZamNVg" name="RFID-Signal">
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_YORnYO8AEeiY0qITZamNVg" role="_Trv3YO8AEeiY0qITZamNVg"/>
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_YOSOcO8AEeiY0qITZamNVg" role="_loCvwO7-EeiY0qITZamNVg"/>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_Pcw60BhHEemEjbQR5QY2ug" name="usb">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_Pcxh4BhHEemEjbQR5QY2ug" role="_tv3iYBhGEemEjbQR5QY2ug"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_Pcxh4RhHEemEjbQR5QY2ug" role="_OiqDABhHEemEjbQR5QY2ug"/>
+      </ownedConnector>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_NsHHcBhFEemEjbQR5QY2ug" name="Microcontroller">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_Th4LgBhGEemEjbQR5QY2ug" name="RFIDController" type="_bUsAgBhGEemEjbQR5QY2ug"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_tv3iYBhGEemEjbQR5QY2ug" name="USBHandler" type="_yLKpABhGEemEjbQR5QY2ug"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_5OMm4BhGEemEjbQR5QY2ug" name="controller" type="_Bsg3ABhHEemEjbQR5QY2ug"/>
+        <nestedClassifier xmi:type="uml:DataType" xmi:id="_bUsAgBhGEemEjbQR5QY2ug" name="RFIDController"/>
+        <nestedClassifier xmi:type="uml:DataType" xmi:id="_yLKpABhGEemEjbQR5QY2ug" name="USBHandler"/>
+        <nestedClassifier xmi:type="uml:DataType" xmi:id="_Bsg3ABhHEemEjbQR5QY2ug" name="Controller"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_RWdSQBhFEemEjbQR5QY2ug" name="RFIDReader">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_nn4F4BhFEemEjbQR5QY2ug" name="uidReader" type="_0tFooBhFEemEjbQR5QY2ug"/>
+      </nestedClassifier>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_WrTQABhFEemEjbQR5QY2ug" name="RFIDTag">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_-LNv8BhFEemEjbQR5QY2ug" name="uid" type="_DgfLgBhGEemEjbQR5QY2ug"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_0tFooBhFEemEjbQR5QY2ug" name="UidReader"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_DgfLgBhGEemEjbQR5QY2ug" name="UID"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_R1h-cBhGEemEjbQR5QY2ug" client="_nn4F4BhFEemEjbQR5QY2ug" supplier="_-LNv8BhFEemEjbQR5QY2ug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_EqlKoBhHEemEjbQR5QY2ug" client="_5OMm4BhGEemEjbQR5QY2ug" supplier="_Th4LgBhGEemEjbQR5QY2ug"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_Fg5HkBhHEemEjbQR5QY2ug" client="_5OMm4BhGEemEjbQR5QY2ug" supplier="_tv3iYBhGEemEjbQR5QY2ug"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_H5evkBhHEemEjbQR5QY2ug" name="Computer">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_KwFJQBhHEemEjbQR5QY2ug" name="Property1"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_RxG8ABhHEemEjbQR5QY2ug" name="Port2" aggregation="composite"/>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_hn-uEBhHEemEjbQR5QY2ug" name="usb">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_hn_VIBhHEemEjbQR5QY2ug" role="_KwFJQBhHEemEjbQR5QY2ug"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_hn_8MBhHEemEjbQR5QY2ug" role="_RxG8ABhHEemEjbQR5QY2ug"/>
       </ownedConnector>
     </packagedElement>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_JiwlEBhIEemEjbQR5QY2ug" informationSource="_RxG8ABhHEemEjbQR5QY2ug" informationTarget="_OiqDABhHEemEjbQR5QY2ug"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_2DkCcBg8EemEjbQR5QY2ug" name="Host"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_68A_IBg8EemEjbQR5QY2ug" memberEnd="_68Hs0Bg8EemEjbQR5QY2ug _68IT4Bg8EemEjbQR5QY2ug">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_68F3oBg8EemEjbQR5QY2ug" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_68GesBg8EemEjbQR5QY2ug" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_68Hs0Bg8EemEjbQR5QY2ug" name="register user" type="_-WeMYOW-EeiHbNSSdY3B9A" association="_68A_IBg8EemEjbQR5QY2ug"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_68IT4Bg8EemEjbQR5QY2ug" name="host" type="_2DkCcBg8EemEjbQR5QY2ug" association="_68A_IBg8EemEjbQR5QY2ug"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_7p28kBg8EemEjbQR5QY2ug" memberEnd="_7p4xwBg8EemEjbQR5QY2ug _7p4xwRg8EemEjbQR5QY2ug">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_7p4KsBg8EemEjbQR5QY2ug" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_7p4KsRg8EemEjbQR5QY2ug" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7p4xwBg8EemEjbQR5QY2ug" name="edit user" type="_8P3lYOvWEeiI75dQfm4qMg" association="_7p28kBg8EemEjbQR5QY2ug"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7p4xwRg8EemEjbQR5QY2ug" name="host" type="_2DkCcBg8EemEjbQR5QY2ug" association="_7p28kBg8EemEjbQR5QY2ug"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_yvU_oBg-EemEjbQR5QY2ug" memberEnd="_yvWNwhg-EemEjbQR5QY2ug _yvW00Bg-EemEjbQR5QY2ug">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_yvWNwBg-EemEjbQR5QY2ug" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_yvWNwRg-EemEjbQR5QY2ug" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_yvWNwhg-EemEjbQR5QY2ug" name="remove user" type="_tWzbwBg-EemEjbQR5QY2ug" association="_yvU_oBg-EemEjbQR5QY2ug"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_yvW00Bg-EemEjbQR5QY2ug" name="host" type="_2DkCcBg8EemEjbQR5QY2ug" association="_yvU_oBg-EemEjbQR5QY2ug"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_aNQikBg_EemEjbQR5QY2ug" memberEnd="_aNTl4Bg_EemEjbQR5QY2ug _aNTl4Rg_EemEjbQR5QY2ug">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_aNSXwBg_EemEjbQR5QY2ug" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_aNS-0Bg_EemEjbQR5QY2ug" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_aNTl4Bg_EemEjbQR5QY2ug" name="actor" type="_FoVs8OW-EeiHbNSSdY3B9A" association="_aNQikBg_EemEjbQR5QY2ug"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_aNTl4Rg_EemEjbQR5QY2ug" name="remove user" type="_tWzbwBg-EemEjbQR5QY2ug" association="_aNQikBg_EemEjbQR5QY2ug"/>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_-7_4wOpHEei0m4I4I3qPnQ">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-8CVAOpHEei0m4I4I3qPnQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
