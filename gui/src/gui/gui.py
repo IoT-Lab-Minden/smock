@@ -118,12 +118,7 @@ class Gui:
             if self.__client_user_interface.check_if_user_exists(textfield_username.get()):
                 self.notify("Der User existiert bereits")
             else:
-                # Get the selected user from the listbox and edit its name by the text of the Entry widgets
-                user_name = self.__client_user_interface.get_username(self.list.index(ACTIVE))
-                uid = self.__client_user_interface.get_uid(self.list.index(ACTIVE))
-
                 # Remove the file of the user
-
                 user_name = textfield_username.get()
                 user_pwd = textfield_password.get()
                 self.__client_user_interface.set_new_data(self.list.index(ACTIVE), user_name, user_pwd)
@@ -150,7 +145,7 @@ class Gui:
         label_password = Label(edit_top_frame, text="Password: ")
 
         textfield_username = Entry(edit_top_frame)
-        textfield_password = Entry(edit_top_frame)
+        textfield_password = Entry(edit_top_frame, show="*")
 
         label_username.grid(row=0)
         label_password.grid(row=1)
@@ -214,7 +209,7 @@ class Gui:
         label_uid = Label(add_top_frame, text="uid: ")
 
         textfield_username = Entry(add_top_frame)
-        textfield_password = Entry(add_top_frame)
+        textfield_password = Entry(add_top_frame, show="*")
         self.label_near_uid = Label(add_top_frame, text="nothing")
 
         label_username.grid(row=0)
