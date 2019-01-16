@@ -415,42 +415,79 @@
     <packagedElement xmi:type="uml:Actor" xmi:id="_FoVs8OW-EeiHbNSSdY3B9A" name="Actor"/>
     <packagedElement xmi:type="uml:Package" xmi:id="_IuEu0OW-EeiHbNSSdY3B9A" name="System">
       <packagedElement xmi:type="uml:UseCase" xmi:id="_U6oyUOW-EeiHbNSSdY3B9A" name="Unlock computer" classifierBehavior="_pox_4OW_EeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_pox_4OW_EeiHbNSSdY3B9A" name="Unlock Computer" node="_3Ne7AOW_EeiHbNSSdY3B9A _Z2ad4OXAEeiHbNSSdY3B9A _3dcNIOXAEeiHbNSSdY3B9A _MnqIIOXBEeiHbNSSdY3B9A _cALxUOXBEeiHbNSSdY3B9A _nXlucOXBEeiHbNSSdY3B9A _zl-98OXBEeiHbNSSdY3B9A _5dKzwOXBEeiHbNSSdY3B9A _9lMZEOXBEeiHbNSSdY3B9A _Daib0OXCEeiHbNSSdY3B9A _DrisQOXCEeiHbNSSdY3B9A _FrkDQOXCEeiHbNSSdY3B9A _I_tUkOXCEeiHbNSSdY3B9A _X8ZWUOXCEeiHbNSSdY3B9A _tV-tkOXDEeiHbNSSdY3B9A _1BXE4OXDEeiHbNSSdY3B9A _suzoMOpKEei0m4I4I3qPnQ">
-          <edge xmi:type="uml:ControlFlow" xmi:id="_-Yhv8OXAEeiHbNSSdY3B9A" target="_3dcNIOXAEeiHbNSSdY3B9A" source="_3Ne7AOW_EeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_JFkhcOXBEeiHbNSSdY3B9A" target="_3Ne7AOW_EeiHbNSSdY3B9A" source="_Z2ad4OXAEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_QXHccOXBEeiHbNSSdY3B9A" name="[error]" target="_MnqIIOXBEeiHbNSSdY3B9A" source="_3dcNIOXAEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_kFu8IOXBEeiHbNSSdY3B9A" target="_cALxUOXBEeiHbNSSdY3B9A" source="_3dcNIOXAEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_sYO90OXBEeiHbNSSdY3B9A" target="_nXlucOXBEeiHbNSSdY3B9A" source="_cALxUOXBEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_B2z_QOXCEeiHbNSSdY3B9A" name="[UserIsLastLoggedUser]" target="_9lMZEOXBEeiHbNSSdY3B9A" source="_nXlucOXBEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_5M5RMOXDEeiHbNSSdY3B9A" name="[UserIsNotLastLoggedUser]" target="_1BXE4OXDEeiHbNSSdY3B9A" source="_nXlucOXBEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_3Ne7AOW_EeiHbNSSdY3B9A" name="Authenticate tag" incoming="_JFkhcOXBEeiHbNSSdY3B9A" outgoing="_-Yhv8OXAEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:AcceptEventAction" xmi:id="_Z2ad4OXAEeiHbNSSdY3B9A" name="RFID signal" outgoing="_JFkhcOXBEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:DecisionNode" xmi:id="_3dcNIOXAEeiHbNSSdY3B9A" name="" incoming="_-Yhv8OXAEeiHbNSSdY3B9A" outgoing="_QXHccOXBEeiHbNSSdY3B9A _kFu8IOXBEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:ActivityFinalNode" xmi:id="_MnqIIOXBEeiHbNSSdY3B9A" name="" incoming="_QXHccOXBEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_cALxUOXBEeiHbNSSdY3B9A" name="Check User" incoming="_kFu8IOXBEeiHbNSSdY3B9A" outgoing="_sYO90OXBEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:DecisionNode" xmi:id="_nXlucOXBEeiHbNSSdY3B9A" name="" incoming="_sYO90OXBEeiHbNSSdY3B9A" outgoing="_B2z_QOXCEeiHbNSSdY3B9A _5M5RMOXDEeiHbNSSdY3B9A"/>
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_pox_4OW_EeiHbNSSdY3B9A" name="Unlock Computer" node="_Z2ad4OXAEeiHbNSSdY3B9A _zl-98OXBEeiHbNSSdY3B9A _5dKzwOXBEeiHbNSSdY3B9A _Daib0OXCEeiHbNSSdY3B9A _DrisQOXCEeiHbNSSdY3B9A _FrkDQOXCEeiHbNSSdY3B9A _I_tUkOXCEeiHbNSSdY3B9A _X8ZWUOXCEeiHbNSSdY3B9A _tV-tkOXDEeiHbNSSdY3B9A _suzoMOpKEei0m4I4I3qPnQ _amDk8BlvEemeVK_RnjIajg _ls_dIBlvEemeVK_RnjIajg _3pVt8BlvEemeVK_RnjIajg _GaOvYBlwEemeVK_RnjIajg _btjjEBlwEemeVK_RnjIajg _CmY04BlxEemeVK_RnjIajg _ZXTn8BlxEemeVK_RnjIajg _vcU-UBlxEemeVK_RnjIajg _FSYEkBlyEemeVK_RnjIajg _M5qmEBlyEemeVK_RnjIajg _lGMbgBlyEemeVK_RnjIajg _11o0UBlyEemeVK_RnjIajg _b8_l4BlzEemeVK_RnjIajg _tnClwBlzEemeVK_RnjIajg _0RrRwBlzEemeVK_RnjIajg _8WKsoBlzEemeVK_RnjIajg _9BjL8BlzEemeVK_RnjIajg" group="_qLjIkBluEemeVK_RnjIajg _1_URkBluEemeVK_RnjIajg">
+          <edge xmi:type="uml:ControlFlow" xmi:id="_jmuUMBlvEemeVK_RnjIajg" target="_11o0UBlyEemeVK_RnjIajg" source="_Z2ad4OXAEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_C-b98BlwEemeVK_RnjIajg" target="_GaOvYBlwEemeVK_RnjIajg" source="_ls_dIBlvEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Yf1p4BlwEemeVK_RnjIajg" target="_3pVt8BlvEemeVK_RnjIajg" source="_GaOvYBlwEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_3T3XwBlwEemeVK_RnjIajg" name="[exists]" target="_btjjEBlwEemeVK_RnjIajg" source="_3pVt8BlvEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_KuQT4BlxEemeVK_RnjIajg" name="[else]" target="_vcU-UBlxEemeVK_RnjIajg" source="_3pVt8BlvEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_imLyUBlxEemeVK_RnjIajg" target="_ZXTn8BlxEemeVK_RnjIajg" source="_btjjEBlwEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_4Ok3EBlxEemeVK_RnjIajg" name="[unlocked]" target="_vcU-UBlxEemeVK_RnjIajg" source="_ZXTn8BlxEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_T_Z5sBlyEemeVK_RnjIajg" name="[else]" target="_M5qmEBlyEemeVK_RnjIajg" source="_ZXTn8BlxEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Wyd3MBlyEemeVK_RnjIajg" target="_FSYEkBlyEemeVK_RnjIajg" source="_M5qmEBlyEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_cYCYkBlyEemeVK_RnjIajg" target="_CmY04BlxEemeVK_RnjIajg" source="_vcU-UBlxEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Ai95sBlzEemeVK_RnjIajg" target="_amDk8BlvEemeVK_RnjIajg" source="_11o0UBlyEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_GPce4Bl0EemeVK_RnjIajg" target="_b8_l4BlzEemeVK_RnjIajg" source="_lGMbgBlyEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Ks9zEBl0EemeVK_RnjIajg" target="_tnClwBlzEemeVK_RnjIajg" source="_0RrRwBlzEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_OJ2JoBl0EemeVK_RnjIajg" target="_9BjL8BlzEemeVK_RnjIajg" source="_b8_l4BlzEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_QhUXUBl0EemeVK_RnjIajg" target="_8WKsoBlzEemeVK_RnjIajg" source="_tnClwBlzEemeVK_RnjIajg"/>
+          <group xmi:type="uml:ActivityPartition" xmi:id="_qLjIkBluEemeVK_RnjIajg" name="Device" node="_Z2ad4OXAEeiHbNSSdY3B9A _amDk8BlvEemeVK_RnjIajg _lGMbgBlyEemeVK_RnjIajg _11o0UBlyEemeVK_RnjIajg _b8_l4BlzEemeVK_RnjIajg _tnClwBlzEemeVK_RnjIajg _0RrRwBlzEemeVK_RnjIajg _8WKsoBlzEemeVK_RnjIajg _9BjL8BlzEemeVK_RnjIajg"/>
+          <group xmi:type="uml:ActivityPartition" xmi:id="_1_URkBluEemeVK_RnjIajg" name="Host" node="_ls_dIBlvEemeVK_RnjIajg _3pVt8BlvEemeVK_RnjIajg _GaOvYBlwEemeVK_RnjIajg _btjjEBlwEemeVK_RnjIajg _CmY04BlxEemeVK_RnjIajg _ZXTn8BlxEemeVK_RnjIajg _vcU-UBlxEemeVK_RnjIajg _FSYEkBlyEemeVK_RnjIajg _M5qmEBlyEemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_Z2ad4OXAEeiHbNSSdY3B9A" name="RFID signal" outgoing="_jmuUMBlvEemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_zl-98OXBEeiHbNSSdY3B9A" name="CallBehaviorAction13"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_5dKzwOXBEeiHbNSSdY3B9A" name="CallBehaviorAction14"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_9lMZEOXBEeiHbNSSdY3B9A" name="Nutzer anmelden" incoming="_B2z_QOXCEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_Daib0OXCEeiHbNSSdY3B9A" name="CallBehaviorAction17"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_DrisQOXCEeiHbNSSdY3B9A" name="CallBehaviorAction18"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_FrkDQOXCEeiHbNSSdY3B9A" name="CallBehaviorAction19"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_I_tUkOXCEeiHbNSSdY3B9A" name="CallBehaviorAction20"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_X8ZWUOXCEeiHbNSSdY3B9A" name="CallBehaviorAction21"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_tV-tkOXDEeiHbNSSdY3B9A" name="CallBehaviorAction22"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_1BXE4OXDEeiHbNSSdY3B9A" name="Change user" incoming="_5M5RMOXDEeiHbNSSdY3B9A"/>
           <node xmi:type="uml:CallBehaviorAction" xmi:id="_suzoMOpKEei0m4I4I3qPnQ" name="CallBehaviorAction24" behavior="_pox_4OW_EeiHbNSSdY3B9A"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_amDk8BlvEemeVK_RnjIajg" name="Validate user" incoming="_Ai95sBlzEemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_ls_dIBlvEemeVK_RnjIajg" name="Validate User" outgoing="_C-b98BlwEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:DecisionNode" xmi:id="_3pVt8BlvEemeVK_RnjIajg" name="" incoming="_Yf1p4BlwEemeVK_RnjIajg" outgoing="_3T3XwBlwEemeVK_RnjIajg _KuQT4BlxEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_GaOvYBlwEemeVK_RnjIajg" name="Check for user" incoming="_C-b98BlwEemeVK_RnjIajg" outgoing="_Yf1p4BlwEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_btjjEBlwEemeVK_RnjIajg" name="Check if unlocked" incoming="_3T3XwBlwEemeVK_RnjIajg" outgoing="_imLyUBlxEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_CmY04BlxEemeVK_RnjIajg" name="Computer unlocked" incoming="_cYCYkBlyEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:DecisionNode" xmi:id="_ZXTn8BlxEemeVK_RnjIajg" name="" incoming="_imLyUBlxEemeVK_RnjIajg" outgoing="_4Ok3EBlxEemeVK_RnjIajg _T_Z5sBlyEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:MergeNode" xmi:id="_vcU-UBlxEemeVK_RnjIajg" incoming="_KuQT4BlxEemeVK_RnjIajg _4Ok3EBlxEemeVK_RnjIajg" outgoing="_cYCYkBlyEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_FSYEkBlyEemeVK_RnjIajg" name="Password" incoming="_Wyd3MBlyEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_M5qmEBlyEemeVK_RnjIajg" name="Get password" incoming="_T_Z5sBlyEemeVK_RnjIajg" outgoing="_Wyd3MBlyEemeVK_RnjIajg" inPartition="_1_URkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_lGMbgBlyEemeVK_RnjIajg" name="Computer unlocked" outgoing="_GPce4Bl0EemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_11o0UBlyEemeVK_RnjIajg" name="Store UID" incoming="_jmuUMBlvEemeVK_RnjIajg" outgoing="_Ai95sBlzEemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_b8_l4BlzEemeVK_RnjIajg" name="Discard UID" incoming="_GPce4Bl0EemeVK_RnjIajg" outgoing="_OJ2JoBl0EemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_tnClwBlzEemeVK_RnjIajg" name="Enter password" incoming="_Ks9zEBl0EemeVK_RnjIajg" outgoing="_QhUXUBl0EemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_0RrRwBlzEemeVK_RnjIajg" name="Password" outgoing="_Ks9zEBl0EemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_8WKsoBlzEemeVK_RnjIajg" incoming="_QhUXUBl0EemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_9BjL8BlzEemeVK_RnjIajg" name="" incoming="_OJ2JoBl0EemeVK_RnjIajg" inPartition="_qLjIkBluEemeVK_RnjIajg"/>
         </ownedBehavior>
       </packagedElement>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_jEheIOW-EeiHbNSSdY3B9A" name="Lock computer" classifierBehavior="_Gz3dMOXEEeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_Gz3dMOXEEeiHbNSSdY3B9A" name="Lock computer" node="_KVtMQOXEEeiHbNSSdY3B9A _TiBx4OXEEeiHbNSSdY3B9A _bhgJ4OXEEeiHbNSSdY3B9A _pN4aUOXEEeiHbNSSdY3B9A">
-          <edge xmi:type="uml:ControlFlow" xmi:id="_ki5R4OXEEeiHbNSSdY3B9A" target="_TiBx4OXEEeiHbNSSdY3B9A" source="_KVtMQOXEEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_lfpOAOXEEeiHbNSSdY3B9A" target="_bhgJ4OXEEeiHbNSSdY3B9A" source="_TiBx4OXEEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_sziSYOXEEeiHbNSSdY3B9A" target="_pN4aUOXEEeiHbNSSdY3B9A" source="_bhgJ4OXEEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:AcceptEventAction" xmi:id="_KVtMQOXEEeiHbNSSdY3B9A" name="RFID interrupt" outgoing="_ki5R4OXEEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_TiBx4OXEEeiHbNSSdY3B9A" name="Lock Computer" incoming="_ki5R4OXEEeiHbNSSdY3B9A" outgoing="_lfpOAOXEEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_bhgJ4OXEEeiHbNSSdY3B9A" name="Sleep mode" incoming="_lfpOAOXEEeiHbNSSdY3B9A" outgoing="_sziSYOXEEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:ActivityFinalNode" xmi:id="_pN4aUOXEEeiHbNSSdY3B9A" name="" incoming="_sziSYOXEEeiHbNSSdY3B9A"/>
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_Gz3dMOXEEeiHbNSSdY3B9A" name="Lock computer" node="_KVtMQOXEEeiHbNSSdY3B9A _TiBx4OXEEeiHbNSSdY3B9A _pN4aUOXEEeiHbNSSdY3B9A _uZOPoBl-EemeVK_RnjIajg _yKorwBl-EemeVK_RnjIajg _1V68ABl-EemeVK_RnjIajg _3J1JoBl-EemeVK_RnjIajg _T1PlMBl_EemeVK_RnjIajg _fuK7ABl_EemeVK_RnjIajg _pUCCABl_EemeVK_RnjIajg _uAxd8Bl_EemeVK_RnjIajg _vPQDQBl_EemeVK_RnjIajg _wOJ7gBl_EemeVK_RnjIajg" group="_PdqWYBl-EemeVK_RnjIajg _m_S0sBl-EemeVK_RnjIajg">
+          <edge xmi:type="uml:ControlFlow" xmi:id="_lfpOAOXEEeiHbNSSdY3B9A" target="_pN4aUOXEEeiHbNSSdY3B9A" source="_TiBx4OXEEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_PdwAgBl_EemeVK_RnjIajg" target="_uZOPoBl-EemeVK_RnjIajg" source="_KVtMQOXEEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Ql7wkBl_EemeVK_RnjIajg" target="_yKorwBl-EemeVK_RnjIajg" source="_uZOPoBl-EemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_SArQQBl_EemeVK_RnjIajg" target="_TiBx4OXEEeiHbNSSdY3B9A" source="_3J1JoBl-EemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_ZuIEIBl_EemeVK_RnjIajg" target="_T1PlMBl_EemeVK_RnjIajg" source="_1V68ABl-EemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_LUcMUBmAEemeVK_RnjIajg" target="_uAxd8Bl_EemeVK_RnjIajg" source="_pUCCABl_EemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_PtUREBmAEemeVK_RnjIajg" target="_pUCCABl_EemeVK_RnjIajg" source="_fuK7ABl_EemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Sw7MABmAEemeVK_RnjIajg" name="[else]" target="_wOJ7gBl_EemeVK_RnjIajg" source="_uAxd8Bl_EemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_XS7-oBmAEemeVK_RnjIajg" name="[locked]" target="_vPQDQBl_EemeVK_RnjIajg" source="_uAxd8Bl_EemeVK_RnjIajg"/>
+          <group xmi:type="uml:ActivityPartition" xmi:id="_PdqWYBl-EemeVK_RnjIajg" name="Device" node="_KVtMQOXEEeiHbNSSdY3B9A _TiBx4OXEEeiHbNSSdY3B9A _pN4aUOXEEeiHbNSSdY3B9A _uZOPoBl-EemeVK_RnjIajg _yKorwBl-EemeVK_RnjIajg _1V68ABl-EemeVK_RnjIajg _3J1JoBl-EemeVK_RnjIajg _T1PlMBl_EemeVK_RnjIajg"/>
+          <group xmi:type="uml:ActivityPartition" xmi:id="_m_S0sBl-EemeVK_RnjIajg" name="Host" node="_pUCCABl_EemeVK_RnjIajg _uAxd8Bl_EemeVK_RnjIajg _wOJ7gBl_EemeVK_RnjIajg _fuK7ABl_EemeVK_RnjIajg _vPQDQBl_EemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_KVtMQOXEEeiHbNSSdY3B9A" name="Card lost" outgoing="_PdwAgBl_EemeVK_RnjIajg" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_TiBx4OXEEeiHbNSSdY3B9A" name="Lock Computer" incoming="_SArQQBl_EemeVK_RnjIajg" outgoing="_lfpOAOXEEeiHbNSSdY3B9A" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_pN4aUOXEEeiHbNSSdY3B9A" name="" incoming="_lfpOAOXEEeiHbNSSdY3B9A" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_uZOPoBl-EemeVK_RnjIajg" name="Discard uid" incoming="_PdwAgBl_EemeVK_RnjIajg" outgoing="_Ql7wkBl_EemeVK_RnjIajg" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_yKorwBl-EemeVK_RnjIajg" name="Check Locked" incoming="_Ql7wkBl_EemeVK_RnjIajg" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_1V68ABl-EemeVK_RnjIajg" name="locked" outgoing="_ZuIEIBl_EemeVK_RnjIajg" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_3J1JoBl-EemeVK_RnjIajg" name="unlocked" outgoing="_SArQQBl_EemeVK_RnjIajg" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_T1PlMBl_EemeVK_RnjIajg" incoming="_ZuIEIBl_EemeVK_RnjIajg" inPartition="_PdqWYBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_fuK7ABl_EemeVK_RnjIajg" name="Ckeck locked" outgoing="_PtUREBmAEemeVK_RnjIajg" inPartition="_m_S0sBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_pUCCABl_EemeVK_RnjIajg" name="Check if locked" incoming="_PtUREBmAEemeVK_RnjIajg" outgoing="_LUcMUBmAEemeVK_RnjIajg" inPartition="_m_S0sBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:DecisionNode" xmi:id="_uAxd8Bl_EemeVK_RnjIajg" incoming="_LUcMUBmAEemeVK_RnjIajg" outgoing="_Sw7MABmAEemeVK_RnjIajg _XS7-oBmAEemeVK_RnjIajg" inPartition="_m_S0sBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_vPQDQBl_EemeVK_RnjIajg" name="locked" incoming="_XS7-oBmAEemeVK_RnjIajg" inPartition="_m_S0sBl-EemeVK_RnjIajg"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_wOJ7gBl_EemeVK_RnjIajg" name="unlocked" incoming="_Sw7MABmAEemeVK_RnjIajg" inPartition="_m_S0sBl-EemeVK_RnjIajg"/>
         </ownedBehavior>
       </packagedElement>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_7iBHwOW-EeiHbNSSdY3B9A" name="Change user" classifierBehavior="_zMg4kOXCEeiHbNSSdY3B9A">
@@ -465,26 +502,28 @@
         </ownedBehavior>
       </packagedElement>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_-WeMYOW-EeiHbNSSdY3B9A" name="Register user" classifierBehavior="_9SIy0OXEEeiHbNSSdY3B9A">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_9SIy0OXEEeiHbNSSdY3B9A" name="Register user" node="__TiC0OXEEeiHbNSSdY3B9A _AwDrMOXFEeiHbNSSdY3B9A _DBSG8OXFEeiHbNSSdY3B9A _HIsBMOXFEeiHbNSSdY3B9A _KLXvEOXFEeiHbNSSdY3B9A _S4RNwOXFEeiHbNSSdY3B9A _cF2-sOXFEeiHbNSSdY3B9A _FY96kOXGEeiHbNSSdY3B9A _Wll-oOXGEeiHbNSSdY3B9A">
-          <edge xmi:type="uml:ControlFlow" xmi:id="_hQ0nsOXFEeiHbNSSdY3B9A" target="_cF2-sOXFEeiHbNSSdY3B9A" source="_S4RNwOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_i_nr0OXFEeiHbNSSdY3B9A" name="[User doesn't exist]" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_n8RMAOXFEeiHbNSSdY3B9A" name="[User exists]" target="_KLXvEOXFEeiHbNSSdY3B9A" source="_cF2-sOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_0UwLoOXFEeiHbNSSdY3B9A" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_KLXvEOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_4rY0sOXFEeiHbNSSdY3B9A" target="_AwDrMOXFEeiHbNSSdY3B9A" source="__TiC0OXEEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_6MFycOXFEeiHbNSSdY3B9A" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_AwDrMOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_6vpygOXFEeiHbNSSdY3B9A" target="_FY96kOXGEeiHbNSSdY3B9A" source="_DBSG8OXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_7lCiYOXFEeiHbNSSdY3B9A" target="_S4RNwOXFEeiHbNSSdY3B9A" source="_HIsBMOXFEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_QI0IcOXGEeiHbNSSdY3B9A" target="_HIsBMOXFEeiHbNSSdY3B9A" source="_FY96kOXGEeiHbNSSdY3B9A"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_Zrq-wOXGEeiHbNSSdY3B9A" name="[Abort]" target="_Wll-oOXGEeiHbNSSdY3B9A" source="_FY96kOXGEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:InitialNode" xmi:id="__TiC0OXEEeiHbNSSdY3B9A" name="" outgoing="_4rY0sOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_AwDrMOXFEeiHbNSSdY3B9A" name="Read Tag" incoming="_4rY0sOXFEeiHbNSSdY3B9A" outgoing="_6MFycOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_DBSG8OXFEeiHbNSSdY3B9A" name="Show tag" incoming="_6MFycOXFEeiHbNSSdY3B9A _0UwLoOXFEeiHbNSSdY3B9A _i_nr0OXFEeiHbNSSdY3B9A" outgoing="_6vpygOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_HIsBMOXFEeiHbNSSdY3B9A" name="Input username" incoming="_QI0IcOXGEeiHbNSSdY3B9A" outgoing="_7lCiYOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_KLXvEOXFEeiHbNSSdY3B9A" name="Input password" incoming="_n8RMAOXFEeiHbNSSdY3B9A" outgoing="_0UwLoOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_S4RNwOXFEeiHbNSSdY3B9A" name="Check user" incoming="_7lCiYOXFEeiHbNSSdY3B9A" outgoing="_hQ0nsOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:DecisionNode" xmi:id="_cF2-sOXFEeiHbNSSdY3B9A" name="" incoming="_hQ0nsOXFEeiHbNSSdY3B9A" outgoing="_i_nr0OXFEeiHbNSSdY3B9A _n8RMAOXFEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:DecisionNode" xmi:id="_FY96kOXGEeiHbNSSdY3B9A" name="" incoming="_6vpygOXFEeiHbNSSdY3B9A" outgoing="_QI0IcOXGEeiHbNSSdY3B9A _Zrq-wOXGEeiHbNSSdY3B9A"/>
-          <node xmi:type="uml:ActivityFinalNode" xmi:id="_Wll-oOXGEeiHbNSSdY3B9A" name="" incoming="_Zrq-wOXGEeiHbNSSdY3B9A"/>
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_9SIy0OXEEeiHbNSSdY3B9A" name="Register user" node="_KLXvEOXFEeiHbNSSdY3B9A _HIsBMOXFEeiHbNSSdY3B9A _DBSG8OXFEeiHbNSSdY3B9A _AwDrMOXFEeiHbNSSdY3B9A __TiC0OXEEeiHbNSSdY3B9A _YOADQBmBEemeVK_RnjIajg _o25IIBmBEemeVK_RnjIajg _Nu4jkBmCEemeVK_RnjIajg _P2TjEBmCEemeVK_RnjIajg _TSUW8BmCEemeVK_RnjIajg _19v0MBmCEemeVK_RnjIajg" group="_-lszYBmAEemeVK_RnjIajg _9knJ0BmAEemeVK_RnjIajg">
+          <edge xmi:type="uml:ControlFlow" xmi:id="_twJ9IBmBEemeVK_RnjIajg" target="_HIsBMOXFEeiHbNSSdY3B9A" source="__TiC0OXEEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_A_xzsBmCEemeVK_RnjIajg" target="_KLXvEOXFEeiHbNSSdY3B9A" source="_HIsBMOXFEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_HyW6wBmCEemeVK_RnjIajg" target="_AwDrMOXFEeiHbNSSdY3B9A" source="_KLXvEOXFEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_IYoQkBmCEemeVK_RnjIajg" target="_YOADQBmBEemeVK_RnjIajg" source="_AwDrMOXFEeiHbNSSdY3B9A"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_Kk9lQBmCEemeVK_RnjIajg" target="_DBSG8OXFEeiHbNSSdY3B9A" source="_o25IIBmBEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_hiq3IBmCEemeVK_RnjIajg" target="_P2TjEBmCEemeVK_RnjIajg" source="_Nu4jkBmCEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_iLE68BmCEemeVK_RnjIajg" target="_TSUW8BmCEemeVK_RnjIajg" source="_P2TjEBmCEemeVK_RnjIajg"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_EUjhsBmDEemeVK_RnjIajg" target="_19v0MBmCEemeVK_RnjIajg" source="_DBSG8OXFEeiHbNSSdY3B9A"/>
+          <group xmi:type="uml:ActivityPartition" xmi:id="_9knJ0BmAEemeVK_RnjIajg" name="Device" node="_P2TjEBmCEemeVK_RnjIajg _TSUW8BmCEemeVK_RnjIajg _Nu4jkBmCEemeVK_RnjIajg"/>
+          <group xmi:type="uml:ActivityPartition" xmi:id="_-lszYBmAEemeVK_RnjIajg" name="Host" node="__TiC0OXEEeiHbNSSdY3B9A _HIsBMOXFEeiHbNSSdY3B9A _KLXvEOXFEeiHbNSSdY3B9A _AwDrMOXFEeiHbNSSdY3B9A _DBSG8OXFEeiHbNSSdY3B9A _YOADQBmBEemeVK_RnjIajg _o25IIBmBEemeVK_RnjIajg _19v0MBmCEemeVK_RnjIajg"/>
+          <node xmi:type="uml:InitialNode" xmi:id="__TiC0OXEEeiHbNSSdY3B9A" name="" outgoing="_twJ9IBmBEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_AwDrMOXFEeiHbNSSdY3B9A" name="Read tag" incoming="_HyW6wBmCEemeVK_RnjIajg" outgoing="_IYoQkBmCEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_DBSG8OXFEeiHbNSSdY3B9A" name="Show tag" incoming="_Kk9lQBmCEemeVK_RnjIajg" outgoing="_EUjhsBmDEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_HIsBMOXFEeiHbNSSdY3B9A" name="Input username" incoming="_twJ9IBmBEemeVK_RnjIajg" outgoing="_A_xzsBmCEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_KLXvEOXFEeiHbNSSdY3B9A" name="Input password" incoming="_A_xzsBmCEemeVK_RnjIajg" outgoing="_HyW6wBmCEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_YOADQBmBEemeVK_RnjIajg" name="Request Uid" incoming="_IYoQkBmCEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_o25IIBmBEemeVK_RnjIajg" name="uid" outgoing="_Kk9lQBmCEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:AcceptEventAction" xmi:id="_Nu4jkBmCEemeVK_RnjIajg" name="request Uid" outgoing="_hiq3IBmCEemeVK_RnjIajg" inPartition="_9knJ0BmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_P2TjEBmCEemeVK_RnjIajg" name="Read Uid" incoming="_hiq3IBmCEemeVK_RnjIajg" outgoing="_iLE68BmCEemeVK_RnjIajg" inPartition="_9knJ0BmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:SendSignalAction" xmi:id="_TSUW8BmCEemeVK_RnjIajg" name="udi" incoming="_iLE68BmCEemeVK_RnjIajg" inPartition="_9knJ0BmAEemeVK_RnjIajg"/>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_19v0MBmCEemeVK_RnjIajg" incoming="_EUjhsBmDEemeVK_RnjIajg" inPartition="_-lszYBmAEemeVK_RnjIajg"/>
         </ownedBehavior>
       </packagedElement>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_8P3lYOvWEeiI75dQfm4qMg" name="Edit user" classifierBehavior="_f9zogOvXEeiI75dQfm4qMg">
