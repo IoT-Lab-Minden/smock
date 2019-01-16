@@ -1,3 +1,4 @@
+![icon](../icon/icon.png)
 # SMOCK
 **Sm**art C**o**mputer Lo**ck**
 
