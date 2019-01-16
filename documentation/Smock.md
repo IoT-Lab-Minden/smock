@@ -108,6 +108,10 @@ The last class of the service script is the __ListenerUserInterface__. This clas
 
 The user script is for the user. This opens a Gui that the user can use to add new User or edit/delete User. The __Gui__ has a main window and the different methods to answer the events that are triggered by pressing buttons. The user Script connects to the open port of the ListenerUserInterface of the service script. This happens in the class CLientUserInterface. The __ClientUserInterface__ has also the task to pass changes that are made by a user to the service script.
 
+![ClassDiagram_controllerInterface](../diagramme/Smock/ClassDiagramHost_controllerInterface.png)
+
+![ClassDiagram_gui](../diagramme/Smock/ClassDiagramHost_gui.png)
+
 ## Software processes
 
 ### Device
