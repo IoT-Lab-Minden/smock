@@ -28,7 +28,6 @@ namespace usbdevice {
 		keyboardHandler = handler;
 	}
 
-	// Anlegen des Objektes auf dem Heap hat nicht funktioniert??
 	USBKeyboardDevice *USBKeyboardDevice::getInstance() {
 		static USBKeyboardDevice instance(keyboardHandler);
 		return &instance;
@@ -173,7 +172,6 @@ namespace usbdevice {
 	    int index = 0;
 
 	    while (running) {
-	        unsigned int tick = ROM_SysTickValueGet();
 	        if((index == 0) && (g_keyTick == 0)) {
 	            g_keyTick = g_ui32SysTickCount;
 	        }

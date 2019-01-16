@@ -155,6 +155,8 @@ uint8_t singleUser = 0;
  */
 const int SYSTICKS_PER_SECOND = 100;
 
+const uint8_t MISSING_CARD_MAX = 30;
+
 /**
  * \fn void configureUSB()
  *
@@ -209,13 +211,12 @@ uint32_t TxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
 uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
 		void *pvMsgData);
 
+uint8_t handleGeneralRequests(uint8_t *symbol, State *state);
+
 /*
  * main.c
  *
- * To use Serial Communication connect to com port (COM9) with baud 115200
- * ser = serial.Serial("COM9", 115200)
- * ser.write("w")
- * print ser.read() // -> 'w'
+ * To use Serial Communication connect to com port with baud 115200
  */
 int main(void) {
 	State state = START;
@@ -248,31 +249,10 @@ int main(void) {
 	Wire.setModule(0);
 
 	rfid_reader::MFRC522 reader;
-	uint8_t res = reader.readRegister(rfid_reader::CommandReg);
 
 	while (true) {
 		uint8_t symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
-		if (symbol == READ_UID) {
-			if (currentUid[0] == 0 && currentUid[1] == 0 && currentUid[2] == 0 && currentUid[3] == 0) {
-				// no card present
-				uint8_t command[] = {READ_UID, END_REQUEST};
-				USBSerialDevice::getInstance()->write(command, sizeof(command));
-			} else {
-				uint8_t command[] = {READ_UID, currentUid[0], currentUid[1], currentUid[2], currentUid[3], END_REQUEST};
-				USBSerialDevice::getInstance()->write(command, sizeof(command));
-			}
-			symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
-			delay(100);
-		}
-		if (symbol == USER_QUANTITY) {
-			singleUser = USBSerialDevice::getInstance()->popReceiveBuffer();
-			symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
-		}
-		if (symbol == OS_SYSTEM && state != START) {
-			os = USBSerialDevice::getInstance()->popReceiveBuffer();
-			singleUser = USBSerialDevice::getInstance()->popReceiveBuffer();
-			symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
-		}
+		while(handleGeneralRequests(&symbol, &state));
 
 		switch (state) {
 		case START:
@@ -360,7 +340,7 @@ int main(void) {
 					cardMissing++;
 				}
 			}
-			if (cardMissing == 30) {
+			if (cardMissing == MISSING_CARD_MAX) {
 				for (uint8_t i = 0; i < sizeof(currentUid); i++) {
 					currentUid[i] = 0;
 				}
@@ -592,4 +572,32 @@ uint32_t TxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue, vo
 
 	}
 	return (0);
+}
+
+uint8_t handleGeneralRequests(uint8_t *symbol, State *state) {
+	if (*symbol == READ_UID) {
+		if (currentUid[0] == 0 && currentUid[1] == 0 && currentUid[2] == 0 && currentUid[3] == 0) {
+			// no card present
+			uint8_t command[] = {READ_UID, END_REQUEST};
+			USBSerialDevice::getInstance()->write(command, sizeof(command));
+		} else {
+			uint8_t command[] = {READ_UID, currentUid[0], currentUid[1], currentUid[2], currentUid[3], END_REQUEST};
+			USBSerialDevice::getInstance()->write(command, sizeof(command));
+		}
+		*symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
+		delay(100);
+		return 1;
+	}
+	if (*symbol == USER_QUANTITY) {
+		singleUser = USBSerialDevice::getInstance()->popReceiveBuffer();
+		*symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
+		return 1;
+	}
+	if (*symbol == OS_SYSTEM && *state != START) {
+		os = USBSerialDevice::getInstance()->popReceiveBuffer();
+		singleUser = USBSerialDevice::getInstance()->popReceiveBuffer();
+		*symbol = USBSerialDevice::getInstance()->popReceiveBuffer();
+		return 1;
+	}
+	return 0;
 }

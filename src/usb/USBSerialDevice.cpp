@@ -101,14 +101,6 @@ namespace usbdevice {
 		return &g_sCDCDevice;
 	}
 
-	tUSBBuffer *USBSerialDevice::getRxBuffer() {
-		return &g_sRxBuffer;
-	}
-
-	tUSBBuffer *USBSerialDevice::getTxBuffer() {
-		return &g_sTxBuffer;
-	}
-
 	void USBSerialDevice::connected() {
 		g_bUSBConfigured = true;
 		USBBufferFlush(&g_sTxBuffer);

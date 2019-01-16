@@ -211,26 +211,6 @@ namespace usbdevice {
 		tUSBDCDCDevice *getSerialDevice();
 
 		/**
-		 * \fn tUSBBuffer *getRxBuffer()
-		 * \brief Getter for the rxBuffer.
-		 *
-		 * Returns the rxBuffer.
-		 *
-		 * \return tUSBBuffer - pointer to the buffer.
-		 */
-		tUSBBuffer *getRxBuffer();
-
-		/**
-		 * \fn tUSBBuffer *getTxBuffer()
-		 * \brief Getter for the txBuffer.
-		 *
-		 * Returns the rxBuffer.
-		 *
-		 * \return tUSBBuffer - pointer to the buffer.
-		 */
-		tUSBBuffer *getTxBuffer();
-
-		/**
 		 * \fn void connected()
 		 * \brief Called when new connection appeared.
 		 *
