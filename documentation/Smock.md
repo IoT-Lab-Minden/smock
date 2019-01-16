@@ -19,7 +19,7 @@ Last but not least remains the possibility to log in manually by entering the us
 
 From the above mentioned goals we deduced six important use cases.
 
-![UseCaseDiagram](..\diagramme\Smock\UseCaseDiagram.PNG)
+![UseCaseDiagram](../diagramme/Smock/UseCaseDiagram.PNG)
 
 The first three use cases are the mentioned goals. This use case are all initiated by the user and executed by the SMOCK device. 
 
@@ -47,7 +47,7 @@ __Python3.5??__
 
 All system requirements, functional and non-functional, are shown in the image below:
 
-![non-functional_requirements](..\diagramme\Smock\non-functional_requirements.png)
+![non-functional_requirements](../diagramme/Smock/non-functional_requirements.png)
 
 ## Components
 
@@ -63,7 +63,7 @@ To communicate with the tag we need a rfid Reader. The reader has the task to re
 
 To control the reader and to communicate with the computer we use a usb-capable micro controller. The micro controller handles the event when a new card is read by the rfid Reader, verifies the user and logs him. The same way works the logging off from the user.
 
-![CompositeDiagram](..\diagramme\Smock\CompositeDiagram.PNG)
+![CompositeDiagram](../diagramme/Smock/CompositeDiagram.PNG)
 
 ## Software Structure
 
@@ -85,9 +85,9 @@ Since we are connecting two usb devices to the host via one usb port we need a c
 
 Because this class takes over the registration at the host the device also contains a descriptor data array that holds the informations needed by the host. The connection is like the other devices handled by a structure provided by the usb library. This tUSBCompositeDevice struct also registers a event handler for default usb events like connecting or disconnecting.
 
-![ClassDiagram_rfid](..\diagramme\Smock\ClassDiagram_rfid.png)
+![ClassDiagram_rfid](../diagramme/Smock/ClassDiagram_rfid.png)
 
-![ClassDiagram_usb](..\diagramme\Smock\ClassDiagram_usb.png)
+![ClassDiagram_usb](../diagramme/Smock/ClassDiagram_usb.png)
 
 ### Host
 
@@ -115,7 +115,7 @@ The user script is for the user. This opens a Gui that the user can use to add n
 
 The main component of the device software is realized with a state machine.
 
-![StateComputer](..\diagramme\Smock\StateComputer.PNG)
+![StateComputer](../diagramme/Smock/StateComputer.PNG)
 
 After starting the micro controller goes into the *START* state. All events that come in, whether they come from the rfid reader or via the serial port, are discarded, except for the OS_SYSTEM event from the host. This message contains information about the operating system and the number of users registered to the software. Without this information the log in or off won't work because there are different schedules needed for a different number of users or different operating systems.
 
@@ -181,15 +181,15 @@ This diagram show different communication protocols between host and user. Switc
 
 #### unlock
 
-![unlock](..\diagramme\Smock\unlock.PNG)
+![unlock](../diagramme/Smock/unlock.PNG)
 
 #### lock
 
-![lock](..\diagramme\Smock\lock.PNG)
+![lock](../diagramme/Smock/lock.PNG)
 
 #### register
 
-![register](..\diagramme\Smock\register.PNG)
+![register](../diagramme/Smock/register.PNG)
 
 ## Setup
 
