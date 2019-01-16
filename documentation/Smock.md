@@ -91,7 +91,7 @@ Because this class takes over the registration at the host the device also conta
 
 ### Host
 
-The software of the host is seperated in two different scripts. The first software 
+
 
 ## Software processes
 
@@ -129,7 +129,25 @@ Finally the currently read UID can be requested from the host to connect it to a
 
 ### Windows
 
-To set up the program for windows python needs to be installed on the host. Pthon version
+To set up the program for windows python needs to be installed on the host. Pthon version 3.5 or above is needed  but version 3.7 is recommended.
+
+For the communication with the host the main.py needs to be started. For every user that is locked in must run a instance of the userScript.py so that the main program can check weather the a user is logged in or not.
+
+For the use of the multiple user option it is also needed to change the registry to logg in by entering the username and the password, not only by entering the password.
+
+1. Press Win+R keys on your keyboard, the "Run" dialog will appear
+
+2. Type **regedit** and press Enter
+
+3. Enter the following key:
+
+   ````
+   HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+   ````
+
+4. Edit the *dontdisplaylastusername* value from 0 to 1
+
+5. Press *OK*
 
 ### Ubuntu
 
