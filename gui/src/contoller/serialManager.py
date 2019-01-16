@@ -53,8 +53,8 @@ class SerialManager:
         Args:
             message: Message that will be written to the serial device
         """
-        while not self.__serial_device.is_open:
-            time.sleep(1)
+        if not self.__serial_device.is_open:
+            return
 
         self.__mutex.acquire(True)
         text = message.get_command_code()
