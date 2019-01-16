@@ -155,6 +155,11 @@ uint8_t singleUser = 0;
  */
 const int SYSTICKS_PER_SECOND = 100;
 
+/**
+ * \var const uint8_t MISSING_CARD_MAX
+ *
+ * Time until the card is identified as lost
+ */
 const uint8_t MISSING_CARD_MAX = 30;
 
 /**
@@ -211,12 +216,26 @@ uint32_t TxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
 uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
 		void *pvMsgData);
 
+/**
+ * \fn uint8_t handleGeneralRequests(uint8_t *symbol, State *state)
+ * \brief Handle general requests which can receive any time
+ *
+ * \param symbol Current read symbol
+ * \param state Current state of the system
+ * 
+ * \return uint8_t - 1 indicates that changes were done and a new symbol was read.
+ */
 uint8_t handleGeneralRequests(uint8_t *symbol, State *state);
 
-/*
- * main.c
+/**
+ * \fn main.c
+ * \brief main program executed at start.
  *
  * To use Serial Communication connect to com port with baud 115200
+ * Sets up the usb devices and the rfid reader and starts the main loop.
+ * The main loop represents the state machine.
+ *
+ * \return int - exit status code
  */
 int main(void) {
 	State state = START;
