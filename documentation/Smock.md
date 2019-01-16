@@ -165,20 +165,30 @@ The rfid reader is controlled with the **MFRC522** class. This class communicate
 #### Service Script
 
 At first the service script will be started. This initializes the __QueueManager__, the __UserManager__, the __SerialManager__, the __ListenerUserInterface__ and the __TaskManager__. Then there start three different threads. 
+
 The first thread opens the port of the ListenerUserInterface and waits for incoming connections from the user script. When a user connects to the port, the user will be stored in a client list of the ListenerUserInterface.
+
 The next thread is calling a function from the SerialManager. This function is called __SerialManager.fill_queue()__ and waits for recieving bytes from the serial device. The messages will be stored as __Message__ in the queue with the function __QueueManager.write_queue()__.
+
 The last thread calls the function __TaskManager.read_tasks()__. Depending on what command code the TaskManager reads from the queue it calls the functions __TaskManager.send_password_to_controller()__, __TaskManager.send_computer_status()__ oder __TaskManager.update_add_window()__.
+
 After that three threads the function __ListenerUserInterface.check_for_new_msg()__ is called in an endless loop.
 
 #### User Script
 
-After the service script is started, the user script can be started. At first the __ClientUserInterface__ and the __Gui__ are initialized. Then a thread is started. It calls the function __ClientUserInterface.polling()__. After this thread is called the gui will be started. After that the user has a few possibillities to continue.
+After the service script is started, the user script can be started. At first the __ClientUserInterface__ and the __Gui__ are initialized. Then a thread is started. It calls the function __ClientUserInterface.polling()__. After this thread is called the gui will be started. Now the user has a few possibillities to continue.
+
 The first is to add a new __User__. Therefore the User presses the button and then the function __Gui.add()__ is called. This will open a new window, where the user can type in the account information of a user. The user can also hold a new RFID tag at the reader and connect this tag to the user account. When the user filled in all information, then at first the function __ClientUserInterface.check_if_user_exists()__ is called so there won't be a duplicate user. Then the user will be added to the UserManager in the service script. At first the __ClientUserInterface.client_user_interface.add_user()__ is called. This will pass the information to the service script. There it will call the function __UserManager.add_user()__.
-If the user wants to edit an account.
+
+If the user wants to edit an account, the user has to select a user from the list and then press the "Edit" button. This calls the function __Gui.edit()__. Another window is popping up. The user can change the username and password. He is not able to change the uid. After the user changed the username and password. Those information are send to the ListenerUserInterface. There is the function __UserManager.edit_user()__ called, that function edits the User in the UserManager. Then the edit window closes.
+
+To delete a User. The user just has to select one User of the listbox in the main window and presses the button "Delete". Then the function __Gui.delete()__ is called. This sends the information together with the index of the user to the service script. There the function __UserManager.delete_user()__ is called.
+
+The user is also able to press a button to check if the device is connected or not. then the function __Gui.find_controller()__ is called. Then the ListenerUserInterface calls the function __SerialManager.find_serial_device()__. After that the ListenerUserInterface returns if the serial device was found or not.
 
 ### Activity Diagrams
 
-This diagram show different communication protocols between host and user. Switch user works like  log in except there is user name and password transfered and not only the password.
+This diagram show different communication protocols between host and user. Switch user works like log in except there is user name and password transfered and not only the password.
 
 #### unlock
 
