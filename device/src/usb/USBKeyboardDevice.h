@@ -66,7 +66,7 @@ namespace usbdevice {
 		 * \brief Method to get the usage code of a char.
 		 *
 		 * \param cKey Char to get the key from
-		 * \param bool Indicates weather the char is a shifted (big) char.
+		 * \param bShifted Indicates weather the char is a shifted (big) char.
 		 *
 		 * Method to get the usage code of a char. (Keyboard code standing for this char)
 		 *
@@ -149,11 +149,11 @@ namespace usbdevice {
 		 * \brief Called by the UI interface to update the USB keyboard.
 		 *
 		 * \param ui8Modifiers The set of key modifiers.
-		 * \param ui8Key The ASCII character to look up.
+		 * \param ui8UsageCode The ASCII character to look up.
 		 * \param bPressed Indicates if this is a press or release event.
 		 *
 		 * This function is used to update a key that has been pressed based on the
-		 * ASCII character that is passed in the ui8Key parameter. The bPressed
+		 * ASCII character that is passed in the ui8UsageCode parameter. The bPressed
 		 * parameter is true if the key was pressed and false if the key was
 		 * released.
 		 *
