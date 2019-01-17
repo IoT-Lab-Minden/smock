@@ -26,7 +26,7 @@ class SerialManager:
         This is the constructor of the SerialManager. It contains a mutex so it's not possible that multiple threads
         communicate with the serial device. At first the serial device will be initialized, but the port is not known
         yet. The baudrate as well as the timeout is set for the serial device. The timeout is for reading from the
-        serial device, when the timout expires, it stops reading from the serial device. The queue manager is necessary
+        serial device, when the timeout expires, it stops reading from the serial device. The queue manager is necessary
         for storing received messages and the user manager has the information of how many users are using this program
         on the Client/Computer side. This is necessary to know, because the serial device acts differently according to
         the number of users.
@@ -68,8 +68,8 @@ class SerialManager:
         Reads the bytes that are send from the serial device. It acquires a mutex if it's not acquired yet. Then it
         reads the first letter as byte. This will be saved as command code. After that it reads all the other bytes that
         the serial device sends. When the serial device sends a b"!" it means that this is the end of the message that
-        is sent. Then the command code and the text is saved as Message.
-        This function should be called by a separate thread. Because its an endless loop.
+        is sent. Then the command code and the text are saved as Message.
+        This function should be called by a separate thread. Because it's an endless loop.
         """
         first_byte = True
         mutex_acquired = False
@@ -128,7 +128,7 @@ class SerialManager:
 
     def find_serial_device(self):
         """
-        This function searches for a serial device. At first it looks into the config file for a already known COM port.
+        This function searches for a serial device. At first it looks into the config file for an already known COM port.
         If the COM port exists and a device is connected to the COM port, the function connects to the serial device and
         opens the port. If no config is available, the function searches for an available COM port and connects to it.
         After that it writes it in a config file.
@@ -138,7 +138,6 @@ class SerialManager:
         if self.__serial_device.is_open:
             # device already connected
             return True
-            # Gui.notify("Das Gerät ist bereits angeschlossen")
 
         config = configparser.ConfigParser()
         config.read(CONFIG_FILE)
@@ -172,8 +171,8 @@ class SerialManager:
 
     def send_os_to_controller(self):
         """
-        Writes the information of the os name to the serial device. Also sends a number to notify the serial device if
-        the system is used by one person or multiple users. The serial device only wants the first letter os name.
+        Writes the information of the OS name to the serial device. Also sends a number to notify the serial device if
+        the system is used by one person or multiple users. The serial device only wants the first letter OS name.
         So "W" for Windows and "L" for Linux. The function has a little delay, because this function will be called
         immediately after opening the port. This prevents that the message is sent to early and the device doesn't
         read the message.

@@ -6,6 +6,10 @@ ADDRESS = ('localhost', 6000)
 
 
 class ListenerUserInterface:
+    """
+    This class opens a port so the user script can connect to it. It is also used so the service script and user script
+    can communicate together.
+    """
     def __init__(self, user_manager, serial_manager):
         """
         Initialize the service script, that runs in the background of the system. It opens a port on the localhost, that
@@ -65,6 +69,7 @@ class ListenerUserInterface:
             data: Data that are send by the client
 
         Returns:
+            True when a change is made, otherwise returns False
         """
         if data == Codes.USER_EXISTING:
             name = c.recv()

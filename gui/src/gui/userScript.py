@@ -42,7 +42,7 @@ def is_locked(multi_user):
 
 def main():
     """
-    This starts starts the program gui of Smock. It connects to the service script and let the user interact with the
+    This starts the program gui of Smock. It connects to the service script and let the user interact with the
     service script through the gui.
     """
     client_user_interface = ClientUserInterface(is_locked)

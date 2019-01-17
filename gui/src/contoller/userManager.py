@@ -21,7 +21,7 @@ class UserManager:
 
     def __load_users_from_files(self):
         """
-        Loads the users from all files that are in the directory users. The directory users creates itself if not
+        Loads the users from all files that are in the directory users. The directory users create itself if not
         already exists.
         """
         # Get all the filenames of the files in the local_path directory

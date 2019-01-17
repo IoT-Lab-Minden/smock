@@ -47,7 +47,7 @@ class TaskManager:
     def send_password_to_controller(self, uid):
         """
         Sends the password of the user with the given uid. Is the computer locked, the method processes.
-        When the computer is unlocked, the computer status will be send to the micro controller. When the system
+        When the computer is unlocked, the computer status will be send to the serial device. When the system
         is a single user system, only the password is send to the serial device. If it is a system with several users,
         there will be send the username as well.
 
