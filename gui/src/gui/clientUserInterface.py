@@ -5,6 +5,7 @@ from src.contoller.command import Command
 from enum import Enum
 import time
 from src.gui.gui import Gui
+from tkinter import *
 
 
 class Codes(Enum):
@@ -32,7 +33,19 @@ class ClientUserInterface:
         Args:
             locked: the callback function to check if the user screen is locked
         """
-        self.__connection = Client(ADDRESS)
+        try:
+            self.__connection = Client(ADDRESS)
+        except ConnectionRefusedError:
+            notify_window = Tk()
+
+            notify_window.title("Smock")
+            label_username = Label(notify_window, text="Service script isn't running.\n please start the service script"
+                                                       "\n and restart the programm then.")
+            btn_ok = Button(notify_window, text="OK", command=notify_window.destroy)
+            label_username.pack()
+            btn_ok.pack()
+            notify_window.mainloop()
+
         self.__mutex = Lock()
         self.gui = None
         self.is_locked = locked
@@ -80,7 +93,7 @@ class ClientUserInterface:
         self.__mutex.acquire(True)
         self.__connection.send(Codes.USER_EXISTING)
         self.__connection.send(name)
-        data = self.__connection.recv() == "True"
+        data = self.__connection.recv()
         self.__mutex.release()
         return data
 
