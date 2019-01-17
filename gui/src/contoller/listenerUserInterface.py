@@ -68,7 +68,8 @@ class ListenerUserInterface:
         """
         if data == Codes.USER_EXISTING:
             name = c.recv()
-            c.send(self.__user_manager.check_if_user_exists(name))
+            user_exists = self.__user_manager.check_if_user_exists(name)
+            c.send(user_exists)
         elif data == Codes.GET_USERNAME:
             index = c.recv()
             c.send(self.__user_manager.user_list[int(index)].get_username())

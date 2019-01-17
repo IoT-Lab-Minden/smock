@@ -128,7 +128,6 @@ class UserManager:
             pwd: new password for the user
         """
         self.user_list[index].set_password(pwd)
-        if self.user_list[index].get_username() != username:
-            remove(USERS_PATH + self.user_list[index].get_username())
-            self.user_list[index].set_username(username)
-            self.create_user_file(self.user_list[index])
+        remove(USERS_PATH + self.user_list[index].get_username())
+        self.user_list[index].set_username(username)
+        self.create_user_file(self.user_list[index])

@@ -115,7 +115,8 @@ class Gui:
         """
         def set_user():
             # First check if username isn't already existing
-            if self.__client_user_interface.check_if_user_exists(textfield_username.get()):
+            if self.__client_user_interface.check_if_user_exists(textfield_username.get())  \
+                    and not (textfield_username.get() == self.list.get(ACTIVE)):
                 self.notify("Der User existiert bereits")
             else:
                 # Remove the file of the user
