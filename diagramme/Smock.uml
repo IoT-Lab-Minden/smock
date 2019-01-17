@@ -658,7 +658,7 @@
       <packagedElement xmi:type="uml:Class" xmi:id="_hvQIMRieEemeVK_RnjIajg" name="Gui">
         <ownedAttribute xmi:type="uml:Property" xmi:id="_hvQIMhieEemeVK_RnjIajg" name="clientUserInterface" visibility="public" type="_hvQIQxieEemeVK_RnjIajg"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQIMxieEemeVK_RnjIajg" name="setWindowSize" visibility="private">
-          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQINBieEemeVK_RnjIajg" name="tk"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQINBieEemeVK_RnjIajg" name="tk" type="_dsz3QBovEemmo9VunLc1LQ"/>
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQINRieEemeVK_RnjIajg" name="width">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
           </ownedParameter>
@@ -667,7 +667,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQINxieEemeVK_RnjIajg" name="notify" visibility="package">
-          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQIOBieEemeVK_RnjIajg" name="message"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQIOBieEemeVK_RnjIajg" name="message" type="_LIv__BifEemeVK_RnjIajg"/>
         </ownedOperation>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQIORieEemeVK_RnjIajg" name="edit" visibility="private"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQIOhieEemeVK_RnjIajg" name="add" visibility="private"/>
@@ -714,7 +714,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQIUhieEemeVK_RnjIajg" name="writeToController">
-          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQIUxieEemeVK_RnjIajg" name="msg"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQIUxieEemeVK_RnjIajg" name="msg" type="_LIv__BifEemeVK_RnjIajg"/>
         </ownedOperation>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hvQIVBieEemeVK_RnjIajg" name="addUser">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_hvQIVRieEemeVK_RnjIajg" name="userName">
@@ -1028,6 +1028,7 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_L4QKoRjpEemL8JhSDUK65Q" value="1"/>
       </ownedEnd>
     </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_dsz3QBovEemmo9VunLc1LQ" name="Tk"/>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_-7_4wOpHEei0m4I4I3qPnQ">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-8CVAOpHEei0m4I4I3qPnQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
