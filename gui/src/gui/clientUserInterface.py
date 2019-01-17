@@ -26,6 +26,9 @@ class Codes(Enum):
 
 
 class ClientUserInterface:
+    """
+    This Class is the Interface for the user script to the service script.
+    """
     def __init__(self, locked):
         """
         This initializes the Interface between the service script and the user script.
@@ -82,7 +85,7 @@ class ClientUserInterface:
 
     def check_if_user_exists(self, name):
         """
-        Asks the service script if a the user exists
+        Asks the service script if the user exists
 
         Args:
             name: the name of the user that is asked for
@@ -136,9 +139,9 @@ class ClientUserInterface:
         Sends the new data of a user to the service script. This will edit the user data in the service script.
 
         Args:
-            index:
-            user_name:
-            user_pwd:
+            index: index of user in list
+            user_name: username of user
+            user_pwd: password of user
         """
         self.__mutex.acquire(True)
         self.__connection.send(Codes.SET_NEW_DATA)
@@ -176,7 +179,7 @@ class ClientUserInterface:
 
     def delete_user(self, index):
         """
-        Sends the service script the information to delete a user and also the index of that user.
+        Sends the service script the information to delete a user and the index of that user.
 
         Args:
             index: the index of the user in the list

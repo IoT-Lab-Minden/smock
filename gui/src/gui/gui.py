@@ -230,7 +230,7 @@ class Gui:
 
     def __delete(self):
         """
-        Deletes the user that is active in the listbox of the main window and also notify the user manager
+        Deletes the user that is active in the listbox of the main window and notifies the user manager
         """
         self.__client_user_interface.delete_user(self.list.index(ACTIVE))
         self.notify("Der User wurde erfolgreich gelöscht")

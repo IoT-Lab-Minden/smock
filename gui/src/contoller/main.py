@@ -9,9 +9,9 @@ from src.contoller.listenerUserInterface import ListenerUserInterface
 
 def main():
     """
-    This starts starts the program Smock. It is initializing the queueManager, serialManager, userManager, taskManager
-    and the gui. It also starts three threads. One to read the messages from the serial input, One to read the tasks
-    that are given from the Smock device and the last to text the Smock device about the using OS.
+    This starts the program Smock. It is initializing the QueueManager, SerialManager, UserManager, TaskManager
+    and the ListenerUserInterface. It also starts three threads. One to read the messages from the serial input, One to
+    read the tasks that are given from the Smock device and one to open the connection to the user script.
     """
     queue_manager = QueueManager()
     user_manager = UserManager()
