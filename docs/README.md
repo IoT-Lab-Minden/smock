@@ -276,6 +276,30 @@ greeter-hide-users=true
 allow-guest=false
 ````
 
+### User Manual
+
+First you connect the smock device to the computer. 
+Then you start the service script.
+After that you can open the user script.
+
+The Gui looks like this.
+![register](images/Gui/gui.png)
+
+Then you have a few options. If you want to add a new user, you have to press the "Add" button.
+Then a new window comes up.
+![register](images/Gui/gui_add.PNG)
+
+You must type in your username and password. To recognize an uid, you have to hold your RFID tag on the smock device and then press the button "Refresh uid".
+When the uid is recognized you can press the button "OK" and the user will be added to your list.
+
+After that you can edit the user. Therefore you have to select a user of the list and press the button "edit".
+Then a new window comes up.
+![register](images/Gui/gui_edit.PNG)
+
+Then you must type in a new username and password. You are not able to change the uid, when you edit the user.
+
+To delete a user, you simply select the user you want to add and delete him.
+
 ## Conclusion
 
 Taking everything into account we reached all our defined use cases. Advantage of the system is that it can be upgrade without putting too much work in it.
