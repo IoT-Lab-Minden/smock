@@ -1,4 +1,4 @@
-![icon](../icon/icon.png)
+![icon](images/icon.png)
 # SMOCK
 **Sm**art C**o**mputer Lo**ck**
 
@@ -20,7 +20,7 @@ Finally remains the possibility to log in manually by entering the user name, if
 
 From the above mentioned goals, we deduced six important use cases.
 
-![UseCaseDiagram](../diagramme/Smock/UseCaseDiagram.PNG)
+![UseCaseDiagram](images/Smock/UseCaseDiagram.PNG)
 
 The first three use cases are the mentioned goals. These use cases are all initiated by the user and executed by the SMOCK device. 
 
@@ -48,7 +48,7 @@ The User must install Python 3.5, otherwise he is not able to use the scripts.
 
 All system requirements, functional and non-functional, are shown in the image below:
 
-![non-functional_requirements](../diagramme/Smock/non-functional_requirements.png)
+![non-functional_requirements](images/Smock/non-functional_requirements.png)
 
 ## Components
 
@@ -64,7 +64,7 @@ To communicate with the tag, we need an RFID Reader. The reader has the task to 
 
 To control the reader and to communicate with the computer we use a usb-capable micro controller. The micro controller handles the event when a new card is read by the RFID reader, verifies the user and logs him in. The same way works with logging off from the user.
 
-![CompositeDiagram](../diagramme/Smock/CompositeDiagram.PNG)
+![CompositeDiagram](images/Smock/CompositeDiagram.PNG)
 
 ## Software Structure
 
@@ -86,9 +86,9 @@ Since we are connecting two usb devices to the host via one usb port we need a c
 
 Because this class takes over the registration at the host the device also contains a descriptor data array that holds the information needed by the host. The connection is like the other devices handled by a structure provided by the usb library. This tUSBCompositeDevice struct also registers an event handler for default usb events like connecting or disconnecting.
 
-![ClassDiagram_rfid](../diagramme/Smock/ClassDiagram_rfid.png)
+![ClassDiagram_rfid](images/Smock/ClassDiagram_rfid.png)
 
-![ClassDiagram_usb](../diagramme/Smock/ClassDiagram_usb.png)
+![ClassDiagram_usb](images/Smock/ClassDiagram_usb.png)
 
 ### Host
 
@@ -108,9 +108,9 @@ The last class of the service script is the __ListenerUserInterface__. This clas
 
 The user script is for the user. This opens a Gui that the user can use to add new User or edit/delete User. The __Gui__ has a main window and the different methods to answer the events that are triggered by pressing buttons. The user Script connects to the open port of the ListenerUserInterface of the service script. This happens in the class ClientUserInterface. The __ClientUserInterface__ has also the task to pass changes that are made by a user to the service script.
 
-![ClassDiagram_controllerInterface](../diagramme/Smock/ClassDiagramHost_controllerInterface.png)
+![ClassDiagram_controllerInterface](images/Smock/ClassDiagramHost_controllerInterface.png)
 
-![ClassDiagram_gui](../diagramme/Smock/ClassDiagramHost_gui.png)
+![ClassDiagram_gui](images/Smock/ClassDiagramHost_gui.png)
 
 ## Software processes
 
@@ -120,7 +120,7 @@ The user script is for the user. This opens a Gui that the user can use to add n
 
 The main component of the device software is realized with a state machine.
 
-![StateComputer](../diagramme/Smock/StateComputer.PNG)
+![StateComputer](images/Smock/StateComputer.PNG)
 
 After starting the micro controller goes into the *START* state. All events that come in, whether they come from the RFID reader or via the serial port, are discarded, except for the OS_SYSTEM event from the host. This message contains information about the operating system and the number of users registered to the software. Without this information the log in or off won't work because there are different schedules needed for a different number of users or different operating systems.
 
@@ -186,19 +186,19 @@ After the service script is started, the user script can be started. At first th
 
 The first is to add a new __User__. Therefore the User presses the button and then the function __Gui.add()__ is called. This will open a new window, where the user can type in the account information of a user. The user can also hold a new RFID tag at the reader and connect this tag to the user account. When the user filled in all information, then at first the function __ClientUserInterface.check_if_user_exists()__ is called so there won't be a duplicate user. The service script checks if the user already exists and if not, then "False" is returned. Then the user will be added to the UserManager in the service script. At first the __ClientUserInterface.add_user()__ is called. This will pass the information to the service script. There it will call the function __UserManager.add_user()__.
 
-![SequenceDiagram_Add](../diagramme/SmockUmlet/SequenceDiagram_Gui_Add.png)
+![SequenceDiagram_Add](images/SmockUmlet/SequenceDiagram_Gui_Add.png)
 
 ##### Edit User
 
 If the user wants to edit an account, the user must select a user from the list and then press the "Edit" button. This calls the function __Gui.edit()__. Another window is popping up. The user can change the username and password. He is not able to change the uid. After the user changed the username and password. That information is send to the ListenerUserInterface. There is the function __UserManager.edit_user()__ called, that function edits the User in the UserManager. Then the edit window closes.
 
-![SequenceDiagram_Edit](../diagramme/SmockUmlet/SequenceDiagram_Gui_Edit.png)
+![SequenceDiagram_Edit](images/SmockUmlet/SequenceDiagram_Gui_Edit.png)
 
 ##### Delete User
 
 To delete a User. The user just must select one User of the listbox in the main window and presses the button "Delete". Then the function __Gui.delete()__ is called. This sends the information together with the index of the user to the service script. There the function __UserManager.delete_user()__ is called.
 
-![SequenceDiagram_Delete](../diagramme/SmockUmlet/SequenceDiagram_Gui_Delete.png)
+![SequenceDiagram_Delete](images/SmockUmlet/SequenceDiagram_Gui_Delete.png)
 
 The user is also able to press a button to check if the device is connected or not. then the function __Gui.find_controller()__ is called. Then the ListenerUserInterface calls the function __SerialManager.find_serial_device()__. After that the ListenerUserInterface returns if the serial device was found or not.
 
@@ -208,15 +208,15 @@ This diagram shows different communication protocols between host and user. Swit
 
 #### unlock
 
-![unlock](../diagramme/Smock/unlock.PNG)
+![unlock](images/Smock/unlock.PNG)
 
 #### lock
 
-![lock](../diagramme/Smock/lock.PNG)
+![lock](images/Smock/lock.PNG)
 
 #### register
 
-![register](../diagramme/Smock/register.PNG)
+![register](images/Smock/register.PNG)
 
 ## Setup
 
