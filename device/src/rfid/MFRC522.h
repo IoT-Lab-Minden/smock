@@ -284,7 +284,7 @@ namespace rfid_reader {
 		 *
 		 * \param *data Pointer to the data to transfer to the FIFO for CRC calculation.
 		 * \param length The number of bytes to transfers
-		 * \param *reslut Pointer to the result buffer, the output is written into.
+		 * \param *result Pointer to the result buffer, the output is written into.
 		 *
 		 * Use the CRC coprocessor in the MFRC522 to calculate a CRC_A.
 		 *

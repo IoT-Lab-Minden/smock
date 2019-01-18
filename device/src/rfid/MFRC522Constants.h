@@ -31,7 +31,7 @@ const uint32_t SS_PIN_BASE = GPIO_PORTA_BASE;
 const uint8_t RST_PIN = GPIO_PIN_6;
 
 /**
- * \var const uint32_t RST_PIN_BASE = GPIO_PORTA_BASE
+ * \var const uint32_t RST_PIN_BASE
  *
  * Pin base of the reset pin-
  */
@@ -190,8 +190,6 @@ enum StatusCode : uint8_t {
 };
 
 /**
- * \var Uid
- *
  * A struct used for passing the UID of a Tag.
  */
 typedef struct {

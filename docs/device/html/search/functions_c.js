@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['write',['write',['../classusbdevice_1_1_u_s_b_serial_device.html#af3884b6ffd4ec034716b20f5b330d085',1,'usbdevice::USBSerialDevice']]],
-  ['writeregister',['writeRegister',['../classrfid__reader_1_1_m_f_r_c522.html#ad2e64b44b8e0e478db3aad53dc66e20b',1,'rfid_reader::MFRC522::writeRegister(PCD_Register reg, uint8_t value)'],['../classrfid__reader_1_1_m_f_r_c522.html#aeee9c4906108be341d8273f7fdbeda26',1,'rfid_reader::MFRC522::writeRegister(PCD_Register reg, uint8_t count, uint8_t *values)']]]
+  ['transceivedata',['transceiveData',['../classrfid__reader_1_1_m_f_r_c522.html#a299bf364776957c15a3ff14c4cb1792e',1,'rfid_reader::MFRC522']]],
+  ['txhandler',['TxHandler',['../main_8cpp.html#ace5880acfab168e16e2a4f7216a99d2a',1,'main.cpp']]]
 ];

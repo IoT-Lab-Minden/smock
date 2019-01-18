@@ -228,7 +228,7 @@ uint32_t RxHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgValue,
 uint8_t handleGeneralRequests(uint8_t *symbol, State *state);
 
 /**
- * \fn main.c
+ * \fn int main(void)
  * \brief main program executed at start.
  *
  * To use Serial Communication connect to com port with baud 115200

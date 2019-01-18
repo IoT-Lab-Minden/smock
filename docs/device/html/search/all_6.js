@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['init',['init',['../classrfid__reader_1_1_m_f_r_c522.html#a14f8812b855d4658e3caf23e1c7519c9',1,'rfid_reader::MFRC522::init()'],['../classusbdevice_1_1_u_s_b_comp_device.html#a11c7086bd7cf73045ffaf833f52c9fa5',1,'usbdevice::USBCompDevice::init()']]],
-  ['initbuffer',['initBuffer',['../classusbdevice_1_1_u_s_b_serial_device.html#ad2721ebfd4cb57801e8137482a518edf',1,'usbdevice::USBSerialDevice']]],
-  ['iskeyboardpending',['IsKeyboardPending',['../classusbdevice_1_1_u_s_b_keyboard_device.html#a227077be616bcb61141f6cb52d2de85b',1,'usbdevice::USBKeyboardDevice']]],
-  ['isnewcardpresent',['isNewCardPresent',['../classrfid__reader_1_1_m_f_r_c522.html#aedc2727258a1e3bf7ef2f019e69c1cbf',1,'rfid_reader::MFRC522']]]
+  ['fifodatareg',['FIFODataReg',['../namespacerfid__reader.html#adb6438be6fe142d0739266d8abee8880a6e02ec6066347f6c25b082b63a24e947',1,'rfid_reader']]],
+  ['fifolevelreg',['FIFOLevelReg',['../namespacerfid__reader.html#adb6438be6fe142d0739266d8abee8880a211f3b2101f93bd82b07f4fb2e3bae40',1,'rfid_reader']]],
+  ['flushreceivebuffer',['flushReceiveBuffer',['../classusbdevice_1_1_u_s_b_serial_device.html#ab8ddf5d93912f8805380c077d7a2a9dc',1,'usbdevice::USBSerialDevice']]],
+  ['fm17522_5ffirmware_5freference',['FM17522_firmware_reference',['../namespacerfid__reader.html#a4456368268271e82d60a7689e8f91ca3',1,'rfid_reader']]]
 ];

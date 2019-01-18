@@ -32,9 +32,9 @@ To limit the requirements, we had to set different functional requirements.
 
 First, should the system can recognize and differentiate multiple users. If the device would not fulfill this, the privacy of every user could not be guaranteed.
 
-Another very important requirement is the integrity of the system. The device should be __small and easy to plug or unplug__. When connecting the device to another computer, this device must not can read the user data of the other computer.
+Another very important requirement is the integrity of the system. The device should be *small and easy to plug or unplug*. When connecting the device to another computer, this device must not can read the user data of the other computer.
 
-These two requirements are the most important. If these requirements are not met, the system does not work and must not be used! **ändern**
+These two requirements are the most important. If these requirements are not met, the system does not work and must not be used!
 
 In addition, there are a few little less important requirements.
 
@@ -70,11 +70,11 @@ To control the reader and to communicate with the computer we use a usb-capable 
 
 ### Device
 
-The Software of the device is separated into two different parts. The first one which controls the MFRC522 RFID Reader mainly consists of one class, the __MRFC522__ class.
+The Software of the device is separated into two different parts. The first one which controls the MFRC522 RFID Reader mainly consists of one class, the <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1_m_f_r_c522.html">MFRC522</a> class.
 
 This class uses the SPI module provided by the Energia libraries to communicate with the host. The class hold the currently available uid in a UID struct. This struct contains an array of bytes that holds the ID. The struct also holds the length of the UID array.
 
-The __MRFC522__ class offers the needed functions to setup and communicate with the reader. To handle different error values a **StatusCode** enumeration is used.
+The <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1_m_f_r_c522.html">MFRC522</a> class offers the needed functions to setup and communicate with the reader. To handle different error values a **StatusCode** enumeration is used.
 
 The second part controls the usb communication. The general communication between the host and the device is realized with a serial interface. The device is represented by the __USBSerialDevice__. It contains a tUSBCDCDevice which is responsible for the serial communication. The tUSBCDCDevice type is provided by the usb library from Texas Instruments and it is used to register the callbacks to handle different usb events. There are three callbacks needed for the serial communication. The first one handles the general usb events like connecting or disconnecting the usb connection, the second one handles the event when data was received and the third one handles the event when data was transmitted.
 
@@ -162,7 +162,7 @@ The second method **USBPressKeyComnination()** takes a modifier byte for the spe
 
 ### RFID reader
 
-The RFID reader is controlled with the **MFRC522** class. This class communicates with the reader over SPI. For this the Energia SPI library is used. The reader provides methods to ask if a new card is detected by the reader and to read the uid from them. In the **isNewCardPresent()** function is a request send to the reader and when a **STATUS_OK** or **STATUS_COLLISION** was returned a new card is present. After that in the main method is the uid read by calling **readCardSerial()**.
+The RFID reader is controlled with the <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1_m_f_r_c522.html">MFRC522</a> class. This class communicates with the reader over SPI. For this the Energia SPI library is used. The reader provides methods to ask if a new card is detected by the reader and to read the uid from them. In the **isNewCardPresent()** function is a request send to the reader and when a **STATUS_OK** or **STATUS_COLLISION** was returned a new card is present. After that in the main method is the uid read by calling **readCardSerial()**.
 
 ### Host
 
