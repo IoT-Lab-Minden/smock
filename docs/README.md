@@ -74,7 +74,7 @@ The Software of the device is separated into two different parts. The first one 
 
 This class uses the SPI module provided by the Energia libraries to communicate with the host. The class hold the currently available uid in a UID struct. This struct contains an array of bytes that holds the ID. The struct also holds the length of the UID array.
 
-The <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1MFRC522.html.html">MFRC522</a> class offers the needed functions to setup and communicate with the reader. To handle different error values a <a href="https://iot-lab-minden.github.io/smock/device/html/MFRC522Constants_8h.html#ad77c7f5b5f680bb2cbb180387c606c24">StatusCode</a> enumeration is used.
+The <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1MFRC522.html.html">MFRC522</a> class offers the needed functions to setup and communicate with the reader. To handle different error values a <a href="https://iot-lab-minden.github.io/smock/device/html/namespacerfid__reader.html#ad77c7f5b5f680bb2cbb180387c606c24">StatusCode</a> enumeration is used.
 
 The second part controls the usb communication. The general communication between the host and the device is realized with a serial interface. The device is represented by the <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBSerialDevice.html">USBSerialDevice</a>. It contains a *tUSBCDCDevice* which is responsible for the serial communication. The *tUSBCDCDevice* type is provided by the usb library from Texas Instruments and it is used to register the callbacks to handle different usb events. There are three callbacks needed for the serial communication. The first one handles the general usb events like connecting or disconnecting the usb connection, the second one handles the event when data was received and the third one handles the event when data was transmitted.
 
@@ -118,15 +118,15 @@ The user script is for the user. This opens a Gui that the user can use to add n
 
 #### Main
 
-The main component of the device software is realized with a state machine.
+The main component of the device software is realized with a <a href="https://iot-lab-minden.github.io/smock/device/html/main_8cpp.html#ae9c42c594bb848c81ace2ff29f64dc89">state machine</a>.
 
 ![StateComputer](images/Smock/StateComputer.PNG)
 
-After starting the micro controller goes into the *START* state. All events that come in, whether they come from the RFID reader or via the serial port, are discarded, except for the OS_SYSTEM event from the host. This message contains information about the operating system and the number of users registered to the software. Without this information the log in or off won't work because there are different schedules needed for a different number of users or different operating systems.
+After starting the micro controller goes into the *START* state. All events that come in, whether they come from the RFID reader or via the serial port, are discarded, except for the <a href="https://iot-lab-minden.github.io/smock/device/html/main_8cpp.html#a887ec76db4f4aa156c159988294a5dc7">OS_SYSTEM</a> event from the host. This message contains information about the operating system and the number of users registered to the software. Without this information the log in or off won't work because there are different schedules needed for a different number of users or different operating systems.
 
 After receiving the needed information, the host goes in the *LOCKED* state. This state is only left when a card is read by the RFID reader. The read Uid from the tag is stored as currentUid. The device sends over the serial interface a request for the password and optional the user name matching to the Uid.
 
-Then the system goes in the state *WAIT_FOR_PW*. In this state the device waits for the answer of the host. There are two different way the host can answer. The first opportunity is that the device receives as HOST_STATUS message. This message indicates that the host is already logged in. In this case a user has unlocked the host manually and the device should not sign in the new user. The system goes back to the *LOCKED* state in that case and resets the currentUid to a default value.
+Then the system goes in the state *WAIT_FOR_PW*. In this state the device waits for the answer of the host. There are two different way the host can answer. The first opportunity is that the device receives as <a href="https://iot-lab-minden.github.io/smock/device/html/main_8cpp.html#a887ec76db4f4aa156c159988294a5dc7">HOST_STATUS</a> message. This message indicates that the host is already logged in. In this case a user has unlocked the host manually and the device should not sign in the new user. The system goes back to the *LOCKED* state in that case and resets the currentUid to a default value.
 
 The second possible answer is a message containing the username and optional the password. In this case the micro controller uses the information to log in the user using the simulated keyboard. The following state in this case is the *UNLOCKED* state.
 
@@ -136,7 +136,7 @@ In the *VALIDATE_HOST_LOCKED_STATE* the device waits for the answer of the host 
 
 In every state are unexpected events discarded except for a few certain requests received via the serial interface.
 
-The first one is the information that the number of registered users has changed. In this case the host sends a USER_QUANTITY code followed by 1 if there is only one user registered and a 2 otherwise.
+The first one is the information that the number of registered users has changed. In this case the host sends a <a href="https://iot-lab-minden.github.io/smock/device/html/main_8cpp.html#a887ec76db4f4aa156c159988294a5dc7">USER_QUANTITY</a> code followed by 1 if there is only one user registered and a 2 otherwise.
 
 The second one is when the operating system information is send again. When this happens the device stores updates of the operating system and user quantity information.
 
@@ -144,63 +144,63 @@ Finally, the currently read UID can be requested from the host to connect it to 
 
 #### Serial interface
 
-The described events from the serial interface are received by the USBSerialDevice class. A interrupt executes the **RxHandler**, defined in the main script, when new data is available. This method writes new data into the **receiveBuffer**. There are two receive buffers needed in this class because the first one, the **g_sRxBuffer** is automatically filled by the usb library, because it is a *tUSBBuffer* and was initialized with the *USBBufferInit()* function. The second receive buffer is for the use of the user. This buffer is handled as a queue.
+The described events from the serial interface are received by the <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBSerialDevice.html">USBSerialDevice</a> class. A interrupt executes the *RxHandler*, defined in the main script, when new data is available. This method writes new data into the *receiveBuffer*. There are two receive buffers needed in this class because the first one, the *g_sRxBuffer* is automatically filled by the usb library, because it is a *tUSBBuffer* and was initialized with the *USBBufferInit()* function. The second receive buffer is for the use of the user. This buffer is handled as a queue.
 
-So the new received data in the **g_sRxBuffer** is added to the end of the **receiveBuffer** in the **USBSerialDevice.readBuffer()** function. In this function is also a counter of all received data incremented.
+So the new received data in the *g_sRxBuffer* is added to the end of the *receiveBuffer* in the <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBSerialDevice.html#acca2b3c4990e877940768e3ee02e9400">USBSerialDevice.readBuffer()</a> function. In this function is also a counter of all received data incremented.
 
 In the main method reads the head of the queue. If the queue is empty, an empty value is returned. The read byte indicates whether and which event was received.
 
-To send data to the host the **USBSerialDevice** class provides a write method which takes a data array and the length of the data as parameters. This function calls the *USBBufferWrite()* function from the usb library to write the data in the **g_sTxBuffer**. This buffer is built like the **g_sRxBuffer** with the difference the the receive Buffer was built with *USBDCDCPacketRead* and the transmit buffer with *USBDCDCPacketWrite*. The data written in the transmit buffer is automatically send to the usb connection.
+To send data to the host the <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBSerialDevice.html">USBSerialDevice</a> class provides a write method which takes a data array and the length of the data as parameters. This function calls the *USBBufferWrite()* function from the usb library to write the data in the *g_sTxBuffer*. This buffer is built like the *g_sRxBuffer* with the difference the the receive Buffer was built with *USBDCDCPacketRead* and the transmit buffer with *USBDCDCPacketWrite*. The data written in the transmit buffer is automatically send to the usb connection.
 
 ### Keyboard device
 
-The keyboard device is a human interface device. The **USBKeyboardDevice** provides two methods to press keys. The first on is the **writeString()** function that writes the given data by calling *USBKeyboardUpdate()* function press and release the key for every given char.
+The keyboard device is a human interface device. The <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBKeyboardDevice.html">USBKeyboardDevice</a> provides two methods to press keys. The first on is the <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBKeyboardDevice.html#ac71a205e6fa9aef43efeb89bad6be6b3">USBKeyboardDevice.USBWriteString()</a> function that writes the given data by calling <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBKeyboardDevice.html#a6e9ec2037f7fe2a81f8fab0d9f2699c1">USBKeyboardDevice.USBKeyboardUpdate()</a> function press and release the key for every given char.
 
-Before pressing the key the usage code of the given char is gotten by calling the **GetUsageCode()** method.
+Before pressing the key the usage code of the given char is gotten by calling the <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBKeyboardDevice.html#aee4901b0d53c1fdb8288fef509c0a7d1">USBKeyboardDevice.GetUsageCode()</a> method.
 
-The second method **USBPressKeyComnination()** takes a modifier byte for the special keys and a string of keys the user wants to press at the same time. The function simply presses every key using the *USBDHIDKeyboardKeyStateChange()* function. Only when all keys were pressed they are released.
+The second method <a href="https://iot-lab-minden.github.io/smock/device/html/classusbdevice_1_1USBKeyboardDevice.html#a7eb69eed34b31f8da978e05f38e7d805">USBKeyboardDevice.USBPressKeyComnination()</a> takes a modifier byte for the special keys and a string of keys the user wants to press at the same time. The function simply presses every key using the *USBDHIDKeyboardKeyStateChange()* function. Only when all keys were pressed they are released.
 
 ### RFID reader
 
-The RFID reader is controlled with the <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1_m_f_r_c522.html">MFRC522</a> class. This class communicates with the reader over SPI. For this the Energia SPI library is used. The reader provides methods to ask if a new card is detected by the reader and to read the uid from them. In the **isNewCardPresent()** function is a request send to the reader and when a **STATUS_OK** or **STATUS_COLLISION** was returned a new card is present. After that in the main method is the uid read by calling **readCardSerial()**.
+The RFID reader is controlled with the <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1_m_f_r_c522.html">MFRC522</a> class. This class communicates with the reader over SPI. For this the Energia SPI library is used. The reader provides methods to ask if a new card is detected by the reader and to read the uid from them. In the <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1MFRC522.html#aedc2727258a1e3bf7ef2f019e69c1cbf">MRFC522.isNewCardPresent()</a> function is a request send to the reader and when a <a href="https://iot-lab-minden.github.io/smock/device/html/namespacerfid__reader.html#ad77c7f5b5f680bb2cbb180387c606c24">STATUS_OK</a> or <a href="https://iot-lab-minden.github.io/smock/device/html/namespacerfid__reader.html#ad77c7f5b5f680bb2cbb180387c606c24">STATUS_COLLISION</a> was returned a new card is present. After that in the main method is the uid read by calling <a href="https://iot-lab-minden.github.io/smock/device/html/classrfid__reader_1_1MFRC522.html#a1ce8c2c1a120db5e6468a3258df20894">readCardSerial()</a>.
 
 ### Host
 
 #### Service Script
 
-At first the service script is started. This initializes the __QueueManager__, the __UserManager__, the __SerialManager__, the __ListenerUserInterface__ and the __TaskManager__. Then there start three different threads. 
+At first the service script is started. This initializes the <a href="https://iot-lab-minden.github.io/smock/controller/html/classqueue_manager_1_1_queue_manager.html">QueueManager</a>, the <a href="https://iot-lab-minden.github.io/smock/controller/html/classtask_manager_1_1_task_manager.html">UserManager</a>, the <a href="https://iot-lab-minden.github.io/smock/controller/html/classserial_manager_1_1_serial_manager.html">SerialManager</a>, the <a href="https://iot-lab-minden.github.io/smock/controller/html/classlistener_user_interface_1_1_listener_user_interface.html">ListenerUserInterface</a> and the <a href="https://iot-lab-minden.github.io/smock/controller/html/classtask_manager_1_1_task_manager.html">TaskManager</a>. Then there start three different threads. 
 
 The first thread opens the port of the ListenerUserInterface and waits for incoming connections from the user script. When a user connects to the port, the user will be stored in a client list of the ListenerUserInterface.
 
-The next thread is calling a function from the SerialManager. This function is called __SerialManager.fill_queue()__ and waits for recieving bytes from the serial device. The messages will be stored as __Message__ in the queue with the function __QueueManager.write_queue()__.
+The next thread is calling a function from the SerialManager. This function is called <a href="https://iot-lab-minden.github.io/smock/controller/html/classserial_manager_1_1_serial_manager.html#af3b68b0396e8387c6930f00e3d49364b">SerialManager.fill_queue()</a> and waits for recieving bytes from the serial device. The messages will be stored as <a href="https://iot-lab-minden.github.io/smock/controller/html/classmessage_1_1_message.html">Message</a> in the queue with the function <a href="https://iot-lab-minden.github.io/smock/controller/html/classqueue_manager_1_1_queue_manager.html#acd24aed3104688ba45e58aab38149114">QueueManager.write_queue()</a>.
 
-The last thread calls the function __TaskManager.read_tasks()__. Depending on what command code the TaskManager reads from the queue it calls the functions __TaskManager.send_password_to_controller()__, __TaskManager.send_computer_status()__ or __TaskManager.update_add_window()__.
+The last thread calls the function <a href="https://iot-lab-minden.github.io/smock/controller/html/classtask_manager_1_1_task_manager.html#ae24df378d896e8446e08c8e6d53e1221">TaskManager.read_tasks()</a>. Depending on what command code the TaskManager reads from the queue it calls the functions <a href="https://iot-lab-minden.github.io/smock/controller/html/classtask_manager_1_1_task_manager.html#a2bbf0eeebab21963240c978ca078062e">TaskManager.send_password_to_controller()</a>, *TaskManager.send_computer_status()* or *TaskManager.update_add_window()*.
 
-After that three threads the function __ListenerUserInterface.check_for_new_msg()__ is called in an endless loop.
+After that three threads the function <a href="https://iot-lab-minden.github.io/smock/controller/html/classlistener_user_interface_1_1_listener_user_interface.html#a11f2e26487c67767df066ff26a512032">ListenerUserInterface.check_for_new_msg()</a> is called in an endless loop.
 
 #### User Script
 
-After the service script is started, the user script can be started. At first the __ClientUserInterface__ and the __Gui__ are initialized. Then a thread is started. It calls the function __ClientUserInterface.polling()__. After this thread is called the gui will be started. Now the user has a few possibillities to continue.
+After the service script is started, the user script can be started. At first the <a href="https://iot-lab-minden.github.io/smock/gui/html/classclient_user_interface_1_1_client_user_interface.html">ClientUserInterface</a> and the <a href="https://iot-lab-minden.github.io/smock/gui/html/classgui_1_1_gui.html">Gui</a> are initialized. Then a thread is started. It calls the function <a href="https://iot-lab-minden.github.io/smock/gui/html/classclient_user_interface_1_1_client_user_interface.html#a6b31f0775ec89901c75c8b9534e6eee0">ClientUserInterface.polling()</a>. After this thread is called the gui will be started. Now the user has a few possibillities to continue.
 
 ##### Add new User
 
-The first is to add a new __User__. Therefore the User presses the button and then the function __Gui.add()__ is called. This will open a new window, where the user can type in the account information of a user. The user can also hold a new RFID tag at the reader and connect this tag to the user account. When the user filled in all information, then at first the function __ClientUserInterface.check_if_user_exists()__ is called so there won't be a duplicate user. The service script checks if the user already exists and if not, then "False" is returned. Then the user will be added to the UserManager in the service script. At first the __ClientUserInterface.add_user()__ is called. This will pass the information to the service script. There it will call the function __UserManager.add_user()__.
+The first is to add a new <a href="https://iot-lab-minden.github.io/smock/controller/html/classuser_1_1_user.html">User</a>. Therefore the User presses the button and then the function *Gui.add()* is called. This will open a new window, where the user can type in the account information of a user. The user can also hold a new RFID tag at the reader and connect this tag to the user account. When the user filled in all information, then at first the function <a href="https://iot-lab-minden.github.io/smock/gui/html/classclient_user_interface_1_1_client_user_interface.html#a8227a82a8f91a2d3ea6ea3b8dad2ffdf">ClientUserInterface.check_if_user_exists()</a> is called so there won't be a duplicate user. The service script checks if the user already exists and if not, then "False" is returned. Then the user will be added to the UserManager in the service script. At first the <a href="https://iot-lab-minden.github.io/smock/gui/html/classclient_user_interface_1_1_client_user_interface.html#a024e4a19d671a9ef94a86453ed1a9641">ClientUserInterface.add_user()</a> is called. This will pass the information to the service script. There it will call the function <a href="https://iot-lab-minden.github.io/smock/controller/html/classuser_manager_1_1_user_manager.html#ac539b9843ebdcd50acf577a29e71c624">UserManager.add_user()</a>.
 
 ![SequenceDiagram_Add](images/SmockUmlet/SequenceDiagram_Gui_Add.png)
 
 ##### Edit User
 
-If the user wants to edit an account, the user must select a user from the list and then press the "Edit" button. This calls the function __Gui.edit()__. Another window is popping up. The user can change the username and password. He is not able to change the uid. After the user changed the username and password. That information is send to the ListenerUserInterface. There is the function __UserManager.edit_user()__ called, that function edits the User in the UserManager. Then the edit window closes.
+If the user wants to edit an account, the user must select a user from the list and then press the "Edit" button. This calls the function *Gui.edit()*. Another window is popping up. The user can change the username and password. He is not able to change the uid. After the user changed the username and password. That information is send to the ListenerUserInterface. There is the function <a href="https://iot-lab-minden.github.io/smock/controller/html/classuser_manager_1_1_user_manager.html#a02119e9b77d780592d389afdb8bb3c83">UserManager.edit_user()</a> called, that function edits the User in the UserManager. Then the edit window closes.
 
 ![SequenceDiagram_Edit](images/SmockUmlet/SequenceDiagram_Gui_Edit.png)
 
 ##### Delete User
 
-To delete a User. The user just must select one User of the listbox in the main window and presses the button "Delete". Then the function __Gui.delete()__ is called. This sends the information together with the index of the user to the service script. There the function __UserManager.delete_user()__ is called.
+To delete a User. The user just must select one User of the listbox in the main window and presses the button "Delete". Then the function *Gui.delete()* is called. This sends the information together with the index of the user to the service script. There the function <a href="https://iot-lab-minden.github.io/smock/controller/html/classuser_manager_1_1_user_manager.html#a7ef21abed1f8e13558d827f3f498d4c1">UserManager.delete_user()</a> is called.
 
 ![SequenceDiagram_Delete](images/SmockUmlet/SequenceDiagram_Gui_Delete.png)
 
-The user is also able to press a button to check if the device is connected or not. then the function __Gui.find_controller()__ is called. Then the ListenerUserInterface calls the function __SerialManager.find_serial_device()__. After that the ListenerUserInterface returns if the serial device was found or not.
+The user is also able to press a button to check if the device is connected or not. then the function *Gui.find_controller()* is called. Then the ListenerUserInterface calls the function <a href="https://iot-lab-minden.github.io/smock/controller/html/classserial_manager_1_1_serial_manager.html#a8a90050aa39382eb45eab44160d7f815">SerialManager.find_serial_device()</a>. After that the ListenerUserInterface returns if the serial device was found or not.
 
 ### Activity Diagrams
 
