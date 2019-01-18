@@ -248,9 +248,9 @@ For the use of the multiple user option it is also needed to change the registry
 
 3. Enter the following key:
 
-   ````
+````
    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
-   ````
+````
 
 4. Edit the *dontdisplaylastusername* value from 0 to 1
 
@@ -276,25 +276,28 @@ greeter-hide-users=true
 allow-guest=false
 ````
 
-### User Manual
+## User Manual
 
 First you connect the smock device to the computer. 
 Then you start the service script.
 After that you can open the user script.
 
 The Gui looks like this.
+
 ![register](images/Gui/gui.png)
 
 Then you have a few options. If you want to add a new user, you have to press the "Add" button.
 Then a new window comes up.
-![register](images/Gui/gui_add.PNG)
+
+![register](images/Gui/gui_add.png)
 
 You must type in your username and password. To recognize an uid, you have to hold your RFID tag on the smock device and then press the button "Refresh uid".
 When the uid is recognized you can press the button "OK" and the user will be added to your list.
 
 After that you can edit the user. Therefore you have to select a user of the list and press the button "edit".
 Then a new window comes up.
-![register](images/Gui/gui_edit.PNG)
+
+![register](images/Gui/gui_edit.png)
 
 Then you must type in a new username and password. You are not able to change the uid, when you edit the user.
 

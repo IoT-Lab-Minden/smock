@@ -4,7 +4,7 @@ from os import listdir
 from os import remove
 import os
 
-USERS_PATH = "../../users/"
+USERS_PATH = "./users/"
 
 
 class UserManager:
