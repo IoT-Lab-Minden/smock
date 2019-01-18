@@ -41,12 +41,12 @@ class Gui:
         self.list = Listbox(self.top_frame)
 
         # Initialize bottom frame
-        self.btn_add = Button(self.bottom_frame, text="Hinzufügen", command=self.__add, width=11, padx=2)
-        self.btn_edit = Button(self.bottom_frame, text="Editieren", command=self.__edit, width=11, padx=2)
-        self.btn_delete = Button(self.bottom_frame, text="Löschen", command=self.__delete, width=11, padx=2)
-        self.btn_refresh_controller = Button(self.bottom_frame, text="Gerät erkennen", command=self.__find_controller,
+        self.btn_add = Button(self.bottom_frame, text="Add", command=self.__add, width=11, padx=2)
+        self.btn_edit = Button(self.bottom_frame, text="Edit", command=self.__edit, width=11, padx=2)
+        self.btn_delete = Button(self.bottom_frame, text="Delete", command=self.__delete, width=11, padx=2)
+        self.btn_refresh_controller = Button(self.bottom_frame, text="Scan Device", command=self.__find_controller,
                                              width=11, padx=2)
-        self.btn_quit = Button(self.bottom_frame, text="Beenden", command=self.__root.destroy, width=11, padx=2)
+        self.btn_quit = Button(self.bottom_frame, text="Quit", command=self.__root.destroy, width=11, padx=2)
 
         # Layout top frame
         self.list.pack()
@@ -117,7 +117,7 @@ class Gui:
             # First check if username isn't already existing
             if self.__client_user_interface.check_if_user_exists(textfield_username.get())  \
                     and not (textfield_username.get() == self.list.get(ACTIVE)):
-                self.notify("Der User existiert bereits")
+                self.notify("The user already exists.")
             else:
                 # Remove the file of the user
                 user_name = textfield_username.get()
@@ -126,7 +126,7 @@ class Gui:
 
                 # refresh the listbox and destroy the editing window
                 edit_window.destroy()
-                self.notify("Der User wurde erfolgreich bearbeitet!")
+                self.notify("Changing the user was successful!")
 
         # Build the edit window
         edit_window = Toplevel(self.__root)
@@ -153,8 +153,8 @@ class Gui:
         textfield_username.grid(row=0, column=1)
         textfield_password.grid(row=1, column=1)
 
-        btn_confirm = Button(edit_bottom_frame, text="Bestätigen", command=set_user)
-        btn_cancel = Button(edit_bottom_frame, text="Abbrechen", command=edit_window.destroy)
+        btn_confirm = Button(edit_bottom_frame, text="OK", command=set_user)
+        btn_cancel = Button(edit_bottom_frame, text="Cancel", command=edit_window.destroy)
 
         btn_confirm.grid(row=0, column=1, padx=10)
         btn_cancel.grid(row=0, column=0)
@@ -177,7 +177,7 @@ class Gui:
         def add_user():
             # First check if username isn't already existing
             if self.__client_user_interface.check_if_user_exists(textfield_username.get()):
-                self.notify("Der User existiert bereits")
+                self.notify("The user already exists.")
             else:
                 # check if textfield have inputs
                 if len(textfield_username.get()) > 0 and len(textfield_password.get()) > 0:
@@ -187,9 +187,9 @@ class Gui:
                     # add user to the listbox
                     self.list.insert(END, textfield_username.get())
                     self.add_window.destroy()
-                    self.notify("Der User wurde erfolgreich hinzugefügt!")
+                    self.notify("Adding the user was successful")
                 else:
-                    self.notify("Bitte geben Sie alle Nutzerdaten ein.")
+                    self.notify("Please type in all user information")
 
         # Build the add Window
         self.add_window = Toplevel(self.__root)
@@ -220,9 +220,9 @@ class Gui:
         textfield_password.grid(row=1, column=1)
         self.label_near_uid.grid(row=2, column=1)
 
-        btn_confirm = Button(add_bottom_frame, text="Bestätigen", command=add_user)
-        btn_cancel = Button(add_bottom_frame, text="Abbrechen", command=destroy_window)
-        btn_refresh = Button(add_bottom_frame, text="uid aktualisieren", command=refresh_uid)
+        btn_confirm = Button(add_bottom_frame, text="OK", command=add_user)
+        btn_cancel = Button(add_bottom_frame, text="Cancel", command=destroy_window)
+        btn_refresh = Button(add_bottom_frame, text="Refresh uid", command=refresh_uid)
 
         btn_confirm.grid(row=0, column=1)
         btn_cancel.grid(row=0, column=0, padx=10)
@@ -233,7 +233,7 @@ class Gui:
         Deletes the user that is active in the listbox of the main window and notifies the user manager
         """
         self.__client_user_interface.delete_user(self.list.index(ACTIVE))
-        self.notify("Der User wurde erfolgreich gelöscht")
+        self.notify("The user is deleted")
 
     def refresh_list(self):
         """
