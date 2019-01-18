@@ -8,7 +8,18 @@
 
 namespace usbdevice {
 
+	/**
+	 * \var const uint32_t USB_BUFFER_SIZE
+	 *
+	 * Size of the buffer used for usb connection.
+	 */
 	const uint32_t USB_BUFFER_SIZE = 128;
+	
+	/**
+	 * \var const uint8_t EMPTY_VALUE
+	 *
+	 * Value indicating that the receive queue is empty.
+	 */
 	const uint8_t EMPTY_VALUE = 255;
 
 	/**

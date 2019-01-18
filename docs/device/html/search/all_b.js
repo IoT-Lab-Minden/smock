@@ -1,6 +1,19 @@
 var searchData=
 [
-  ['linux',['LINUX',['../main_8cpp.html#a29feca1f513f25655e5175ed67cab1a6',1,'main.cpp']]],
-  ['locked',['LOCKED',['../main_8cpp.html#ae9c42c594bb848c81ace2ff29f64dc89a6b4af979c9694e48f340397ac08dfd1c',1,'main.cpp']]],
-  ['log_5fwindows',['LOG_WINDOWS',['../main_8cpp.html#a8282414d3be1f9fdd95bddbde67e9037',1,'main.cpp']]]
+  ['readbuffer',['readBuffer',['../classusbdevice_1_1USBSerialDevice.html#acca2b3c4990e877940768e3ee02e9400',1,'usbdevice::USBSerialDevice']]],
+  ['readcardserial',['readCardSerial',['../classrfid__reader_1_1MFRC522.html#a1ce8c2c1a120db5e6468a3258df20894',1,'rfid_reader::MFRC522']]],
+  ['readregister',['readRegister',['../classrfid__reader_1_1MFRC522.html#a1cfc5b374ced146f1c609dfa7891aa20',1,'rfid_reader::MFRC522::readRegister(PCD_Register reg)'],['../classrfid__reader_1_1MFRC522.html#a15c33b1b8368f91901929ad48dea83b5',1,'rfid_reader::MFRC522::readRegister(PCD_Register reg, uint8_t count, uint8_t *values, uint8_t rxAlign=0)']]],
+  ['registercontrolhandler',['registerControlHandler',['../classusbdevice_1_1USBSerialDevice.html#aa34711870fe1fd4c849cb5e78683b184',1,'usbdevice::USBSerialDevice']]],
+  ['registereventhandler',['registerEventHandler',['../classusbdevice_1_1USBCompDevice.html#a2d49f03b9206e027a34a16891b374e83',1,'usbdevice::USBCompDevice']]],
+  ['registerkeyboardhandler',['registerKeyboardHandler',['../classusbdevice_1_1USBKeyboardDevice.html#a89b892c97ccc6d447836510ac72b678d',1,'usbdevice::USBKeyboardDevice']]],
+  ['registerrxhandler',['registerRxHandler',['../classusbdevice_1_1USBSerialDevice.html#a2498db41fd74bcf943e0e704e7e00801',1,'usbdevice::USBSerialDevice']]],
+  ['registertxhandler',['registerTxHandler',['../classusbdevice_1_1USBSerialDevice.html#a783a4765110ca9f823cb54f45909cb40',1,'usbdevice::USBSerialDevice']]],
+  ['releasespecialkey',['releaseSpecialKey',['../classusbdevice_1_1USBKeyboardDevice.html#accb04f8fe2d5fd2469faff774e0a467d',1,'usbdevice::USBKeyboardDevice']]],
+  ['reqa_5for_5fwupa',['REQA_or_WUPA',['../classrfid__reader_1_1MFRC522.html#aacfd7f437b8dc45fd7322aaa99a3119f',1,'rfid_reader::MFRC522']]],
+  ['resetcommandstatusflag',['resetCommandStatusFlag',['../classusbdevice_1_1USBSerialDevice.html#a871027e87d727d295f96489f15d29d2f',1,'usbdevice::USBSerialDevice']]],
+  ['rst_5fpin',['RST_PIN',['../MFRC522_8h.html#ad7b9874d7379faa97c00fbf6c7f4e4a3',1,'rfid_reader']]],
+  ['rst_5fpin_5fbase',['RST_PIN_BASE',['../MFRC522_8h.html#a2f93776b5f46f109e9ac950fb01184c5',1,'rfid_reader']]],
+  ['rx_5fgpio_5fbase',['RX_GPIO_BASE',['../USBSerialConstants_8h.html#a451aa56caa5893887e4225cfe4b8af81',1,'usbdevice']]],
+  ['rx_5fgpio_5fperiph',['RX_GPIO_PERIPH',['../USBSerialConstants_8h.html#ad154dfa4d0079e78fbab324741158ada',1,'usbdevice']]],
+  ['rx_5fgpio_5fpin',['RX_GPIO_PIN',['../USBSerialConstants_8h.html#ac9df83d125910647da3e57f36b9b079f',1,'usbdevice']]]
 ];

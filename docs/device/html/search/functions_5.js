@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['getinstance',['getInstance',['../classusbdevice_1_1_u_s_b_comp_device.html#a01a960be02d145bded272c681f5758de',1,'usbdevice::USBCompDevice::getInstance()'],['../classusbdevice_1_1_u_s_b_keyboard_device.html#a25d04a18c93270ea2f8ae11e97e98aa6',1,'usbdevice::USBKeyboardDevice::getInstance()'],['../classusbdevice_1_1_u_s_b_serial_device.html#a981f54b3c31a06d18984f28b0f048c61',1,'usbdevice::USBSerialDevice::getInstance()']]],
-  ['getkeyboarddevice',['getKeyboardDevice',['../classusbdevice_1_1_u_s_b_keyboard_device.html#ae161ac3db37f3e70fb0b8fa6220f4050',1,'usbdevice::USBKeyboardDevice']]],
-  ['getlinecoding',['GetLineCoding',['../classusbdevice_1_1_u_s_b_serial_device.html#ace75598fb46d690a478f7cf924c497ad',1,'usbdevice::USBSerialDevice']]],
-  ['getreceivebufferlength',['getReceiveBufferLength',['../classusbdevice_1_1_u_s_b_serial_device.html#a623767d4a33912d98fb84482c4e54774',1,'usbdevice::USBSerialDevice']]],
-  ['getrxeventcount',['getRxEventCount',['../classusbdevice_1_1_u_s_b_serial_device.html#a7bc9ec56cb3fd6e82d5dc535a12b7206',1,'usbdevice::USBSerialDevice']]],
-  ['getserialdevice',['getSerialDevice',['../classusbdevice_1_1_u_s_b_serial_device.html#ae6d8813297fdb77ae424cfe22eabadac',1,'usbdevice::USBSerialDevice']]],
-  ['getusagecode',['GetUsageCode',['../classusbdevice_1_1_u_s_b_keyboard_device.html#aee4901b0d53c1fdb8288fef509c0a7d1',1,'usbdevice::USBKeyboardDevice']]]
+  ['init',['init',['../classrfid__reader_1_1MFRC522.html#a14f8812b855d4658e3caf23e1c7519c9',1,'rfid_reader::MFRC522::init()'],['../classusbdevice_1_1USBCompDevice.html#a11c7086bd7cf73045ffaf833f52c9fa5',1,'usbdevice::USBCompDevice::init()']]],
+  ['initbuffer',['initBuffer',['../classusbdevice_1_1USBSerialDevice.html#ad2721ebfd4cb57801e8137482a518edf',1,'usbdevice::USBSerialDevice']]],
+  ['iskeyboardpending',['IsKeyboardPending',['../classusbdevice_1_1USBKeyboardDevice.html#a227077be616bcb61141f6cb52d2de85b',1,'usbdevice::USBKeyboardDevice']]],
+  ['isnewcardpresent',['isNewCardPresent',['../classrfid__reader_1_1MFRC522.html#aedc2727258a1e3bf7ef2f019e69c1cbf',1,'rfid_reader::MFRC522']]]
 ];
