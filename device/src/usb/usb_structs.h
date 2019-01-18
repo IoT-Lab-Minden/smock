@@ -29,10 +29,22 @@
 #include "usblib/device/usbdhidkeyb.h"
 #include "usblib/device/usbdcomp.h"
 
-// Globals used by both classes.
+/**
+ * \var extern volatile int32_t g_ui32USBFlags
+ *
+ * Flags for Keyboard and Mouse shared states.
+ */
 extern volatile uint32_t g_ui32USBFlags;
+
+/**
+ * \var extern volatile int32_t g_ui32SysTickCount
+ *
+ * Tick count of the system
+ */
 extern volatile uint32_t g_ui32SysTickCount;
+
 extern volatile uint8_t g_ui8Buttons;
+
 
 /**
  * The HID keyboard device initialization and customization structures.

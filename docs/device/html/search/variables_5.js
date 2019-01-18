@@ -11,7 +11,7 @@ var searchData=
   ['g_5fpui8serialnumberstring',['g_pui8SerialNumberString',['../usb__structs_8cpp.html#a57aba3a2645778b8843f24d9548d6ea7',1,'g_pui8SerialNumberString():&#160;usb_structs.cpp'],['../usb__structs_8h.html#a57aba3a2645778b8843f24d9548d6ea7',1,'g_pui8SerialNumberString():&#160;usb_structs.cpp']]],
   ['g_5fpui8stringdescriptors',['g_pui8StringDescriptors',['../usb__structs_8cpp.html#af2eb9e517088198606d360c3b9e120c9',1,'g_pui8StringDescriptors():&#160;usb_structs.cpp'],['../usb__structs_8h.html#ad5cb1abb02b0ba9da9ef8ff5df2d4a74',1,'g_pui8StringDescriptors():&#160;usb_structs.cpp']]],
   ['g_5fskeyboardstate',['g_sKeyboardState',['../namespaceusbdevice.html#a09795cc6d51ffbd704a40f6f849f7a20',1,'usbdevice']]],
-  ['g_5fui32systickcount',['g_ui32SysTickCount',['../tm4c123gh6pm__startup__ccs_8c.html#aaf7a76df92dad1ce0048871ae4b43ce7',1,'g_ui32SysTickCount():&#160;tm4c123gh6pm_startup_ccs.c'],['../usb__structs_8h.html#a679b27cf979f4233a385abf5af3ef43d',1,'g_ui32SysTickCount():&#160;tm4c123gh6pm_startup_ccs.c']]],
-  ['g_5fui32usbflags',['g_ui32USBFlags',['../usb__structs_8cpp.html#a0be1ef92ebc752bded26842ceb72a0b1',1,'g_ui32USBFlags():&#160;usb_structs.cpp'],['../usb__structs_8h.html#a042593340a5e798b65579319675e83c2',1,'g_ui32USBFlags():&#160;usb_structs.cpp']]],
+  ['g_5fui32systickcount',['g_ui32SysTickCount',['../tm4c123gh6pm__startup__ccs_8c.html#a5f57611c80e421e8713fab2a6eb56df6',1,'g_ui32SysTickCount():&#160;tm4c123gh6pm_startup_ccs.c'],['../usb__structs_8h.html#a679b27cf979f4233a385abf5af3ef43d',1,'g_ui32SysTickCount():&#160;tm4c123gh6pm_startup_ccs.c']]],
+  ['g_5fui32usbflags',['g_ui32USBFlags',['../usb__structs_8cpp.html#a65f6168e7ce6a1ab3fdf2ce54cca1f48',1,'g_ui32USBFlags():&#160;usb_structs.cpp'],['../usb__structs_8h.html#a042593340a5e798b65579319675e83c2',1,'g_ui32USBFlags():&#160;usb_structs.cpp']]],
   ['g_5fui8buttons',['g_ui8Buttons',['../usb__structs_8h.html#ad9f4cdd89f96d270da1ecc5e504d8ff1',1,'usb_structs.h']]]
 ];

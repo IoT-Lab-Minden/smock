@@ -15,7 +15,7 @@ var searchData=
   ['tm4c123gh6pm_5fstartup_5fccs_2ec',['tm4c123gh6pm_startup_ccs.c',['../tm4c123gh6pm__startup__ccs_8c.html',1,'']]],
   ['tmodereg',['TModeReg',['../namespacerfid__reader.html#adb6438be6fe142d0739266d8abee8880ac5116b71093f87cd99d6388d55676adc',1,'rfid_reader']]],
   ['tprescalerreg',['TPrescalerReg',['../namespacerfid__reader.html#adb6438be6fe142d0739266d8abee8880a45c68376fd3fa45aa181daa120b0cd4c',1,'rfid_reader']]],
-  ['transceivedata',['transceiveData',['../classrfid__reader_1_1_m_f_r_c522.html#a299bf364776957c15a3ff14c4cb1792e',1,'rfid_reader::MFRC522']]],
+  ['transceivedata',['transceiveData',['../classrfid__reader_1_1MFRC522.html#a299bf364776957c15a3ff14c4cb1792e',1,'rfid_reader::MFRC522']]],
   ['treloadregh',['TReloadRegH',['../namespacerfid__reader.html#adb6438be6fe142d0739266d8abee8880a43be9db7d7624a9be526b9e39663bbcc',1,'rfid_reader']]],
   ['treloadregl',['TReloadRegL',['../namespacerfid__reader.html#adb6438be6fe142d0739266d8abee8880a2a3fc7f77dc750c91a0b0b2b019f2956',1,'rfid_reader']]],
   ['tx_5fgpio_5fbase',['TX_GPIO_BASE',['../namespaceusbdevice.html#aacaa653886cabcc6b7c64b973ce8de3d',1,'usbdevice']]],

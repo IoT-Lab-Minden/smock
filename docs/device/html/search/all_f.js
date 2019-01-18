@@ -13,7 +13,7 @@ var searchData=
   ['pcd_5ftransceive',['PCD_Transceive',['../namespacerfid__reader.html#a94269210185870258460b98327b55515ad4002cbc62110f1d369053d7f04ed6ce',1,'rfid_reader']]],
   ['pcd_5ftransmit',['PCD_Transmit',['../namespacerfid__reader.html#a94269210185870258460b98327b55515a12dbebae44d6ccd45993667e6236fd7d',1,'rfid_reader']]],
   ['pending',['pending',['../namespaceusbdevice.html#a9306a8c70be2bf36af6335a8f2b0255a',1,'usbdevice']]],
-  ['performselftest',['performSelfTest',['../classrfid__reader_1_1_m_f_r_c522.html#a6131e93cf7b7073448d27e419e503875',1,'rfid_reader::MFRC522']]],
+  ['performselftest',['performSelfTest',['../classrfid__reader_1_1MFRC522.html#a6131e93cf7b7073448d27e419e503875',1,'rfid_reader::MFRC522']]],
   ['picc_5fcmd_5fct',['PICC_CMD_CT',['../namespacerfid__reader.html#a49edffe97cbf5ced516a52a72e64b456af01e9024522a7fba01df19cb80bbffc2',1,'rfid_reader']]],
   ['picc_5fcmd_5fhlta',['PICC_CMD_HLTA',['../namespacerfid__reader.html#a49edffe97cbf5ced516a52a72e64b456adb6f39bf634b1ecaa9b63fa48b03f355',1,'rfid_reader']]],
   ['picc_5fcmd_5fmf_5fauth_5fkey_5fa',['PICC_CMD_MF_AUTH_KEY_A',['../namespacerfid__reader.html#a49edffe97cbf5ced516a52a72e64b456a325c9dd4e100284b4f8e57d72d8ba25c',1,'rfid_reader']]],
@@ -32,6 +32,6 @@ var searchData=
   ['picc_5fcmd_5ful_5fwrite',['PICC_CMD_UL_WRITE',['../namespacerfid__reader.html#a49edffe97cbf5ced516a52a72e64b456a21585373c973c8e28939583cd15853ca',1,'rfid_reader']]],
   ['picc_5fcmd_5fwupa',['PICC_CMD_WUPA',['../namespacerfid__reader.html#a49edffe97cbf5ced516a52a72e64b456a5d89753103cb12fb6008068286fffe19',1,'rfid_reader']]],
   ['picc_5fcommand',['PICC_Command',['../namespacerfid__reader.html#a49edffe97cbf5ced516a52a72e64b456',1,'rfid_reader']]],
-  ['popreceivebuffer',['popReceiveBuffer',['../classusbdevice_1_1_u_s_b_serial_device.html#aa54a952b46225b35c90c97b5b5896ff8',1,'usbdevice::USBSerialDevice']]],
-  ['pushreceivebuffer',['pushReceiveBuffer',['../classusbdevice_1_1_u_s_b_serial_device.html#a57629924cbdfad86e932cda3c46acce5',1,'usbdevice::USBSerialDevice']]]
+  ['popreceivebuffer',['popReceiveBuffer',['../classusbdevice_1_1USBSerialDevice.html#aa54a952b46225b35c90c97b5b5896ff8',1,'usbdevice::USBSerialDevice']]],
+  ['pushreceivebuffer',['pushReceiveBuffer',['../classusbdevice_1_1USBSerialDevice.html#a57629924cbdfad86e932cda3c46acce5',1,'usbdevice::USBSerialDevice']]]
 ];
