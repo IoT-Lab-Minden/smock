@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['mfrc522',['MFRC522',['../classrfid__reader_1_1_m_f_r_c522.html',1,'rfid_reader::MFRC522'],['../classrfid__reader_1_1_m_f_r_c522.html#ade71164bf5c180636d46912821c0b64b',1,'rfid_reader::MFRC522::MFRC522()']]],
-  ['mfrc522_2ecpp',['MFRC522.cpp',['../_m_f_r_c522_8cpp.html',1,'']]],
-  ['mfrc522_2eh',['MFRC522.h',['../_m_f_r_c522_8h.html',1,'']]],
-  ['mfrc522constants_2eh',['MFRC522Constants.h',['../_m_f_r_c522_constants_8h.html',1,'']]],
-  ['multitarget',['MultiTarget',['../struct_stream_1_1_multi_target.html',1,'Stream']]]
+  ['num_5fdevices',['NUM_DEVICES',['../_u_s_b_comp_constants_8h.html#a77add979f424c0d079b7573f0b607507',1,'usbdevice']]],
+  ['num_5fstring_5fdescriptors',['NUM_STRING_DESCRIPTORS',['../usb__structs_8cpp.html#add4ec79d6117edda5d0536b9255bbaad',1,'NUM_STRING_DESCRIPTORS():&#160;usb_structs.cpp'],['../usb__structs_8h.html#a0b431065cf06f416708107e02fe7d7c9',1,'NUM_STRING_DESCRIPTORS():&#160;usb_structs.cpp']]]
 ];

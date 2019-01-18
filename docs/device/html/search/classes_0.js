@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hardwareserial',['HardwareSerial',['../class_hardware_serial.html',1,'']]]
+  ['mfrc522',['MFRC522',['../classrfid__reader_1_1_m_f_r_c522.html',1,'rfid_reader']]]
 ];

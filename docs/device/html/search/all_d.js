@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['select_5fpicc',['select_PICC',['../classrfid__reader_1_1_m_f_r_c522.html#a53357100bbf243e0034552ce937bcdee',1,'rfid_reader::MFRC522']]],
-  ['sendbreak',['SendBreak',['../classusbdevice_1_1_u_s_b_serial_device.html#ad9eadeec256969f8c736f7ded61f5fa0',1,'usbdevice::USBSerialDevice']]],
-  ['setcontrollinestate',['SetControlLineState',['../classusbdevice_1_1_u_s_b_serial_device.html#a46805f59e2e3bf567348897f311c9b95',1,'usbdevice::USBSerialDevice']]],
-  ['setlinecoding',['SetLineCoding',['../classusbdevice_1_1_u_s_b_serial_device.html#ae42671dfee2a661cd0a88a52ca52e289',1,'usbdevice::USBSerialDevice']]],
-  ['setregisterbitmask',['setRegisterBitMask',['../classrfid__reader_1_1_m_f_r_c522.html#af696dffed33d452324a4f23af0f77120',1,'rfid_reader::MFRC522']]],
-  ['softreset',['softReset',['../classrfid__reader_1_1_m_f_r_c522.html#a68c491eeb26faf6ebee9ce5f505cfa12',1,'rfid_reader::MFRC522']]],
-  ['spiclass',['SPIClass',['../class_s_p_i_class.html',1,'']]],
-  ['ss_5fpin',['SS_PIN',['../_m_f_r_c522_8h.html#aa84f1656b6984a2e0f39f0b5a9215116',1,'rfid_reader']]],
-  ['ss_5fpin_5fbase',['SS_PIN_BASE',['../_m_f_r_c522_8h.html#a27ded619764ae3607f8680e93faf74b8',1,'rfid_reader']]],
-  ['statuscode',['StatusCode',['../_m_f_r_c522_constants_8h.html#ad77c7f5b5f680bb2cbb180387c606c24',1,'rfid_reader']]],
-  ['stream',['Stream',['../class_stream.html',1,'']]],
-  ['susageentry',['sUsageEntry',['../structusbdevice_1_1s_usage_entry.html',1,'usbdevice']]]
+  ['tab',['TAB',['../_u_s_b_keyboard_constants_8h.html#a992ba750557b99b79c448469bf016061',1,'usbdevice']]],
+  ['transceivedata',['transceiveData',['../classrfid__reader_1_1_m_f_r_c522.html#a299bf364776957c15a3ff14c4cb1792e',1,'rfid_reader::MFRC522']]],
+  ['tx_5fgpio_5fbase',['TX_GPIO_BASE',['../_u_s_b_serial_constants_8h.html#aacaa653886cabcc6b7c64b973ce8de3d',1,'usbdevice']]],
+  ['tx_5fgpio_5fperiph',['TX_GPIO_PERIPH',['../_u_s_b_serial_constants_8h.html#a267aef396ed757f9dc2e7df2b3ca83d1',1,'usbdevice']]],
+  ['tx_5fgpio_5fpin',['TX_GPIO_PIN',['../_u_s_b_serial_constants_8h.html#a8e301f3ee666afe19252d5e04aa64c2b',1,'usbdevice']]]
 ];

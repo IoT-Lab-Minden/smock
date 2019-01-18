@@ -220,6 +220,20 @@ This diagram shows different communication protocols between host and user. Swit
 
 ## Setup
 
+### Device
+
+Connect the pins of the Tiva C Launchpad and the MFRC522 like shown below in the table:
+
+| Tiva C pin | MFRC522 pin |
+| ---------- | ----------- |
+| PA2        | SCK         |
+| PA3        | SDA         |
+| PA4        | MISO        |
+| PA5        | MOSI        |
+| PA6        | RST         |
+
+
+
 ### Windows
 
 To set up the program for windows python needs to be installed on the host. Python version 3.5 or above is needed but version 3.7 is recommended.
@@ -246,6 +260,22 @@ For the use of the multiple user option it is also needed to change the registry
 
 To run the program on ubuntu you need to run the service script main.py as a root, otherwise it can't open the serial port. On the other hand, the userSript_ubuntu.py needs to be run as user, because if not the is_locked function will not work.
 
+To setup the system to login by entering user name and password you need to do the following steps:
+
+````bash
+sudo mkdir -p /etc/lightdm/lightdm.conf.d
+
+sudo gedit /etc/lightdm/lightdm.conf.d/10-ubuntu.conf
+
+Enter the following text:
+
+[SeatDefaults]
+user-session=ubuntu
+greeter-show-manual-login=true
+greeter-hide-users=true
+allow-guest=false
+````
+
 ## Conclusion
 
 Taking everything into account we reached all our defined use cases. Advantage of the system is that it can be upgrade without putting too much work in it.
@@ -256,7 +286,18 @@ By changing the reader class on micro controller another RFID reader can be conn
 
 ## Code Documentation
 
-## Data sheets
+__Host__
 
+* <a href="https://iot-lab-minden.github.io/smock/gui/html/index.html">Gui</a>
+* <a href="https://iot-lab-minden.github.io/smock/controller/html/index.html">Service</a>
 
+**Device**
+
+* <a href="https://iot-lab-minden.github.io/smock/device/html/index.html">Main</a>
+
+## Parts list
+
+* <a href="http://www.ti.com/tool/EK-TM4C123GXL">Tiva C Launchpad</a>
+  * <a href="http://www.ti.com/lit/ug/spmu297d/spmu297d.pdf">USB Library</a>
+* <a href="https://www.nxp.com/docs/en/data-sheet/MFRC522.pdf"> MFRC522</a>
 
