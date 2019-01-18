@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['rst_5fpin',['RST_PIN',['../MFRC522_8h.html#ad7b9874d7379faa97c00fbf6c7f4e4a3',1,'rfid_reader']]],
-  ['rst_5fpin_5fbase',['RST_PIN_BASE',['../MFRC522_8h.html#a2f93776b5f46f109e9ac950fb01184c5',1,'rfid_reader']]],
-  ['rx_5fgpio_5fbase',['RX_GPIO_BASE',['../USBSerialConstants_8h.html#a451aa56caa5893887e4225cfe4b8af81',1,'usbdevice']]],
-  ['rx_5fgpio_5fperiph',['RX_GPIO_PERIPH',['../USBSerialConstants_8h.html#ad154dfa4d0079e78fbab324741158ada',1,'usbdevice']]],
-  ['rx_5fgpio_5fpin',['RX_GPIO_PIN',['../USBSerialConstants_8h.html#ac9df83d125910647da3e57f36b9b079f',1,'usbdevice']]]
+  ['mfrc522_5ffirmware_5freferencev0_5f0',['MFRC522_firmware_referenceV0_0',['../namespacerfid__reader.html#a2cc11756d78441ed8cd7e1eb89e4a78c',1,'rfid_reader']]],
+  ['mfrc522_5ffirmware_5freferencev1_5f0',['MFRC522_firmware_referenceV1_0',['../namespacerfid__reader.html#abe0bea84732458c56c2f2f9cc6bc57ec',1,'rfid_reader']]],
+  ['mfrc522_5ffirmware_5freferencev2_5f0',['MFRC522_firmware_referenceV2_0',['../namespacerfid__reader.html#aeb3679c92dd21d3c55f4890a731adf5c',1,'rfid_reader']]],
+  ['missing_5fcard_5fmax',['MISSING_CARD_MAX',['../main_8cpp.html#a4b3a42cd61d8379b51e27d0a904a6157',1,'main.cpp']]]
 ];

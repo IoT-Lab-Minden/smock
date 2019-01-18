@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mfrc522',['MFRC522',['../classrfid__reader_1_1MFRC522.html#ade71164bf5c180636d46912821c0b64b',1,'rfid_reader::MFRC522']]]
+  ['handlegeneralrequests',['handleGeneralRequests',['../main_8cpp.html#a79221d2c33678c6ef718b579bebeb3e6',1,'main.cpp']]]
 ];

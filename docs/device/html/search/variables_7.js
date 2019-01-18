@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['num_5fdevices',['NUM_DEVICES',['../USBCompConstants_8h.html#a77add979f424c0d079b7573f0b607507',1,'usbdevice']]],
-  ['num_5fstring_5fdescriptors',['NUM_STRING_DESCRIPTORS',['../usb__structs_8cpp.html#add4ec79d6117edda5d0536b9255bbaad',1,'NUM_STRING_DESCRIPTORS():&#160;usb_structs.cpp'],['../usb__structs_8h.html#a0b431065cf06f416708107e02fe7d7c9',1,'NUM_STRING_DESCRIPTORS():&#160;usb_structs.cpp']]]
+  ['linux',['LINUX',['../main_8cpp.html#a29feca1f513f25655e5175ed67cab1a6',1,'main.cpp']]],
+  ['log_5fwindows',['LOG_WINDOWS',['../main_8cpp.html#a8282414d3be1f9fdd95bddbde67e9037',1,'main.cpp']]]
 ];

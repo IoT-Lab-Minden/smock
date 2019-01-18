@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['default_5fbit_5frate',['DEFAULT_BIT_RATE',['../USBSerialConstants_8h.html#aab22cf6d0fe6a538d0ca684dc535f1ac',1,'usbdevice']]],
-  ['default_5fuart_5fconfig',['DEFAULT_UART_CONFIG',['../USBSerialConstants_8h.html#a57d4ff8bc6e295f26f26210aceaa04a5',1,'usbdevice']]],
-  ['del',['DEL',['../USBKeyboardConstants_8h.html#abe5a232827f9ee6cca964c7f9becea54',1,'usbdevice']]],
-  ['descriptor_5fdata_5fsize',['DESCRIPTOR_DATA_SIZE',['../USBCompConstants_8h.html#aade83b6759f2fc0abce85bc594ae16a0',1,'usbdevice']]]
+  ['cardmissing',['cardMissing',['../main_8cpp.html#a90b8ee2be9ae2de7aa447fe616e2ad1a',1,'main.cpp']]],
+  ['cchar',['cChar',['../structusbdevice_1_1sUsageEntry.html#a92575788cd1e716b4021d01603d3021d',1,'usbdevice::sUsageEntry']]],
+  ['command_5fpacket_5freceived',['COMMAND_PACKET_RECEIVED',['../namespaceusbdevice.html#ac957067d064ee5c43d4611e258874e23',1,'usbdevice']]],
+  ['command_5fstatus_5fupdate',['COMMAND_STATUS_UPDATE',['../namespaceusbdevice.html#a928658eab8fa5f109e2cf7e3ae76987d',1,'usbdevice']]],
+  ['currentuid',['currentUid',['../main_8cpp.html#a473f029fc238f651bef4f52537bc26cf',1,'main.cpp']]],
+  ['cusage',['cUsage',['../structusbdevice_1_1sUsageEntry.html#a7b5a9f80c19fb802808b9564cef56cbf',1,'usbdevice::sUsageEntry']]]
 ];

@@ -1,16 +1,16 @@
 var searchData=
 [
-  ['sak',['sak',['../structrfid__reader_1_1_uid.html#a0eaf9cd1475b88a9f3ea4ee6fde323cf',1,'rfid_reader::Uid']]],
-  ['select_5fpicc',['select_PICC',['../classrfid__reader_1_1_m_f_r_c522.html#a53357100bbf243e0034552ce937bcdee',1,'rfid_reader::MFRC522']]],
-  ['sendbreak',['SendBreak',['../classusbdevice_1_1_u_s_b_serial_device.html#ad9eadeec256969f8c736f7ded61f5fa0',1,'usbdevice::USBSerialDevice']]],
+  ['sak',['sak',['../structrfid__reader_1_1Uid.html#a0eaf9cd1475b88a9f3ea4ee6fde323cf',1,'rfid_reader::Uid']]],
+  ['select_5fpicc',['select_PICC',['../classrfid__reader_1_1MFRC522.html#a53357100bbf243e0034552ce937bcdee',1,'rfid_reader::MFRC522']]],
+  ['sendbreak',['SendBreak',['../classusbdevice_1_1USBSerialDevice.html#ad9eadeec256969f8c736f7ded61f5fa0',1,'usbdevice::USBSerialDevice']]],
   ['serialspeedreg',['SerialSpeedReg',['../namespacerfid__reader.html#adb6438be6fe142d0739266d8abee8880adbb534e1005849a470e5773c1525aae2',1,'rfid_reader']]],
-  ['setcontrollinestate',['SetControlLineState',['../classusbdevice_1_1_u_s_b_serial_device.html#a46805f59e2e3bf567348897f311c9b95',1,'usbdevice::USBSerialDevice']]],
-  ['setlinecoding',['SetLineCoding',['../classusbdevice_1_1_u_s_b_serial_device.html#ae42671dfee2a661cd0a88a52ca52e289',1,'usbdevice::USBSerialDevice']]],
-  ['setregisterbitmask',['setRegisterBitMask',['../classrfid__reader_1_1_m_f_r_c522.html#af696dffed33d452324a4f23af0f77120',1,'rfid_reader::MFRC522']]],
+  ['setcontrollinestate',['SetControlLineState',['../classusbdevice_1_1USBSerialDevice.html#a46805f59e2e3bf567348897f311c9b95',1,'usbdevice::USBSerialDevice']]],
+  ['setlinecoding',['SetLineCoding',['../classusbdevice_1_1USBSerialDevice.html#ae42671dfee2a661cd0a88a52ca52e289',1,'usbdevice::USBSerialDevice']]],
+  ['setregisterbitmask',['setRegisterBitMask',['../classrfid__reader_1_1MFRC522.html#af696dffed33d452324a4f23af0f77120',1,'rfid_reader::MFRC522']]],
   ['single_5fuser',['SINGLE_USER',['../main_8cpp.html#a887ec76db4f4aa156c159988294a5dc7a91bbb660ffee15227f9a0a73792eaa7f',1,'main.cpp']]],
   ['singleuser',['singleUser',['../main_8cpp.html#af7fc77aa9651a2720d0a45587c623593',1,'main.cpp']]],
-  ['size',['size',['../structrfid__reader_1_1_uid.html#a08588004e143050d97e20f5c04e484fb',1,'rfid_reader::Uid']]],
-  ['softreset',['softReset',['../classrfid__reader_1_1_m_f_r_c522.html#a68c491eeb26faf6ebee9ce5f505cfa12',1,'rfid_reader::MFRC522']]],
+  ['size',['size',['../structrfid__reader_1_1Uid.html#a08588004e143050d97e20f5c04e484fb',1,'rfid_reader::Uid']]],
+  ['softreset',['softReset',['../classrfid__reader_1_1MFRC522.html#a68c491eeb26faf6ebee9ce5f505cfa12',1,'rfid_reader::MFRC522']]],
   ['ss_5fpin',['SS_PIN',['../namespacerfid__reader.html#aa84f1656b6984a2e0f39f0b5a9215116',1,'rfid_reader']]],
   ['ss_5fpin_5fbase',['SS_PIN_BASE',['../namespacerfid__reader.html#a27ded619764ae3607f8680e93faf74b8',1,'rfid_reader']]],
   ['start',['START',['../main_8cpp.html#ae9c42c594bb848c81ace2ff29f64dc89a13d000b4d7dc70d90239b7430d1eb6b2',1,'main.cpp']]],
@@ -28,7 +28,7 @@ var searchData=
   ['status_5fok',['STATUS_OK',['../namespacerfid__reader.html#ad77c7f5b5f680bb2cbb180387c606c24aa69b6f293805cef5fa7a9b2d7ab7c192',1,'rfid_reader']]],
   ['status_5ftimeout',['STATUS_TIMEOUT',['../namespacerfid__reader.html#ad77c7f5b5f680bb2cbb180387c606c24ad696e192956a66584ac926318c945b77',1,'rfid_reader']]],
   ['statuscode',['StatusCode',['../namespacerfid__reader.html#ad77c7f5b5f680bb2cbb180387c606c24',1,'rfid_reader']]],
-  ['susageentry',['sUsageEntry',['../structusbdevice_1_1s_usage_entry.html',1,'usbdevice']]],
+  ['susageentry',['sUsageEntry',['../structusbdevice_1_1sUsageEntry.html',1,'usbdevice']]],
   ['systickinthandler',['SysTickIntHandler',['../tm4c123gh6pm__startup__ccs_8c.html#a7a442b29c027d9132acef15e0c63d88c',1,'tm4c123gh6pm_startup_ccs.c']]],
   ['systicks_5fper_5fsecond',['SYSTICKS_PER_SECOND',['../main_8cpp.html#af2ca5c84c783519b55beec875ef45f1f',1,'main.cpp']]]
 ];
