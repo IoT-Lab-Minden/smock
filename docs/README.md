@@ -300,6 +300,11 @@ Then you must type in a new username and password. You are not able to change th
 
 To delete a user, you simply select the user you want to add and delete him.
 
+After you add the user, you can use the system. To start using the system as single user, you just have to log out of the computer with *win + L*. 
+Then you can put your tag onto the device and it will keep you logged in as long as the card is on the serial device. If you take away the tag, you will automatically log out.
+
+If you want to use the system as multiple user, you have to first read the setup and set the regedit entries. If you have done that, you have to lock out of the system with *ctrl + alt + del* and then click on the change user button. It is important that you can see the entries for username and password. If you see the entries, you can put your tags onto the device and you will log into the correct device. 
+
 ## Conclusion
 
 Taking everything into account we reached all our defined use cases. Advantage of the system is that it can be upgrade without putting too much work in it.
