@@ -58,15 +58,15 @@ class TaskManager:
         if self.__is_locked():
             user = self.__user_manager.get_user_with_uid(uid)
             if user != -1:
+                password = user.get_password().encode()
+                if password[-1] != NEWLINE:
+                    password += b'\n'
                 if self.__user_manager.contains_multiple_user():
-                    password = user.get_password().encode()
-                    if password[-1] != NEWLINE:
-                        password += b'\n'
                     username = (user.get_username() + "\n").encode()
                     message_text = password + username
                     message = Message(Command.PASSWORD.value, message_text)
                 else:
-                    message = Message(Command.PASSWORD.value, user.get_password().encode())
+                    message = Message(Command.PASSWORD.value, password)
 
                 self.__serial_manager.write_to_controller(message)
                 found_user = True

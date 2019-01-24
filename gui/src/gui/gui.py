@@ -128,6 +128,10 @@ class Gui:
                 edit_window.destroy()
                 self.notify("Changing the user was successful!")
 
+        if self.list.get(ACTIVE) == "":
+            self.notify("You have to select a user!")
+            return
+
         # Build the edit window
         edit_window = Toplevel(self.__root)
 
