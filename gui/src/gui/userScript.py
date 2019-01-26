@@ -37,7 +37,8 @@ def is_locked(multi_user):
         return window_title.value.decode('ASCII') == "" and window_number == no_window_number
     else:
         return window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_ENGLISH or \
-               window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_GERMAN
+               window_title.value.decode('ASCII') == LOCK_WINDOW_NAME_GERMAN or \
+               window_title.value.decode('ASCII') == "" and window_number == no_window_number
 
 
 def main():

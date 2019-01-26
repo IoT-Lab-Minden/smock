@@ -14,6 +14,10 @@ Another advantage is the working environment where different users work on the s
 
 Finally remains the possibility to log in manually by entering the user name, if needed, and the password.
 
+![case](images\case.jpg)
+
+![case2](images\case2.jpg)
+
 ## Requirements
 
 ### Functional requirements
